@@ -1,0 +1,11 @@
+# RequestRequest
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `IntegrationID`                                                                      | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `LinkedUserID`                                                                       | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `Vertical`                                                                           | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `PassThroughRequestDto`                                                              | [components.PassThroughRequestDto](../../models/components/passthroughrequestdto.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |

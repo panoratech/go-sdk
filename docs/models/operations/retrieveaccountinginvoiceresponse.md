@@ -1,0 +1,9 @@
+# RetrieveAccountingInvoiceResponse
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                      | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `UnifiedAccountingInvoiceOutput`                                                                        | [*components.UnifiedAccountingInvoiceOutput](../../models/components/unifiedaccountinginvoiceoutput.md) | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |

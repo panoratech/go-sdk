@@ -1,0 +1,10 @@
+# PassThroughResponse
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `URL`                                                                                    | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Status`                                                                                 | *float64*                                                                                | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `Data`                                                                                   | [components.PassThroughResponseData](../../models/components/passthroughresponsedata.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |

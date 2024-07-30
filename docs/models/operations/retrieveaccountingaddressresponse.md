@@ -1,0 +1,9 @@
+# RetrieveAccountingAddressResponse
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                      | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `UnifiedAccountingAddressOutput`                                                                        | [*components.UnifiedAccountingAddressOutput](../../models/components/unifiedaccountingaddressoutput.md) | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |

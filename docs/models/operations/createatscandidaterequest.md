@@ -1,0 +1,10 @@
+# CreateAtsCandidateRequest
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `XConnectionToken`                                                                         | *string*                                                                                   | :heavy_check_mark:                                                                         | The connection token                                                                       |
+| `RemoteData`                                                                               | **bool*                                                                                    | :heavy_minus_sign:                                                                         | Set to true to include data from the original Ats software.                                |
+| `UnifiedAtsCandidateInput`                                                                 | [components.UnifiedAtsCandidateInput](../../models/components/unifiedatscandidateinput.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

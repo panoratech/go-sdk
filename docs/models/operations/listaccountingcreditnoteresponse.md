@@ -1,0 +1,9 @@
+# ListAccountingCreditNoteResponse
+
+
+## Fields
+
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                  | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| `Object`                                                                                                            | [*operations.ListAccountingCreditNoteResponseBody](../../models/operations/listaccountingcreditnoteresponsebody.md) | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |

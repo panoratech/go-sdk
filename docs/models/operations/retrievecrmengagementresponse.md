@@ -1,0 +1,9 @@
+# RetrieveCrmEngagementResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `UnifiedCrmEngagementOutput`                                                                    | [*components.UnifiedCrmEngagementOutput](../../models/components/unifiedcrmengagementoutput.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |

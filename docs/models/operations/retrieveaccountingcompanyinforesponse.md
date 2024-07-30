@@ -1,0 +1,9 @@
+# RetrieveAccountingCompanyInfoResponse
+
+
+## Fields
+
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                              | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `UnifiedAccountingCompanyinfoOutput`                                                                            | [*components.UnifiedAccountingCompanyinfoOutput](../../models/components/unifiedaccountingcompanyinfooutput.md) | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |

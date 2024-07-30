@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Panora-OAS:
+        inputs:
+            - location: https://raw.githubusercontent.com/panoratech/Panora/main/packages/api/swagger/swagger-spec.yaml
+        registry:
+            location: registry.speakeasyapi.dev/panora/panora/go-sdk
+targets:
+    panora:
+        target: go
+        source: Panora-OAS
+        codeSamples:
+            output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/panora/panora/go-sdk

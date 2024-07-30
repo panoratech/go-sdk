@@ -1,0 +1,9 @@
+# RequestResponse
+
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                | :heavy_check_mark:                                                                | N/A                                                                               |
+| `PassThroughResponse`                                                             | [*components.PassThroughResponse](../../models/components/passthroughresponse.md) | :heavy_minus_sign:                                                                | N/A                                                                               |

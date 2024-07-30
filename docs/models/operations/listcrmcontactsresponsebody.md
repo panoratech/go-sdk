@@ -1,0 +1,10 @@
+# ListCrmContactsResponseBody
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `PrevCursor`                                                                               | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `NextCursor`                                                                               | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `Data`                                                                                     | [][components.UnifiedCrmContactOutput](../../models/components/unifiedcrmcontactoutput.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

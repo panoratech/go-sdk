@@ -1,0 +1,9 @@
+# CreateAtsApplicationResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `UnifiedAtsApplicationOutput`                                                                     | [*components.UnifiedAtsApplicationOutput](../../models/components/unifiedatsapplicationoutput.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |
