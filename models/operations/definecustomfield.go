@@ -6,11 +6,11 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type DefineResponse struct {
+type DefineCustomFieldResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *DefineResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *DefineCustomFieldResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}

@@ -18,23 +18,20 @@ Panora API: A unified API to ship integrations
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
 
     ctx := context.Background()
     res, err := s.Hello(ctx)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.String != nil {
         // handle response
     }
 }
@@ -63,23 +60,20 @@ func main() {
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
 
     ctx := context.Background()
     res, err := s.Health(ctx)
     if err != nil {
         log.Fatal(err)
     }
-    if res != nil {
+    if res.Number != nil {
         // handle response
     }
 }

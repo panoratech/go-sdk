@@ -6,7 +6,7 @@ type WebhookDto struct {
 	// The endpoint url of the webhook.
 	URL string `json:"url"`
 	// The description of the webhook.
-	Description string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// The events that the webhook listen to.
 	Scope []string `json:"scope"`
 }
@@ -18,9 +18,9 @@ func (o *WebhookDto) GetURL() string {
 	return o.URL
 }
 
-func (o *WebhookDto) GetDescription() string {
+func (o *WebhookDto) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }

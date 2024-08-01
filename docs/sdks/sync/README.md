@@ -16,16 +16,13 @@ Retrieve sync status of a certain vertical
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var vertical string = "<value>"
     ctx := context.Background()
     res, err := s.Sync.Status(ctx, vertical)
@@ -64,16 +61,13 @@ Resync common objects across a vertical
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
 
     ctx := context.Background()
     res, err := s.Sync.Resync(ctx)

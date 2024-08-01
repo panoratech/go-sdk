@@ -32,7 +32,7 @@ func (s *Sync) Status(ctx context.Context, vertical string, opts ...operations.O
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "status",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.StatusRequest{
@@ -74,10 +74,6 @@ func (s *Sync) Status(ctx context.Context, vertical string, opts ...operations.O
 	}
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -197,7 +193,7 @@ func (s *Sync) Resync(ctx context.Context, opts ...operations.Option) (*operatio
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "resync",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	o := operations.Options{}
@@ -235,10 +231,6 @@ func (s *Sync) Resync(ctx context.Context, opts ...operations.Option) (*operatio
 	}
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -341,6 +333,8 @@ func (s *Sync) Resync(ctx context.Context, opts ...operations.Option) (*operatio
 
 	switch {
 	case httpRes.StatusCode == 200:
+		fallthrough
+	case httpRes.StatusCode == 201:
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:

@@ -11,7 +11,7 @@ type WebhookResponse struct {
 	// The unique UUID of the webhook.
 	IDWebhookEndpoint string `json:"id_webhook_endpoint"`
 	// The description of the webhook.
-	EndpointDescription string `json:"endpoint_description"`
+	EndpointDescription *string `json:"endpoint_description"`
 	// The endpoint url of the webhook.
 	URL string `json:"url"`
 	// The secret of the webhook.
@@ -25,7 +25,7 @@ type WebhookResponse struct {
 	// The project id tied to the webhook.
 	IDProject string `json:"id_project"`
 	// The last update date of the webhook.
-	LastUpdate time.Time `json:"last_update"`
+	LastUpdate *time.Time `json:"last_update"`
 }
 
 func (w WebhookResponse) MarshalJSON() ([]byte, error) {
@@ -46,9 +46,9 @@ func (o *WebhookResponse) GetIDWebhookEndpoint() string {
 	return o.IDWebhookEndpoint
 }
 
-func (o *WebhookResponse) GetEndpointDescription() string {
+func (o *WebhookResponse) GetEndpointDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.EndpointDescription
 }
@@ -95,9 +95,9 @@ func (o *WebhookResponse) GetIDProject() string {
 	return o.IDProject
 }
 
-func (o *WebhookResponse) GetLastUpdate() time.Time {
+func (o *WebhookResponse) GetLastUpdate() *time.Time {
 	if o == nil {
-		return time.Time{}
+		return nil
 	}
 	return o.LastUpdate
 }

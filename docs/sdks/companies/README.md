@@ -17,25 +17,16 @@ List  Companies
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Crm.Companies.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Companies.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -74,7 +65,6 @@ Create Companies in any supported CRM software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -82,19 +72,15 @@ import(
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     unifiedCrmCompanyInput := components.UnifiedCrmCompanyInput{
         Name: "<value>",
         FieldMappings: components.UnifiedCrmCompanyInputFieldMappings{},
     }
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Companies.Create(ctx, xConnectionToken, unifiedCrmCompanyInput, remoteData)
+    res, err := s.Crm.Companies.Create(ctx, xConnectionToken, unifiedCrmCompanyInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -132,23 +118,18 @@ Retrieve Companies from any connected Crm software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Companies.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Companies.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

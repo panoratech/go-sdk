@@ -17,25 +17,16 @@ List  Tickets
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -74,7 +65,6 @@ Create Tickets in any supported Ticketing software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -82,9 +72,7 @@ import(
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     unifiedTicketingTicketInput := components.UnifiedTicketingTicketInput{
@@ -92,10 +80,8 @@ func main() {
         Description: "Multi-tiered human-resource model",
         FieldMappings: components.UnifiedTicketingTicketInputFieldMappings{},
     }
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, remoteData)
+    res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -133,23 +119,18 @@ Retrieve Tickets from any connected Ticketing software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Ticketing.Tickets.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

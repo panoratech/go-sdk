@@ -15,7 +15,6 @@ Make a passthrough request
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -23,9 +22,7 @@ import(
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var integrationID string = "<value>"
 
     var linkedUserID string = "<value>"

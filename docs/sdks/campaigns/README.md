@@ -17,25 +17,16 @@ List  Campaigns
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Marketingautomation.Campaigns.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Marketingautomation.Campaigns.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -74,7 +65,6 @@ Create a campaign in any supported Marketingautomation software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -82,16 +72,12 @@ import(
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     unifiedMarketingautomationCampaignInput := components.UnifiedMarketingautomationCampaignInput{}
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Marketingautomation.Campaigns.Create(ctx, xConnectionToken, unifiedMarketingautomationCampaignInput, remoteData)
+    res, err := s.Marketingautomation.Campaigns.Create(ctx, xConnectionToken, unifiedMarketingautomationCampaignInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -129,23 +115,18 @@ Retrieve Campaigns from any connected Marketingautomation software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Marketingautomation.Campaigns.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Marketingautomation.Campaigns.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

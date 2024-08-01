@@ -32,7 +32,7 @@ func (s *Vendorcredits) List(ctx context.Context, xConnectionToken string, remot
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAccountingVendorCredit",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListAccountingVendorCreditRequest{
@@ -82,10 +82,6 @@ func (s *Vendorcredits) List(ctx context.Context, xConnectionToken string, remot
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -218,7 +214,7 @@ func (s *Vendorcredits) Retrieve(ctx context.Context, xConnectionToken string, i
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAccountingVendorCredit",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RetrieveAccountingVendorCreditRequest{
@@ -267,10 +263,6 @@ func (s *Vendorcredits) Retrieve(ctx context.Context, xConnectionToken string, i
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
