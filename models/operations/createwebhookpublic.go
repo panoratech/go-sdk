@@ -6,19 +6,19 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type CreateWebhookResponse struct {
+type CreateWebhookPublicResponse struct {
 	HTTPMeta        components.HTTPMetadata `json:"-"`
 	WebhookResponse *components.WebhookResponse
 }
 
-func (o *CreateWebhookResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *CreateWebhookPublicResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
 }
 
-func (o *CreateWebhookResponse) GetWebhookResponse() *components.WebhookResponse {
+func (o *CreateWebhookPublicResponse) GetWebhookResponse() *components.WebhookResponse {
 	if o == nil {
 		return nil
 	}

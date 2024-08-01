@@ -28,14 +28,8 @@ func main() {
         gosdk.WithSecurity(os.Getenv("BEARER")),
     )
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Ticketing.Comments.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ticketing.Comments.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -90,10 +84,8 @@ func main() {
     unifiedTicketingCommentInput := components.UnifiedTicketingCommentInput{
         Body: "<value>",
     }
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Comments.Create(ctx, xConnectionToken, unifiedTicketingCommentInput, remoteData)
+    res, err := s.Ticketing.Comments.Create(ctx, xConnectionToken, unifiedTicketingCommentInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -144,10 +136,8 @@ func main() {
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Comments.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Ticketing.Comments.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

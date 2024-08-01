@@ -1,4 +1,4 @@
-# CreateWebhookResponse
+# CreateWebhookPublicResponse
 
 
 ## Fields

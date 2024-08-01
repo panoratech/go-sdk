@@ -28,14 +28,8 @@ func main() {
         gosdk.WithSecurity(os.Getenv("BEARER")),
     )
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Marketingautomation.Automations.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Marketingautomation.Automations.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -88,10 +82,8 @@ func main() {
     var xConnectionToken string = "<value>"
 
     unifiedMarketingautomationAutomationInput := components.UnifiedMarketingautomationAutomationInput{}
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Marketingautomation.Automations.Create(ctx, xConnectionToken, unifiedMarketingautomationAutomationInput, remoteData)
+    res, err := s.Marketingautomation.Automations.Create(ctx, xConnectionToken, unifiedMarketingautomationAutomationInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -142,10 +134,8 @@ func main() {
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Marketingautomation.Automations.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Marketingautomation.Automations.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

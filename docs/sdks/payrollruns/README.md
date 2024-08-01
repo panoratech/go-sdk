@@ -26,14 +26,8 @@ func main() {
         gosdk.WithSecurity(os.Getenv("BEARER")),
     )
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Hris.Payrollruns.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Hris.Payrollruns.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

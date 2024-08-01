@@ -28,14 +28,8 @@ func main() {
         gosdk.WithSecurity(os.Getenv("BEARER")),
     )
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -92,10 +86,8 @@ func main() {
         Description: "Multi-tiered human-resource model",
         FieldMappings: components.UnifiedTicketingTicketInputFieldMappings{},
     }
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, remoteData)
+    res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -146,10 +138,8 @@ func main() {
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Ticketing.Tickets.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

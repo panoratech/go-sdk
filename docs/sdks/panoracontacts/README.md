@@ -28,14 +28,8 @@ func main() {
         gosdk.WithSecurity(os.Getenv("BEARER")),
     )
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Crm.Contacts.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Contacts.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -92,10 +86,8 @@ func main() {
         LastName: "Kuhn",
         FieldMappings: components.UnifiedCrmContactInputFieldMappings{},
     }
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Contacts.Create(ctx, xConnectionToken, unifiedCrmContactInput, remoteData)
+    res, err := s.Crm.Contacts.Create(ctx, xConnectionToken, unifiedCrmContactInput, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -146,10 +138,8 @@ func main() {
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Contacts.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Contacts.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

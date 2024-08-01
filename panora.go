@@ -77,7 +77,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Panora API: A unified API to ship integrations
 type Panora struct {
-	Webhook             *Webhook
+	Webhooks            *Webhooks
 	Ticketing           *Ticketing
 	Sync                *Sync
 	Crm                 *Crm
@@ -134,7 +134,7 @@ func WithClient(client HTTPClient) SDKOption {
 // WithSecurity configures the SDK to use the provided security details
 func WithSecurity(bearer string) SDKOption {
 	return func(sdk *Panora) {
-		security := components.Security{Bearer: &bearer}
+		security := components.Security{Bearer: bearer}
 		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
 	}
 }
@@ -167,9 +167,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.0.1",
-			GenVersion:        "2.380.2",
-			UserAgent:         "speakeasy-sdk/go 0.0.1 2.380.2 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.0.2",
+			GenVersion:        "2.384.4",
+			UserAgent:         "speakeasy-sdk/go 0.0.2 2.384.4 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -189,7 +189,7 @@ func New(opts ...SDKOption) *Panora {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
-	sdk.Webhook = newWebhook(sdk.sdkConfiguration)
+	sdk.Webhooks = newWebhooks(sdk.sdkConfiguration)
 
 	sdk.Ticketing = newTicketing(sdk.sdkConfiguration)
 

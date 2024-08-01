@@ -1,17 +1,19 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: 9a90e56f39162805896ae234e3c0001b
+  docChecksum: 2dc62da46437fe24fc79b9affc4eea75
   docVersion: "1.0"
-  speakeasyVersion: 1.348.2
-  generationVersion: 2.380.2
-  releaseVersion: 0.0.1
-  configChecksum: be9c5be07fc21838a38aa2f2ee6388a4
+  speakeasyVersion: 1.351.2
+  generationVersion: 2.384.4
+  releaseVersion: 0.0.2
+  configChecksum: 6c757117dbacfd41d2b4da1ce8a03db5
+  repoURL: https://github.com/panoratech/go-sdk.git
+  installationURL: https://github.com/panoratech/go-sdk
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.4
-    core: 3.5.2
+    core: 3.5.3
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.2.1
@@ -27,7 +29,9 @@ features:
     retries: 2.83.0
     sdkHooks: 0.1.0
 generatedFiles:
-  - webhook.go
+  - id.go
+  - verifyevent.go
+  - webhooks.go
   - tickets.go
   - users.go
   - accounts.go
@@ -48,7 +52,12 @@ generatedFiles:
   - tasks.go
   - panorausers.go
   - crm.go
+  - batch.go
+  - single.go
+  - fromremoteid.go
   - linkedusers.go
+  - define.go
+  - map.go
   - fieldmappings.go
   - passthrough.go
   - bankinfos.go
@@ -142,7 +151,7 @@ generatedFiles:
   - /models/operations/hello.go
   - /models/operations/health.go
   - /models/operations/listwebhooks.go
-  - /models/operations/createwebhook.go
+  - /models/operations/createwebhookpublic.go
   - /models/operations/delete.go
   - /models/operations/updatestatus.go
   - /models/operations/verifyevent.go
@@ -196,8 +205,8 @@ generatedFiles:
   - /models/operations/importbatch.go
   - /models/operations/retrievelinkeduser.go
   - /models/operations/remoteid.go
-  - /models/operations/define.go
-  - /models/operations/create.go
+  - /models/operations/definecustomfield.go
+  - /models/operations/definitions.go
   - /models/operations/map.go
   - /models/operations/request.go
   - /models/operations/listhrisbankinfo.go
@@ -385,8 +394,8 @@ generatedFiles:
   - /models/components/unifiedcrmuseroutput.go
   - /models/components/createlinkeduserdto.go
   - /models/components/createbatchlinkeduserdto.go
-  - /models/components/definetargetfielddto.go
   - /models/components/customfieldcreatedto.go
+  - /models/components/definetargetfielddto.go
   - /models/components/mapfieldtoproviderdto.go
   - /models/components/passthroughresponse.go
   - /models/components/passthroughrequestdto.go
@@ -482,7 +491,7 @@ generatedFiles:
   - docs/models/operations/helloresponse.md
   - docs/models/operations/healthresponse.md
   - docs/models/operations/listwebhooksresponse.md
-  - docs/models/operations/createwebhookresponse.md
+  - docs/models/operations/createwebhookpublicresponse.md
   - docs/models/operations/deleterequest.md
   - docs/models/operations/deleteresponse.md
   - docs/models/operations/updatestatusrequest.md
@@ -603,8 +612,8 @@ generatedFiles:
   - docs/models/operations/retrievelinkeduserresponse.md
   - docs/models/operations/remoteidrequest.md
   - docs/models/operations/remoteidresponse.md
-  - docs/models/operations/defineresponse.md
-  - docs/models/operations/createresponse.md
+  - docs/models/operations/definecustomfieldresponse.md
+  - docs/models/operations/definitionsresponse.md
   - docs/models/operations/mapresponse.md
   - docs/models/operations/requestrequest.md
   - docs/models/operations/requestresponse.md
@@ -1081,8 +1090,8 @@ generatedFiles:
   - docs/models/components/unifiedcrmuseroutput.md
   - docs/models/components/createlinkeduserdto.md
   - docs/models/components/createbatchlinkeduserdto.md
-  - docs/models/components/definetargetfielddto.md
   - docs/models/components/customfieldcreatedto.md
+  - docs/models/components/definetargetfielddto.md
   - docs/models/components/mapfieldtoproviderdto.md
   - docs/models/components/passthroughresponsedata.md
   - docs/models/components/passthroughresponse.md
@@ -1266,7 +1275,9 @@ generatedFiles:
   - docs/models/components/security.md
   - docs/models/operations/option.md
   - docs/sdks/panora/README.md
-  - docs/sdks/webhook/README.md
+  - docs/sdks/webhooks/README.md
+  - docs/sdks/id/README.md
+  - docs/sdks/verifyevent/README.md
   - docs/sdks/ticketing/README.md
   - docs/sdks/tickets/README.md
   - docs/sdks/users/README.md
@@ -1288,7 +1299,12 @@ generatedFiles:
   - docs/sdks/tasks/README.md
   - docs/sdks/panorausers/README.md
   - docs/sdks/linkedusers/README.md
+  - docs/sdks/batch/README.md
+  - docs/sdks/single/README.md
+  - docs/sdks/fromremoteid/README.md
   - docs/sdks/fieldmappings/README.md
+  - docs/sdks/define/README.md
+  - docs/sdks/map/README.md
   - docs/sdks/passthrough/README.md
   - docs/sdks/hris/README.md
   - docs/sdks/bankinfos/README.md

@@ -65,13 +65,19 @@ func main() {
 * [Hello](docs/sdks/panora/README.md#hello)
 * [Health](docs/sdks/panora/README.md#health)
 
-### [Webhook](docs/sdks/webhook/README.md)
+### [Webhooks](docs/sdks/webhooks/README.md)
 
-* [List](docs/sdks/webhook/README.md#list) - List webhooks 
-* [Create](docs/sdks/webhook/README.md#create) - Add webhook metadata
-* [Delete](docs/sdks/webhook/README.md#delete) - Delete Webhook
-* [UpdateStatus](docs/sdks/webhook/README.md#updatestatus) - Update webhook status
-* [VerifyEvent](docs/sdks/webhook/README.md#verifyevent) - Verify payload signature of the webhook
+* [List](docs/sdks/webhooks/README.md#list) - List webhooks
+* [Create](docs/sdks/webhooks/README.md#create) - Add webhook metadata
+
+### [Webhooks.{id}](docs/sdks/id/README.md)
+
+* [Delete](docs/sdks/id/README.md#delete) - Delete Webhook
+* [UpdateStatus](docs/sdks/id/README.md#updatestatus) - Update webhook status
+
+### [Webhooks.Verifyevent](docs/sdks/verifyevent/README.md)
+
+* [VerifyEvent](docs/sdks/verifyevent/README.md#verifyevent) - Verify payload signature of the webhook
 
 
 ### [Ticketing.Tickets](docs/sdks/tickets/README.md)
@@ -176,17 +182,32 @@ func main() {
 
 ### [LinkedUsers](docs/sdks/linkedusers/README.md)
 
-* [Create](docs/sdks/linkedusers/README.md#create) - Add Linked User
-* [List](docs/sdks/linkedusers/README.md#list) - Retrieve Linked Users
-* [ImportBatch](docs/sdks/linkedusers/README.md#importbatch) - Add Batch Linked Users
-* [Retrieve](docs/sdks/linkedusers/README.md#retrieve) - Retrieve a Linked User
-* [RemoteID](docs/sdks/linkedusers/README.md#remoteid) - Retrieve a Linked User From A Remote Id
+* [Create](docs/sdks/linkedusers/README.md#create) - Create Linked Users
+* [List](docs/sdks/linkedusers/README.md#list) - List Linked Users
+
+### [LinkedUsers.Batch](docs/sdks/batch/README.md)
+
+* [ImportBatch](docs/sdks/batch/README.md#importbatch) - Add Batch Linked Users
+
+### [LinkedUsers.Single](docs/sdks/single/README.md)
+
+* [Retrieve](docs/sdks/single/README.md#retrieve) - Retrieve Linked Users
+
+### [LinkedUsers.Fromremoteid](docs/sdks/fromremoteid/README.md)
+
+* [RemoteID](docs/sdks/fromremoteid/README.md#remoteid) - Retrieve a Linked User From A Remote Id
 
 ### [FieldMappings](docs/sdks/fieldmappings/README.md)
 
-* [Define](docs/sdks/fieldmappings/README.md#define) - Define target Field
-* [Create](docs/sdks/fieldmappings/README.md#create) - Create Custom Field
-* [Map](docs/sdks/fieldmappings/README.md#map) - Map Custom Field
+* [DefineCustomField](docs/sdks/fieldmappings/README.md#definecustomfield) - Create Custom Field
+
+### [FieldMappings.Define](docs/sdks/define/README.md)
+
+* [Definitions](docs/sdks/define/README.md#definitions) - Define target Field
+
+### [FieldMappings.Map](docs/sdks/map/README.md)
+
+* [Map](docs/sdks/map/README.md#map) - Map Custom Field
 
 ### [Passthrough](docs/sdks/passthrough/README.md)
 
