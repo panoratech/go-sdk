@@ -32,7 +32,7 @@ func (s *Engagements) List(ctx context.Context, xConnectionToken string, remoteD
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listCrmEngagements",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListCrmEngagementsRequest{
@@ -82,10 +82,6 @@ func (s *Engagements) List(ctx context.Context, xConnectionToken string, remoteD
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -218,7 +214,7 @@ func (s *Engagements) Create(ctx context.Context, xConnectionToken string, unifi
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createCrmEngagement",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.CreateCrmEngagementRequest{
@@ -273,10 +269,6 @@ func (s *Engagements) Create(ctx context.Context, xConnectionToken string, unifi
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -409,7 +401,7 @@ func (s *Engagements) Retrieve(ctx context.Context, xConnectionToken string, id 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveCrmEngagement",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RetrieveCrmEngagementRequest{
@@ -458,10 +450,6 @@ func (s *Engagements) Retrieve(ctx context.Context, xConnectionToken string, id 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

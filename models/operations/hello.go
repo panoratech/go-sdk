@@ -8,6 +8,7 @@ import (
 
 type HelloResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
+	String   *string
 }
 
 func (o *HelloResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *HelloResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *HelloResponse) GetString() *string {
+	if o == nil {
+		return nil
+	}
+	return o.String
 }

@@ -16,25 +16,16 @@ List  Groups
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
-
-    var limit *float64 = gosdk.Float64(50)
-
-    var cursor *string = gosdk.String("<value>")
     ctx := context.Background()
-    res, err := s.Filestorage.Groups.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Filestorage.Groups.List(ctx, xConnectionToken, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -73,23 +64,18 @@ Retrieve Groups from any connected Filestorage software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("BEARER")),
-    )
+    s := gosdk.New()
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Filestorage.Groups.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Filestorage.Groups.Retrieve(ctx, xConnectionToken, id, nil)
     if err != nil {
         log.Fatal(err)
     }

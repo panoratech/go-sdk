@@ -32,7 +32,7 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsAttachment",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListAtsAttachmentRequest{
@@ -82,10 +82,6 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -218,7 +214,7 @@ func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifi
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createAtsAttachment",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.CreateAtsAttachmentRequest{
@@ -273,10 +269,6 @@ func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifi
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -409,7 +401,7 @@ func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsAttachment",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RetrieveAtsAttachmentRequest{
@@ -458,10 +450,6 @@ func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

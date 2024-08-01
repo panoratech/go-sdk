@@ -53,8 +53,8 @@ func Float32(f float32) *float32 { return &f }
 func Float64(f float64) *float64 { return &f }
 
 type sdkConfiguration struct {
-	Client            HTTPClient
-	Security          func(context.Context) (interface{}, error)
+	Client HTTPClient
+
 	ServerURL         string
 	ServerIndex       int
 	Language          string
@@ -77,7 +77,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Panora API: A unified API to ship integrations
 type Panora struct {
-	Webhook             *Webhook
+	Webhooks            *Webhooks
 	Ticketing           *Ticketing
 	Sync                *Sync
 	Crm                 *Crm
@@ -131,23 +131,6 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
-// WithSecurity configures the SDK to use the provided security details
-func WithSecurity(bearer string) SDKOption {
-	return func(sdk *Panora) {
-		security := components.Security{Bearer: &bearer}
-		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
-	}
-}
-
-// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
-func WithSecuritySource(security func(context.Context) (components.Security, error)) SDKOption {
-	return func(sdk *Panora) {
-		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
-			return security(ctx)
-		}
-	}
-}
-
 func WithRetryConfig(retryConfig retry.Config) SDKOption {
 	return func(sdk *Panora) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
@@ -167,9 +150,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.0.1",
-			GenVersion:        "2.380.2",
-			UserAgent:         "speakeasy-sdk/go 0.0.1 2.380.2 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.1.0",
+			GenVersion:        "2.384.4",
+			UserAgent:         "speakeasy-sdk/go 0.1.0 2.384.4 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -189,7 +172,7 @@ func New(opts ...SDKOption) *Panora {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
-	sdk.Webhook = newWebhook(sdk.sdkConfiguration)
+	sdk.Webhooks = newWebhooks(sdk.sdkConfiguration)
 
 	sdk.Ticketing = newTicketing(sdk.sdkConfiguration)
 
@@ -220,7 +203,7 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "hello",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	o := operations.Options{}
@@ -256,12 +239,8 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "*/*")
+	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -364,6 +343,17 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 
 	switch {
 	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			var out string
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.String = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
@@ -380,7 +370,7 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "health",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	o := operations.Options{}
@@ -416,12 +406,8 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "*/*")
+	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -524,6 +510,17 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 
 	switch {
 	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			var out float64
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Number = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:

@@ -32,7 +32,7 @@ func (s *Jobs) List(ctx context.Context, xConnectionToken string, remoteData *bo
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsJob",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListAtsJobRequest{
@@ -82,10 +82,6 @@ func (s *Jobs) List(ctx context.Context, xConnectionToken string, remoteData *bo
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -218,7 +214,7 @@ func (s *Jobs) Retrieve(ctx context.Context, xConnectionToken string, id string,
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsJob",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RetrieveAtsJobRequest{
@@ -267,10 +263,6 @@ func (s *Jobs) Retrieve(ctx context.Context, xConnectionToken string, id string,
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

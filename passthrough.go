@@ -32,7 +32,7 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "request",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RequestRequest{
@@ -86,10 +86,6 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -193,6 +189,8 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 
 	switch {
 	case httpRes.StatusCode == 200:
+		fallthrough
+	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out components.PassThroughResponse

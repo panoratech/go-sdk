@@ -1,4 +1,4 @@
-# DefineResponse
+# DefineCustomFieldResponse
 
 
 ## Fields

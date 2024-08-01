@@ -32,7 +32,7 @@ func (s *Jobinterviewstages) List(ctx context.Context, xConnectionToken string, 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsJobInterviewStage",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListAtsJobInterviewStageRequest{
@@ -82,10 +82,6 @@ func (s *Jobinterviewstages) List(ctx context.Context, xConnectionToken string, 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -218,7 +214,7 @@ func (s *Jobinterviewstages) Retrieve(ctx context.Context, xConnectionToken stri
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsJobInterviewStage",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.RetrieveAtsJobInterviewStageRequest{
@@ -267,10 +263,6 @@ func (s *Jobinterviewstages) Retrieve(ctx context.Context, xConnectionToken stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

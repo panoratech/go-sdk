@@ -8,6 +8,7 @@ import (
 
 type HealthResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
+	Number   *float64
 }
 
 func (o *HealthResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *HealthResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *HealthResponse) GetNumber() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Number
 }
