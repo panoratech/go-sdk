@@ -2,38 +2,46 @@
 
 package components
 
-type UnifiedFilestorageGroupOutputFieldMappings struct {
-}
-
-type UnifiedFilestorageGroupOutputRemoteData struct {
-}
-
-type UnifiedFilestorageGroupOutputCreatedAt struct {
-}
-
-type UnifiedFilestorageGroupOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedFilestorageGroupOutput struct {
 	// The name of the group
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// Uuids of users of the group
 	Users []string `json:"users"`
 	// Indicates whether or not this object has been deleted in the third party platform.
-	RemoteWasDeleted bool                                       `json:"remote_was_deleted"`
-	FieldMappings    UnifiedFilestorageGroupOutputFieldMappings `json:"field_mappings"`
+	RemoteWasDeleted *bool `json:"remote_was_deleted"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the group
 	ID *string `json:"id,omitempty"`
 	// The id of the group in the context of the 3rd Party
-	RemoteID   *string                                 `json:"remote_id,omitempty"`
-	RemoteData UnifiedFilestorageGroupOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedFilestorageGroupOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedFilestorageGroupOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the group in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetName() string {
+func (u UnifiedFilestorageGroupOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedFilestorageGroupOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedFilestorageGroupOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -45,16 +53,16 @@ func (o *UnifiedFilestorageGroupOutput) GetUsers() []string {
 	return o.Users
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetRemoteWasDeleted() bool {
+func (o *UnifiedFilestorageGroupOutput) GetRemoteWasDeleted() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.RemoteWasDeleted
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetFieldMappings() UnifiedFilestorageGroupOutputFieldMappings {
+func (o *UnifiedFilestorageGroupOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageGroupOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -73,23 +81,23 @@ func (o *UnifiedFilestorageGroupOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetRemoteData() UnifiedFilestorageGroupOutputRemoteData {
+func (o *UnifiedFilestorageGroupOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageGroupOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetCreatedAt() UnifiedFilestorageGroupOutputCreatedAt {
+func (o *UnifiedFilestorageGroupOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedFilestorageGroupOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedFilestorageGroupOutput) GetModifiedAt() UnifiedFilestorageGroupOutputModifiedAt {
+func (o *UnifiedFilestorageGroupOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedFilestorageGroupOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

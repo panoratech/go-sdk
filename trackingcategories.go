@@ -32,7 +32,7 @@ func (s *Trackingcategories) List(ctx context.Context, xConnectionToken string, 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAccountingTrackingCategorys",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAccountingTrackingCategorysRequest{
@@ -82,6 +82,10 @@ func (s *Trackingcategories) List(ctx context.Context, xConnectionToken string, 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Trackingcategories) Retrieve(ctx context.Context, xConnectionToken stri
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAccountingTrackingCategory",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAccountingTrackingCategoryRequest{
@@ -263,6 +267,10 @@ func (s *Trackingcategories) Retrieve(ctx context.Context, xConnectionToken stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

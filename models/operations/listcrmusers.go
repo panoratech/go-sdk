@@ -58,21 +58,21 @@ func (o *ListCrmUsersRequest) GetCursor() *string {
 }
 
 type ListCrmUsersResponseBody struct {
-	PrevCursor string                            `json:"prev_cursor"`
-	NextCursor string                            `json:"next_cursor"`
+	PrevCursor *string                           `json:"prev_cursor"`
+	NextCursor *string                           `json:"next_cursor"`
 	Data       []components.UnifiedCrmUserOutput `json:"data"`
 }
 
-func (o *ListCrmUsersResponseBody) GetPrevCursor() string {
+func (o *ListCrmUsersResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListCrmUsersResponseBody) GetNextCursor() string {
+func (o *ListCrmUsersResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

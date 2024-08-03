@@ -32,7 +32,7 @@ func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteDat
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listHrisBankinfo",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListHrisBankinfoRequest{
@@ -82,6 +82,10 @@ func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteDat
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Bankinfos) Retrieve(ctx context.Context, xConnectionToken string, id st
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveHrisBankinfo",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveHrisBankinfoRequest{
@@ -263,6 +267,10 @@ func (s *Bankinfos) Retrieve(ctx context.Context, xConnectionToken string, id st
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

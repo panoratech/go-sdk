@@ -32,7 +32,7 @@ func (s *Tags) List(ctx context.Context, xConnectionToken string, remoteData *bo
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listTicketingTags",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListTicketingTagsRequest{
@@ -82,6 +82,10 @@ func (s *Tags) List(ctx context.Context, xConnectionToken string, remoteData *bo
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Tags) Retrieve(ctx context.Context, xConnectionToken string, id string,
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveTicketingTag",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveTicketingTagRequest{
@@ -263,6 +267,10 @@ func (s *Tags) Retrieve(ctx context.Context, xConnectionToken string, id string,
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

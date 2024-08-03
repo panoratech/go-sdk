@@ -2,14 +2,11 @@
 
 package components
 
-type UnifiedCrmContactInputFieldMappings struct {
-}
-
 type UnifiedCrmContactInput struct {
 	// The first name of the contact
-	FirstName string `json:"first_name"`
+	FirstName *string `json:"first_name"`
 	// The last name of the contact
-	LastName string `json:"last_name"`
+	LastName *string `json:"last_name"`
 	// The email addresses of the contact
 	EmailAddresses []Email `json:"email_addresses,omitempty"`
 	// The phone numbers of the contact
@@ -17,20 +14,21 @@ type UnifiedCrmContactInput struct {
 	// The addresses of the contact
 	Addresses []Address `json:"addresses,omitempty"`
 	// The UUID of the user who owns the contact
-	UserID        *string                             `json:"user_id,omitempty"`
-	FieldMappings UnifiedCrmContactInputFieldMappings `json:"field_mappings"`
+	UserID *string `json:"user_id,omitempty"`
+	// The custom field mappings of the contact between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedCrmContactInput) GetFirstName() string {
+func (o *UnifiedCrmContactInput) GetFirstName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FirstName
 }
 
-func (o *UnifiedCrmContactInput) GetLastName() string {
+func (o *UnifiedCrmContactInput) GetLastName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.LastName
 }
@@ -63,9 +61,9 @@ func (o *UnifiedCrmContactInput) GetUserID() *string {
 	return o.UserID
 }
 
-func (o *UnifiedCrmContactInput) GetFieldMappings() UnifiedCrmContactInputFieldMappings {
+func (o *UnifiedCrmContactInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmContactInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

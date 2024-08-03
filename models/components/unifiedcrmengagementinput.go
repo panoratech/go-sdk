@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedCrmEngagementInputFieldMappings struct {
-}
-
 type UnifiedCrmEngagementInput struct {
 	// The content of the engagement
 	Content *string `json:"content,omitempty"`
@@ -22,14 +19,15 @@ type UnifiedCrmEngagementInput struct {
 	// The end time of the engagement
 	EndTime *time.Time `json:"end_time,omitempty"`
 	// The type of the engagement. Authorized values are EMAIL, CALL or MEETING
-	Type string `json:"type"`
+	Type *string `json:"type"`
 	// The UUID of the user tied to the engagement
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the engagement
 	CompanyID *string `json:"company_id,omitempty"`
 	// The UUIDs of contacts tied to the engagement object
-	Contacts      []string                               `json:"contacts,omitempty"`
-	FieldMappings UnifiedCrmEngagementInputFieldMappings `json:"field_mappings"`
+	Contacts []string `json:"contacts,omitempty"`
+	// The custom field mappings of the engagement between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedCrmEngagementInput) MarshalJSON() ([]byte, error) {
@@ -78,9 +76,9 @@ func (o *UnifiedCrmEngagementInput) GetEndTime() *time.Time {
 	return o.EndTime
 }
 
-func (o *UnifiedCrmEngagementInput) GetType() string {
+func (o *UnifiedCrmEngagementInput) GetType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Type
 }
@@ -106,9 +104,9 @@ func (o *UnifiedCrmEngagementInput) GetContacts() []string {
 	return o.Contacts
 }
 
-func (o *UnifiedCrmEngagementInput) GetFieldMappings() UnifiedCrmEngagementInputFieldMappings {
+func (o *UnifiedCrmEngagementInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmEngagementInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

@@ -58,21 +58,21 @@ func (o *ListAccountingTaxRateRequest) GetCursor() *string {
 }
 
 type ListAccountingTaxRateResponseBody struct {
-	PrevCursor string                                      `json:"prev_cursor"`
-	NextCursor string                                      `json:"next_cursor"`
+	PrevCursor *string                                     `json:"prev_cursor"`
+	NextCursor *string                                     `json:"next_cursor"`
 	Data       []components.UnifiedAccountingTaxrateOutput `json:"data"`
 }
 
-func (o *ListAccountingTaxRateResponseBody) GetPrevCursor() string {
+func (o *ListAccountingTaxRateResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingTaxRateResponseBody) GetNextCursor() string {
+func (o *ListAccountingTaxRateResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

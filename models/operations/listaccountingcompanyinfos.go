@@ -58,21 +58,21 @@ func (o *ListAccountingCompanyInfosRequest) GetCursor() *string {
 }
 
 type ListAccountingCompanyInfosResponseBody struct {
-	PrevCursor string                                          `json:"prev_cursor"`
-	NextCursor string                                          `json:"next_cursor"`
+	PrevCursor *string                                         `json:"prev_cursor"`
+	NextCursor *string                                         `json:"next_cursor"`
 	Data       []components.UnifiedAccountingCompanyinfoOutput `json:"data"`
 }
 
-func (o *ListAccountingCompanyInfosResponseBody) GetPrevCursor() string {
+func (o *ListAccountingCompanyInfosResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingCompanyInfosResponseBody) GetNextCursor() string {
+func (o *ListAccountingCompanyInfosResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

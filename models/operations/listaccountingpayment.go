@@ -58,21 +58,21 @@ func (o *ListAccountingPaymentRequest) GetCursor() *string {
 }
 
 type ListAccountingPaymentResponseBody struct {
-	PrevCursor string                                      `json:"prev_cursor"`
-	NextCursor string                                      `json:"next_cursor"`
+	PrevCursor *string                                     `json:"prev_cursor"`
+	NextCursor *string                                     `json:"next_cursor"`
 	Data       []components.UnifiedAccountingPaymentOutput `json:"data"`
 }
 
-func (o *ListAccountingPaymentResponseBody) GetPrevCursor() string {
+func (o *ListAccountingPaymentResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingPaymentResponseBody) GetNextCursor() string {
+func (o *ListAccountingPaymentResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

@@ -37,21 +37,21 @@ func (o *RetrieveTicketingContactRequest) GetRemoteData() *bool {
 }
 
 type RetrieveTicketingContactResponseBody struct {
-	PrevCursor string                                     `json:"prev_cursor"`
-	NextCursor string                                     `json:"next_cursor"`
+	PrevCursor *string                                    `json:"prev_cursor"`
+	NextCursor *string                                    `json:"next_cursor"`
 	Data       []components.UnifiedTicketingContactOutput `json:"data"`
 }
 
-func (o *RetrieveTicketingContactResponseBody) GetPrevCursor() string {
+func (o *RetrieveTicketingContactResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *RetrieveTicketingContactResponseBody) GetNextCursor() string {
+func (o *RetrieveTicketingContactResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

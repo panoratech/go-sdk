@@ -58,21 +58,21 @@ func (o *ListHrisBankinfoRequest) GetCursor() *string {
 }
 
 type ListHrisBankinfoResponseBody struct {
-	PrevCursor string                                 `json:"prev_cursor"`
-	NextCursor string                                 `json:"next_cursor"`
+	PrevCursor *string                                `json:"prev_cursor"`
+	NextCursor *string                                `json:"next_cursor"`
 	Data       []components.UnifiedHrisBankinfoOutput `json:"data"`
 }
 
-func (o *ListHrisBankinfoResponseBody) GetPrevCursor() string {
+func (o *ListHrisBankinfoResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisBankinfoResponseBody) GetNextCursor() string {
+func (o *ListHrisBankinfoResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

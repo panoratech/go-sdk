@@ -58,21 +58,21 @@ func (o *ListAtsScorecardRequest) GetCursor() *string {
 }
 
 type ListAtsScorecardResponseBody struct {
-	PrevCursor string                                 `json:"prev_cursor"`
-	NextCursor string                                 `json:"next_cursor"`
+	PrevCursor *string                                `json:"prev_cursor"`
+	NextCursor *string                                `json:"next_cursor"`
 	Data       []components.UnifiedAtsScorecardOutput `json:"data"`
 }
 
-func (o *ListAtsScorecardResponseBody) GetPrevCursor() string {
+func (o *ListAtsScorecardResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsScorecardResponseBody) GetNextCursor() string {
+func (o *ListAtsScorecardResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

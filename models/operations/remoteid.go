@@ -18,7 +18,8 @@ func (o *RemoteIDRequest) GetRemoteID() string {
 }
 
 type RemoteIDResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta           components.HTTPMetadata `json:"-"`
+	LinkedUserResponse *components.LinkedUserResponse
 }
 
 func (o *RemoteIDResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -26,4 +27,11 @@ func (o *RemoteIDResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *RemoteIDResponse) GetLinkedUserResponse() *components.LinkedUserResponse {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedUserResponse
 }

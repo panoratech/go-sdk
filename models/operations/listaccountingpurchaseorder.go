@@ -58,21 +58,21 @@ func (o *ListAccountingPurchaseOrderRequest) GetCursor() *string {
 }
 
 type ListAccountingPurchaseOrderResponseBody struct {
-	PrevCursor string                                            `json:"prev_cursor"`
-	NextCursor string                                            `json:"next_cursor"`
+	PrevCursor *string                                           `json:"prev_cursor"`
+	NextCursor *string                                           `json:"next_cursor"`
 	Data       []components.UnifiedAccountingPurchaseorderOutput `json:"data"`
 }
 
-func (o *ListAccountingPurchaseOrderResponseBody) GetPrevCursor() string {
+func (o *ListAccountingPurchaseOrderResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingPurchaseOrderResponseBody) GetNextCursor() string {
+func (o *ListAccountingPurchaseOrderResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

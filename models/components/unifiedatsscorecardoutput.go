@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsScorecardOutputFieldMappings struct {
-}
-
-type UnifiedAtsScorecardOutputRemoteData struct {
-}
-
-type UnifiedAtsScorecardOutputCreatedAt struct {
-}
-
-type UnifiedAtsScorecardOutputModifiedAt struct {
-}
-
 type UnifiedAtsScorecardOutput struct {
 	// The overall recommendation
 	OverallRecommendation *string `json:"overall_recommendation,omitempty"`
@@ -27,17 +15,21 @@ type UnifiedAtsScorecardOutput struct {
 	// The UUID of the interview
 	InterviewID *string `json:"interview_id,omitempty"`
 	// The remote creation date of the scorecard
-	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	RemoteCreatedAt *string `json:"remote_created_at,omitempty"`
 	// The submission date of the scorecard
-	SubmittedAt   *time.Time                             `json:"submitted_at,omitempty"`
-	FieldMappings UnifiedAtsScorecardOutputFieldMappings `json:"field_mappings"`
+	SubmittedAt *string `json:"submitted_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the scorecard
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the scorecard in the context of the 3rd Party
-	RemoteID   *string                             `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsScorecardOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsScorecardOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsScorecardOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the scorecard in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedAtsScorecardOutput) MarshalJSON() ([]byte, error) {
@@ -72,23 +64,23 @@ func (o *UnifiedAtsScorecardOutput) GetInterviewID() *string {
 	return o.InterviewID
 }
 
-func (o *UnifiedAtsScorecardOutput) GetRemoteCreatedAt() *time.Time {
+func (o *UnifiedAtsScorecardOutput) GetRemoteCreatedAt() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RemoteCreatedAt
 }
 
-func (o *UnifiedAtsScorecardOutput) GetSubmittedAt() *time.Time {
+func (o *UnifiedAtsScorecardOutput) GetSubmittedAt() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SubmittedAt
 }
 
-func (o *UnifiedAtsScorecardOutput) GetFieldMappings() UnifiedAtsScorecardOutputFieldMappings {
+func (o *UnifiedAtsScorecardOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsScorecardOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -107,23 +99,23 @@ func (o *UnifiedAtsScorecardOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsScorecardOutput) GetRemoteData() UnifiedAtsScorecardOutputRemoteData {
+func (o *UnifiedAtsScorecardOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsScorecardOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsScorecardOutput) GetCreatedAt() UnifiedAtsScorecardOutputCreatedAt {
+func (o *UnifiedAtsScorecardOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsScorecardOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsScorecardOutput) GetModifiedAt() UnifiedAtsScorecardOutputModifiedAt {
+func (o *UnifiedAtsScorecardOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsScorecardOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

@@ -32,7 +32,7 @@ func (s *PanoraCompanies) List(ctx context.Context, xConnectionToken string, rem
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listHrisCompanys",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListHrisCompanysRequest{
@@ -82,6 +82,10 @@ func (s *PanoraCompanies) List(ctx context.Context, xConnectionToken string, rem
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

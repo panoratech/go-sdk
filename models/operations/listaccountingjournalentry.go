@@ -58,21 +58,21 @@ func (o *ListAccountingJournalEntryRequest) GetCursor() *string {
 }
 
 type ListAccountingJournalEntryResponseBody struct {
-	PrevCursor string                                           `json:"prev_cursor"`
-	NextCursor string                                           `json:"next_cursor"`
+	PrevCursor *string                                          `json:"prev_cursor"`
+	NextCursor *string                                          `json:"next_cursor"`
 	Data       []components.UnifiedAccountingJournalentryOutput `json:"data"`
 }
 
-func (o *ListAccountingJournalEntryResponseBody) GetPrevCursor() string {
+func (o *ListAccountingJournalEntryResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingJournalEntryResponseBody) GetNextCursor() string {
+func (o *ListAccountingJournalEntryResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

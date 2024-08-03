@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsJobOutputFieldMappings struct {
-}
-
-type UnifiedAtsJobOutputRemoteData struct {
-}
-
-type UnifiedAtsJobOutputCreatedAt struct {
-}
-
-type UnifiedAtsJobOutputModifiedAt struct {
-}
-
 type UnifiedAtsJobOutput struct {
 	// The name of the job
 	Name *string `json:"name,omitempty"`
@@ -43,15 +31,19 @@ type UnifiedAtsJobOutput struct {
 	// The remote creation date of the job
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the job
-	RemoteUpdatedAt *time.Time                       `json:"remote_updated_at,omitempty"`
-	FieldMappings   UnifiedAtsJobOutputFieldMappings `json:"field_mappings"`
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the job
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the job in the context of the 3rd Party
-	RemoteID   *string                       `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsJobOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsJobOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsJobOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the job in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedAtsJobOutput) MarshalJSON() ([]byte, error) {
@@ -149,9 +141,9 @@ func (o *UnifiedAtsJobOutput) GetRemoteUpdatedAt() *time.Time {
 	return o.RemoteUpdatedAt
 }
 
-func (o *UnifiedAtsJobOutput) GetFieldMappings() UnifiedAtsJobOutputFieldMappings {
+func (o *UnifiedAtsJobOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsJobOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -170,23 +162,23 @@ func (o *UnifiedAtsJobOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsJobOutput) GetRemoteData() UnifiedAtsJobOutputRemoteData {
+func (o *UnifiedAtsJobOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsJobOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsJobOutput) GetCreatedAt() UnifiedAtsJobOutputCreatedAt {
+func (o *UnifiedAtsJobOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsJobOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsJobOutput) GetModifiedAt() UnifiedAtsJobOutputModifiedAt {
+func (o *UnifiedAtsJobOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsJobOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

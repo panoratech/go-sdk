@@ -2,46 +2,44 @@
 
 package components
 
-type UnifiedFilestorageFolderInputFieldMappings struct {
-}
-
 type UnifiedFilestorageFolderInput struct {
 	// The name of the folder
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The size of the folder
-	Size string `json:"size"`
+	Size *string `json:"size"`
 	// The url of the folder
-	FolderURL string `json:"folder_url"`
+	FolderURL *string `json:"folder_url"`
 	// The description of the folder
 	Description string `json:"description"`
 	// The UUID of the drive tied to the folder
-	DriveID string `json:"drive_id"`
+	DriveID *string `json:"drive_id"`
 	// The UUID of the parent folder
-	ParentFolderID string `json:"parent_folder_id"`
+	ParentFolderID *string `json:"parent_folder_id"`
 	// The UUID of the shared link tied to the folder
-	SharedLink string `json:"shared_link"`
+	SharedLink *string `json:"shared_link"`
 	// The UUID of the permission tied to the folder
-	Permission    string                                     `json:"permission"`
-	FieldMappings UnifiedFilestorageFolderInputFieldMappings `json:"field_mappings"`
+	Permission *string `json:"permission"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedFilestorageFolderInput) GetName() string {
+func (o *UnifiedFilestorageFolderInput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedFilestorageFolderInput) GetSize() string {
+func (o *UnifiedFilestorageFolderInput) GetSize() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Size
 }
 
-func (o *UnifiedFilestorageFolderInput) GetFolderURL() string {
+func (o *UnifiedFilestorageFolderInput) GetFolderURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FolderURL
 }
@@ -53,37 +51,37 @@ func (o *UnifiedFilestorageFolderInput) GetDescription() string {
 	return o.Description
 }
 
-func (o *UnifiedFilestorageFolderInput) GetDriveID() string {
+func (o *UnifiedFilestorageFolderInput) GetDriveID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.DriveID
 }
 
-func (o *UnifiedFilestorageFolderInput) GetParentFolderID() string {
+func (o *UnifiedFilestorageFolderInput) GetParentFolderID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ParentFolderID
 }
 
-func (o *UnifiedFilestorageFolderInput) GetSharedLink() string {
+func (o *UnifiedFilestorageFolderInput) GetSharedLink() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SharedLink
 }
 
-func (o *UnifiedFilestorageFolderInput) GetPermission() string {
+func (o *UnifiedFilestorageFolderInput) GetPermission() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Permission
 }
 
-func (o *UnifiedFilestorageFolderInput) GetFieldMappings() UnifiedFilestorageFolderInputFieldMappings {
+func (o *UnifiedFilestorageFolderInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageFolderInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

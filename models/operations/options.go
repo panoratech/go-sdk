@@ -22,6 +22,7 @@ const (
 type AcceptHeaderEnum string
 
 const (
+	AcceptHeaderEnumTextPlain        AcceptHeaderEnum = "text/plain"
 	AcceptHeaderEnumApplicationJson  AcceptHeaderEnum = "application/json"
 	AcceptHeaderEnumWildcardWildcard AcceptHeaderEnum = "*/*"
 )

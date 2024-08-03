@@ -58,21 +58,21 @@ func (o *ListTicketingAttachmentsRequest) GetCursor() *string {
 }
 
 type ListTicketingAttachmentsResponseBody struct {
-	PrevCursor string                                        `json:"prev_cursor"`
-	NextCursor string                                        `json:"next_cursor"`
+	PrevCursor *string                                       `json:"prev_cursor"`
+	NextCursor *string                                       `json:"next_cursor"`
 	Data       []components.UnifiedTicketingAttachmentOutput `json:"data"`
 }
 
-func (o *ListTicketingAttachmentsResponseBody) GetPrevCursor() string {
+func (o *ListTicketingAttachmentsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListTicketingAttachmentsResponseBody) GetNextCursor() string {
+func (o *ListTicketingAttachmentsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

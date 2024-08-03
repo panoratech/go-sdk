@@ -6,9 +6,21 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
+type VerifyEventResponseBody struct {
+	// Dynamic event payload
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (o *VerifyEventResponseBody) GetData() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 type VerifyEventResponse struct {
-	HTTPMeta     components.HTTPMetadata `json:"-"`
-	EventPayload *components.EventPayload
+	HTTPMeta components.HTTPMetadata `json:"-"`
+	Object   *VerifyEventResponseBody
 }
 
 func (o *VerifyEventResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -18,9 +30,9 @@ func (o *VerifyEventResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *VerifyEventResponse) GetEventPayload() *components.EventPayload {
+func (o *VerifyEventResponse) GetObject() *VerifyEventResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.EventPayload
+	return o.Object
 }

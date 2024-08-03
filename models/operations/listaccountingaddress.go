@@ -58,21 +58,21 @@ func (o *ListAccountingAddressRequest) GetCursor() *string {
 }
 
 type ListAccountingAddressResponseBody struct {
-	PrevCursor string                                      `json:"prev_cursor"`
-	NextCursor string                                      `json:"next_cursor"`
+	PrevCursor *string                                     `json:"prev_cursor"`
+	NextCursor *string                                     `json:"next_cursor"`
 	Data       []components.UnifiedAccountingAddressOutput `json:"data"`
 }
 
-func (o *ListAccountingAddressResponseBody) GetPrevCursor() string {
+func (o *ListAccountingAddressResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingAddressResponseBody) GetNextCursor() string {
+func (o *ListAccountingAddressResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

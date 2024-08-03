@@ -3,4 +3,22 @@
 package components
 
 type URL struct {
+	// The url.
+	URL *string `json:"url"`
+	// The url type. It takes [WEBSITE | BLOG | LINKEDIN | GITHUB | OTHER]
+	URLType *string `json:"url_type"`
+}
+
+func (o *URL) GetURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.URL
+}
+
+func (o *URL) GetURLType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.URLType
 }

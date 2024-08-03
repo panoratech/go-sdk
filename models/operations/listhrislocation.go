@@ -58,21 +58,21 @@ func (o *ListHrisLocationRequest) GetCursor() *string {
 }
 
 type ListHrisLocationResponseBody struct {
-	PrevCursor string                                 `json:"prev_cursor"`
-	NextCursor string                                 `json:"next_cursor"`
+	PrevCursor *string                                `json:"prev_cursor"`
+	NextCursor *string                                `json:"next_cursor"`
 	Data       []components.UnifiedHrisLocationOutput `json:"data"`
 }
 
-func (o *ListHrisLocationResponseBody) GetPrevCursor() string {
+func (o *ListHrisLocationResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisLocationResponseBody) GetNextCursor() string {
+func (o *ListHrisLocationResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

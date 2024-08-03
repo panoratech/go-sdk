@@ -58,21 +58,21 @@ func (o *ListCrmContactsRequest) GetCursor() *string {
 }
 
 type ListCrmContactsResponseBody struct {
-	PrevCursor string                               `json:"prev_cursor"`
-	NextCursor string                               `json:"next_cursor"`
+	PrevCursor *string                              `json:"prev_cursor"`
+	NextCursor *string                              `json:"next_cursor"`
 	Data       []components.UnifiedCrmContactOutput `json:"data"`
 }
 
-func (o *ListCrmContactsResponseBody) GetPrevCursor() string {
+func (o *ListCrmContactsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListCrmContactsResponseBody) GetNextCursor() string {
+func (o *ListCrmContactsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

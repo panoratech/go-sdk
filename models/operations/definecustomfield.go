@@ -7,7 +7,8 @@ import (
 )
 
 type DefineCustomFieldResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta            components.HTTPMetadata `json:"-"`
+	CustomFieldResponse *components.CustomFieldResponse
 }
 
 func (o *DefineCustomFieldResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *DefineCustomFieldResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *DefineCustomFieldResponse) GetCustomFieldResponse() *components.CustomFieldResponse {
+	if o == nil {
+		return nil
+	}
+	return o.CustomFieldResponse
 }

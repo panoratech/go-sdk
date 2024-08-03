@@ -17,13 +17,16 @@ List  Comments
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Ticketing.Comments.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Comments in any supported Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,11 +76,13 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedTicketingCommentInput := components.UnifiedTicketingCommentInput{
-        Body: "<value>",
+        Body: gosdk.String("<value>"),
     }
     ctx := context.Background()
     res, err := s.Ticketing.Comments.Create(ctx, xConnectionToken, unifiedTicketingCommentInput, nil)
@@ -117,13 +123,16 @@ Retrieve Comments from any connected Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

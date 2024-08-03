@@ -7,7 +7,8 @@ import (
 )
 
 type ListLinkedUsersResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta            components.HTTPMetadata `json:"-"`
+	LinkedUserResponses []components.LinkedUserResponse
 }
 
 func (o *ListLinkedUsersResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *ListLinkedUsersResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *ListLinkedUsersResponse) GetLinkedUserResponses() []components.LinkedUserResponse {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedUserResponses
 }

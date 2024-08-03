@@ -36,17 +36,20 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
+	"os"
 )
 
 func main() {
-	s := gosdk.New()
+	s := gosdk.New(
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
+	)
 
 	ctx := context.Background()
 	res, err := s.Hello(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.String != nil {
+	if res.Res != nil {
 		// handle response
 	}
 }
@@ -66,15 +69,9 @@ func main() {
 
 * [List](docs/sdks/webhooks/README.md#list) - List webhooks
 * [Create](docs/sdks/webhooks/README.md#create) - Add webhook metadata
-
-### [Webhooks.{id}](docs/sdks/id/README.md)
-
-* [Delete](docs/sdks/id/README.md#delete) - Delete Webhook
-* [UpdateStatus](docs/sdks/id/README.md#updatestatus) - Update webhook status
-
-### [Webhooks.Verifyevent](docs/sdks/verifyevent/README.md)
-
-* [VerifyEvent](docs/sdks/verifyevent/README.md#verifyevent) - Verify payload signature of the webhook
+* [Delete](docs/sdks/webhooks/README.md#delete) - Delete Webhook
+* [UpdateStatus](docs/sdks/webhooks/README.md#updatestatus) - Update webhook status
+* [VerifyEvent](docs/sdks/webhooks/README.md#verifyevent) - Verify payload signature of the webhook
 
 
 ### [Ticketing.Tickets](docs/sdks/tickets/README.md)
@@ -133,7 +130,7 @@ func main() {
 
 ### [Crm.Companies](docs/sdks/companies/README.md)
 
-* [List](docs/sdks/companies/README.md#list) - List  Companies
+* [List](docs/sdks/companies/README.md#list) - List Companies
 * [Create](docs/sdks/companies/README.md#create) - Create Companies
 * [Retrieve](docs/sdks/companies/README.md#retrieve) - Retrieve Companies
 
@@ -572,10 +569,13 @@ import (
 	"github.com/panoratech/go-sdk/retry"
 	"log"
 	"models/operations"
+	"os"
 )
 
 func main() {
-	s := gosdk.New()
+	s := gosdk.New(
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
+	)
 
 	ctx := context.Background()
 	res, err := s.Hello(ctx, operations.WithRetries(
@@ -592,7 +592,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.String != nil {
+	if res.Res != nil {
 		// handle response
 	}
 }
@@ -608,6 +608,7 @@ import (
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/retry"
 	"log"
+	"os"
 )
 
 func main() {
@@ -623,6 +624,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
 	)
 
 	ctx := context.Background()
@@ -630,7 +632,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.String != nil {
+	if res.Res != nil {
 		// handle response
 	}
 }
@@ -658,10 +660,13 @@ import (
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
 	"log"
+	"os"
 )
 
 func main() {
-	s := gosdk.New()
+	s := gosdk.New(
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
+	)
 
 	ctx := context.Background()
 	res, err := s.Hello(ctx)
@@ -700,11 +705,13 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
+	"os"
 )
 
 func main() {
 	s := gosdk.New(
 		gosdk.WithServerIndex(2),
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
 	)
 
 	ctx := context.Background()
@@ -712,7 +719,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.String != nil {
+	if res.Res != nil {
 		// handle response
 	}
 }
@@ -730,11 +737,13 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
+	"os"
 )
 
 func main() {
 	s := gosdk.New(
 		gosdk.WithServerURL("https://api.panora.dev"),
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
 	)
 
 	ctx := context.Background()
@@ -742,7 +751,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.String != nil {
+	if res.Res != nil {
 		// handle response
 	}
 }
@@ -784,6 +793,46 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- End Special Types [types] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name     | Type     | Scheme   |
+| -------- | -------- | -------- |
+| `APIKey` | apiKey   | API key  |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	gosdk "github.com/panoratech/go-sdk"
+	"log"
+	"os"
+)
+
+func main() {
+	s := gosdk.New(
+		gosdk.WithSecurity(os.Getenv("API_KEY")),
+	)
+
+	ctx := context.Background()
+	res, err := s.Hello(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.Res != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

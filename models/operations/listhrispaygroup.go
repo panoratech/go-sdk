@@ -58,21 +58,21 @@ func (o *ListHrisPaygroupRequest) GetCursor() *string {
 }
 
 type ListHrisPaygroupResponseBody struct {
-	PrevCursor string                                 `json:"prev_cursor"`
-	NextCursor string                                 `json:"next_cursor"`
+	PrevCursor *string                                `json:"prev_cursor"`
+	NextCursor *string                                `json:"next_cursor"`
 	Data       []components.UnifiedHrisPaygroupOutput `json:"data"`
 }
 
-func (o *ListHrisPaygroupResponseBody) GetPrevCursor() string {
+func (o *ListHrisPaygroupResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisPaygroupResponseBody) GetNextCursor() string {
+func (o *ListHrisPaygroupResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

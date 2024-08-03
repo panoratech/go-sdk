@@ -58,21 +58,21 @@ func (o *ListHrisEmployerBenefitRequest) GetCursor() *string {
 }
 
 type ListHrisEmployerBenefitResponseBody struct {
-	PrevCursor string                                        `json:"prev_cursor"`
-	NextCursor string                                        `json:"next_cursor"`
+	PrevCursor *string                                       `json:"prev_cursor"`
+	NextCursor *string                                       `json:"next_cursor"`
 	Data       []components.UnifiedHrisEmployerbenefitOutput `json:"data"`
 }
 
-func (o *ListHrisEmployerBenefitResponseBody) GetPrevCursor() string {
+func (o *ListHrisEmployerBenefitResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisEmployerBenefitResponseBody) GetNextCursor() string {
+func (o *ListHrisEmployerBenefitResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

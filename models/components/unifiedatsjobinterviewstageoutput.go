@@ -2,17 +2,10 @@
 
 package components
 
-type UnifiedAtsJobinterviewstageOutputFieldMappings struct {
-}
-
-type UnifiedAtsJobinterviewstageOutputRemoteData struct {
-}
-
-type UnifiedAtsJobinterviewstageOutputCreatedAt struct {
-}
-
-type UnifiedAtsJobinterviewstageOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedAtsJobinterviewstageOutput struct {
 	// The name of the job interview stage
@@ -20,15 +13,30 @@ type UnifiedAtsJobinterviewstageOutput struct {
 	// The order of the stage
 	StageOrder *float64 `json:"stage_order,omitempty"`
 	// The UUID of the job
-	JobID         *string                                        `json:"job_id,omitempty"`
-	FieldMappings UnifiedAtsJobinterviewstageOutputFieldMappings `json:"field_mappings"`
+	JobID *string `json:"job_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the job interview stage
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the job interview stage in the context of the 3rd Party
-	RemoteID   *string                                     `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsJobinterviewstageOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsJobinterviewstageOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsJobinterviewstageOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the job interview stage in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAtsJobinterviewstageOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAtsJobinterviewstageOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UnifiedAtsJobinterviewstageOutput) GetName() *string {
@@ -52,9 +60,9 @@ func (o *UnifiedAtsJobinterviewstageOutput) GetJobID() *string {
 	return o.JobID
 }
 
-func (o *UnifiedAtsJobinterviewstageOutput) GetFieldMappings() UnifiedAtsJobinterviewstageOutputFieldMappings {
+func (o *UnifiedAtsJobinterviewstageOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsJobinterviewstageOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -73,23 +81,23 @@ func (o *UnifiedAtsJobinterviewstageOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsJobinterviewstageOutput) GetRemoteData() UnifiedAtsJobinterviewstageOutputRemoteData {
+func (o *UnifiedAtsJobinterviewstageOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsJobinterviewstageOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsJobinterviewstageOutput) GetCreatedAt() UnifiedAtsJobinterviewstageOutputCreatedAt {
+func (o *UnifiedAtsJobinterviewstageOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsJobinterviewstageOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsJobinterviewstageOutput) GetModifiedAt() UnifiedAtsJobinterviewstageOutputModifiedAt {
+func (o *UnifiedAtsJobinterviewstageOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsJobinterviewstageOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

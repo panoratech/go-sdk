@@ -4,7 +4,9 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/panoratech/go-sdk/internal/utils"
 )
 
 type Method string
@@ -42,17 +44,74 @@ func (e *Method) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type DataType string
+
+const (
+	DataTypeMapOfAny        DataType = "mapOfAny"
+	DataTypeArrayOfMapOfAny DataType = "arrayOfMapOfAny"
+)
+
 type Data struct {
+	MapOfAny        map[string]any
+	ArrayOfMapOfAny []map[string]any
+
+	Type DataType
 }
 
-type Headers struct {
+func CreateDataMapOfAny(mapOfAny map[string]any) Data {
+	typ := DataTypeMapOfAny
+
+	return Data{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func CreateDataArrayOfMapOfAny(arrayOfMapOfAny []map[string]any) Data {
+	typ := DataTypeArrayOfMapOfAny
+
+	return Data{
+		ArrayOfMapOfAny: arrayOfMapOfAny,
+		Type:            typ,
+	}
+}
+
+func (u *Data) UnmarshalJSON(data []byte) error {
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = DataTypeMapOfAny
+		return nil
+	}
+
+	var arrayOfMapOfAny []map[string]any = []map[string]any{}
+	if err := utils.UnmarshalJSON(data, &arrayOfMapOfAny, "", true, true); err == nil {
+		u.ArrayOfMapOfAny = arrayOfMapOfAny
+		u.Type = DataTypeArrayOfMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Data", string(data))
+}
+
+func (u Data) MarshalJSON() ([]byte, error) {
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	if u.ArrayOfMapOfAny != nil {
+		return utils.MarshalJSON(u.ArrayOfMapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Data: all fields are null")
 }
 
 type PassThroughRequestDto struct {
-	Method  Method   `json:"method"`
-	Path    string   `json:"path"`
-	Data    *Data    `json:"data,omitempty"`
-	Headers *Headers `json:"headers,omitempty"`
+	Method  Method         `json:"method"`
+	Path    *string        `json:"path"`
+	Data    *Data          `json:"data,omitempty"`
+	Headers map[string]any `json:"headers,omitempty"`
 }
 
 func (o *PassThroughRequestDto) GetMethod() Method {
@@ -62,9 +121,9 @@ func (o *PassThroughRequestDto) GetMethod() Method {
 	return o.Method
 }
 
-func (o *PassThroughRequestDto) GetPath() string {
+func (o *PassThroughRequestDto) GetPath() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Path
 }
@@ -76,7 +135,7 @@ func (o *PassThroughRequestDto) GetData() *Data {
 	return o.Data
 }
 
-func (o *PassThroughRequestDto) GetHeaders() *Headers {
+func (o *PassThroughRequestDto) GetHeaders() map[string]any {
 	if o == nil {
 		return nil
 	}

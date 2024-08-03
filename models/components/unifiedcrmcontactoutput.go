@@ -2,23 +2,16 @@
 
 package components
 
-type UnifiedCrmContactOutputFieldMappings struct {
-}
-
-type UnifiedCrmContactOutputRemoteData struct {
-}
-
-type UnifiedCrmContactOutputCreatedAt struct {
-}
-
-type UnifiedCrmContactOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedCrmContactOutput struct {
 	// The first name of the contact
-	FirstName string `json:"first_name"`
+	FirstName *string `json:"first_name"`
 	// The last name of the contact
-	LastName string `json:"last_name"`
+	LastName *string `json:"last_name"`
 	// The email addresses of the contact
 	EmailAddresses []Email `json:"email_addresses,omitempty"`
 	// The phone numbers of the contact
@@ -26,27 +19,42 @@ type UnifiedCrmContactOutput struct {
 	// The addresses of the contact
 	Addresses []Address `json:"addresses,omitempty"`
 	// The UUID of the user who owns the contact
-	UserID        *string                              `json:"user_id,omitempty"`
-	FieldMappings UnifiedCrmContactOutputFieldMappings `json:"field_mappings"`
+	UserID *string `json:"user_id,omitempty"`
+	// The custom field mappings of the contact between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the contact
 	ID *string `json:"id,omitempty"`
 	// The id of the contact in the context of the Crm 3rd Party
-	RemoteID   *string                           `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmContactOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmContactOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmContactOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the contact in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedCrmContactOutput) GetFirstName() string {
+func (u UnifiedCrmContactOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedCrmContactOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedCrmContactOutput) GetFirstName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FirstName
 }
 
-func (o *UnifiedCrmContactOutput) GetLastName() string {
+func (o *UnifiedCrmContactOutput) GetLastName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.LastName
 }
@@ -79,9 +87,9 @@ func (o *UnifiedCrmContactOutput) GetUserID() *string {
 	return o.UserID
 }
 
-func (o *UnifiedCrmContactOutput) GetFieldMappings() UnifiedCrmContactOutputFieldMappings {
+func (o *UnifiedCrmContactOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmContactOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -100,23 +108,23 @@ func (o *UnifiedCrmContactOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmContactOutput) GetRemoteData() UnifiedCrmContactOutputRemoteData {
+func (o *UnifiedCrmContactOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmContactOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmContactOutput) GetCreatedAt() UnifiedCrmContactOutputCreatedAt {
+func (o *UnifiedCrmContactOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmContactOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmContactOutput) GetModifiedAt() UnifiedCrmContactOutputModifiedAt {
+func (o *UnifiedCrmContactOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmContactOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

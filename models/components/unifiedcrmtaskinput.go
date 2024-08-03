@@ -7,27 +7,25 @@ import (
 	"time"
 )
 
-type UnifiedCrmTaskInputFieldMappings struct {
-}
-
 type UnifiedCrmTaskInput struct {
 	// The subject of the task
-	Subject string `json:"subject"`
+	Subject *string `json:"subject"`
 	// The content of the task
-	Content string `json:"content"`
+	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status string `json:"status"`
+	Status *string `json:"status"`
 	// The due date of the task
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The finished date of the task
 	FinishedDate *time.Time `json:"finished_date,omitempty"`
 	// The UUID of the user tied to the task
 	UserID *string `json:"user_id,omitempty"`
-	// The UUID fo the company tied to the task
+	// The UUID of the company tied to the task
 	CompanyID *string `json:"company_id,omitempty"`
 	// The UUID of the deal tied to the task
-	DealID        *string                          `json:"deal_id,omitempty"`
-	FieldMappings UnifiedCrmTaskInputFieldMappings `json:"field_mappings"`
+	DealID *string `json:"deal_id,omitempty"`
+	// The custom field mappings of the task between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedCrmTaskInput) MarshalJSON() ([]byte, error) {
@@ -41,23 +39,23 @@ func (u *UnifiedCrmTaskInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedCrmTaskInput) GetSubject() string {
+func (o *UnifiedCrmTaskInput) GetSubject() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Subject
 }
 
-func (o *UnifiedCrmTaskInput) GetContent() string {
+func (o *UnifiedCrmTaskInput) GetContent() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskInput) GetStatus() string {
+func (o *UnifiedCrmTaskInput) GetStatus() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Status
 }
@@ -97,9 +95,9 @@ func (o *UnifiedCrmTaskInput) GetDealID() *string {
 	return o.DealID
 }
 
-func (o *UnifiedCrmTaskInput) GetFieldMappings() UnifiedCrmTaskInputFieldMappings {
+func (o *UnifiedCrmTaskInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmTaskInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

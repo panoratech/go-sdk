@@ -2,31 +2,39 @@
 
 package components
 
-type UnifiedAtsOfficeOutputFieldMappings struct {
-}
-
-type UnifiedAtsOfficeOutputRemoteData struct {
-}
-
-type UnifiedAtsOfficeOutputCreatedAt struct {
-}
-
-type UnifiedAtsOfficeOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedAtsOfficeOutput struct {
 	// The name of the office
 	Name *string `json:"name,omitempty"`
 	// The location of the office
-	Location      *string                             `json:"location,omitempty"`
-	FieldMappings UnifiedAtsOfficeOutputFieldMappings `json:"field_mappings"`
+	Location *string `json:"location,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the office
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the office in the context of the 3rd Party
-	RemoteID   *string                          `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsOfficeOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsOfficeOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsOfficeOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the office in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAtsOfficeOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAtsOfficeOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UnifiedAtsOfficeOutput) GetName() *string {
@@ -43,9 +51,9 @@ func (o *UnifiedAtsOfficeOutput) GetLocation() *string {
 	return o.Location
 }
 
-func (o *UnifiedAtsOfficeOutput) GetFieldMappings() UnifiedAtsOfficeOutputFieldMappings {
+func (o *UnifiedAtsOfficeOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsOfficeOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -64,23 +72,23 @@ func (o *UnifiedAtsOfficeOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsOfficeOutput) GetRemoteData() UnifiedAtsOfficeOutputRemoteData {
+func (o *UnifiedAtsOfficeOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsOfficeOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsOfficeOutput) GetCreatedAt() UnifiedAtsOfficeOutputCreatedAt {
+func (o *UnifiedAtsOfficeOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsOfficeOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsOfficeOutput) GetModifiedAt() UnifiedAtsOfficeOutputModifiedAt {
+func (o *UnifiedAtsOfficeOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsOfficeOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

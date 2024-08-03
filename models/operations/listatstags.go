@@ -58,21 +58,21 @@ func (o *ListAtsTagsRequest) GetCursor() *string {
 }
 
 type ListAtsTagsResponseBody struct {
-	PrevCursor string                           `json:"prev_cursor"`
-	NextCursor string                           `json:"next_cursor"`
+	PrevCursor *string                          `json:"prev_cursor"`
+	NextCursor *string                          `json:"next_cursor"`
 	Data       []components.UnifiedAtsTagOutput `json:"data"`
 }
 
-func (o *ListAtsTagsResponseBody) GetPrevCursor() string {
+func (o *ListAtsTagsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsTagsResponseBody) GetNextCursor() string {
+func (o *ListAtsTagsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

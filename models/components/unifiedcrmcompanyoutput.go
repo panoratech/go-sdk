@@ -2,21 +2,17 @@
 
 package components
 
-type UnifiedCrmCompanyOutputFieldMappings struct {
+// CreatedAt - The created date of the object
+type CreatedAt struct {
 }
 
-type UnifiedCrmCompanyOutputRemoteData struct {
-}
-
-type UnifiedCrmCompanyOutputCreatedAt struct {
-}
-
-type UnifiedCrmCompanyOutputModifiedAt struct {
+// ModifiedAt - The modified date of the object
+type ModifiedAt struct {
 }
 
 type UnifiedCrmCompanyOutput struct {
 	// The name of the company
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The industry of the company. Authorized values can be found in the Industry enum.
 	Industry *string `json:"industry,omitempty"`
 	// The number of employees of the company
@@ -28,20 +24,24 @@ type UnifiedCrmCompanyOutput struct {
 	// The addresses of the company
 	Addresses []Address `json:"addresses,omitempty"`
 	// The phone numbers of the company
-	PhoneNumbers  []Phone                              `json:"phone_numbers,omitempty"`
-	FieldMappings UnifiedCrmCompanyOutputFieldMappings `json:"field_mappings"`
+	PhoneNumbers []Phone `json:"phone_numbers,omitempty"`
+	// The custom field mappings of the company between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the company
 	ID *string `json:"id,omitempty"`
 	// The id of the company in the context of the Crm 3rd Party
-	RemoteID   *string                           `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmCompanyOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmCompanyOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmCompanyOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the company in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *CreatedAt `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *ModifiedAt `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedCrmCompanyOutput) GetName() string {
+func (o *UnifiedCrmCompanyOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -88,9 +88,9 @@ func (o *UnifiedCrmCompanyOutput) GetPhoneNumbers() []Phone {
 	return o.PhoneNumbers
 }
 
-func (o *UnifiedCrmCompanyOutput) GetFieldMappings() UnifiedCrmCompanyOutputFieldMappings {
+func (o *UnifiedCrmCompanyOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmCompanyOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -109,23 +109,23 @@ func (o *UnifiedCrmCompanyOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmCompanyOutput) GetRemoteData() UnifiedCrmCompanyOutputRemoteData {
+func (o *UnifiedCrmCompanyOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmCompanyOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmCompanyOutput) GetCreatedAt() UnifiedCrmCompanyOutputCreatedAt {
+func (o *UnifiedCrmCompanyOutput) GetCreatedAt() *CreatedAt {
 	if o == nil {
-		return UnifiedCrmCompanyOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmCompanyOutput) GetModifiedAt() UnifiedCrmCompanyOutputModifiedAt {
+func (o *UnifiedCrmCompanyOutput) GetModifiedAt() *ModifiedAt {
 	if o == nil {
-		return UnifiedCrmCompanyOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

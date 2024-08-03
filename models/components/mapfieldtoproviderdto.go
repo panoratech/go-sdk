@@ -3,36 +3,40 @@
 package components
 
 type MapFieldToProviderDto struct {
-	AttributeID         string `json:"attributeId"`
-	SourceCustomFieldID string `json:"source_custom_field_id"`
-	SourceProvider      string `json:"source_provider"`
-	LinkedUserID        string `json:"linked_user_id"`
+	// Attribute Id
+	AttributeID *string `json:"attributeId"`
+	// Attribute Id
+	SourceCustomFieldID *string `json:"source_custom_field_id"`
+	// Attribute Id
+	SourceProvider *string `json:"source_provider"`
+	// Attribute Id
+	LinkedUserID *string `json:"linked_user_id"`
 }
 
-func (o *MapFieldToProviderDto) GetAttributeID() string {
+func (o *MapFieldToProviderDto) GetAttributeID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.AttributeID
 }
 
-func (o *MapFieldToProviderDto) GetSourceCustomFieldID() string {
+func (o *MapFieldToProviderDto) GetSourceCustomFieldID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SourceCustomFieldID
 }
 
-func (o *MapFieldToProviderDto) GetSourceProvider() string {
+func (o *MapFieldToProviderDto) GetSourceProvider() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SourceProvider
 }
 
-func (o *MapFieldToProviderDto) GetLinkedUserID() string {
+func (o *MapFieldToProviderDto) GetLinkedUserID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.LinkedUserID
 }

@@ -58,21 +58,21 @@ func (o *ListAccountingAttachmentsRequest) GetCursor() *string {
 }
 
 type ListAccountingAttachmentsResponseBody struct {
-	PrevCursor string                                         `json:"prev_cursor"`
-	NextCursor string                                         `json:"next_cursor"`
+	PrevCursor *string                                        `json:"prev_cursor"`
+	NextCursor *string                                        `json:"next_cursor"`
 	Data       []components.UnifiedAccountingAttachmentOutput `json:"data"`
 }
 
-func (o *ListAccountingAttachmentsResponseBody) GetPrevCursor() string {
+func (o *ListAccountingAttachmentsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingAttachmentsResponseBody) GetNextCursor() string {
+func (o *ListAccountingAttachmentsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

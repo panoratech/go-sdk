@@ -2,42 +2,40 @@
 
 package components
 
-type UnifiedCrmDealInputFieldMappings struct {
-}
-
 type UnifiedCrmDealInput struct {
 	// The name of the deal
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The description of the deal
-	Description string `json:"description"`
+	Description *string `json:"description"`
 	// The amount of the deal
-	Amount float64 `json:"amount"`
+	Amount *float64 `json:"amount"`
 	// The UUID of the user who is on the deal
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the stage of the deal
 	StageID *string `json:"stage_id,omitempty"`
 	// The UUID of the company tied to the deal
-	CompanyID     *string                          `json:"company_id,omitempty"`
-	FieldMappings UnifiedCrmDealInputFieldMappings `json:"field_mappings"`
+	CompanyID *string `json:"company_id,omitempty"`
+	// The custom field mappings of the company between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedCrmDealInput) GetName() string {
+func (o *UnifiedCrmDealInput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedCrmDealInput) GetDescription() string {
+func (o *UnifiedCrmDealInput) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
 
-func (o *UnifiedCrmDealInput) GetAmount() float64 {
+func (o *UnifiedCrmDealInput) GetAmount() *float64 {
 	if o == nil {
-		return 0.0
+		return nil
 	}
 	return o.Amount
 }
@@ -63,9 +61,9 @@ func (o *UnifiedCrmDealInput) GetCompanyID() *string {
 	return o.CompanyID
 }
 
-func (o *UnifiedCrmDealInput) GetFieldMappings() UnifiedCrmDealInputFieldMappings {
+func (o *UnifiedCrmDealInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmDealInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

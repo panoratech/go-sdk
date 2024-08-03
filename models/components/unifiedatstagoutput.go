@@ -7,23 +7,19 @@ import (
 	"time"
 )
 
-type UnifiedAtsTagOutputFieldMappings struct {
-}
-
-type UnifiedAtsTagOutputRemoteData struct {
-}
-
 type UnifiedAtsTagOutput struct {
 	// The name of the tag
 	Name *string `json:"name,omitempty"`
 	// The UUID of the candidate
-	IDAtsCandidate *string                          `json:"id_ats_candidate,omitempty"`
-	FieldMappings  UnifiedAtsTagOutputFieldMappings `json:"field_mappings"`
+	IDAtsCandidate *string `json:"id_ats_candidate,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the tag
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the tag in the context of the 3rd Party
-	RemoteID   *string                       `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsTagOutputRemoteData `json:"remote_data"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the tag in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
 	// The creation date of the tag
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The modification date of the tag
@@ -55,9 +51,9 @@ func (o *UnifiedAtsTagOutput) GetIDAtsCandidate() *string {
 	return o.IDAtsCandidate
 }
 
-func (o *UnifiedAtsTagOutput) GetFieldMappings() UnifiedAtsTagOutputFieldMappings {
+func (o *UnifiedAtsTagOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsTagOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -76,9 +72,9 @@ func (o *UnifiedAtsTagOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsTagOutput) GetRemoteData() UnifiedAtsTagOutputRemoteData {
+func (o *UnifiedAtsTagOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsTagOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }

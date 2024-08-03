@@ -58,21 +58,21 @@ func (o *ListHrisEmploymentRequest) GetCursor() *string {
 }
 
 type ListHrisEmploymentResponseBody struct {
-	PrevCursor string                                   `json:"prev_cursor"`
-	NextCursor string                                   `json:"next_cursor"`
+	PrevCursor *string                                  `json:"prev_cursor"`
+	NextCursor *string                                  `json:"next_cursor"`
 	Data       []components.UnifiedHrisEmploymentOutput `json:"data"`
 }
 
-func (o *ListHrisEmploymentResponseBody) GetPrevCursor() string {
+func (o *ListHrisEmploymentResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisEmploymentResponseBody) GetNextCursor() string {
+func (o *ListHrisEmploymentResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

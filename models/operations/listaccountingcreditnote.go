@@ -58,21 +58,21 @@ func (o *ListAccountingCreditNoteRequest) GetCursor() *string {
 }
 
 type ListAccountingCreditNoteResponseBody struct {
-	PrevCursor string                                         `json:"prev_cursor"`
-	NextCursor string                                         `json:"next_cursor"`
+	PrevCursor *string                                        `json:"prev_cursor"`
+	NextCursor *string                                        `json:"next_cursor"`
 	Data       []components.UnifiedAccountingCreditnoteOutput `json:"data"`
 }
 
-func (o *ListAccountingCreditNoteResponseBody) GetPrevCursor() string {
+func (o *ListAccountingCreditNoteResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingCreditNoteResponseBody) GetNextCursor() string {
+func (o *ListAccountingCreditNoteResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

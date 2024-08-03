@@ -2,41 +2,41 @@
 
 package components
 
-type UnifiedCrmStageOutputFieldMappings struct {
-}
-
-type UnifiedCrmStageOutputRemoteData struct {
-}
-
+// UnifiedCrmStageOutputCreatedAt - The created date of the object
 type UnifiedCrmStageOutputCreatedAt struct {
 }
 
+// UnifiedCrmStageOutputModifiedAt - The modified date of the object
 type UnifiedCrmStageOutputModifiedAt struct {
 }
 
 type UnifiedCrmStageOutput struct {
 	// The name of the stage
-	StageName     string                             `json:"stage_name"`
-	FieldMappings UnifiedCrmStageOutputFieldMappings `json:"field_mappings"`
+	StageName *string `json:"stage_name"`
+	// The custom field mappings of the stage between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the stage
 	ID *string `json:"id,omitempty"`
 	// The id of the stage in the context of the Crm 3rd Party
-	RemoteID   *string                         `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmStageOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmStageOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmStageOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the stage in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *UnifiedCrmStageOutputCreatedAt `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *UnifiedCrmStageOutputModifiedAt `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedCrmStageOutput) GetStageName() string {
+func (o *UnifiedCrmStageOutput) GetStageName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.StageName
 }
 
-func (o *UnifiedCrmStageOutput) GetFieldMappings() UnifiedCrmStageOutputFieldMappings {
+func (o *UnifiedCrmStageOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmStageOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -55,23 +55,23 @@ func (o *UnifiedCrmStageOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmStageOutput) GetRemoteData() UnifiedCrmStageOutputRemoteData {
+func (o *UnifiedCrmStageOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmStageOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmStageOutput) GetCreatedAt() UnifiedCrmStageOutputCreatedAt {
+func (o *UnifiedCrmStageOutput) GetCreatedAt() *UnifiedCrmStageOutputCreatedAt {
 	if o == nil {
-		return UnifiedCrmStageOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmStageOutput) GetModifiedAt() UnifiedCrmStageOutputModifiedAt {
+func (o *UnifiedCrmStageOutput) GetModifiedAt() *UnifiedCrmStageOutputModifiedAt {
 	if o == nil {
-		return UnifiedCrmStageOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

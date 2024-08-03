@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsInterviewInputFieldMappings struct {
-}
-
 type UnifiedAtsInterviewInput struct {
 	// The status of the interview
 	Status *string `json:"status,omitempty"`
@@ -30,8 +27,9 @@ type UnifiedAtsInterviewInput struct {
 	// The remote creation date of the interview
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the interview
-	RemoteUpdatedAt *time.Time                            `json:"remote_updated_at,omitempty"`
-	FieldMappings   UnifiedAtsInterviewInputFieldMappings `json:"field_mappings"`
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedAtsInterviewInput) MarshalJSON() ([]byte, error) {
@@ -115,9 +113,9 @@ func (o *UnifiedAtsInterviewInput) GetRemoteUpdatedAt() *time.Time {
 	return o.RemoteUpdatedAt
 }
 
-func (o *UnifiedAtsInterviewInput) GetFieldMappings() UnifiedAtsInterviewInputFieldMappings {
+func (o *UnifiedAtsInterviewInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsInterviewInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

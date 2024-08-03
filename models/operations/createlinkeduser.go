@@ -7,7 +7,8 @@ import (
 )
 
 type CreateLinkedUserResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta           components.HTTPMetadata `json:"-"`
+	LinkedUserResponse *components.LinkedUserResponse
 }
 
 func (o *CreateLinkedUserResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *CreateLinkedUserResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *CreateLinkedUserResponse) GetLinkedUserResponse() *components.LinkedUserResponse {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedUserResponse
 }

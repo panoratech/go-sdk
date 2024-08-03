@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsApplicationInputFieldMappings struct {
-}
-
 type UnifiedAtsApplicationInput struct {
 	// The application date
 	AppliedAt *time.Time `json:"applied_at,omitempty"`
@@ -28,8 +25,9 @@ type UnifiedAtsApplicationInput struct {
 	// The UUID of the candidate
 	CandidateID *string `json:"candidate_id,omitempty"`
 	// The UUID of the job
-	JobID         *string                                 `json:"job_id,omitempty"`
-	FieldMappings UnifiedAtsApplicationInputFieldMappings `json:"field_mappings"`
+	JobID *string `json:"job_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedAtsApplicationInput) MarshalJSON() ([]byte, error) {
@@ -106,9 +104,9 @@ func (o *UnifiedAtsApplicationInput) GetJobID() *string {
 	return o.JobID
 }
 
-func (o *UnifiedAtsApplicationInput) GetFieldMappings() UnifiedAtsApplicationInputFieldMappings {
+func (o *UnifiedAtsApplicationInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsApplicationInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

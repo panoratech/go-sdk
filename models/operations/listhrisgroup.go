@@ -58,21 +58,21 @@ func (o *ListHrisGroupRequest) GetCursor() *string {
 }
 
 type ListHrisGroupResponseBody struct {
-	PrevCursor string                              `json:"prev_cursor"`
-	NextCursor string                              `json:"next_cursor"`
+	PrevCursor *string                             `json:"prev_cursor"`
+	NextCursor *string                             `json:"next_cursor"`
 	Data       []components.UnifiedHrisGroupOutput `json:"data"`
 }
 
-func (o *ListHrisGroupResponseBody) GetPrevCursor() string {
+func (o *ListHrisGroupResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisGroupResponseBody) GetNextCursor() string {
+func (o *ListHrisGroupResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

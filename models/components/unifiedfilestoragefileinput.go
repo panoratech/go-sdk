@@ -2,79 +2,77 @@
 
 package components
 
-type UnifiedFilestorageFileInputFieldMappings struct {
-}
-
 type UnifiedFilestorageFileInput struct {
 	// The name of the file
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The url of the file
-	FileURL string `json:"file_url"`
+	FileURL *string `json:"file_url"`
 	// The mime type of the file
-	MimeType string `json:"mime_type"`
+	MimeType *string `json:"mime_type"`
 	// The size of the file
-	Size string `json:"size"`
+	Size *string `json:"size"`
 	// The UUID of the folder tied to the file
-	FolderID string `json:"folder_id"`
+	FolderID *string `json:"folder_id"`
 	// The UUID of the permission tied to the file
-	Permission string `json:"permission"`
+	Permission *string `json:"permission"`
 	// The UUID of the shared link tied to the file
-	SharedLink    string                                   `json:"shared_link"`
-	FieldMappings UnifiedFilestorageFileInputFieldMappings `json:"field_mappings"`
+	SharedLink *string `json:"shared_link"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedFilestorageFileInput) GetName() string {
+func (o *UnifiedFilestorageFileInput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedFilestorageFileInput) GetFileURL() string {
+func (o *UnifiedFilestorageFileInput) GetFileURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FileURL
 }
 
-func (o *UnifiedFilestorageFileInput) GetMimeType() string {
+func (o *UnifiedFilestorageFileInput) GetMimeType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.MimeType
 }
 
-func (o *UnifiedFilestorageFileInput) GetSize() string {
+func (o *UnifiedFilestorageFileInput) GetSize() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Size
 }
 
-func (o *UnifiedFilestorageFileInput) GetFolderID() string {
+func (o *UnifiedFilestorageFileInput) GetFolderID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FolderID
 }
 
-func (o *UnifiedFilestorageFileInput) GetPermission() string {
+func (o *UnifiedFilestorageFileInput) GetPermission() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Permission
 }
 
-func (o *UnifiedFilestorageFileInput) GetSharedLink() string {
+func (o *UnifiedFilestorageFileInput) GetSharedLink() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SharedLink
 }
 
-func (o *UnifiedFilestorageFileInput) GetFieldMappings() UnifiedFilestorageFileInputFieldMappings {
+func (o *UnifiedFilestorageFileInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageFileInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

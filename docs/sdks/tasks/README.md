@@ -17,13 +17,16 @@ List  Tasks
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Crm.Tasks.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Tasks in any supported Crm software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,14 +76,15 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedCrmTaskInput := components.UnifiedCrmTaskInput{
-        Subject: "<value>",
-        Content: "<value>",
-        Status: "<value>",
-        FieldMappings: components.UnifiedCrmTaskInputFieldMappings{},
+        Subject: gosdk.String("<value>"),
+        Content: gosdk.String("<value>"),
+        Status: gosdk.String("<value>"),
     }
     ctx := context.Background()
     res, err := s.Crm.Tasks.Create(ctx, xConnectionToken, unifiedCrmTaskInput, nil)
@@ -120,13 +125,16 @@ Retrieve Tasks from any connected Crm software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

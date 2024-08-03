@@ -58,21 +58,21 @@ func (o *ListAtsJobRequest) GetCursor() *string {
 }
 
 type ListAtsJobResponseBody struct {
-	PrevCursor string                           `json:"prev_cursor"`
-	NextCursor string                           `json:"next_cursor"`
+	PrevCursor *string                          `json:"prev_cursor"`
+	NextCursor *string                          `json:"next_cursor"`
 	Data       []components.UnifiedAtsJobOutput `json:"data"`
 }
 
-func (o *ListAtsJobResponseBody) GetPrevCursor() string {
+func (o *ListAtsJobResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsJobResponseBody) GetNextCursor() string {
+func (o *ListAtsJobResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

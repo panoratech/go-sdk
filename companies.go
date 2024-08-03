@@ -27,12 +27,12 @@ func newCompanies(sdkConfig sdkConfiguration) *Companies {
 	}
 }
 
-// List  Companies
+// List Companies
 func (s *Companies) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListCrmCompanyResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listCrmCompany",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListCrmCompanyRequest{
@@ -82,6 +82,10 @@ func (s *Companies) List(ctx context.Context, xConnectionToken string, remoteDat
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Companies) Create(ctx context.Context, xConnectionToken string, unified
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createCrmCompany",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.CreateCrmCompanyRequest{
@@ -269,6 +273,10 @@ func (s *Companies) Create(ctx context.Context, xConnectionToken string, unified
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -401,7 +409,7 @@ func (s *Companies) Retrieve(ctx context.Context, xConnectionToken string, id st
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveCrmCompany",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveCrmCompanyRequest{
@@ -450,6 +458,10 @@ func (s *Companies) Retrieve(ctx context.Context, xConnectionToken string, id st
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

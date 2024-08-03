@@ -7,43 +7,43 @@ import (
 	"time"
 )
 
-type UnifiedCrmTaskOutputFieldMappings struct {
-}
-
-type UnifiedCrmTaskOutputRemoteData struct {
-}
-
+// UnifiedCrmTaskOutputCreatedAt - The created date of the object
 type UnifiedCrmTaskOutputCreatedAt struct {
 }
 
+// UnifiedCrmTaskOutputModifiedAt - The modified date of the object
 type UnifiedCrmTaskOutputModifiedAt struct {
 }
 
 type UnifiedCrmTaskOutput struct {
 	// The subject of the task
-	Subject string `json:"subject"`
+	Subject *string `json:"subject"`
 	// The content of the task
-	Content string `json:"content"`
+	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status string `json:"status"`
+	Status *string `json:"status"`
 	// The due date of the task
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The finished date of the task
 	FinishedDate *time.Time `json:"finished_date,omitempty"`
 	// The UUID of the user tied to the task
 	UserID *string `json:"user_id,omitempty"`
-	// The UUID fo the company tied to the task
+	// The UUID of the company tied to the task
 	CompanyID *string `json:"company_id,omitempty"`
 	// The UUID of the deal tied to the task
-	DealID        *string                           `json:"deal_id,omitempty"`
-	FieldMappings UnifiedCrmTaskOutputFieldMappings `json:"field_mappings"`
+	DealID *string `json:"deal_id,omitempty"`
+	// The custom field mappings of the task between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the task
 	ID *string `json:"id,omitempty"`
 	// The id of the task in the context of the Crm 3rd Party
-	RemoteID   *string                        `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmTaskOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmTaskOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmTaskOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the task in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *UnifiedCrmTaskOutputCreatedAt `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *UnifiedCrmTaskOutputModifiedAt `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedCrmTaskOutput) MarshalJSON() ([]byte, error) {
@@ -57,23 +57,23 @@ func (u *UnifiedCrmTaskOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedCrmTaskOutput) GetSubject() string {
+func (o *UnifiedCrmTaskOutput) GetSubject() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Subject
 }
 
-func (o *UnifiedCrmTaskOutput) GetContent() string {
+func (o *UnifiedCrmTaskOutput) GetContent() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskOutput) GetStatus() string {
+func (o *UnifiedCrmTaskOutput) GetStatus() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Status
 }
@@ -113,9 +113,9 @@ func (o *UnifiedCrmTaskOutput) GetDealID() *string {
 	return o.DealID
 }
 
-func (o *UnifiedCrmTaskOutput) GetFieldMappings() UnifiedCrmTaskOutputFieldMappings {
+func (o *UnifiedCrmTaskOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmTaskOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -134,23 +134,23 @@ func (o *UnifiedCrmTaskOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmTaskOutput) GetRemoteData() UnifiedCrmTaskOutputRemoteData {
+func (o *UnifiedCrmTaskOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmTaskOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmTaskOutput) GetCreatedAt() UnifiedCrmTaskOutputCreatedAt {
+func (o *UnifiedCrmTaskOutput) GetCreatedAt() *UnifiedCrmTaskOutputCreatedAt {
 	if o == nil {
-		return UnifiedCrmTaskOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmTaskOutput) GetModifiedAt() UnifiedCrmTaskOutputModifiedAt {
+func (o *UnifiedCrmTaskOutput) GetModifiedAt() *UnifiedCrmTaskOutputModifiedAt {
 	if o == nil {
-		return UnifiedCrmTaskOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

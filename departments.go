@@ -32,7 +32,7 @@ func (s *Departments) List(ctx context.Context, xConnectionToken string, remoteD
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsDepartments",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAtsDepartmentsRequest{
@@ -82,6 +82,10 @@ func (s *Departments) List(ctx context.Context, xConnectionToken string, remoteD
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Departments) Retrieve(ctx context.Context, xConnectionToken string, id 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsDepartment",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAtsDepartmentRequest{
@@ -263,6 +267,10 @@ func (s *Departments) Retrieve(ctx context.Context, xConnectionToken string, id 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

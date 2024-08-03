@@ -2,18 +2,14 @@
 
 package components
 
-type UnifiedTicketingCommentOutputRemoteData struct {
-}
-
-type UnifiedTicketingCommentOutputCreatedAt struct {
-}
-
-type UnifiedTicketingCommentOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingCommentOutput struct {
 	// The body of the comment
-	Body string `json:"body"`
+	Body *string `json:"body"`
 	// The html body of the comment
 	HTMLBody *string `json:"html_body,omitempty"`
 	// The public status of the comment
@@ -31,15 +27,29 @@ type UnifiedTicketingCommentOutput struct {
 	// The UUID of the comment
 	ID *string `json:"id,omitempty"`
 	// The id of the comment in the context of the 3rd Party
-	RemoteID   *string                                 `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingCommentOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingCommentOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingCommentOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the comment in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingCommentOutput) GetBody() string {
+func (u UnifiedTicketingCommentOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingCommentOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingCommentOutput) GetBody() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Body
 }
@@ -107,23 +117,23 @@ func (o *UnifiedTicketingCommentOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingCommentOutput) GetRemoteData() UnifiedTicketingCommentOutputRemoteData {
+func (o *UnifiedTicketingCommentOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingCommentOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingCommentOutput) GetCreatedAt() UnifiedTicketingCommentOutputCreatedAt {
+func (o *UnifiedTicketingCommentOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingCommentOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingCommentOutput) GetModifiedAt() UnifiedTicketingCommentOutputModifiedAt {
+func (o *UnifiedTicketingCommentOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingCommentOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

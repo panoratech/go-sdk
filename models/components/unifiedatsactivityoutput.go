@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsActivityOutputFieldMappings struct {
-}
-
-type UnifiedAtsActivityOutputRemoteData struct {
-}
-
-type UnifiedAtsActivityOutputCreatedAt struct {
-}
-
-type UnifiedAtsActivityOutputModifiedAt struct {
-}
-
 type UnifiedAtsActivityOutput struct {
 	// The type of activity
 	ActivityType *string `json:"activity_type,omitempty"`
@@ -31,15 +19,19 @@ type UnifiedAtsActivityOutput struct {
 	// The UUID of the candidate
 	CandidateID *string `json:"candidate_id,omitempty"`
 	// The remote creation date of the activity
-	RemoteCreatedAt *time.Time                            `json:"remote_created_at,omitempty"`
-	FieldMappings   UnifiedAtsActivityOutputFieldMappings `json:"field_mappings"`
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the activity
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the activity in the context of the 3rd Party
-	RemoteID   *string                            `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsActivityOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsActivityOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsActivityOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the activity in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedAtsActivityOutput) MarshalJSON() ([]byte, error) {
@@ -95,9 +87,9 @@ func (o *UnifiedAtsActivityOutput) GetRemoteCreatedAt() *time.Time {
 	return o.RemoteCreatedAt
 }
 
-func (o *UnifiedAtsActivityOutput) GetFieldMappings() UnifiedAtsActivityOutputFieldMappings {
+func (o *UnifiedAtsActivityOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsActivityOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -116,23 +108,23 @@ func (o *UnifiedAtsActivityOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsActivityOutput) GetRemoteData() UnifiedAtsActivityOutputRemoteData {
+func (o *UnifiedAtsActivityOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsActivityOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsActivityOutput) GetCreatedAt() UnifiedAtsActivityOutputCreatedAt {
+func (o *UnifiedAtsActivityOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsActivityOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsActivityOutput) GetModifiedAt() UnifiedAtsActivityOutputModifiedAt {
+func (o *UnifiedAtsActivityOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsActivityOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

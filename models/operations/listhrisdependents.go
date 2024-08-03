@@ -58,21 +58,21 @@ func (o *ListHrisDependentsRequest) GetCursor() *string {
 }
 
 type ListHrisDependentsResponseBody struct {
-	PrevCursor string                                  `json:"prev_cursor"`
-	NextCursor string                                  `json:"next_cursor"`
+	PrevCursor *string                                 `json:"prev_cursor"`
+	NextCursor *string                                 `json:"next_cursor"`
 	Data       []components.UnifiedHrisDependentOutput `json:"data"`
 }
 
-func (o *ListHrisDependentsResponseBody) GetPrevCursor() string {
+func (o *ListHrisDependentsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisDependentsResponseBody) GetNextCursor() string {
+func (o *ListHrisDependentsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

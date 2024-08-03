@@ -58,21 +58,21 @@ func (o *ListAtsOfferRequest) GetCursor() *string {
 }
 
 type ListAtsOfferResponseBody struct {
-	PrevCursor string                             `json:"prev_cursor"`
-	NextCursor string                             `json:"next_cursor"`
+	PrevCursor *string                            `json:"prev_cursor"`
+	NextCursor *string                            `json:"next_cursor"`
 	Data       []components.UnifiedAtsOfferOutput `json:"data"`
 }
 
-func (o *ListAtsOfferResponseBody) GetPrevCursor() string {
+func (o *ListAtsOfferResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsOfferResponseBody) GetNextCursor() string {
+func (o *ListAtsOfferResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }
