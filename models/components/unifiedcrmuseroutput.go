@@ -2,50 +2,58 @@
 
 package components
 
-type UnifiedCrmUserOutputFieldMappings struct {
-}
-
-type UnifiedCrmUserOutputRemoteData struct {
-}
-
-type UnifiedCrmUserOutputCreatedAt struct {
-}
-
-type UnifiedCrmUserOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedCrmUserOutput struct {
 	// The name of the user
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The email of the user
-	Email         string                            `json:"email"`
-	FieldMappings UnifiedCrmUserOutputFieldMappings `json:"field_mappings"`
+	Email *string `json:"email"`
+	// The custom field mappings of the user between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the user
 	ID *string `json:"id,omitempty"`
 	// The id of the user in the context of the Crm 3rd Party
-	RemoteID   *string                        `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmUserOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmUserOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmUserOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the user in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedCrmUserOutput) GetName() string {
+func (u UnifiedCrmUserOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedCrmUserOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedCrmUserOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedCrmUserOutput) GetEmail() string {
+func (o *UnifiedCrmUserOutput) GetEmail() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Email
 }
 
-func (o *UnifiedCrmUserOutput) GetFieldMappings() UnifiedCrmUserOutputFieldMappings {
+func (o *UnifiedCrmUserOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmUserOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -64,23 +72,23 @@ func (o *UnifiedCrmUserOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmUserOutput) GetRemoteData() UnifiedCrmUserOutputRemoteData {
+func (o *UnifiedCrmUserOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmUserOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmUserOutput) GetCreatedAt() UnifiedCrmUserOutputCreatedAt {
+func (o *UnifiedCrmUserOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmUserOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmUserOutput) GetModifiedAt() UnifiedCrmUserOutputModifiedAt {
+func (o *UnifiedCrmUserOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmUserOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

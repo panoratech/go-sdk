@@ -9,21 +9,21 @@ import (
 
 type WebhookResponse struct {
 	// The unique UUID of the webhook.
-	IDWebhookEndpoint string `json:"id_webhook_endpoint"`
+	IDWebhookEndpoint *string `json:"id_webhook_endpoint"`
 	// The description of the webhook.
 	EndpointDescription *string `json:"endpoint_description"`
 	// The endpoint url of the webhook.
-	URL string `json:"url"`
+	URL *string `json:"url"`
 	// The secret of the webhook.
-	Secret string `json:"secret"`
+	Secret *string `json:"secret"`
 	// The status of the webhook.
-	Active bool `json:"active"`
+	Active *bool `json:"active"`
 	// The created date  of the webhook.
-	CreatedAt time.Time `json:"created_at"`
+	CreatedAt *time.Time `json:"created_at"`
 	// The events that the webhook listen to.
 	Scope []string `json:"scope"`
 	// The project id tied to the webhook.
-	IDProject string `json:"id_project"`
+	IDProject *string `json:"id_project"`
 	// The last update date of the webhook.
 	LastUpdate *time.Time `json:"last_update"`
 }
@@ -39,9 +39,9 @@ func (w *WebhookResponse) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *WebhookResponse) GetIDWebhookEndpoint() string {
+func (o *WebhookResponse) GetIDWebhookEndpoint() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.IDWebhookEndpoint
 }
@@ -53,44 +53,44 @@ func (o *WebhookResponse) GetEndpointDescription() *string {
 	return o.EndpointDescription
 }
 
-func (o *WebhookResponse) GetURL() string {
+func (o *WebhookResponse) GetURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.URL
 }
 
-func (o *WebhookResponse) GetSecret() string {
+func (o *WebhookResponse) GetSecret() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Secret
 }
 
-func (o *WebhookResponse) GetActive() bool {
+func (o *WebhookResponse) GetActive() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.Active
 }
 
-func (o *WebhookResponse) GetCreatedAt() time.Time {
+func (o *WebhookResponse) GetCreatedAt() *time.Time {
 	if o == nil {
-		return time.Time{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
 func (o *WebhookResponse) GetScope() []string {
 	if o == nil {
-		return []string{}
+		return nil
 	}
 	return o.Scope
 }
 
-func (o *WebhookResponse) GetIDProject() string {
+func (o *WebhookResponse) GetIDProject() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.IDProject
 }

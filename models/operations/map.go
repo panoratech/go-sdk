@@ -7,7 +7,8 @@ import (
 )
 
 type MapResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta            components.HTTPMetadata `json:"-"`
+	CustomFieldResponse *components.CustomFieldResponse
 }
 
 func (o *MapResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *MapResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *MapResponse) GetCustomFieldResponse() *components.CustomFieldResponse {
+	if o == nil {
+		return nil
+	}
+	return o.CustomFieldResponse
 }

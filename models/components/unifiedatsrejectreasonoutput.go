@@ -2,29 +2,37 @@
 
 package components
 
-type UnifiedAtsRejectreasonOutputFieldMappings struct {
-}
-
-type UnifiedAtsRejectreasonOutputRemoteData struct {
-}
-
-type UnifiedAtsRejectreasonOutputCreatedAt struct {
-}
-
-type UnifiedAtsRejectreasonOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedAtsRejectreasonOutput struct {
 	// The name of the reject reason
-	Name          *string                                   `json:"name,omitempty"`
-	FieldMappings UnifiedAtsRejectreasonOutputFieldMappings `json:"field_mappings"`
+	Name *string `json:"name,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the reject reason
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the reject reason in the context of the 3rd Party
-	RemoteID   *string                                `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsRejectreasonOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsRejectreasonOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsRejectreasonOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the reject reason in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAtsRejectreasonOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAtsRejectreasonOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UnifiedAtsRejectreasonOutput) GetName() *string {
@@ -34,9 +42,9 @@ func (o *UnifiedAtsRejectreasonOutput) GetName() *string {
 	return o.Name
 }
 
-func (o *UnifiedAtsRejectreasonOutput) GetFieldMappings() UnifiedAtsRejectreasonOutputFieldMappings {
+func (o *UnifiedAtsRejectreasonOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsRejectreasonOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -55,23 +63,23 @@ func (o *UnifiedAtsRejectreasonOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsRejectreasonOutput) GetRemoteData() UnifiedAtsRejectreasonOutputRemoteData {
+func (o *UnifiedAtsRejectreasonOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsRejectreasonOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsRejectreasonOutput) GetCreatedAt() UnifiedAtsRejectreasonOutputCreatedAt {
+func (o *UnifiedAtsRejectreasonOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsRejectreasonOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsRejectreasonOutput) GetModifiedAt() UnifiedAtsRejectreasonOutputModifiedAt {
+func (o *UnifiedAtsRejectreasonOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsRejectreasonOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

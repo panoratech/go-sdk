@@ -58,21 +58,21 @@ func (o *ListAccountingCashflowStatementRequest) GetCursor() *string {
 }
 
 type ListAccountingCashflowStatementResponseBody struct {
-	PrevCursor string                                                `json:"prev_cursor"`
-	NextCursor string                                                `json:"next_cursor"`
+	PrevCursor *string                                               `json:"prev_cursor"`
+	NextCursor *string                                               `json:"next_cursor"`
 	Data       []components.UnifiedAccountingCashflowstatementOutput `json:"data"`
 }
 
-func (o *ListAccountingCashflowStatementResponseBody) GetPrevCursor() string {
+func (o *ListAccountingCashflowStatementResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingCashflowStatementResponseBody) GetNextCursor() string {
+func (o *ListAccountingCashflowStatementResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

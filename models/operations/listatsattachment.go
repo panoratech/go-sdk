@@ -58,21 +58,21 @@ func (o *ListAtsAttachmentRequest) GetCursor() *string {
 }
 
 type ListAtsAttachmentResponseBody struct {
-	PrevCursor string                                  `json:"prev_cursor"`
-	NextCursor string                                  `json:"next_cursor"`
+	PrevCursor *string                                 `json:"prev_cursor"`
+	NextCursor *string                                 `json:"next_cursor"`
 	Data       []components.UnifiedAtsAttachmentOutput `json:"data"`
 }
 
-func (o *ListAtsAttachmentResponseBody) GetPrevCursor() string {
+func (o *ListAtsAttachmentResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsAttachmentResponseBody) GetNextCursor() string {
+func (o *ListAtsAttachmentResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

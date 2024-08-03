@@ -2,36 +2,44 @@
 
 package components
 
-type UnifiedTicketingTeamOutputFieldMappings struct {
-}
-
-type UnifiedTicketingTeamOutputRemoteData struct {
-}
-
-type UnifiedTicketingTeamOutputCreatedAt struct {
-}
-
-type UnifiedTicketingTeamOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingTeamOutput struct {
 	// The name of the team
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The description of the team
-	Description   *string                                 `json:"description,omitempty"`
-	FieldMappings UnifiedTicketingTeamOutputFieldMappings `json:"field_mappings"`
+	Description *string `json:"description,omitempty"`
+	// The custom field mappings of the team between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the team
 	ID *string `json:"id,omitempty"`
 	// The id of the team in the context of the 3rd Party
-	RemoteID   *string                              `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingTeamOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingTeamOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingTeamOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the team in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingTeamOutput) GetName() string {
+func (u UnifiedTicketingTeamOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingTeamOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingTeamOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -43,9 +51,9 @@ func (o *UnifiedTicketingTeamOutput) GetDescription() *string {
 	return o.Description
 }
 
-func (o *UnifiedTicketingTeamOutput) GetFieldMappings() UnifiedTicketingTeamOutputFieldMappings {
+func (o *UnifiedTicketingTeamOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingTeamOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -64,23 +72,23 @@ func (o *UnifiedTicketingTeamOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingTeamOutput) GetRemoteData() UnifiedTicketingTeamOutputRemoteData {
+func (o *UnifiedTicketingTeamOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingTeamOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingTeamOutput) GetCreatedAt() UnifiedTicketingTeamOutputCreatedAt {
+func (o *UnifiedTicketingTeamOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingTeamOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingTeamOutput) GetModifiedAt() UnifiedTicketingTeamOutputModifiedAt {
+func (o *UnifiedTicketingTeamOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingTeamOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

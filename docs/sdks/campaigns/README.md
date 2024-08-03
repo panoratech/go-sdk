@@ -17,13 +17,16 @@ List  Campaigns
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Marketingautomation.Campaigns.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create a campaign in any supported Marketingautomation software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,7 +76,9 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedMarketingautomationCampaignInput := components.UnifiedMarketingautomationCampaignInput{}
@@ -115,13 +121,16 @@ Retrieve Campaigns from any connected Marketingautomation software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

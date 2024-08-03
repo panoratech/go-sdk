@@ -3,36 +3,36 @@
 package components
 
 type DefineTargetFieldDto struct {
-	ObjectTypeOwner string `json:"object_type_owner"`
-	Name            string `json:"name"`
-	Description     string `json:"description"`
-	DataType        string `json:"data_type"`
+	ObjectTypeOwner *string `json:"object_type_owner"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	DataType        *string `json:"data_type"`
 }
 
-func (o *DefineTargetFieldDto) GetObjectTypeOwner() string {
+func (o *DefineTargetFieldDto) GetObjectTypeOwner() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ObjectTypeOwner
 }
 
-func (o *DefineTargetFieldDto) GetName() string {
+func (o *DefineTargetFieldDto) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *DefineTargetFieldDto) GetDescription() string {
+func (o *DefineTargetFieldDto) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
 
-func (o *DefineTargetFieldDto) GetDataType() string {
+func (o *DefineTargetFieldDto) GetDataType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.DataType
 }

@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsAttachmentOutputFieldMappings struct {
-}
-
-type UnifiedAtsAttachmentOutputRemoteData struct {
-}
-
-type UnifiedAtsAttachmentOutputCreatedAt struct {
-}
-
-type UnifiedAtsAttachmentOutputModifiedAt struct {
-}
-
 type UnifiedAtsAttachmentOutput struct {
 	// The URL of the file
 	FileURL *string `json:"file_url,omitempty"`
@@ -31,15 +19,19 @@ type UnifiedAtsAttachmentOutput struct {
 	// The remote modification date of the attachment
 	RemoteModifiedAt *time.Time `json:"remote_modified_at,omitempty"`
 	// The UUID of the candidate
-	CandidateID   *string                                 `json:"candidate_id,omitempty"`
-	FieldMappings UnifiedAtsAttachmentOutputFieldMappings `json:"field_mappings"`
+	CandidateID *string `json:"candidate_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the attachment
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the attachment
-	RemoteID   *string                              `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsAttachmentOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsAttachmentOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsAttachmentOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the attachment in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedAtsAttachmentOutput) MarshalJSON() ([]byte, error) {
@@ -95,9 +87,9 @@ func (o *UnifiedAtsAttachmentOutput) GetCandidateID() *string {
 	return o.CandidateID
 }
 
-func (o *UnifiedAtsAttachmentOutput) GetFieldMappings() UnifiedAtsAttachmentOutputFieldMappings {
+func (o *UnifiedAtsAttachmentOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsAttachmentOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -116,23 +108,23 @@ func (o *UnifiedAtsAttachmentOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsAttachmentOutput) GetRemoteData() UnifiedAtsAttachmentOutputRemoteData {
+func (o *UnifiedAtsAttachmentOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsAttachmentOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsAttachmentOutput) GetCreatedAt() UnifiedAtsAttachmentOutputCreatedAt {
+func (o *UnifiedAtsAttachmentOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsAttachmentOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsAttachmentOutput) GetModifiedAt() UnifiedAtsAttachmentOutputModifiedAt {
+func (o *UnifiedAtsAttachmentOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsAttachmentOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

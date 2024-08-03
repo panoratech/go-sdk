@@ -2,12 +2,9 @@
 
 package components
 
-type UnifiedCrmNoteInputFieldMappings struct {
-}
-
 type UnifiedCrmNoteInput struct {
 	// The content of the note
-	Content string `json:"content"`
+	Content *string `json:"content"`
 	// The UUID of the user tied the note
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the note
@@ -15,13 +12,14 @@ type UnifiedCrmNoteInput struct {
 	// The UUID fo the contact tied to the note
 	ContactID *string `json:"contact_id,omitempty"`
 	// The UUID of the deal tied to the note
-	DealID        *string                          `json:"deal_id,omitempty"`
-	FieldMappings UnifiedCrmNoteInputFieldMappings `json:"field_mappings"`
+	DealID *string `json:"deal_id,omitempty"`
+	// The custom field mappings of the note between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedCrmNoteInput) GetContent() string {
+func (o *UnifiedCrmNoteInput) GetContent() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Content
 }
@@ -54,9 +52,9 @@ func (o *UnifiedCrmNoteInput) GetDealID() *string {
 	return o.DealID
 }
 
-func (o *UnifiedCrmNoteInput) GetFieldMappings() UnifiedCrmNoteInputFieldMappings {
+func (o *UnifiedCrmNoteInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmNoteInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

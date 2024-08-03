@@ -6,28 +6,28 @@ type PassThroughResponseData struct {
 }
 
 type PassThroughResponse struct {
-	URL    string                  `json:"url"`
-	Status float64                 `json:"status"`
-	Data   PassThroughResponseData `json:"data"`
+	URL    *string                  `json:"url"`
+	Status *float64                 `json:"status"`
+	Data   *PassThroughResponseData `json:"data"`
 }
 
-func (o *PassThroughResponse) GetURL() string {
+func (o *PassThroughResponse) GetURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.URL
 }
 
-func (o *PassThroughResponse) GetStatus() float64 {
+func (o *PassThroughResponse) GetStatus() *float64 {
 	if o == nil {
-		return 0.0
+		return nil
 	}
 	return o.Status
 }
 
-func (o *PassThroughResponse) GetData() PassThroughResponseData {
+func (o *PassThroughResponse) GetData() *PassThroughResponseData {
 	if o == nil {
-		return PassThroughResponseData{}
+		return nil
 	}
 	return o.Data
 }

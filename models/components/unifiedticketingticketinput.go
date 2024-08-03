@@ -7,16 +7,89 @@ import (
 	"time"
 )
 
-type UnifiedTicketingTicketInputFieldMappings struct {
+// UnifiedTicketingTicketInputComment - The comment of the ticket
+type UnifiedTicketingTicketInputComment struct {
+	// The body of the comment
+	Body *string `json:"body"`
+	// The html body of the comment
+	HTMLBody *string `json:"html_body,omitempty"`
+	// The public status of the comment
+	IsPrivate *bool `json:"is_private,omitempty"`
+	// The creator type of the comment. Authorized values are either USER or CONTACT
+	CreatorType *string `json:"creator_type,omitempty"`
+	// The UUID of the ticket the comment is tied to
+	TicketID *string `json:"ticket_id,omitempty"`
+	// The UUID of the contact which the comment belongs to (if no user_id specified)
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the user which the comment belongs to (if no contact_id specified)
+	UserID *string `json:"user_id,omitempty"`
+	// The attachements UUIDs tied to the comment
+	Attachments []string `json:"attachments,omitempty"`
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Body
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetHTMLBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.HTMLBody
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetIsPrivate() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsPrivate
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetCreatorType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatorType
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetTicketID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TicketID
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetUserID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserID
+}
+
+func (o *UnifiedTicketingTicketInputComment) GetAttachments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Attachments
 }
 
 type UnifiedTicketingTicketInput struct {
 	// The name of the ticket
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The status of the ticket. Authorized values are OPEN or CLOSED.
 	Status *string `json:"status,omitempty"`
 	// The description of the ticket
-	Description string `json:"description"`
+	Description *string `json:"description"`
 	// The date the ticket is due
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
@@ -34,14 +107,15 @@ type UnifiedTicketingTicketInput struct {
 	// The users UUIDs the ticket is assigned to
 	AssignedTo []string `json:"assigned_to,omitempty"`
 	// The comment of the ticket
-	Comment *UnifiedTicketingCommentInput `json:"comment,omitempty"`
+	Comment *UnifiedTicketingTicketInputComment `json:"comment,omitempty"`
 	// The UUID of the account which the ticket belongs to
 	AccountID *string `json:"account_id,omitempty"`
 	// The UUID of the contact which the ticket belongs to
 	ContactID *string `json:"contact_id,omitempty"`
-	// The attachements UUIDs tied to the ticket
-	Attachments   []string                                 `json:"attachments,omitempty"`
-	FieldMappings UnifiedTicketingTicketInputFieldMappings `json:"field_mappings"`
+	// The attachments UUIDs tied to the ticket
+	Attachments []string `json:"attachments,omitempty"`
+	// The custom field mappings of the ticket between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedTicketingTicketInput) MarshalJSON() ([]byte, error) {
@@ -55,9 +129,9 @@ func (u *UnifiedTicketingTicketInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedTicketingTicketInput) GetName() string {
+func (o *UnifiedTicketingTicketInput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -69,9 +143,9 @@ func (o *UnifiedTicketingTicketInput) GetStatus() *string {
 	return o.Status
 }
 
-func (o *UnifiedTicketingTicketInput) GetDescription() string {
+func (o *UnifiedTicketingTicketInput) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
@@ -132,7 +206,7 @@ func (o *UnifiedTicketingTicketInput) GetAssignedTo() []string {
 	return o.AssignedTo
 }
 
-func (o *UnifiedTicketingTicketInput) GetComment() *UnifiedTicketingCommentInput {
+func (o *UnifiedTicketingTicketInput) GetComment() *UnifiedTicketingTicketInputComment {
 	if o == nil {
 		return nil
 	}
@@ -160,9 +234,9 @@ func (o *UnifiedTicketingTicketInput) GetAttachments() []string {
 	return o.Attachments
 }
 
-func (o *UnifiedTicketingTicketInput) GetFieldMappings() UnifiedTicketingTicketInputFieldMappings {
+func (o *UnifiedTicketingTicketInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingTicketInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

@@ -4,19 +4,19 @@ package components
 
 type CreateBatchLinkedUserDto struct {
 	LinkedUserOriginIds []string `json:"linked_user_origin_ids"`
-	Alias               string   `json:"alias"`
+	Alias               *string  `json:"alias"`
 }
 
 func (o *CreateBatchLinkedUserDto) GetLinkedUserOriginIds() []string {
 	if o == nil {
-		return []string{}
+		return nil
 	}
 	return o.LinkedUserOriginIds
 }
 
-func (o *CreateBatchLinkedUserDto) GetAlias() string {
+func (o *CreateBatchLinkedUserDto) GetAlias() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Alias
 }

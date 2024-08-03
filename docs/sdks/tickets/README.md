@@ -17,13 +17,16 @@ List  Tickets
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Tickets in any supported Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,13 +76,14 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedTicketingTicketInput := components.UnifiedTicketingTicketInput{
-        Name: "<value>",
-        Description: "Multi-tiered human-resource model",
-        FieldMappings: components.UnifiedTicketingTicketInputFieldMappings{},
+        Name: gosdk.String("<value>"),
+        Description: gosdk.String("Multi-tiered human-resource model"),
     }
     ctx := context.Background()
     res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, nil)
@@ -119,13 +124,16 @@ Retrieve Tickets from any connected Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

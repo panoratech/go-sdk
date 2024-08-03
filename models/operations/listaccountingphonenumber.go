@@ -58,21 +58,21 @@ func (o *ListAccountingPhonenumberRequest) GetCursor() *string {
 }
 
 type ListAccountingPhonenumberResponseBody struct {
-	PrevCursor string                                          `json:"prev_cursor"`
-	NextCursor string                                          `json:"next_cursor"`
+	PrevCursor *string                                         `json:"prev_cursor"`
+	NextCursor *string                                         `json:"next_cursor"`
 	Data       []components.UnifiedAccountingPhonenumberOutput `json:"data"`
 }
 
-func (o *ListAccountingPhonenumberResponseBody) GetPrevCursor() string {
+func (o *ListAccountingPhonenumberResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingPhonenumberResponseBody) GetNextCursor() string {
+func (o *ListAccountingPhonenumberResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

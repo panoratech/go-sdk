@@ -4,7 +4,7 @@ package components
 
 type UnifiedTicketingCommentInput struct {
 	// The body of the comment
-	Body string `json:"body"`
+	Body *string `json:"body"`
 	// The html body of the comment
 	HTMLBody *string `json:"html_body,omitempty"`
 	// The public status of the comment
@@ -21,9 +21,9 @@ type UnifiedTicketingCommentInput struct {
 	Attachments []string `json:"attachments,omitempty"`
 }
 
-func (o *UnifiedTicketingCommentInput) GetBody() string {
+func (o *UnifiedTicketingCommentInput) GetBody() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Body
 }

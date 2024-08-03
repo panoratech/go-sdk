@@ -32,7 +32,7 @@ func (s *Notes) List(ctx context.Context, xConnectionToken string, remoteData *b
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listCrmNote",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListCrmNoteRequest{
@@ -82,6 +82,10 @@ func (s *Notes) List(ctx context.Context, xConnectionToken string, remoteData *b
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Notes) Create(ctx context.Context, xConnectionToken string, unifiedCrmN
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createCrmNote",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.CreateCrmNoteRequest{
@@ -269,6 +273,10 @@ func (s *Notes) Create(ctx context.Context, xConnectionToken string, unifiedCrmN
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -401,7 +409,7 @@ func (s *Notes) Retrieve(ctx context.Context, xConnectionToken string, id string
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveCrmNote",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveCrmNoteRequest{
@@ -450,6 +458,10 @@ func (s *Notes) Retrieve(ctx context.Context, xConnectionToken string, id string
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

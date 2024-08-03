@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedCrmEngagementOutputFieldMappings struct {
-}
-
-type UnifiedCrmEngagementOutputRemoteData struct {
-}
-
-type UnifiedCrmEngagementOutputCreatedAt struct {
-}
-
-type UnifiedCrmEngagementOutputModifiedAt struct {
-}
-
 type UnifiedCrmEngagementOutput struct {
 	// The content of the engagement
 	Content *string `json:"content,omitempty"`
@@ -31,21 +19,25 @@ type UnifiedCrmEngagementOutput struct {
 	// The end time of the engagement
 	EndTime *time.Time `json:"end_time,omitempty"`
 	// The type of the engagement. Authorized values are EMAIL, CALL or MEETING
-	Type string `json:"type"`
+	Type *string `json:"type"`
 	// The UUID of the user tied to the engagement
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the engagement
 	CompanyID *string `json:"company_id,omitempty"`
 	// The UUIDs of contacts tied to the engagement object
-	Contacts      []string                                `json:"contacts,omitempty"`
-	FieldMappings UnifiedCrmEngagementOutputFieldMappings `json:"field_mappings"`
+	Contacts []string `json:"contacts,omitempty"`
+	// The custom field mappings of the engagement between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the engagement
 	ID *string `json:"id,omitempty"`
 	// The id of the engagement in the context of the Crm 3rd Party
-	RemoteID   *string                              `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmEngagementOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmEngagementOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmEngagementOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the engagement in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedCrmEngagementOutput) MarshalJSON() ([]byte, error) {
@@ -94,9 +86,9 @@ func (o *UnifiedCrmEngagementOutput) GetEndTime() *time.Time {
 	return o.EndTime
 }
 
-func (o *UnifiedCrmEngagementOutput) GetType() string {
+func (o *UnifiedCrmEngagementOutput) GetType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Type
 }
@@ -122,9 +114,9 @@ func (o *UnifiedCrmEngagementOutput) GetContacts() []string {
 	return o.Contacts
 }
 
-func (o *UnifiedCrmEngagementOutput) GetFieldMappings() UnifiedCrmEngagementOutputFieldMappings {
+func (o *UnifiedCrmEngagementOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmEngagementOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -143,23 +135,23 @@ func (o *UnifiedCrmEngagementOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmEngagementOutput) GetRemoteData() UnifiedCrmEngagementOutputRemoteData {
+func (o *UnifiedCrmEngagementOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmEngagementOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmEngagementOutput) GetCreatedAt() UnifiedCrmEngagementOutputCreatedAt {
+func (o *UnifiedCrmEngagementOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmEngagementOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmEngagementOutput) GetModifiedAt() UnifiedCrmEngagementOutputModifiedAt {
+func (o *UnifiedCrmEngagementOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmEngagementOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

@@ -2,12 +2,9 @@
 
 package components
 
-type UnifiedCrmCompanyInputFieldMappings struct {
-}
-
 type UnifiedCrmCompanyInput struct {
 	// The name of the company
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The industry of the company. Authorized values can be found in the Industry enum.
 	Industry *string `json:"industry,omitempty"`
 	// The number of employees of the company
@@ -19,13 +16,14 @@ type UnifiedCrmCompanyInput struct {
 	// The addresses of the company
 	Addresses []Address `json:"addresses,omitempty"`
 	// The phone numbers of the company
-	PhoneNumbers  []Phone                             `json:"phone_numbers,omitempty"`
-	FieldMappings UnifiedCrmCompanyInputFieldMappings `json:"field_mappings"`
+	PhoneNumbers []Phone `json:"phone_numbers,omitempty"`
+	// The custom field mappings of the company between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
-func (o *UnifiedCrmCompanyInput) GetName() string {
+func (o *UnifiedCrmCompanyInput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -72,9 +70,9 @@ func (o *UnifiedCrmCompanyInput) GetPhoneNumbers() []Phone {
 	return o.PhoneNumbers
 }
 
-func (o *UnifiedCrmCompanyInput) GetFieldMappings() UnifiedCrmCompanyInputFieldMappings {
+func (o *UnifiedCrmCompanyInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmCompanyInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

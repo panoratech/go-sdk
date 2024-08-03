@@ -58,21 +58,21 @@ func (o *ListAccountingVendorCreditRequest) GetCursor() *string {
 }
 
 type ListAccountingVendorCreditResponseBody struct {
-	PrevCursor string                                           `json:"prev_cursor"`
-	NextCursor string                                           `json:"next_cursor"`
+	PrevCursor *string                                          `json:"prev_cursor"`
+	NextCursor *string                                          `json:"next_cursor"`
 	Data       []components.UnifiedAccountingVendorcreditOutput `json:"data"`
 }
 
-func (o *ListAccountingVendorCreditResponseBody) GetPrevCursor() string {
+func (o *ListAccountingVendorCreditResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAccountingVendorCreditResponseBody) GetNextCursor() string {
+func (o *ListAccountingVendorCreditResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

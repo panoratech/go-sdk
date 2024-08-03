@@ -4,75 +4,75 @@ package components
 
 type Address struct {
 	// The street
-	Street1 string `json:"street_1"`
+	Street1 *string `json:"street_1"`
 	// More information about the street
-	Street2 string `json:"street_2"`
+	Street2 *string `json:"street_2"`
 	// The city
-	City string `json:"city"`
+	City *string `json:"city"`
 	// The state
-	State string `json:"state"`
+	State *string `json:"state"`
 	// The postal code
-	PostalCode string `json:"postal_code"`
+	PostalCode *string `json:"postal_code"`
 	// The country
-	Country string `json:"country"`
+	Country *string `json:"country"`
 	// The address type. Authorized values are either PERSONAL or WORK.
-	AddressType string `json:"address_type"`
+	AddressType *string `json:"address_type"`
 	// The owner type of the address
-	OwnerType string `json:"owner_type"`
+	OwnerType *string `json:"owner_type"`
 }
 
-func (o *Address) GetStreet1() string {
+func (o *Address) GetStreet1() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Street1
 }
 
-func (o *Address) GetStreet2() string {
+func (o *Address) GetStreet2() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Street2
 }
 
-func (o *Address) GetCity() string {
+func (o *Address) GetCity() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.City
 }
 
-func (o *Address) GetState() string {
+func (o *Address) GetState() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.State
 }
 
-func (o *Address) GetPostalCode() string {
+func (o *Address) GetPostalCode() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PostalCode
 }
 
-func (o *Address) GetCountry() string {
+func (o *Address) GetCountry() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Country
 }
 
-func (o *Address) GetAddressType() string {
+func (o *Address) GetAddressType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.AddressType
 }
 
-func (o *Address) GetOwnerType() string {
+func (o *Address) GetOwnerType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.OwnerType
 }

@@ -7,25 +7,89 @@ import (
 	"time"
 )
 
-type FieldMappings struct {
+// Comment - The comment of the ticket
+type Comment struct {
+	// The body of the comment
+	Body *string `json:"body"`
+	// The html body of the comment
+	HTMLBody *string `json:"html_body,omitempty"`
+	// The public status of the comment
+	IsPrivate *bool `json:"is_private,omitempty"`
+	// The creator type of the comment. Authorized values are either USER or CONTACT
+	CreatorType *string `json:"creator_type,omitempty"`
+	// The UUID of the ticket the comment is tied to
+	TicketID *string `json:"ticket_id,omitempty"`
+	// The UUID of the contact which the comment belongs to (if no user_id specified)
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the user which the comment belongs to (if no contact_id specified)
+	UserID *string `json:"user_id,omitempty"`
+	// The attachements UUIDs tied to the comment
+	Attachments []string `json:"attachments,omitempty"`
 }
 
-type RemoteData struct {
+func (o *Comment) GetBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Body
 }
 
-type CreatedAt struct {
+func (o *Comment) GetHTMLBody() *string {
+	if o == nil {
+		return nil
+	}
+	return o.HTMLBody
 }
 
-type ModifiedAt struct {
+func (o *Comment) GetIsPrivate() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsPrivate
+}
+
+func (o *Comment) GetCreatorType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatorType
+}
+
+func (o *Comment) GetTicketID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TicketID
+}
+
+func (o *Comment) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *Comment) GetUserID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UserID
+}
+
+func (o *Comment) GetAttachments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Attachments
 }
 
 type UnifiedTicketingTicketOutput struct {
 	// The name of the ticket
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The status of the ticket. Authorized values are OPEN or CLOSED.
 	Status *string `json:"status,omitempty"`
 	// The description of the ticket
-	Description string `json:"description"`
+	Description *string `json:"description"`
 	// The date the ticket is due
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
@@ -43,21 +107,25 @@ type UnifiedTicketingTicketOutput struct {
 	// The users UUIDs the ticket is assigned to
 	AssignedTo []string `json:"assigned_to,omitempty"`
 	// The comment of the ticket
-	Comment *UnifiedTicketingCommentInput `json:"comment,omitempty"`
+	Comment *Comment `json:"comment,omitempty"`
 	// The UUID of the account which the ticket belongs to
 	AccountID *string `json:"account_id,omitempty"`
 	// The UUID of the contact which the ticket belongs to
 	ContactID *string `json:"contact_id,omitempty"`
-	// The attachements UUIDs tied to the ticket
-	Attachments   []string      `json:"attachments,omitempty"`
-	FieldMappings FieldMappings `json:"field_mappings"`
+	// The attachments UUIDs tied to the ticket
+	Attachments []string `json:"attachments,omitempty"`
+	// The custom field mappings of the ticket between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the ticket
 	ID *string `json:"id,omitempty"`
 	// The id of the ticket in the context of the 3rd Party
-	RemoteID   *string    `json:"remote_id,omitempty"`
-	RemoteData RemoteData `json:"remote_data"`
-	CreatedAt  CreatedAt  `json:"created_at"`
-	ModifiedAt ModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the ticket in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedTicketingTicketOutput) MarshalJSON() ([]byte, error) {
@@ -71,9 +139,9 @@ func (u *UnifiedTicketingTicketOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedTicketingTicketOutput) GetName() string {
+func (o *UnifiedTicketingTicketOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -85,9 +153,9 @@ func (o *UnifiedTicketingTicketOutput) GetStatus() *string {
 	return o.Status
 }
 
-func (o *UnifiedTicketingTicketOutput) GetDescription() string {
+func (o *UnifiedTicketingTicketOutput) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
@@ -148,7 +216,7 @@ func (o *UnifiedTicketingTicketOutput) GetAssignedTo() []string {
 	return o.AssignedTo
 }
 
-func (o *UnifiedTicketingTicketOutput) GetComment() *UnifiedTicketingCommentInput {
+func (o *UnifiedTicketingTicketOutput) GetComment() *Comment {
 	if o == nil {
 		return nil
 	}
@@ -176,9 +244,9 @@ func (o *UnifiedTicketingTicketOutput) GetAttachments() []string {
 	return o.Attachments
 }
 
-func (o *UnifiedTicketingTicketOutput) GetFieldMappings() FieldMappings {
+func (o *UnifiedTicketingTicketOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return FieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -197,23 +265,23 @@ func (o *UnifiedTicketingTicketOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingTicketOutput) GetRemoteData() RemoteData {
+func (o *UnifiedTicketingTicketOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return RemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingTicketOutput) GetCreatedAt() CreatedAt {
+func (o *UnifiedTicketingTicketOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return CreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingTicketOutput) GetModifiedAt() ModifiedAt {
+func (o *UnifiedTicketingTicketOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return ModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

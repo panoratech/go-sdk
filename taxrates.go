@@ -32,7 +32,7 @@ func (s *Taxrates) List(ctx context.Context, xConnectionToken string, remoteData
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAccountingTaxRate",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAccountingTaxRateRequest{
@@ -82,6 +82,10 @@ func (s *Taxrates) List(ctx context.Context, xConnectionToken string, remoteData
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Taxrates) Retrieve(ctx context.Context, xConnectionToken string, id str
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAccountingTaxRate",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAccountingTaxRateRequest{
@@ -263,6 +267,10 @@ func (s *Taxrates) Retrieve(ctx context.Context, xConnectionToken string, id str
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

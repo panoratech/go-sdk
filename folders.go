@@ -32,7 +32,7 @@ func (s *Folders) List(ctx context.Context, xConnectionToken string, remoteData 
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listFilestorageFolder",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListFilestorageFolderRequest{
@@ -82,6 +82,10 @@ func (s *Folders) List(ctx context.Context, xConnectionToken string, remoteData 
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Folders) Create(ctx context.Context, xConnectionToken string, remoteDat
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createFilestorageFolder",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.CreateFilestorageFolderRequest{
@@ -269,6 +273,10 @@ func (s *Folders) Create(ctx context.Context, xConnectionToken string, remoteDat
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -401,7 +409,7 @@ func (s *Folders) Retrieve(ctx context.Context, xConnectionToken string, id stri
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveFilestorageFolder",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveFilestorageFolderRequest{
@@ -450,6 +458,10 @@ func (s *Folders) Retrieve(ctx context.Context, xConnectionToken string, id stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

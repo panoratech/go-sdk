@@ -32,7 +32,7 @@ func (s *PanoraTags) List(ctx context.Context, xConnectionToken string, remoteDa
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsTags",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAtsTagsRequest{
@@ -82,6 +82,10 @@ func (s *PanoraTags) List(ctx context.Context, xConnectionToken string, remoteDa
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *PanoraTags) Retrieve(ctx context.Context, xConnectionToken string, id s
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsTag",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAtsTagRequest{
@@ -263,6 +267,10 @@ func (s *PanoraTags) Retrieve(ctx context.Context, xConnectionToken string, id s
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

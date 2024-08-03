@@ -2,59 +2,67 @@
 
 package components
 
-type UnifiedFilestorageDriveOutputFieldMappings struct {
-}
-
-type UnifiedFilestorageDriveOutputRemoteData struct {
-}
-
-type UnifiedFilestorageDriveOutputCreatedAt struct {
-}
-
-type UnifiedFilestorageDriveOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedFilestorageDriveOutput struct {
 	// The name of the drive
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// When the third party s drive was created.
-	RemoteCreatedAt string `json:"remote_created_at"`
+	RemoteCreatedAt *string `json:"remote_created_at"`
 	// The url of the drive
-	DriveURL      string                                     `json:"drive_url"`
-	FieldMappings UnifiedFilestorageDriveOutputFieldMappings `json:"field_mappings"`
+	DriveURL *string `json:"drive_url"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the drive
 	ID *string `json:"id,omitempty"`
 	// The id of the drive in the context of the 3rd Party
-	RemoteID   *string                                 `json:"remote_id,omitempty"`
-	RemoteData UnifiedFilestorageDriveOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedFilestorageDriveOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedFilestorageDriveOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the drive in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetName() string {
+func (u UnifiedFilestorageDriveOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedFilestorageDriveOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedFilestorageDriveOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetRemoteCreatedAt() string {
+func (o *UnifiedFilestorageDriveOutput) GetRemoteCreatedAt() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.RemoteCreatedAt
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetDriveURL() string {
+func (o *UnifiedFilestorageDriveOutput) GetDriveURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.DriveURL
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetFieldMappings() UnifiedFilestorageDriveOutputFieldMappings {
+func (o *UnifiedFilestorageDriveOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageDriveOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -73,23 +81,23 @@ func (o *UnifiedFilestorageDriveOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetRemoteData() UnifiedFilestorageDriveOutputRemoteData {
+func (o *UnifiedFilestorageDriveOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedFilestorageDriveOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetCreatedAt() UnifiedFilestorageDriveOutputCreatedAt {
+func (o *UnifiedFilestorageDriveOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedFilestorageDriveOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedFilestorageDriveOutput) GetModifiedAt() UnifiedFilestorageDriveOutputModifiedAt {
+func (o *UnifiedFilestorageDriveOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedFilestorageDriveOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

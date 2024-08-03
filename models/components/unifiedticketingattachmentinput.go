@@ -2,40 +2,38 @@
 
 package components
 
-type UnifiedTicketingAttachmentInputFieldMappings struct {
-}
-
 type UnifiedTicketingAttachmentInput struct {
 	// The file name of the attachment
-	FileName string `json:"file_name"`
+	FileName *string `json:"file_name"`
 	// The file url of the attachment
-	FileURL string `json:"file_url"`
+	FileURL *string `json:"file_url"`
 	// The uploader's UUID of the attachment
-	Uploader string `json:"uploader"`
+	Uploader *string `json:"uploader"`
 	// The UUID of the ticket the attachment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the comment the attachment is tied to
-	CommentID     *string                                      `json:"comment_id,omitempty"`
-	FieldMappings UnifiedTicketingAttachmentInputFieldMappings `json:"field_mappings"`
+	CommentID *string `json:"comment_id,omitempty"`
+	// The custom field mappings of the attachment between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings"`
 }
 
-func (o *UnifiedTicketingAttachmentInput) GetFileName() string {
+func (o *UnifiedTicketingAttachmentInput) GetFileName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FileName
 }
 
-func (o *UnifiedTicketingAttachmentInput) GetFileURL() string {
+func (o *UnifiedTicketingAttachmentInput) GetFileURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FileURL
 }
 
-func (o *UnifiedTicketingAttachmentInput) GetUploader() string {
+func (o *UnifiedTicketingAttachmentInput) GetUploader() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Uploader
 }
@@ -54,9 +52,9 @@ func (o *UnifiedTicketingAttachmentInput) GetCommentID() *string {
 	return o.CommentID
 }
 
-func (o *UnifiedTicketingAttachmentInput) GetFieldMappings() UnifiedTicketingAttachmentInputFieldMappings {
+func (o *UnifiedTicketingAttachmentInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingAttachmentInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

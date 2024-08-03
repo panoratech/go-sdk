@@ -2,36 +2,44 @@
 
 package components
 
-type UnifiedTicketingAccountOutputFieldMappings struct {
-}
-
-type UnifiedTicketingAccountOutputRemoteData struct {
-}
-
-type UnifiedTicketingAccountOutputCreatedAt struct {
-}
-
-type UnifiedTicketingAccountOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingAccountOutput struct {
 	// The name of the account
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The domains of the account
-	Domains       []string                                   `json:"domains,omitempty"`
-	FieldMappings UnifiedTicketingAccountOutputFieldMappings `json:"field_mappings"`
+	Domains []string `json:"domains,omitempty"`
+	// The custom field mappings of the account between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the account
 	ID *string `json:"id,omitempty"`
 	// The id of the account in the context of the 3rd Party
-	RemoteID   *string                                 `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingAccountOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingAccountOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingAccountOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the account in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingAccountOutput) GetName() string {
+func (u UnifiedTicketingAccountOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingAccountOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingAccountOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -43,9 +51,9 @@ func (o *UnifiedTicketingAccountOutput) GetDomains() []string {
 	return o.Domains
 }
 
-func (o *UnifiedTicketingAccountOutput) GetFieldMappings() UnifiedTicketingAccountOutputFieldMappings {
+func (o *UnifiedTicketingAccountOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingAccountOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -64,23 +72,23 @@ func (o *UnifiedTicketingAccountOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingAccountOutput) GetRemoteData() UnifiedTicketingAccountOutputRemoteData {
+func (o *UnifiedTicketingAccountOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingAccountOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingAccountOutput) GetCreatedAt() UnifiedTicketingAccountOutputCreatedAt {
+func (o *UnifiedTicketingAccountOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingAccountOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingAccountOutput) GetModifiedAt() UnifiedTicketingAccountOutputModifiedAt {
+func (o *UnifiedTicketingAccountOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingAccountOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsActivityInputFieldMappings struct {
-}
-
 type UnifiedAtsActivityInput struct {
 	// The type of activity
 	ActivityType *string `json:"activity_type,omitempty"`
@@ -22,8 +19,9 @@ type UnifiedAtsActivityInput struct {
 	// The UUID of the candidate
 	CandidateID *string `json:"candidate_id,omitempty"`
 	// The remote creation date of the activity
-	RemoteCreatedAt *time.Time                           `json:"remote_created_at,omitempty"`
-	FieldMappings   UnifiedAtsActivityInputFieldMappings `json:"field_mappings"`
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedAtsActivityInput) MarshalJSON() ([]byte, error) {
@@ -79,9 +77,9 @@ func (o *UnifiedAtsActivityInput) GetRemoteCreatedAt() *time.Time {
 	return o.RemoteCreatedAt
 }
 
-func (o *UnifiedAtsActivityInput) GetFieldMappings() UnifiedAtsActivityInputFieldMappings {
+func (o *UnifiedAtsActivityInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsActivityInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

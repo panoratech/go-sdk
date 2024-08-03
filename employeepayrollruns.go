@@ -32,7 +32,7 @@ func (s *Employeepayrollruns) List(ctx context.Context, xConnectionToken string,
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listHrisEmployeePayrollRun",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListHrisEmployeePayrollRunRequest{
@@ -82,6 +82,10 @@ func (s *Employeepayrollruns) List(ctx context.Context, xConnectionToken string,
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Employeepayrollruns) Retrieve(ctx context.Context, xConnectionToken str
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveHrisEmployeePayrollRun",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveHrisEmployeePayrollRunRequest{
@@ -263,6 +267,10 @@ func (s *Employeepayrollruns) Retrieve(ctx context.Context, xConnectionToken str
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

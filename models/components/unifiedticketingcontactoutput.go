@@ -2,47 +2,55 @@
 
 package components
 
-type UnifiedTicketingContactOutputFieldMappings struct {
-}
-
-type UnifiedTicketingContactOutputRemoteData struct {
-}
-
-type UnifiedTicketingContactOutputCreatedAt struct {
-}
-
-type UnifiedTicketingContactOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingContactOutput struct {
 	// The name of the contact
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The email address of the contact
-	EmailAddress string `json:"email_address"`
+	EmailAddress *string `json:"email_address"`
 	// The phone number of the contact
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The details of the contact
-	Details       *string                                    `json:"details,omitempty"`
-	FieldMappings UnifiedTicketingContactOutputFieldMappings `json:"field_mappings"`
+	Details *string `json:"details,omitempty"`
+	// The custom field mappings of the contact between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the contact
 	ID *string `json:"id,omitempty"`
 	// The id of the contact in the context of the 3rd Party
-	RemoteID   *string                                 `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingContactOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingContactOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingContactOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the contact in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingContactOutput) GetName() string {
+func (u UnifiedTicketingContactOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingContactOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingContactOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedTicketingContactOutput) GetEmailAddress() string {
+func (o *UnifiedTicketingContactOutput) GetEmailAddress() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.EmailAddress
 }
@@ -61,9 +69,9 @@ func (o *UnifiedTicketingContactOutput) GetDetails() *string {
 	return o.Details
 }
 
-func (o *UnifiedTicketingContactOutput) GetFieldMappings() UnifiedTicketingContactOutputFieldMappings {
+func (o *UnifiedTicketingContactOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingContactOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -82,23 +90,23 @@ func (o *UnifiedTicketingContactOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingContactOutput) GetRemoteData() UnifiedTicketingContactOutputRemoteData {
+func (o *UnifiedTicketingContactOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingContactOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingContactOutput) GetCreatedAt() UnifiedTicketingContactOutputCreatedAt {
+func (o *UnifiedTicketingContactOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingContactOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingContactOutput) GetModifiedAt() UnifiedTicketingContactOutputModifiedAt {
+func (o *UnifiedTicketingContactOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingContactOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

@@ -32,7 +32,7 @@ func (s *Incomestatements) List(ctx context.Context, xConnectionToken string, re
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAccountingIncomeStatement",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAccountingIncomeStatementRequest{
@@ -82,6 +82,10 @@ func (s *Incomestatements) List(ctx context.Context, xConnectionToken string, re
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Incomestatements) Retrieve(ctx context.Context, xConnectionToken string
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAccountingIncomeStatement",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAccountingIncomeStatementRequest{
@@ -263,6 +267,10 @@ func (s *Incomestatements) Retrieve(ctx context.Context, xConnectionToken string
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

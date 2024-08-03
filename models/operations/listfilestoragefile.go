@@ -58,21 +58,21 @@ func (o *ListFilestorageFileRequest) GetCursor() *string {
 }
 
 type ListFilestorageFileResponseBody struct {
-	PrevCursor string                                    `json:"prev_cursor"`
-	NextCursor string                                    `json:"next_cursor"`
+	PrevCursor *string                                   `json:"prev_cursor"`
+	NextCursor *string                                   `json:"next_cursor"`
 	Data       []components.UnifiedFilestorageFileOutput `json:"data"`
 }
 
-func (o *ListFilestorageFileResponseBody) GetPrevCursor() string {
+func (o *ListFilestorageFileResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListFilestorageFileResponseBody) GetNextCursor() string {
+func (o *ListFilestorageFileResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

@@ -7,18 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsInterviewOutputFieldMappings struct {
-}
-
-type UnifiedAtsInterviewOutputRemoteData struct {
-}
-
-type UnifiedAtsInterviewOutputCreatedAt struct {
-}
-
-type UnifiedAtsInterviewOutputModifiedAt struct {
-}
-
 type UnifiedAtsInterviewOutput struct {
 	// The status of the interview
 	Status *string `json:"status,omitempty"`
@@ -39,15 +27,19 @@ type UnifiedAtsInterviewOutput struct {
 	// The remote creation date of the interview
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the interview
-	RemoteUpdatedAt *time.Time                             `json:"remote_updated_at,omitempty"`
-	FieldMappings   UnifiedAtsInterviewOutputFieldMappings `json:"field_mappings"`
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the interview
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the interview in the context of the 3rd Party
-	RemoteID   *string                             `json:"remote_id,omitempty"`
-	RemoteData UnifiedAtsInterviewOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedAtsInterviewOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedAtsInterviewOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the interview in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedAtsInterviewOutput) MarshalJSON() ([]byte, error) {
@@ -131,9 +123,9 @@ func (o *UnifiedAtsInterviewOutput) GetRemoteUpdatedAt() *time.Time {
 	return o.RemoteUpdatedAt
 }
 
-func (o *UnifiedAtsInterviewOutput) GetFieldMappings() UnifiedAtsInterviewOutputFieldMappings {
+func (o *UnifiedAtsInterviewOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsInterviewOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -152,23 +144,23 @@ func (o *UnifiedAtsInterviewOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAtsInterviewOutput) GetRemoteData() UnifiedAtsInterviewOutputRemoteData {
+func (o *UnifiedAtsInterviewOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedAtsInterviewOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedAtsInterviewOutput) GetCreatedAt() UnifiedAtsInterviewOutputCreatedAt {
+func (o *UnifiedAtsInterviewOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsInterviewOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedAtsInterviewOutput) GetModifiedAt() UnifiedAtsInterviewOutputModifiedAt {
+func (o *UnifiedAtsInterviewOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedAtsInterviewOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

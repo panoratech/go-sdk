@@ -7,7 +7,8 @@ import (
 )
 
 type ResyncResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta        components.HTTPMetadata `json:"-"`
+	ResyncStatusDto *components.ResyncStatusDto
 }
 
 func (o *ResyncResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *ResyncResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *ResyncResponse) GetResyncStatusDto() *components.ResyncStatusDto {
+	if o == nil {
+		return nil
+	}
+	return o.ResyncStatusDto
 }

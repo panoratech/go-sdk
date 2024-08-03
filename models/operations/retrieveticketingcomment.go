@@ -37,21 +37,21 @@ func (o *RetrieveTicketingCommentRequest) GetRemoteData() *bool {
 }
 
 type RetrieveTicketingCommentResponseBody struct {
-	PrevCursor string                                     `json:"prev_cursor"`
-	NextCursor string                                     `json:"next_cursor"`
+	PrevCursor *string                                    `json:"prev_cursor"`
+	NextCursor *string                                    `json:"next_cursor"`
 	Data       []components.UnifiedTicketingCommentOutput `json:"data"`
 }
 
-func (o *RetrieveTicketingCommentResponseBody) GetPrevCursor() string {
+func (o *RetrieveTicketingCommentResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *RetrieveTicketingCommentResponseBody) GetNextCursor() string {
+func (o *RetrieveTicketingCommentResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

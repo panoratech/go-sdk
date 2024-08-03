@@ -17,13 +17,16 @@ List  Folders
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Filestorage.Folders.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Folders in any supported Filestorage software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,21 +76,22 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var remoteData bool = false
 
     unifiedFilestorageFolderInput := components.UnifiedFilestorageFolderInput{
-        Name: "<value>",
-        Size: "<value>",
-        FolderURL: "<value>",
+        Name: gosdk.String("<value>"),
+        Size: gosdk.String("<value>"),
+        FolderURL: gosdk.String("<value>"),
         Description: "Multi-tiered human-resource model",
-        DriveID: "<value>",
-        ParentFolderID: "<value>",
-        SharedLink: "<value>",
-        Permission: "<value>",
-        FieldMappings: components.UnifiedFilestorageFolderInputFieldMappings{},
+        DriveID: gosdk.String("<value>"),
+        ParentFolderID: gosdk.String("<value>"),
+        SharedLink: gosdk.String("<value>"),
+        Permission: gosdk.String("<value>"),
     }
     ctx := context.Background()
     res, err := s.Filestorage.Folders.Create(ctx, xConnectionToken, remoteData, unifiedFilestorageFolderInput)
@@ -127,13 +132,16 @@ Retrieve Folders from any connected Filestorage software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

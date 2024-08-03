@@ -58,21 +58,21 @@ func (o *ListHrisTimeoffsRequest) GetCursor() *string {
 }
 
 type ListHrisTimeoffsResponseBody struct {
-	PrevCursor string                                `json:"prev_cursor"`
-	NextCursor string                                `json:"next_cursor"`
+	PrevCursor *string                               `json:"prev_cursor"`
+	NextCursor *string                               `json:"next_cursor"`
 	Data       []components.UnifiedHrisTimeoffOutput `json:"data"`
 }
 
-func (o *ListHrisTimeoffsResponseBody) GetPrevCursor() string {
+func (o *ListHrisTimeoffsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisTimeoffsResponseBody) GetNextCursor() string {
+func (o *ListHrisTimeoffsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

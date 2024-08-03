@@ -58,21 +58,21 @@ func (o *ListAtsInterviewRequest) GetCursor() *string {
 }
 
 type ListAtsInterviewResponseBody struct {
-	PrevCursor string                                 `json:"prev_cursor"`
-	NextCursor string                                 `json:"next_cursor"`
+	PrevCursor *string                                `json:"prev_cursor"`
+	NextCursor *string                                `json:"next_cursor"`
 	Data       []components.UnifiedAtsInterviewOutput `json:"data"`
 }
 
-func (o *ListAtsInterviewResponseBody) GetPrevCursor() string {
+func (o *ListAtsInterviewResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsInterviewResponseBody) GetNextCursor() string {
+func (o *ListAtsInterviewResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

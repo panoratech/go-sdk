@@ -7,7 +7,8 @@ import (
 )
 
 type ImportBatchResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta            components.HTTPMetadata `json:"-"`
+	LinkedUserResponses []components.LinkedUserResponse
 }
 
 func (o *ImportBatchResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -15,4 +16,11 @@ func (o *ImportBatchResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *ImportBatchResponse) GetLinkedUserResponses() []components.LinkedUserResponse {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedUserResponses
 }

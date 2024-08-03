@@ -17,13 +17,16 @@ List  Payments
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Accounting.Payments.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Payments in any supported Accounting software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,7 +76,9 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedAccountingPaymentInput := components.UnifiedAccountingPaymentInput{}
@@ -115,13 +121,16 @@ Retrieve Payments from any connected Accounting software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

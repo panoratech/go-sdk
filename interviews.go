@@ -32,7 +32,7 @@ func (s *Interviews) List(ctx context.Context, xConnectionToken string, remoteDa
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listAtsInterview",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListAtsInterviewRequest{
@@ -82,6 +82,10 @@ func (s *Interviews) List(ctx context.Context, xConnectionToken string, remoteDa
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Interviews) Create(ctx context.Context, xConnectionToken string, unifie
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createAtsInterview",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.CreateAtsInterviewRequest{
@@ -269,6 +273,10 @@ func (s *Interviews) Create(ctx context.Context, xConnectionToken string, unifie
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -401,7 +409,7 @@ func (s *Interviews) Retrieve(ctx context.Context, xConnectionToken string, id s
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveAtsInterview",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveAtsInterviewRequest{
@@ -450,6 +458,10 @@ func (s *Interviews) Retrieve(ctx context.Context, xConnectionToken string, id s
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

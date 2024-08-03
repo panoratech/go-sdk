@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsAttachmentInputFieldMappings struct {
-}
-
 type UnifiedAtsAttachmentInput struct {
 	// The URL of the file
 	FileURL *string `json:"file_url,omitempty"`
@@ -22,8 +19,9 @@ type UnifiedAtsAttachmentInput struct {
 	// The remote modification date of the attachment
 	RemoteModifiedAt *time.Time `json:"remote_modified_at,omitempty"`
 	// The UUID of the candidate
-	CandidateID   *string                                `json:"candidate_id,omitempty"`
-	FieldMappings UnifiedAtsAttachmentInputFieldMappings `json:"field_mappings"`
+	CandidateID *string `json:"candidate_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedAtsAttachmentInput) MarshalJSON() ([]byte, error) {
@@ -79,9 +77,9 @@ func (o *UnifiedAtsAttachmentInput) GetCandidateID() *string {
 	return o.CandidateID
 }
 
-func (o *UnifiedAtsAttachmentInput) GetFieldMappings() UnifiedAtsAttachmentInputFieldMappings {
+func (o *UnifiedAtsAttachmentInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsAttachmentInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

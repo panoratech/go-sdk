@@ -2,56 +2,64 @@
 
 package components
 
-type UnifiedTicketingAttachmentOutputFieldMappings struct {
-}
-
-type UnifiedTicketingAttachmentOutputRemoteData struct {
-}
-
-type UnifiedTicketingAttachmentOutputCreatedAt struct {
-}
-
-type UnifiedTicketingAttachmentOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingAttachmentOutput struct {
 	// The file name of the attachment
-	FileName string `json:"file_name"`
+	FileName *string `json:"file_name"`
 	// The file url of the attachment
-	FileURL string `json:"file_url"`
+	FileURL *string `json:"file_url"`
 	// The uploader's UUID of the attachment
-	Uploader string `json:"uploader"`
+	Uploader *string `json:"uploader"`
 	// The UUID of the ticket the attachment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the comment the attachment is tied to
-	CommentID     *string                                       `json:"comment_id,omitempty"`
-	FieldMappings UnifiedTicketingAttachmentOutputFieldMappings `json:"field_mappings"`
+	CommentID *string `json:"comment_id,omitempty"`
+	// The custom field mappings of the attachment between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the attachment
 	ID *string `json:"id,omitempty"`
 	// The id of the attachment in the context of the 3rd Party
-	RemoteID   *string                                    `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingAttachmentOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingAttachmentOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingAttachmentOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the attachment in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetFileName() string {
+func (u UnifiedTicketingAttachmentOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingAttachmentOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingAttachmentOutput) GetFileName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FileName
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetFileURL() string {
+func (o *UnifiedTicketingAttachmentOutput) GetFileURL() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FileURL
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetUploader() string {
+func (o *UnifiedTicketingAttachmentOutput) GetUploader() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Uploader
 }
@@ -70,9 +78,9 @@ func (o *UnifiedTicketingAttachmentOutput) GetCommentID() *string {
 	return o.CommentID
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetFieldMappings() UnifiedTicketingAttachmentOutputFieldMappings {
+func (o *UnifiedTicketingAttachmentOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingAttachmentOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -91,23 +99,23 @@ func (o *UnifiedTicketingAttachmentOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetRemoteData() UnifiedTicketingAttachmentOutputRemoteData {
+func (o *UnifiedTicketingAttachmentOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingAttachmentOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetCreatedAt() UnifiedTicketingAttachmentOutputCreatedAt {
+func (o *UnifiedTicketingAttachmentOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingAttachmentOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingAttachmentOutput) GetModifiedAt() UnifiedTicketingAttachmentOutputModifiedAt {
+func (o *UnifiedTicketingAttachmentOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingAttachmentOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

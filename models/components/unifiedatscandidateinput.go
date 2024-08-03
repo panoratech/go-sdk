@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-type UnifiedAtsCandidateInputFieldMappings struct {
-}
-
 type UnifiedAtsCandidateInput struct {
 	// The first name of the candidate
 	FirstName *string `json:"first_name,omitempty"`
@@ -42,8 +39,9 @@ type UnifiedAtsCandidateInput struct {
 	// The phone numbers of the candidate
 	PhoneNumbers []Phone `json:"phone_numbers,omitempty"`
 	// The email addresses of the candidate
-	EmailAddresses []Email                               `json:"email_addresses,omitempty"`
-	FieldMappings  UnifiedAtsCandidateInputFieldMappings `json:"field_mappings"`
+	EmailAddresses []Email `json:"email_addresses,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (u UnifiedAtsCandidateInput) MarshalJSON() ([]byte, error) {
@@ -169,9 +167,9 @@ func (o *UnifiedAtsCandidateInput) GetEmailAddresses() []Email {
 	return o.EmailAddresses
 }
 
-func (o *UnifiedAtsCandidateInput) GetFieldMappings() UnifiedAtsCandidateInputFieldMappings {
+func (o *UnifiedAtsCandidateInput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedAtsCandidateInputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }

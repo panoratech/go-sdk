@@ -8,7 +8,8 @@ import (
 
 type HelloResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	String   *string
+	// Returns a greeting message
+	Res *string
 }
 
 func (o *HelloResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -18,9 +19,9 @@ func (o *HelloResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *HelloResponse) GetString() *string {
+func (o *HelloResponse) GetRes() *string {
 	if o == nil {
 		return nil
 	}
-	return o.String
+	return o.Res
 }

@@ -58,21 +58,21 @@ func (o *ListHrisEmployeePayrollRunRequest) GetCursor() *string {
 }
 
 type ListHrisEmployeePayrollRunResponseBody struct {
-	PrevCursor string                                           `json:"prev_cursor"`
-	NextCursor string                                           `json:"next_cursor"`
+	PrevCursor *string                                          `json:"prev_cursor"`
+	NextCursor *string                                          `json:"next_cursor"`
 	Data       []components.UnifiedHrisEmployeepayrollrunOutput `json:"data"`
 }
 
-func (o *ListHrisEmployeePayrollRunResponseBody) GetPrevCursor() string {
+func (o *ListHrisEmployeePayrollRunResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisEmployeePayrollRunResponseBody) GetNextCursor() string {
+func (o *ListHrisEmployeePayrollRunResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

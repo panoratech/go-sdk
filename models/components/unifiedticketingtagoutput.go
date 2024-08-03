@@ -2,41 +2,49 @@
 
 package components
 
-type UnifiedTicketingTagOutputFieldMappings struct {
-}
-
-type UnifiedTicketingTagOutputRemoteData struct {
-}
-
-type UnifiedTicketingTagOutputCreatedAt struct {
-}
-
-type UnifiedTicketingTagOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingTagOutput struct {
 	// The name of the tag
-	Name          string                                 `json:"name"`
-	FieldMappings UnifiedTicketingTagOutputFieldMappings `json:"field_mappings"`
+	Name *string `json:"name"`
+	// The custom field mappings of the tag between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the tag
 	ID *string `json:"id,omitempty"`
 	// The id of the tag in the context of the 3rd Party
-	RemoteID   *string                             `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingTagOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingTagOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingTagOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the tag in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingTagOutput) GetName() string {
+func (u UnifiedTicketingTagOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingTagOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingTagOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedTicketingTagOutput) GetFieldMappings() UnifiedTicketingTagOutputFieldMappings {
+func (o *UnifiedTicketingTagOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedTicketingTagOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -55,23 +63,23 @@ func (o *UnifiedTicketingTagOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingTagOutput) GetRemoteData() UnifiedTicketingTagOutputRemoteData {
+func (o *UnifiedTicketingTagOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingTagOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingTagOutput) GetCreatedAt() UnifiedTicketingTagOutputCreatedAt {
+func (o *UnifiedTicketingTagOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingTagOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingTagOutput) GetModifiedAt() UnifiedTicketingTagOutputModifiedAt {
+func (o *UnifiedTicketingTagOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingTagOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

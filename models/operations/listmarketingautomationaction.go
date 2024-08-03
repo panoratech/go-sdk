@@ -58,21 +58,21 @@ func (o *ListMarketingautomationActionRequest) GetCursor() *string {
 }
 
 type ListMarketingautomationActionResponseBody struct {
-	PrevCursor string                                              `json:"prev_cursor"`
-	NextCursor string                                              `json:"next_cursor"`
+	PrevCursor *string                                             `json:"prev_cursor"`
+	NextCursor *string                                             `json:"next_cursor"`
 	Data       []components.UnifiedMarketingautomationActionOutput `json:"data"`
 }
 
-func (o *ListMarketingautomationActionResponseBody) GetPrevCursor() string {
+func (o *ListMarketingautomationActionResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListMarketingautomationActionResponseBody) GetNextCursor() string {
+func (o *ListMarketingautomationActionResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

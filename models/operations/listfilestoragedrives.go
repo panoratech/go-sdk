@@ -58,21 +58,21 @@ func (o *ListFilestorageDrivesRequest) GetCursor() *string {
 }
 
 type ListFilestorageDrivesResponseBody struct {
-	PrevCursor string                                     `json:"prev_cursor"`
-	NextCursor string                                     `json:"next_cursor"`
+	PrevCursor *string                                    `json:"prev_cursor"`
+	NextCursor *string                                    `json:"next_cursor"`
 	Data       []components.UnifiedFilestorageDriveOutput `json:"data"`
 }
 
-func (o *ListFilestorageDrivesResponseBody) GetPrevCursor() string {
+func (o *ListFilestorageDrivesResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListFilestorageDrivesResponseBody) GetNextCursor() string {
+func (o *ListFilestorageDrivesResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

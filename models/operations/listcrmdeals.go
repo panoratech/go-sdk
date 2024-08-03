@@ -58,21 +58,21 @@ func (o *ListCrmDealsRequest) GetCursor() *string {
 }
 
 type ListCrmDealsResponseBody struct {
-	PrevCursor string                            `json:"prev_cursor"`
-	NextCursor string                            `json:"next_cursor"`
+	PrevCursor *string                           `json:"prev_cursor"`
+	NextCursor *string                           `json:"next_cursor"`
 	Data       []components.UnifiedCrmDealOutput `json:"data"`
 }
 
-func (o *ListCrmDealsResponseBody) GetPrevCursor() string {
+func (o *ListCrmDealsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListCrmDealsResponseBody) GetNextCursor() string {
+func (o *ListCrmDealsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

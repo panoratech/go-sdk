@@ -58,21 +58,21 @@ func (o *ListAtsRejectReasonsRequest) GetCursor() *string {
 }
 
 type ListAtsRejectReasonsResponseBody struct {
-	PrevCursor string                                    `json:"prev_cursor"`
-	NextCursor string                                    `json:"next_cursor"`
+	PrevCursor *string                                   `json:"prev_cursor"`
+	NextCursor *string                                   `json:"next_cursor"`
 	Data       []components.UnifiedAtsRejectreasonOutput `json:"data"`
 }
 
-func (o *ListAtsRejectReasonsResponseBody) GetPrevCursor() string {
+func (o *ListAtsRejectReasonsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsRejectReasonsResponseBody) GetNextCursor() string {
+func (o *ListAtsRejectReasonsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

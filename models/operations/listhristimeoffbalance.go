@@ -58,21 +58,21 @@ func (o *ListHrisTimeoffbalanceRequest) GetCursor() *string {
 }
 
 type ListHrisTimeoffbalanceResponseBody struct {
-	PrevCursor string                                       `json:"prev_cursor"`
-	NextCursor string                                       `json:"next_cursor"`
+	PrevCursor *string                                      `json:"prev_cursor"`
+	NextCursor *string                                      `json:"next_cursor"`
 	Data       []components.UnifiedHrisTimeoffbalanceOutput `json:"data"`
 }
 
-func (o *ListHrisTimeoffbalanceResponseBody) GetPrevCursor() string {
+func (o *ListHrisTimeoffbalanceResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListHrisTimeoffbalanceResponseBody) GetNextCursor() string {
+func (o *ListHrisTimeoffbalanceResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

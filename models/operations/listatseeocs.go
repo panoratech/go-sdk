@@ -58,21 +58,21 @@ func (o *ListAtsEeocsRequest) GetCursor() *string {
 }
 
 type ListAtsEeocsResponseBody struct {
-	PrevCursor string                             `json:"prev_cursor"`
-	NextCursor string                             `json:"next_cursor"`
+	PrevCursor *string                            `json:"prev_cursor"`
+	NextCursor *string                            `json:"next_cursor"`
 	Data       []components.UnifiedAtsEeocsOutput `json:"data"`
 }
 
-func (o *ListAtsEeocsResponseBody) GetPrevCursor() string {
+func (o *ListAtsEeocsResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListAtsEeocsResponseBody) GetNextCursor() string {
+func (o *ListAtsEeocsResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

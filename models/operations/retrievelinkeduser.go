@@ -18,7 +18,8 @@ func (o *RetrieveLinkedUserRequest) GetID() string {
 }
 
 type RetrieveLinkedUserResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
+	HTTPMeta           components.HTTPMetadata `json:"-"`
+	LinkedUserResponse *components.LinkedUserResponse
 }
 
 func (o *RetrieveLinkedUserResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -26,4 +27,11 @@ func (o *RetrieveLinkedUserResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *RetrieveLinkedUserResponse) GetLinkedUserResponse() *components.LinkedUserResponse {
+	if o == nil {
+		return nil
+	}
+	return o.LinkedUserResponse
 }

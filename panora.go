@@ -53,8 +53,8 @@ func Float32(f float32) *float32 { return &f }
 func Float64(f float64) *float64 { return &f }
 
 type sdkConfiguration struct {
-	Client HTTPClient
-
+	Client            HTTPClient
+	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
 	ServerIndex       int
 	Language          string
@@ -131,6 +131,23 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
+// WithSecurity configures the SDK to use the provided security details
+func WithSecurity(apiKey string) SDKOption {
+	return func(sdk *Panora) {
+		security := components.Security{APIKey: apiKey}
+		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (components.Security, error)) SDKOption {
+	return func(sdk *Panora) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
+	}
+}
+
 func WithRetryConfig(retryConfig retry.Config) SDKOption {
 	return func(sdk *Panora) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
@@ -150,9 +167,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.1.0",
-			GenVersion:        "2.384.4",
-			UserAgent:         "speakeasy-sdk/go 0.1.0 2.384.4 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.385.1",
+			UserAgent:         "speakeasy-sdk/go 0.2.0 2.385.1 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -203,7 +220,7 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "hello",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	o := operations.Options{}
@@ -239,8 +256,12 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Accept", "text/plain")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -344,13 +365,10 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out string
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `text/plain`):
 
-			res.String = &out
+			out := string(rawBody)
+			res.Res = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -370,7 +388,7 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "health",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	o := operations.Options{}
@@ -408,6 +426,10 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries

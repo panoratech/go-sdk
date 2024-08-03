@@ -58,21 +58,21 @@ func (o *ListCrmTaskRequest) GetCursor() *string {
 }
 
 type ListCrmTaskResponseBody struct {
-	PrevCursor string                            `json:"prev_cursor"`
-	NextCursor string                            `json:"next_cursor"`
+	PrevCursor *string                           `json:"prev_cursor"`
+	NextCursor *string                           `json:"next_cursor"`
 	Data       []components.UnifiedCrmTaskOutput `json:"data"`
 }
 
-func (o *ListCrmTaskResponseBody) GetPrevCursor() string {
+func (o *ListCrmTaskResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListCrmTaskResponseBody) GetNextCursor() string {
+func (o *ListCrmTaskResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

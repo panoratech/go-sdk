@@ -32,7 +32,7 @@ func (s *Emails) List(ctx context.Context, xConnectionToken string, remoteData *
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listMarketingautomationEmails",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.ListMarketingautomationEmailsRequest{
@@ -82,6 +82,10 @@ func (s *Emails) List(ctx context.Context, xConnectionToken string, remoteData *
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -214,7 +218,7 @@ func (s *Emails) Retrieve(ctx context.Context, xConnectionToken string, id strin
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "retrieveMarketingautomationEmail",
-		SecuritySource: nil,
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	request := operations.RetrieveMarketingautomationEmailRequest{
@@ -263,6 +267,10 @@ func (s *Emails) Retrieve(ctx context.Context, xConnectionToken string, id strin
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
 	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig

@@ -2,58 +2,66 @@
 
 package components
 
-type UnifiedCrmDealOutputFieldMappings struct {
-}
-
-type UnifiedCrmDealOutputRemoteData struct {
-}
-
-type UnifiedCrmDealOutputCreatedAt struct {
-}
-
-type UnifiedCrmDealOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedCrmDealOutput struct {
 	// The name of the deal
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The description of the deal
-	Description string `json:"description"`
+	Description *string `json:"description"`
 	// The amount of the deal
-	Amount float64 `json:"amount"`
+	Amount *float64 `json:"amount"`
 	// The UUID of the user who is on the deal
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the stage of the deal
 	StageID *string `json:"stage_id,omitempty"`
 	// The UUID of the company tied to the deal
-	CompanyID     *string                           `json:"company_id,omitempty"`
-	FieldMappings UnifiedCrmDealOutputFieldMappings `json:"field_mappings"`
+	CompanyID *string `json:"company_id,omitempty"`
+	// The custom field mappings of the company between the remote 3rd party & Panora
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the deal
 	ID *string `json:"id,omitempty"`
 	// The id of the deal in the context of the Crm 3rd Party
-	RemoteID   *string                        `json:"remote_id,omitempty"`
-	RemoteData UnifiedCrmDealOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedCrmDealOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedCrmDealOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the deal in the context of the Crm 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedCrmDealOutput) GetName() string {
+func (u UnifiedCrmDealOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedCrmDealOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedCrmDealOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *UnifiedCrmDealOutput) GetDescription() string {
+func (o *UnifiedCrmDealOutput) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
 
-func (o *UnifiedCrmDealOutput) GetAmount() float64 {
+func (o *UnifiedCrmDealOutput) GetAmount() *float64 {
 	if o == nil {
-		return 0.0
+		return nil
 	}
 	return o.Amount
 }
@@ -79,9 +87,9 @@ func (o *UnifiedCrmDealOutput) GetCompanyID() *string {
 	return o.CompanyID
 }
 
-func (o *UnifiedCrmDealOutput) GetFieldMappings() UnifiedCrmDealOutputFieldMappings {
+func (o *UnifiedCrmDealOutput) GetFieldMappings() map[string]any {
 	if o == nil {
-		return UnifiedCrmDealOutputFieldMappings{}
+		return nil
 	}
 	return o.FieldMappings
 }
@@ -100,23 +108,23 @@ func (o *UnifiedCrmDealOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedCrmDealOutput) GetRemoteData() UnifiedCrmDealOutputRemoteData {
+func (o *UnifiedCrmDealOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedCrmDealOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmDealOutput) GetCreatedAt() UnifiedCrmDealOutputCreatedAt {
+func (o *UnifiedCrmDealOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmDealOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmDealOutput) GetModifiedAt() UnifiedCrmDealOutputModifiedAt {
+func (o *UnifiedCrmDealOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedCrmDealOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

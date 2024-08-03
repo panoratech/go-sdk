@@ -3,60 +3,60 @@
 package components
 
 type CustomFieldCreateDto struct {
-	ObjectTypeOwner     string `json:"object_type_owner"`
-	Name                string `json:"name"`
-	Description         string `json:"description"`
-	DataType            string `json:"data_type"`
-	SourceCustomFieldID string `json:"source_custom_field_id"`
-	SourceProvider      string `json:"source_provider"`
-	LinkedUserID        string `json:"linked_user_id"`
+	ObjectTypeOwner     *string `json:"object_type_owner"`
+	Name                *string `json:"name"`
+	Description         *string `json:"description"`
+	DataType            *string `json:"data_type"`
+	SourceCustomFieldID *string `json:"source_custom_field_id"`
+	SourceProvider      *string `json:"source_provider"`
+	LinkedUserID        *string `json:"linked_user_id"`
 }
 
-func (o *CustomFieldCreateDto) GetObjectTypeOwner() string {
+func (o *CustomFieldCreateDto) GetObjectTypeOwner() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ObjectTypeOwner
 }
 
-func (o *CustomFieldCreateDto) GetName() string {
+func (o *CustomFieldCreateDto) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
 
-func (o *CustomFieldCreateDto) GetDescription() string {
+func (o *CustomFieldCreateDto) GetDescription() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Description
 }
 
-func (o *CustomFieldCreateDto) GetDataType() string {
+func (o *CustomFieldCreateDto) GetDataType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.DataType
 }
 
-func (o *CustomFieldCreateDto) GetSourceCustomFieldID() string {
+func (o *CustomFieldCreateDto) GetSourceCustomFieldID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SourceCustomFieldID
 }
 
-func (o *CustomFieldCreateDto) GetSourceProvider() string {
+func (o *CustomFieldCreateDto) GetSourceProvider() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.SourceProvider
 }
 
-func (o *CustomFieldCreateDto) GetLinkedUserID() string {
+func (o *CustomFieldCreateDto) GetLinkedUserID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.LinkedUserID
 }

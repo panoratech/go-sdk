@@ -17,13 +17,16 @@ List  Attachments
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Ticketing.Attachments.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Attachments in any supported Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,14 +76,18 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedTicketingAttachmentInput := components.UnifiedTicketingAttachmentInput{
-        FileName: "your_file_here",
-        FileURL: "<value>",
-        Uploader: "<value>",
-        FieldMappings: components.UnifiedTicketingAttachmentInputFieldMappings{},
+        FileName: gosdk.String("your_file_here"),
+        FileURL: gosdk.String("<value>"),
+        Uploader: gosdk.String("<value>"),
+        FieldMappings: map[string]any{
+            "key": "<value>",
+        },
     }
     ctx := context.Background()
     res, err := s.Ticketing.Attachments.Create(ctx, xConnectionToken, unifiedTicketingAttachmentInput, nil)
@@ -120,13 +128,16 @@ Retrieve Attachments from any connected Ticketing software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

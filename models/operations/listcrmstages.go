@@ -58,21 +58,21 @@ func (o *ListCrmStagesRequest) GetCursor() *string {
 }
 
 type ListCrmStagesResponseBody struct {
-	PrevCursor string                             `json:"prev_cursor"`
-	NextCursor string                             `json:"next_cursor"`
+	PrevCursor *string                            `json:"prev_cursor"`
+	NextCursor *string                            `json:"next_cursor"`
 	Data       []components.UnifiedCrmStageOutput `json:"data"`
 }
 
-func (o *ListCrmStagesResponseBody) GetPrevCursor() string {
+func (o *ListCrmStagesResponseBody) GetPrevCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.PrevCursor
 }
 
-func (o *ListCrmStagesResponseBody) GetNextCursor() string {
+func (o *ListCrmStagesResponseBody) GetNextCursor() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.NextCursor
 }

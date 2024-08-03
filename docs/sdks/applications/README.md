@@ -17,13 +17,16 @@ List  Applications
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Ats.Applications.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Applications in any supported Ats software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,12 +76,12 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
-    unifiedAtsApplicationInput := components.UnifiedAtsApplicationInput{
-        FieldMappings: components.UnifiedAtsApplicationInputFieldMappings{},
-    }
+    unifiedAtsApplicationInput := components.UnifiedAtsApplicationInput{}
     ctx := context.Background()
     res, err := s.Ats.Applications.Create(ctx, xConnectionToken, unifiedAtsApplicationInput, nil)
     if err != nil {
@@ -117,13 +121,16 @@ Retrieve Applications from any connected Ats software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"

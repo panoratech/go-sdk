@@ -2,18 +2,14 @@
 
 package components
 
-type UnifiedTicketingCollectionOutputRemoteData struct {
-}
-
-type UnifiedTicketingCollectionOutputCreatedAt struct {
-}
-
-type UnifiedTicketingCollectionOutputModifiedAt struct {
-}
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
 
 type UnifiedTicketingCollectionOutput struct {
 	// The name of the collection
-	Name string `json:"name"`
+	Name *string `json:"name"`
 	// The description of the collection
 	Description *string `json:"description,omitempty"`
 	// The type of the collection. Authorized values are either PROJECT or LIST
@@ -21,15 +17,29 @@ type UnifiedTicketingCollectionOutput struct {
 	// The UUID of the collection
 	ID *string `json:"id,omitempty"`
 	// The id of the collection in the context of the 3rd Party
-	RemoteID   *string                                    `json:"remote_id,omitempty"`
-	RemoteData UnifiedTicketingCollectionOutputRemoteData `json:"remote_data"`
-	CreatedAt  UnifiedTicketingCollectionOutputCreatedAt  `json:"created_at"`
-	ModifiedAt UnifiedTicketingCollectionOutputModifiedAt `json:"modified_at"`
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the collection in the context of the 3rd Party
+	RemoteData map[string]any `json:"remote_data,omitempty"`
+	// The created date of the object
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The modified date of the object
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
-func (o *UnifiedTicketingCollectionOutput) GetName() string {
+func (u UnifiedTicketingCollectionOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedTicketingCollectionOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedTicketingCollectionOutput) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
 }
@@ -62,23 +72,23 @@ func (o *UnifiedTicketingCollectionOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedTicketingCollectionOutput) GetRemoteData() UnifiedTicketingCollectionOutputRemoteData {
+func (o *UnifiedTicketingCollectionOutput) GetRemoteData() map[string]any {
 	if o == nil {
-		return UnifiedTicketingCollectionOutputRemoteData{}
+		return nil
 	}
 	return o.RemoteData
 }
 
-func (o *UnifiedTicketingCollectionOutput) GetCreatedAt() UnifiedTicketingCollectionOutputCreatedAt {
+func (o *UnifiedTicketingCollectionOutput) GetCreatedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingCollectionOutputCreatedAt{}
+		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedTicketingCollectionOutput) GetModifiedAt() UnifiedTicketingCollectionOutputModifiedAt {
+func (o *UnifiedTicketingCollectionOutput) GetModifiedAt() *time.Time {
 	if o == nil {
-		return UnifiedTicketingCollectionOutputModifiedAt{}
+		return nil
 	}
 	return o.ModifiedAt
 }

@@ -17,13 +17,16 @@ List  Notes
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
     res, err := s.Crm.Notes.List(ctx, xConnectionToken, nil, nil, nil)
@@ -65,6 +68,7 @@ Create Notes in any supported Crm software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -72,12 +76,13 @@ import(
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     unifiedCrmNoteInput := components.UnifiedCrmNoteInput{
-        Content: "<value>",
-        FieldMappings: components.UnifiedCrmNoteInputFieldMappings{},
+        Content: gosdk.String("<value>"),
     }
     ctx := context.Background()
     res, err := s.Crm.Notes.Create(ctx, xConnectionToken, unifiedCrmNoteInput, nil)
@@ -118,13 +123,16 @@ Retrieve Notes from any connected Crm software
 package main
 
 import(
+	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
 )
 
 func main() {
-    s := gosdk.New()
+    s := gosdk.New(
+        gosdk.WithSecurity(os.Getenv("API_KEY")),
+    )
     var xConnectionToken string = "<value>"
 
     var id string = "<value>"
