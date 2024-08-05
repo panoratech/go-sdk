@@ -27,15 +27,15 @@ func newAutomations(sdkConfig sdkConfiguration) *Automations {
 	}
 }
 
-// List  Automations
-func (s *Automations) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationAutomationResponse, error) {
+// List Automations
+func (s *Automations) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationAutomationsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listMarketingautomationAutomation",
+		OperationID:    "listMarketingautomationAutomations",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListMarketingautomationAutomationRequest{
+	request := operations.ListMarketingautomationAutomationsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Automations) List(ctx context.Context, xConnectionToken string, remoteD
 		}
 	}
 
-	res := &operations.ListMarketingautomationAutomationResponse{
+	res := &operations.ListMarketingautomationAutomationsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Automations) List(ctx context.Context, xConnectionToken string, remoteD
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListMarketingautomationAutomationResponseBody
+			var out operations.ListMarketingautomationAutomationsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -403,8 +403,8 @@ func (s *Automations) Create(ctx context.Context, xConnectionToken string, unifi
 
 }
 
-// Retrieve Automations
-// Retrieve Automations from any connected Marketingautomation software
+// Retrieve Automation
+// Retrieve an Automation from any connected Marketingautomation software
 func (s *Automations) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveMarketingautomationAutomationResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

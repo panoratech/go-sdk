@@ -28,13 +28,13 @@ type UnifiedFilestorageFolderOutput struct {
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the folder
 	ID *string `json:"id,omitempty"`
-	// The id of the folder in the context of the 3rd Party
+	// The remote ID of the folder in the context of the 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the folder in the context of the 3rd Party
 	RemoteData map[string]any `json:"remote_data,omitempty"`
-	// The created date of the object
+	// The created date of the folder
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	// The modified date of the object
+	// The modified date of the folder
 	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 

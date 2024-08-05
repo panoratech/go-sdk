@@ -3,9 +3,44 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// UnifiedAtsAttachmentInputAttachmentType - The type of the file
+type UnifiedAtsAttachmentInputAttachmentType string
+
+const (
+	UnifiedAtsAttachmentInputAttachmentTypeResume      UnifiedAtsAttachmentInputAttachmentType = "RESUME"
+	UnifiedAtsAttachmentInputAttachmentTypeCoverLetter UnifiedAtsAttachmentInputAttachmentType = "COVER_LETTER"
+	UnifiedAtsAttachmentInputAttachmentTypeOfferLetter UnifiedAtsAttachmentInputAttachmentType = "OFFER_LETTER"
+	UnifiedAtsAttachmentInputAttachmentTypeOther       UnifiedAtsAttachmentInputAttachmentType = "OTHER"
+)
+
+func (e UnifiedAtsAttachmentInputAttachmentType) ToPointer() *UnifiedAtsAttachmentInputAttachmentType {
+	return &e
+}
+func (e *UnifiedAtsAttachmentInputAttachmentType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "RESUME":
+		fallthrough
+	case "COVER_LETTER":
+		fallthrough
+	case "OFFER_LETTER":
+		fallthrough
+	case "OTHER":
+		*e = UnifiedAtsAttachmentInputAttachmentType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedAtsAttachmentInputAttachmentType: %v", v)
+	}
+}
 
 type UnifiedAtsAttachmentInput struct {
 	// The URL of the file
@@ -13,7 +48,7 @@ type UnifiedAtsAttachmentInput struct {
 	// The name of the file
 	FileName *string `json:"file_name,omitempty"`
 	// The type of the file
-	AttachmentType *string `json:"attachment_type,omitempty"`
+	AttachmentType *UnifiedAtsAttachmentInputAttachmentType `json:"attachment_type,omitempty"`
 	// The remote creation date of the attachment
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the attachment
@@ -49,7 +84,7 @@ func (o *UnifiedAtsAttachmentInput) GetFileName() *string {
 	return o.FileName
 }
 
-func (o *UnifiedAtsAttachmentInput) GetAttachmentType() *string {
+func (o *UnifiedAtsAttachmentInput) GetAttachmentType() *UnifiedAtsAttachmentInputAttachmentType {
 	if o == nil {
 		return nil
 	}

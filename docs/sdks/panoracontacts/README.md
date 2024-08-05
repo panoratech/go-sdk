@@ -17,7 +17,6 @@ List CRM Contacts
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,7 +67,6 @@ Create Contacts in any supported CRM
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -77,16 +75,47 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
     unifiedCrmContactInput := components.UnifiedCrmContactInput{
-        FirstName: gosdk.String("Jed"),
-        LastName: gosdk.String("Kuhn"),
+        FirstName: gosdk.String("John"),
+        LastName: gosdk.String("Doe"),
+        EmailAddresses: []components.Email{
+            components.Email{
+                EmailAddress: gosdk.String("Jena.Nienow28@yahoo.com"),
+                EmailAddressType: components.EmailAddressTypePersonal.ToPointer(),
+            },
+        },
+        PhoneNumbers: []components.Phone{
+            components.Phone{
+                PhoneNumber: gosdk.String("<value>"),
+                PhoneType: components.PhoneTypeWork.ToPointer(),
+            },
+        },
+        Addresses: []components.Address{
+            components.Address{
+                Street1: gosdk.String("<value>"),
+                Street2: gosdk.String("<value>"),
+                City: gosdk.String("Anytown"),
+                State: gosdk.String("CA"),
+                PostalCode: gosdk.String("97398"),
+                Country: gosdk.String("USA"),
+                AddressType: components.AddressTypePersonal.ToPointer(),
+                OwnerType: gosdk.String("<value>"),
+            },
+        },
+        UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
     }
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Contacts.Create(ctx, xConnectionToken, unifiedCrmContactInput, nil)
+    res, err := s.Crm.Contacts.Create(ctx, xConnectionToken, unifiedCrmContactInput, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -98,13 +127,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `xConnectionToken`                                                                     | *string*                                                                               | :heavy_check_mark:                                                                     | The connection token                                                                   |
-| `unifiedCrmContactInput`                                                               | [components.UnifiedCrmContactInput](../../models/components/unifiedcrmcontactinput.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `remoteData`                                                                           | **bool*                                                                                | :heavy_minus_sign:                                                                     | Set to true to include data from the original CRM software.                            |
-| `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |                                                                                        |
+| `xConnectionToken`                                                                     | *string*                                                                               | :heavy_check_mark:                                                                     | The connection token                                                                   |                                                                                        |
+| `unifiedCrmContactInput`                                                               | [components.UnifiedCrmContactInput](../../models/components/unifiedcrmcontactinput.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `remoteData`                                                                           | **bool*                                                                                | :heavy_minus_sign:                                                                     | Set to true to include data from the original CRM software.                            | false                                                                                  |
+| `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |                                                                                        |
 
 
 ### Response
@@ -124,7 +153,6 @@ Retrieve Contacts from any connected CRM
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -132,13 +160,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Contacts.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Crm.Contacts.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -150,13 +180,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
-| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |
-| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the `contact` you want to retrive.                    |
-| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original CRM software. |
-| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |                                                             |
+| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |                                                             |
+| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the `contact` you want to retrive.                    | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                        |
+| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original CRM software. | false                                                       |
+| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
 
 ### Response

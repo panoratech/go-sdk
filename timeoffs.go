@@ -27,7 +27,7 @@ func newTimeoffs(sdkConfig sdkConfiguration) *Timeoffs {
 	}
 }
 
-// List  Timeoffs
+// List Time Offs
 func (s *Timeoffs) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisTimeoffsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -403,8 +403,8 @@ func (s *Timeoffs) Create(ctx context.Context, xConnectionToken string, unifiedH
 
 }
 
-// Retrieve Timeoffs
-// Retrieve Timeoffs from any connected Hris software
+// Retrieve Time Off
+// Retrieve a Time Off from any connected Hris software
 func (s *Timeoffs) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisTimeoffResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

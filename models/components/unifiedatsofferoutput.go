@@ -3,9 +3,59 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// UnifiedAtsOfferOutputStatus - The status of the offer
+type UnifiedAtsOfferOutputStatus string
+
+const (
+	UnifiedAtsOfferOutputStatusDraft        UnifiedAtsOfferOutputStatus = "DRAFT"
+	UnifiedAtsOfferOutputStatusApprovalSent UnifiedAtsOfferOutputStatus = "APPROVAL_SENT"
+	UnifiedAtsOfferOutputStatusApproved     UnifiedAtsOfferOutputStatus = "APPROVED"
+	UnifiedAtsOfferOutputStatusSent         UnifiedAtsOfferOutputStatus = "SENT"
+	UnifiedAtsOfferOutputStatusSentManually UnifiedAtsOfferOutputStatus = "SENT_MANUALLY"
+	UnifiedAtsOfferOutputStatusOpened       UnifiedAtsOfferOutputStatus = "OPENED"
+	UnifiedAtsOfferOutputStatusDenied       UnifiedAtsOfferOutputStatus = "DENIED"
+	UnifiedAtsOfferOutputStatusSigned       UnifiedAtsOfferOutputStatus = "SIGNED"
+	UnifiedAtsOfferOutputStatusDeprecated   UnifiedAtsOfferOutputStatus = "DEPRECATED"
+)
+
+func (e UnifiedAtsOfferOutputStatus) ToPointer() *UnifiedAtsOfferOutputStatus {
+	return &e
+}
+func (e *UnifiedAtsOfferOutputStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DRAFT":
+		fallthrough
+	case "APPROVAL_SENT":
+		fallthrough
+	case "APPROVED":
+		fallthrough
+	case "SENT":
+		fallthrough
+	case "SENT_MANUALLY":
+		fallthrough
+	case "OPENED":
+		fallthrough
+	case "DENIED":
+		fallthrough
+	case "SIGNED":
+		fallthrough
+	case "DEPRECATED":
+		*e = UnifiedAtsOfferOutputStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedAtsOfferOutputStatus: %v", v)
+	}
+}
 
 // UnifiedAtsOfferOutputCreatedAt - The created date of the object
 type UnifiedAtsOfferOutputCreatedAt struct {
@@ -27,7 +77,7 @@ type UnifiedAtsOfferOutput struct {
 	// The start date of the offer
 	StartDate *time.Time `json:"start_date,omitempty"`
 	// The status of the offer
-	Status *string `json:"status,omitempty"`
+	Status *UnifiedAtsOfferOutputStatus `json:"status,omitempty"`
 	// The UUID of the application
 	ApplicationID *string `json:"application_id,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
@@ -90,7 +140,7 @@ func (o *UnifiedAtsOfferOutput) GetStartDate() *time.Time {
 	return o.StartDate
 }
 
-func (o *UnifiedAtsOfferOutput) GetStatus() *string {
+func (o *UnifiedAtsOfferOutput) GetStatus() *UnifiedAtsOfferOutputStatus {
 	if o == nil {
 		return nil
 	}

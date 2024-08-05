@@ -3,16 +3,37 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
-// UnifiedCrmTaskOutputCreatedAt - The created date of the object
-type UnifiedCrmTaskOutputCreatedAt struct {
-}
+// UnifiedCrmTaskOutputStatus - The status of the task. Authorized values are PENDING, COMPLETED.
+type UnifiedCrmTaskOutputStatus string
 
-// UnifiedCrmTaskOutputModifiedAt - The modified date of the object
-type UnifiedCrmTaskOutputModifiedAt struct {
+const (
+	UnifiedCrmTaskOutputStatusPending   UnifiedCrmTaskOutputStatus = "PENDING"
+	UnifiedCrmTaskOutputStatusCompleted UnifiedCrmTaskOutputStatus = "COMPLETED"
+)
+
+func (e UnifiedCrmTaskOutputStatus) ToPointer() *UnifiedCrmTaskOutputStatus {
+	return &e
+}
+func (e *UnifiedCrmTaskOutputStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PENDING":
+		fallthrough
+	case "COMPLETED":
+		*e = UnifiedCrmTaskOutputStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedCrmTaskOutputStatus: %v", v)
+	}
 }
 
 type UnifiedCrmTaskOutput struct {
@@ -21,11 +42,11 @@ type UnifiedCrmTaskOutput struct {
 	// The content of the task
 	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status *string `json:"status"`
+	Status *UnifiedCrmTaskOutputStatus `json:"status"`
 	// The due date of the task
-	DueDate *time.Time `json:"due_date,omitempty"`
+	DueDate *string `json:"due_date,omitempty"`
 	// The finished date of the task
-	FinishedDate *time.Time `json:"finished_date,omitempty"`
+	FinishedDate *string `json:"finished_date,omitempty"`
 	// The UUID of the user tied to the task
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the task
@@ -36,14 +57,14 @@ type UnifiedCrmTaskOutput struct {
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the task
 	ID *string `json:"id,omitempty"`
-	// The id of the task in the context of the Crm 3rd Party
+	// The ID of the task in the context of the Crm 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the task in the context of the Crm 3rd Party
 	RemoteData map[string]any `json:"remote_data,omitempty"`
 	// The created date of the object
-	CreatedAt *UnifiedCrmTaskOutputCreatedAt `json:"created_at,omitempty"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The modified date of the object
-	ModifiedAt *UnifiedCrmTaskOutputModifiedAt `json:"modified_at,omitempty"`
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
 }
 
 func (u UnifiedCrmTaskOutput) MarshalJSON() ([]byte, error) {
@@ -71,21 +92,21 @@ func (o *UnifiedCrmTaskOutput) GetContent() *string {
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskOutput) GetStatus() *string {
+func (o *UnifiedCrmTaskOutput) GetStatus() *UnifiedCrmTaskOutputStatus {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *UnifiedCrmTaskOutput) GetDueDate() *time.Time {
+func (o *UnifiedCrmTaskOutput) GetDueDate() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DueDate
 }
 
-func (o *UnifiedCrmTaskOutput) GetFinishedDate() *time.Time {
+func (o *UnifiedCrmTaskOutput) GetFinishedDate() *string {
 	if o == nil {
 		return nil
 	}
@@ -141,14 +162,14 @@ func (o *UnifiedCrmTaskOutput) GetRemoteData() map[string]any {
 	return o.RemoteData
 }
 
-func (o *UnifiedCrmTaskOutput) GetCreatedAt() *UnifiedCrmTaskOutputCreatedAt {
+func (o *UnifiedCrmTaskOutput) GetCreatedAt() *time.Time {
 	if o == nil {
 		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *UnifiedCrmTaskOutput) GetModifiedAt() *UnifiedCrmTaskOutputModifiedAt {
+func (o *UnifiedCrmTaskOutput) GetModifiedAt() *time.Time {
 	if o == nil {
 		return nil
 	}

@@ -27,7 +27,7 @@ func newTemplates(sdkConfig sdkConfiguration) *Templates {
 	}
 }
 
-// List  Templates
+// List Templates
 func (s *Templates) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationTemplatesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -403,8 +403,8 @@ func (s *Templates) Create(ctx context.Context, xConnectionToken string, unified
 
 }
 
-// Retrieve Templates
-// Retrieve Templates from any connected Marketingautomation software
+// Retrieve Template
+// Retrieve a Template from any connected Marketingautomation software
 func (s *Templates) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveMarketingautomationTemplateResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

@@ -3,15 +3,87 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
+type Vertical string
+
+const (
+	VerticalTicketing           Vertical = "ticketing"
+	VerticalAts                 Vertical = "ats"
+	VerticalAccounting          Vertical = "accounting"
+	VerticalHris                Vertical = "hris"
+	VerticalCrm                 Vertical = "crm"
+	VerticalFilestorage         Vertical = "filestorage"
+	VerticalEcommerce           Vertical = "ecommerce"
+	VerticalMarketingautomation Vertical = "marketingautomation"
+)
+
+func (e Vertical) ToPointer() *Vertical {
+	return &e
+}
+func (e *Vertical) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ticketing":
+		fallthrough
+	case "ats":
+		fallthrough
+	case "accounting":
+		fallthrough
+	case "hris":
+		fallthrough
+	case "crm":
+		fallthrough
+	case "filestorage":
+		fallthrough
+	case "ecommerce":
+		fallthrough
+	case "marketingautomation":
+		*e = Vertical(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Vertical: %v", v)
+	}
+}
+
+type ResyncStatusDtoStatus string
+
+const (
+	ResyncStatusDtoStatusSuccess ResyncStatusDtoStatus = "success"
+	ResyncStatusDtoStatusFail    ResyncStatusDtoStatus = "fail"
+)
+
+func (e ResyncStatusDtoStatus) ToPointer() *ResyncStatusDtoStatus {
+	return &e
+}
+func (e *ResyncStatusDtoStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "success":
+		fallthrough
+	case "fail":
+		*e = ResyncStatusDtoStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ResyncStatusDtoStatus: %v", v)
+	}
+}
+
 type ResyncStatusDto struct {
-	Timestamp *time.Time `json:"timestamp"`
-	Vertical  *string    `json:"vertical"`
-	Provider  *string    `json:"provider"`
-	Status    *string    `json:"status"`
+	Timestamp *time.Time             `json:"timestamp"`
+	Vertical  *Vertical              `json:"vertical"`
+	Provider  *string                `json:"provider"`
+	Status    *ResyncStatusDtoStatus `json:"status"`
 }
 
 func (r ResyncStatusDto) MarshalJSON() ([]byte, error) {
@@ -32,7 +104,7 @@ func (o *ResyncStatusDto) GetTimestamp() *time.Time {
 	return o.Timestamp
 }
 
-func (o *ResyncStatusDto) GetVertical() *string {
+func (o *ResyncStatusDto) GetVertical() *Vertical {
 	if o == nil {
 		return nil
 	}
@@ -46,7 +118,7 @@ func (o *ResyncStatusDto) GetProvider() *string {
 	return o.Provider
 }
 
-func (o *ResyncStatusDto) GetStatus() *string {
+func (o *ResyncStatusDto) GetStatus() *ResyncStatusDtoStatus {
 	if o == nil {
 		return nil
 	}

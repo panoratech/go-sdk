@@ -17,7 +17,7 @@ type UnifiedCrmStageOutput struct {
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the stage
 	ID *string `json:"id,omitempty"`
-	// The id of the stage in the context of the Crm 3rd Party
+	// The ID of the stage in the context of the Crm 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the stage in the context of the Crm 3rd Party
 	RemoteData map[string]any `json:"remote_data,omitempty"`

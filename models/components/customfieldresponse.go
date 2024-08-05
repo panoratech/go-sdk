@@ -3,9 +3,38 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// CustomFieldResponseDataType - Attribute Data Type
+type CustomFieldResponseDataType string
+
+const (
+	CustomFieldResponseDataTypeString CustomFieldResponseDataType = "string"
+	CustomFieldResponseDataTypeNumber CustomFieldResponseDataType = "number"
+)
+
+func (e CustomFieldResponseDataType) ToPointer() *CustomFieldResponseDataType {
+	return &e
+}
+func (e *CustomFieldResponseDataType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "string":
+		fallthrough
+	case "number":
+		*e = CustomFieldResponseDataType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomFieldResponseDataType: %v", v)
+	}
+}
 
 type CustomFieldResponse struct {
 	// Attribute Id
@@ -19,18 +48,18 @@ type CustomFieldResponse struct {
 	// Attribute Description
 	Description *string `json:"description"`
 	// Attribute Data Type
-	DataType *string `json:"data_type"`
+	DataType *CustomFieldResponseDataType `json:"data_type"`
 	// Attribute Remote Id
 	RemoteID *string `json:"remote_id"`
 	// Attribute Source
 	Source *string `json:"source"`
-	// Attribute Id Entity
+	// Attribute Entity Id
 	IDEntity *string `json:"id_entity"`
-	// Attribute Id Project
+	// Attribute Project Id
 	IDProject *string `json:"id_project"`
 	// Attribute Scope
 	Scope *string `json:"scope"`
-	// Attribute Id Consumer
+	// Attribute Consumer Id
 	IDConsumer *string `json:"id_consumer"`
 	// Attribute Created Date
 	CreatedAt *time.Time `json:"created_at"`
@@ -84,7 +113,7 @@ func (o *CustomFieldResponse) GetDescription() *string {
 	return o.Description
 }
 
-func (o *CustomFieldResponse) GetDataType() *string {
+func (o *CustomFieldResponse) GetDataType() *CustomFieldResponseDataType {
 	if o == nil {
 		return nil
 	}

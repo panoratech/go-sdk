@@ -2,14 +2,96 @@
 
 package components
 
-type DefineTargetFieldDto struct {
-	ObjectTypeOwner *string `json:"object_type_owner"`
-	Name            *string `json:"name"`
-	Description     *string `json:"description"`
-	DataType        *string `json:"data_type"`
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type ObjectTypeOwner string
+
+const (
+	ObjectTypeOwnerCompany    ObjectTypeOwner = "company"
+	ObjectTypeOwnerContact    ObjectTypeOwner = "contact"
+	ObjectTypeOwnerDeal       ObjectTypeOwner = "deal"
+	ObjectTypeOwnerLead       ObjectTypeOwner = "lead"
+	ObjectTypeOwnerNote       ObjectTypeOwner = "note"
+	ObjectTypeOwnerTask       ObjectTypeOwner = "task"
+	ObjectTypeOwnerEngagement ObjectTypeOwner = "engagement"
+	ObjectTypeOwnerStage      ObjectTypeOwner = "stage"
+	ObjectTypeOwnerUser       ObjectTypeOwner = "user"
+)
+
+func (e ObjectTypeOwner) ToPointer() *ObjectTypeOwner {
+	return &e
+}
+func (e *ObjectTypeOwner) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "company":
+		fallthrough
+	case "contact":
+		fallthrough
+	case "deal":
+		fallthrough
+	case "lead":
+		fallthrough
+	case "note":
+		fallthrough
+	case "task":
+		fallthrough
+	case "engagement":
+		fallthrough
+	case "stage":
+		fallthrough
+	case "user":
+		*e = ObjectTypeOwner(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ObjectTypeOwner: %v", v)
+	}
 }
 
-func (o *DefineTargetFieldDto) GetObjectTypeOwner() *string {
+// DataType - The data type of the target field
+type DataType string
+
+const (
+	DataTypeString DataType = "string"
+	DataTypeNumber DataType = "number"
+)
+
+func (e DataType) ToPointer() *DataType {
+	return &e
+}
+func (e *DataType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "string":
+		fallthrough
+	case "number":
+		*e = DataType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DataType: %v", v)
+	}
+}
+
+type DefineTargetFieldDto struct {
+	ObjectTypeOwner *ObjectTypeOwner `json:"object_type_owner"`
+	// The name of the target field
+	Name *string `json:"name"`
+	// The description of the target field
+	Description *string `json:"description"`
+	// The data type of the target field
+	DataType *DataType `json:"data_type"`
+}
+
+func (o *DefineTargetFieldDto) GetObjectTypeOwner() *ObjectTypeOwner {
 	if o == nil {
 		return nil
 	}
@@ -30,7 +112,7 @@ func (o *DefineTargetFieldDto) GetDescription() *string {
 	return o.Description
 }
 
-func (o *DefineTargetFieldDto) GetDataType() *string {
+func (o *DefineTargetFieldDto) GetDataType() *DataType {
 	if o == nil {
 		return nil
 	}

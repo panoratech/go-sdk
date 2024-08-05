@@ -36,8 +36,8 @@ func (o *CreateMarketingautomationCampaignRequest) GetUnifiedMarketingautomation
 }
 
 type CreateMarketingautomationCampaignResponse struct {
-	HTTPMeta              components.HTTPMetadata `json:"-"`
-	UnifiedCampaignOutput *components.UnifiedCampaignOutput
+	HTTPMeta                                 components.HTTPMetadata `json:"-"`
+	UnifiedMarketingautomationCampaignOutput *components.UnifiedMarketingautomationCampaignOutput
 }
 
 func (o *CreateMarketingautomationCampaignResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -47,9 +47,9 @@ func (o *CreateMarketingautomationCampaignResponse) GetHTTPMeta() components.HTT
 	return o.HTTPMeta
 }
 
-func (o *CreateMarketingautomationCampaignResponse) GetUnifiedCampaignOutput() *components.UnifiedCampaignOutput {
+func (o *CreateMarketingautomationCampaignResponse) GetUnifiedMarketingautomationCampaignOutput() *components.UnifiedMarketingautomationCampaignOutput {
 	if o == nil {
 		return nil
 	}
-	return o.UnifiedCampaignOutput
+	return o.UnifiedMarketingautomationCampaignOutput
 }

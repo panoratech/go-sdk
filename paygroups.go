@@ -27,15 +27,15 @@ func newPaygroups(sdkConfig sdkConfiguration) *Paygroups {
 	}
 }
 
-// List  PayGroups
-func (s *Paygroups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisPaygroupResponse, error) {
+// List Pay Groups
+func (s *Paygroups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisPaygroupsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisPaygroup",
+		OperationID:    "listHrisPaygroups",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisPaygroupRequest{
+	request := operations.ListHrisPaygroupsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Paygroups) List(ctx context.Context, xConnectionToken string, remoteDat
 		}
 	}
 
-	res := &operations.ListHrisPaygroupResponse{
+	res := &operations.ListHrisPaygroupsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Paygroups) List(ctx context.Context, xConnectionToken string, remoteDat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisPaygroupResponseBody
+			var out operations.ListHrisPaygroupsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,8 +212,8 @@ func (s *Paygroups) List(ctx context.Context, xConnectionToken string, remoteDat
 
 }
 
-// Retrieve Pay Groups
-// Retrieve Pay Groups from any connected Hris software
+// Retrieve Pay Group
+// Retrieve a Pay Group from any connected Hris software
 func (s *Paygroups) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisPaygroupResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

@@ -6,49 +6,49 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type RetrieveHrisBankinfoRequest struct {
+type RetrieveHrisBankInfoRequest struct {
 	// The connection token
 	XConnectionToken string `header:"style=simple,explode=false,name=x-connection-token"`
-	// id of the bankinfo you want to retrieve.
+	// id of the bank info you want to retrieve.
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 	// Set to true to include data from the original Hris software.
 	RemoteData *bool `queryParam:"style=form,explode=true,name=remote_data"`
 }
 
-func (o *RetrieveHrisBankinfoRequest) GetXConnectionToken() string {
+func (o *RetrieveHrisBankInfoRequest) GetXConnectionToken() string {
 	if o == nil {
 		return ""
 	}
 	return o.XConnectionToken
 }
 
-func (o *RetrieveHrisBankinfoRequest) GetID() string {
+func (o *RetrieveHrisBankInfoRequest) GetID() string {
 	if o == nil {
 		return ""
 	}
 	return o.ID
 }
 
-func (o *RetrieveHrisBankinfoRequest) GetRemoteData() *bool {
+func (o *RetrieveHrisBankInfoRequest) GetRemoteData() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.RemoteData
 }
 
-type RetrieveHrisBankinfoResponse struct {
+type RetrieveHrisBankInfoResponse struct {
 	HTTPMeta                  components.HTTPMetadata `json:"-"`
 	UnifiedHrisBankinfoOutput *components.UnifiedHrisBankinfoOutput
 }
 
-func (o *RetrieveHrisBankinfoResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *RetrieveHrisBankInfoResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
 }
 
-func (o *RetrieveHrisBankinfoResponse) GetUnifiedHrisBankinfoOutput() *components.UnifiedHrisBankinfoOutput {
+func (o *RetrieveHrisBankInfoResponse) GetUnifiedHrisBankinfoOutput() *components.UnifiedHrisBankinfoOutput {
 	if o == nil {
 		return nil
 	}

@@ -1,4 +1,4 @@
-# RetrieveHrisBankinfoResponse
+# RetrieveHrisBankInfoResponse
 
 
 ## Fields

@@ -3,9 +3,36 @@
 package components
 
 import (
-	"github.com/panoratech/go-sdk/internal/utils"
-	"time"
+	"encoding/json"
+	"fmt"
 )
+
+// UnifiedCrmTaskInputStatus - The status of the task. Authorized values are PENDING, COMPLETED.
+type UnifiedCrmTaskInputStatus string
+
+const (
+	UnifiedCrmTaskInputStatusPending   UnifiedCrmTaskInputStatus = "PENDING"
+	UnifiedCrmTaskInputStatusCompleted UnifiedCrmTaskInputStatus = "COMPLETED"
+)
+
+func (e UnifiedCrmTaskInputStatus) ToPointer() *UnifiedCrmTaskInputStatus {
+	return &e
+}
+func (e *UnifiedCrmTaskInputStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PENDING":
+		fallthrough
+	case "COMPLETED":
+		*e = UnifiedCrmTaskInputStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedCrmTaskInputStatus: %v", v)
+	}
+}
 
 type UnifiedCrmTaskInput struct {
 	// The subject of the task
@@ -13,11 +40,11 @@ type UnifiedCrmTaskInput struct {
 	// The content of the task
 	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status *string `json:"status"`
+	Status *UnifiedCrmTaskInputStatus `json:"status"`
 	// The due date of the task
-	DueDate *time.Time `json:"due_date,omitempty"`
+	DueDate *string `json:"due_date,omitempty"`
 	// The finished date of the task
-	FinishedDate *time.Time `json:"finished_date,omitempty"`
+	FinishedDate *string `json:"finished_date,omitempty"`
 	// The UUID of the user tied to the task
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the task
@@ -26,17 +53,6 @@ type UnifiedCrmTaskInput struct {
 	DealID *string `json:"deal_id,omitempty"`
 	// The custom field mappings of the task between the remote 3rd party & Panora
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
-}
-
-func (u UnifiedCrmTaskInput) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UnifiedCrmTaskInput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *UnifiedCrmTaskInput) GetSubject() *string {
@@ -53,21 +69,21 @@ func (o *UnifiedCrmTaskInput) GetContent() *string {
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskInput) GetStatus() *string {
+func (o *UnifiedCrmTaskInput) GetStatus() *UnifiedCrmTaskInputStatus {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *UnifiedCrmTaskInput) GetDueDate() *time.Time {
+func (o *UnifiedCrmTaskInput) GetDueDate() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DueDate
 }
 
-func (o *UnifiedCrmTaskInput) GetFinishedDate() *time.Time {
+func (o *UnifiedCrmTaskInput) GetFinishedDate() *string {
 	if o == nil {
 		return nil
 	}

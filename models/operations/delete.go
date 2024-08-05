@@ -7,6 +7,7 @@ import (
 )
 
 type DeleteRequest struct {
+	// id of the webhook to delete.
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 

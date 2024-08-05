@@ -27,15 +27,15 @@ func newEmployments(sdkConfig sdkConfiguration) *Employments {
 	}
 }
 
-// List  Employments
-func (s *Employments) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisEmploymentResponse, error) {
+// List Employments
+func (s *Employments) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisEmploymentsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisEmployment",
+		OperationID:    "listHrisEmployments",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisEmploymentRequest{
+	request := operations.ListHrisEmploymentsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Employments) List(ctx context.Context, xConnectionToken string, remoteD
 		}
 	}
 
-	res := &operations.ListHrisEmploymentResponse{
+	res := &operations.ListHrisEmploymentsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Employments) List(ctx context.Context, xConnectionToken string, remoteD
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisEmploymentResponseBody
+			var out operations.ListHrisEmploymentsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,8 +212,8 @@ func (s *Employments) List(ctx context.Context, xConnectionToken string, remoteD
 
 }
 
-// Retrieve Employments
-// Retrieve Employments from any connected Hris software
+// Retrieve Employment
+// Retrieve an Employment from any connected Hris software
 func (s *Employments) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisEmploymentResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

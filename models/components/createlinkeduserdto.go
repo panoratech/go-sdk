@@ -3,13 +3,15 @@
 package components
 
 type CreateLinkedUserDto struct {
-	LinkedUserOriginID *string `json:"linked_user_origin_id"`
-	Alias              *string `json:"alias"`
+	// The id of the user in the context of your own software
+	LinkedUserOriginID string `json:"linked_user_origin_id"`
+	// Your company alias
+	Alias *string `json:"alias"`
 }
 
-func (o *CreateLinkedUserDto) GetLinkedUserOriginID() *string {
+func (o *CreateLinkedUserDto) GetLinkedUserOriginID() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.LinkedUserOriginID
 }

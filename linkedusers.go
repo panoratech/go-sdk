@@ -19,7 +19,7 @@ import (
 
 type LinkedUsers struct {
 	Batch        *Batch
-	Single       *Single
+	ID           *ID
 	Fromremoteid *Fromremoteid
 
 	sdkConfiguration sdkConfiguration
@@ -29,7 +29,7 @@ func newLinkedUsers(sdkConfig sdkConfiguration) *LinkedUsers {
 	return &LinkedUsers{
 		sdkConfiguration: sdkConfig,
 		Batch:            newBatch(sdkConfig),
-		Single:           newSingle(sdkConfig),
+		ID:               newID(sdkConfig),
 		Fromremoteid:     newFromremoteid(sdkConfig),
 	}
 }

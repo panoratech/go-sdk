@@ -17,7 +17,7 @@ type UnifiedTicketingUserOutput struct {
 	// The account or organization the user is part of
 	AccountID *string `json:"account_id,omitempty"`
 	// The custom field mappings of the user between the remote 3rd party & Panora
-	FieldMappings map[string]any `json:"field_mappings"`
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the user
 	ID *string `json:"id,omitempty"`
 	// The id of the user in the context of the 3rd Party

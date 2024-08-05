@@ -15,7 +15,6 @@ Map Custom Field
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -24,13 +23,13 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.MapFieldToProviderDto{
-        AttributeID: gosdk.String("<value>"),
-        SourceCustomFieldID: gosdk.String("<value>"),
-        SourceProvider: gosdk.String("<value>"),
-        LinkedUserID: gosdk.String("<value>"),
+        AttributeID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        SourceCustomFieldID: gosdk.String("id_1"),
+        SourceProvider: gosdk.String("hubspot"),
+        LinkedUserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
     }
     ctx := context.Background()
     res, err := s.FieldMappings.Map.Map(ctx, request)

@@ -3,16 +3,62 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type StatusRequest struct {
-	Vertical string `pathParam:"style=simple,explode=false,name=vertical"`
+type Vertical string
+
+const (
+	VerticalTicketing           Vertical = "ticketing"
+	VerticalMarketingautomation Vertical = "marketingautomation"
+	VerticalCrm                 Vertical = "crm"
+	VerticalFilestorage         Vertical = "filestorage"
+	VerticalAts                 Vertical = "ats"
+	VerticalHris                Vertical = "hris"
+	VerticalAccounting          Vertical = "accounting"
+	VerticalEcommerce           Vertical = "ecommerce"
+)
+
+func (e Vertical) ToPointer() *Vertical {
+	return &e
+}
+func (e *Vertical) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ticketing":
+		fallthrough
+	case "marketingautomation":
+		fallthrough
+	case "crm":
+		fallthrough
+	case "filestorage":
+		fallthrough
+	case "ats":
+		fallthrough
+	case "hris":
+		fallthrough
+	case "accounting":
+		fallthrough
+	case "ecommerce":
+		*e = Vertical(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Vertical: %v", v)
+	}
 }
 
-func (o *StatusRequest) GetVertical() string {
+type StatusRequest struct {
+	Vertical Vertical `pathParam:"style=simple,explode=false,name=vertical"`
+}
+
+func (o *StatusRequest) GetVertical() Vertical {
 	if o == nil {
-		return ""
+		return Vertical("")
 	}
 	return o.Vertical
 }

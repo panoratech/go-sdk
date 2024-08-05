@@ -3,13 +3,13 @@
 
 ### Available Operations
 
-* [List](#list) - List  Notes
+* [List](#list) - List Notes
 * [Create](#create) - Create Notes
 * [Retrieve](#retrieve) - Retrieve Notes
 
 ## List
 
-List  Notes
+List Notes
 
 ### Example Usage
 
@@ -17,7 +17,6 @@ List  Notes
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,7 +67,6 @@ Create Notes in any supported Crm software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -77,15 +75,25 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
     unifiedCrmNoteInput := components.UnifiedCrmNoteInput{
-        Content: gosdk.String("<value>"),
+        Content: gosdk.String("My notes taken during the meeting"),
+        UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        CompanyID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        ContactID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        DealID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
     }
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Notes.Create(ctx, xConnectionToken, unifiedCrmNoteInput, nil)
+    res, err := s.Crm.Notes.Create(ctx, xConnectionToken, unifiedCrmNoteInput, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -97,13 +105,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `xConnectionToken`                                                               | *string*                                                                         | :heavy_check_mark:                                                               | The connection token                                                             |
-| `unifiedCrmNoteInput`                                                            | [components.UnifiedCrmNoteInput](../../models/components/unifiedcrmnoteinput.md) | :heavy_check_mark:                                                               | N/A                                                                              |
-| `remoteData`                                                                     | **bool*                                                                          | :heavy_minus_sign:                                                               | Set to true to include data from the original Crm software.                      |
-| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |                                                                                  |
+| `xConnectionToken`                                                               | *string*                                                                         | :heavy_check_mark:                                                               | The connection token                                                             |                                                                                  |
+| `unifiedCrmNoteInput`                                                            | [components.UnifiedCrmNoteInput](../../models/components/unifiedcrmnoteinput.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
+| `remoteData`                                                                     | **bool*                                                                          | :heavy_minus_sign:                                                               | Set to true to include data from the original Crm software.                      | false                                                                            |
+| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
 
 ### Response
@@ -123,7 +131,6 @@ Retrieve Notes from any connected Crm software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -131,13 +138,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Notes.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Crm.Notes.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -149,13 +158,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
-| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |
-| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the note you want to retrieve.                        |
-| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Crm software. |
-| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |                                                             |
+| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |                                                             |
+| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the note you want to retrieve.                        | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                        |
+| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Crm software. | false                                                       |
+| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
 
 ### Response

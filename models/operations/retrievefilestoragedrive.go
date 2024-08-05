@@ -11,7 +11,7 @@ type RetrieveFilestorageDriveRequest struct {
 	XConnectionToken string `header:"style=simple,explode=false,name=x-connection-token"`
 	// id of the drive you want to retrieve.
 	ID string `pathParam:"style=simple,explode=false,name=id"`
-	// Set to true to include data from the original File Storage software.
+	// Set to true to include data from the original file storage service.
 	RemoteData *bool `queryParam:"style=form,explode=true,name=remote_data"`
 }
 

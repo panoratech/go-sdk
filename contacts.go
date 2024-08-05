@@ -27,7 +27,7 @@ func newContacts(sdkConfig sdkConfiguration) *Contacts {
 	}
 }
 
-// List all Contacts
+// List Contacts
 func (s *Contacts) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListTicketingContactsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Contacts) List(ctx context.Context, xConnectionToken string, remoteData
 
 }
 
-// Retrieve Contacts
-// Retrieve Contacts from any connected Ticketing software
+// Retrieve Contact
+// Retrieve a Contact from any connected Ticketing software
 func (s *Contacts) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveTicketingContactResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

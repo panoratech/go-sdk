@@ -27,7 +27,7 @@ func newEmails(sdkConfig sdkConfiguration) *Emails {
 	}
 }
 
-// List  Emails
+// List Emails
 func (s *Emails) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationEmailsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Emails) List(ctx context.Context, xConnectionToken string, remoteData *
 
 }
 
-// Retrieve Emails
-// Retrieve Emails from any connected Marketingautomation software
+// Retrieve Email
+// Retrieve an Email from any connected Marketingautomation software
 func (s *Emails) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveMarketingautomationEmailResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

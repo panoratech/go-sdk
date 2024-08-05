@@ -27,7 +27,7 @@ func newNotes(sdkConfig sdkConfiguration) *Notes {
 	}
 }
 
-// List  Notes
+// List Notes
 func (s *Notes) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListCrmNoteResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

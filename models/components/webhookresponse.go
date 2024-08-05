@@ -15,10 +15,10 @@ type WebhookResponse struct {
 	// The endpoint url of the webhook.
 	URL *string `json:"url"`
 	// The secret of the webhook.
-	Secret *string `json:"secret"`
+	Secret string `json:"secret"`
 	// The status of the webhook.
 	Active *bool `json:"active"`
-	// The created date  of the webhook.
+	// The created date of the webhook.
 	CreatedAt *time.Time `json:"created_at"`
 	// The events that the webhook listen to.
 	Scope []string `json:"scope"`
@@ -60,9 +60,9 @@ func (o *WebhookResponse) GetURL() *string {
 	return o.URL
 }
 
-func (o *WebhookResponse) GetSecret() *string {
+func (o *WebhookResponse) GetSecret() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.Secret
 }

@@ -17,7 +17,6 @@ List  Interviews
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,22 +67,41 @@ Create Interviews in any supported Ats software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
+	"github.com/panoratech/go-sdk/types"
 	"context"
 	"log"
 )
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    unifiedAtsInterviewInput := components.UnifiedAtsInterviewInput{}
+    unifiedAtsInterviewInput := components.UnifiedAtsInterviewInput{
+        Status: components.UnifiedAtsInterviewInputStatusScheduled.ToPointer(),
+        ApplicationID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        JobInterviewStageID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        OrganizedBy: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Interviewers: []string{
+            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+        },
+        Location: gosdk.String("San Francisco"),
+        StartAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
+        EndAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
+        RemoteCreatedAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
+        RemoteUpdatedAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
+    }
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ats.Interviews.Create(ctx, xConnectionToken, unifiedAtsInterviewInput, nil)
+    res, err := s.Ats.Interviews.Create(ctx, xConnectionToken, unifiedAtsInterviewInput, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -95,13 +113,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
-| `xConnectionToken`                                                                         | *string*                                                                                   | :heavy_check_mark:                                                                         | The connection token                                                                       |
-| `unifiedAtsInterviewInput`                                                                 | [components.UnifiedAtsInterviewInput](../../models/components/unifiedatsinterviewinput.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `remoteData`                                                                               | **bool*                                                                                    | :heavy_minus_sign:                                                                         | Set to true to include data from the original Ats software.                                |
-| `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
+| `xConnectionToken`                                                                         | *string*                                                                                   | :heavy_check_mark:                                                                         | The connection token                                                                       |                                                                                            |
+| `unifiedAtsInterviewInput`                                                                 | [components.UnifiedAtsInterviewInput](../../models/components/unifiedatsinterviewinput.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
+| `remoteData`                                                                               | **bool*                                                                                    | :heavy_minus_sign:                                                                         | Set to true to include data from the original Ats software.                                | false                                                                                      |
+| `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |                                                                                            |
 
 
 ### Response
@@ -121,7 +139,6 @@ Retrieve Interviews from any connected Ats software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -129,13 +146,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ats.Interviews.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Ats.Interviews.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -147,13 +166,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
-| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |
-| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the interview you want to retrieve.                   |
-| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Ats software. |
-| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |                                                             |
+| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |                                                             |
+| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the interview you want to retrieve.                   | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                        |
+| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Ats software. | false                                                       |
+| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
 
 ### Response

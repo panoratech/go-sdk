@@ -5,11 +5,11 @@ package components
 type UnifiedCrmNoteInput struct {
 	// The content of the note
 	Content *string `json:"content"`
-	// The UUID of the user tied the note
+	// The UUID of the user tied to the note
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the note
 	CompanyID *string `json:"company_id,omitempty"`
-	// The UUID fo the contact tied to the note
+	// The UUID of the contact tied to the note
 	ContactID *string `json:"contact_id,omitempty"`
 	// The UUID of the deal tied to the note
 	DealID *string `json:"deal_id,omitempty"`

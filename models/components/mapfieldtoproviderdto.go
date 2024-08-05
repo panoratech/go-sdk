@@ -3,13 +3,13 @@
 package components
 
 type MapFieldToProviderDto struct {
-	// Attribute Id
+	// The attribute ID
 	AttributeID *string `json:"attributeId"`
-	// Attribute Id
+	// The source custom field ID
 	SourceCustomFieldID *string `json:"source_custom_field_id"`
-	// Attribute Id
+	// The source provider
 	SourceProvider *string `json:"source_provider"`
-	// Attribute Id
+	// The linked user ID
 	LinkedUserID *string `json:"linked_user_id"`
 }
 

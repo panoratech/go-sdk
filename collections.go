@@ -27,7 +27,7 @@ func newCollections(sdkConfig sdkConfiguration) *Collections {
 	}
 }
 
-// List  Collections
+// List Collections
 func (s *Collections) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListTicketingCollectionsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

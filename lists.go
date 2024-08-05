@@ -27,7 +27,7 @@ func newLists(sdkConfig sdkConfiguration) *Lists {
 	}
 }
 
-// List  Lists
+// List Lists
 func (s *Lists) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationListsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -403,8 +403,8 @@ func (s *Lists) Create(ctx context.Context, xConnectionToken string, unifiedMark
 
 }
 
-// Retrieve Lists
-// Retrieve Lists from any connected Marketingautomation software
+// Retrieve List
+// Retrieve a List from any connected Marketingautomation software
 func (s *Lists) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveMarketingautomationListResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

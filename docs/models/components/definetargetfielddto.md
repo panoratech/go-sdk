@@ -3,9 +3,9 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `ObjectTypeOwner`  | *string*           | :heavy_check_mark: | N/A                |
-| `Name`             | *string*           | :heavy_check_mark: | N/A                |
-| `Description`      | *string*           | :heavy_check_mark: | N/A                |
-| `DataType`         | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `ObjectTypeOwner`                                                        | [components.ObjectTypeOwner](../../models/components/objecttypeowner.md) | :heavy_check_mark:                                                       | N/A                                                                      | company                                                                  |
+| `Name`                                                                   | *string*                                                                 | :heavy_check_mark:                                                       | The name of the target field                                             | fav_dish                                                                 |
+| `Description`                                                            | *string*                                                                 | :heavy_check_mark:                                                       | The description of the target field                                      | My favorite dish                                                         |
+| `DataType`                                                               | [components.DataType](../../models/components/datatype.md)               | :heavy_check_mark:                                                       | The data type of the target field                                        | string                                                                   |

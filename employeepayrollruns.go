@@ -27,7 +27,7 @@ func newEmployeepayrollruns(sdkConfig sdkConfiguration) *Employeepayrollruns {
 	}
 }
 
-// List  EmployeePayrollRuns
+// List Employee Payroll Runs
 func (s *Employeepayrollruns) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisEmployeePayrollRunResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Employeepayrollruns) List(ctx context.Context, xConnectionToken string,
 
 }
 
-// Retrieve Employee Payroll Runs
-// Retrieve Employee Payroll Runs from any connected Hris software
+// Retrieve Employee Payroll Run
+// Retrieve Employee Payroll Run from any connected Hris software
 func (s *Employeepayrollruns) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisEmployeePayrollRunResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

@@ -27,7 +27,7 @@ func newEngagements(sdkConfig sdkConfiguration) *Engagements {
 	}
 }
 
-// List  Engagements
+// List Engagements
 func (s *Engagements) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListCrmEngagementsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

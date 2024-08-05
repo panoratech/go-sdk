@@ -7,7 +7,7 @@ import (
 )
 
 type RetrieveLinkedUserRequest struct {
-	ID string `queryParam:"style=form,explode=true,name=id"`
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 func (o *RetrieveLinkedUserRequest) GetID() string {

@@ -2,17 +2,102 @@
 
 package components
 
-type CustomFieldCreateDto struct {
-	ObjectTypeOwner     *string `json:"object_type_owner"`
-	Name                *string `json:"name"`
-	Description         *string `json:"description"`
-	DataType            *string `json:"data_type"`
-	SourceCustomFieldID *string `json:"source_custom_field_id"`
-	SourceProvider      *string `json:"source_provider"`
-	LinkedUserID        *string `json:"linked_user_id"`
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type CustomFieldCreateDtoObjectTypeOwner string
+
+const (
+	CustomFieldCreateDtoObjectTypeOwnerCompany    CustomFieldCreateDtoObjectTypeOwner = "company"
+	CustomFieldCreateDtoObjectTypeOwnerContact    CustomFieldCreateDtoObjectTypeOwner = "contact"
+	CustomFieldCreateDtoObjectTypeOwnerDeal       CustomFieldCreateDtoObjectTypeOwner = "deal"
+	CustomFieldCreateDtoObjectTypeOwnerLead       CustomFieldCreateDtoObjectTypeOwner = "lead"
+	CustomFieldCreateDtoObjectTypeOwnerNote       CustomFieldCreateDtoObjectTypeOwner = "note"
+	CustomFieldCreateDtoObjectTypeOwnerTask       CustomFieldCreateDtoObjectTypeOwner = "task"
+	CustomFieldCreateDtoObjectTypeOwnerEngagement CustomFieldCreateDtoObjectTypeOwner = "engagement"
+	CustomFieldCreateDtoObjectTypeOwnerStage      CustomFieldCreateDtoObjectTypeOwner = "stage"
+	CustomFieldCreateDtoObjectTypeOwnerUser       CustomFieldCreateDtoObjectTypeOwner = "user"
+)
+
+func (e CustomFieldCreateDtoObjectTypeOwner) ToPointer() *CustomFieldCreateDtoObjectTypeOwner {
+	return &e
+}
+func (e *CustomFieldCreateDtoObjectTypeOwner) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "company":
+		fallthrough
+	case "contact":
+		fallthrough
+	case "deal":
+		fallthrough
+	case "lead":
+		fallthrough
+	case "note":
+		fallthrough
+	case "task":
+		fallthrough
+	case "engagement":
+		fallthrough
+	case "stage":
+		fallthrough
+	case "user":
+		*e = CustomFieldCreateDtoObjectTypeOwner(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomFieldCreateDtoObjectTypeOwner: %v", v)
+	}
 }
 
-func (o *CustomFieldCreateDto) GetObjectTypeOwner() *string {
+// CustomFieldCreateDtoDataType - The data type of the custom field
+type CustomFieldCreateDtoDataType string
+
+const (
+	CustomFieldCreateDtoDataTypeString CustomFieldCreateDtoDataType = "string"
+	CustomFieldCreateDtoDataTypeNumber CustomFieldCreateDtoDataType = "number"
+)
+
+func (e CustomFieldCreateDtoDataType) ToPointer() *CustomFieldCreateDtoDataType {
+	return &e
+}
+func (e *CustomFieldCreateDtoDataType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "string":
+		fallthrough
+	case "number":
+		*e = CustomFieldCreateDtoDataType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomFieldCreateDtoDataType: %v", v)
+	}
+}
+
+type CustomFieldCreateDto struct {
+	ObjectTypeOwner *CustomFieldCreateDtoObjectTypeOwner `json:"object_type_owner"`
+	// The name of the custom field
+	Name *string `json:"name"`
+	// The description of the custom field
+	Description *string `json:"description"`
+	// The data type of the custom field
+	DataType *CustomFieldCreateDtoDataType `json:"data_type"`
+	// The source custom field ID
+	SourceCustomFieldID *string `json:"source_custom_field_id"`
+	// The name of the source software/provider
+	SourceProvider *string `json:"source_provider"`
+	// The linked user ID
+	LinkedUserID *string `json:"linked_user_id"`
+}
+
+func (o *CustomFieldCreateDto) GetObjectTypeOwner() *CustomFieldCreateDtoObjectTypeOwner {
 	if o == nil {
 		return nil
 	}
@@ -33,7 +118,7 @@ func (o *CustomFieldCreateDto) GetDescription() *string {
 	return o.Description
 }
 
-func (o *CustomFieldCreateDto) GetDataType() *string {
+func (o *CustomFieldCreateDto) GetDataType() *CustomFieldCreateDtoDataType {
 	if o == nil {
 		return nil
 	}
