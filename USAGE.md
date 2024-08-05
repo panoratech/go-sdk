@@ -6,12 +6,11 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()

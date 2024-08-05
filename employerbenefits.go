@@ -27,15 +27,15 @@ func newEmployerbenefits(sdkConfig sdkConfiguration) *Employerbenefits {
 	}
 }
 
-// List  EmployerBenefits
-func (s *Employerbenefits) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisEmployerBenefitResponse, error) {
+// List Employer Benefits
+func (s *Employerbenefits) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisEmployerBenefitsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisEmployerBenefit",
+		OperationID:    "listHrisEmployerBenefits",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisEmployerBenefitRequest{
+	request := operations.ListHrisEmployerBenefitsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Employerbenefits) List(ctx context.Context, xConnectionToken string, re
 		}
 	}
 
-	res := &operations.ListHrisEmployerBenefitResponse{
+	res := &operations.ListHrisEmployerBenefitsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Employerbenefits) List(ctx context.Context, xConnectionToken string, re
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisEmployerBenefitResponseBody
+			var out operations.ListHrisEmployerBenefitsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,8 +212,8 @@ func (s *Employerbenefits) List(ctx context.Context, xConnectionToken string, re
 
 }
 
-// Retrieve Employer Benefits
-// Retrieve Employer Benefits from any connected Hris software
+// Retrieve Employer Benefit
+// Retrieve an Employer Benefit from any connected Hris software
 func (s *Employerbenefits) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisEmployerBenefitResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

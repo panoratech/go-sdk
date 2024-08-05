@@ -3,8 +3,10 @@
 package components
 
 type CreateBatchLinkedUserDto struct {
+	// The ids of the users in the context of your own software
 	LinkedUserOriginIds []string `json:"linked_user_origin_ids"`
-	Alias               *string  `json:"alias"`
+	// Your company alias
+	Alias *string `json:"alias"`
 }
 
 func (o *CreateBatchLinkedUserDto) GetLinkedUserOriginIds() []string {

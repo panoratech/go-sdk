@@ -16,17 +16,17 @@ Retrieve sync status of a certain vertical
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
+	"github.com/panoratech/go-sdk/models/operations"
 	"context"
 	"log"
 )
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var vertical string = "<value>"
+    var vertical operations.Vertical = operations.VerticalTicketing
     ctx := context.Background()
     res, err := s.Sync.Status(ctx, vertical)
     if err != nil {
@@ -40,11 +40,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `vertical`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |                                                            |
+| `vertical`                                                 | [operations.Vertical](../../models/operations/vertical.md) | :heavy_check_mark:                                         | N/A                                                        | ticketing                                                  |
+| `opts`                                                     | [][operations.Option](../../models/operations/option.md)   | :heavy_minus_sign:                                         | The options for this request.                              |                                                            |
 
 
 ### Response
@@ -64,7 +64,6 @@ Resync common objects across a vertical
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -72,7 +71,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()

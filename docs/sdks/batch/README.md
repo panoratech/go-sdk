@@ -15,7 +15,6 @@ Add Batch Linked Users
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -24,13 +23,13 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.CreateBatchLinkedUserDto{
         LinkedUserOriginIds: []string{
-            "<value>",
+            "id_1",
         },
-        Alias: gosdk.String("<value>"),
+        Alias: gosdk.String("acme"),
     }
     ctx := context.Background()
     res, err := s.LinkedUsers.Batch.ImportBatch(ctx, request)

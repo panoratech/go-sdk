@@ -15,7 +15,6 @@ Retrieve a Linked User From A Remote Id
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -23,9 +22,9 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var remoteID string = "<value>"
+    var remoteID string = "id_1"
     ctx := context.Background()
     res, err := s.LinkedUsers.Fromremoteid.RemoteID(ctx, remoteID)
     if err != nil {
@@ -39,11 +38,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `remoteID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `remoteID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | id_1                                                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 
 ### Response

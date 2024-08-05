@@ -27,7 +27,7 @@ func newDeals(sdkConfig sdkConfiguration) *Deals {
 	}
 }
 
-// List  Deals
+// List Deals
 func (s *Deals) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListCrmDealsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

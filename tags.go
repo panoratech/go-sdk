@@ -27,7 +27,7 @@ func newTags(sdkConfig sdkConfiguration) *Tags {
 	}
 }
 
-// List  Tags
+// List Tags
 func (s *Tags) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListTicketingTagsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Tags) List(ctx context.Context, xConnectionToken string, remoteData *bo
 
 }
 
-// Retrieve Tags
-// Retrieve Tags from any connected Ticketing software
+// Retrieve Tag
+// Retrieve a Tag from any connected Ticketing software
 func (s *Tags) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveTicketingTagResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

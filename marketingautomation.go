@@ -8,7 +8,7 @@ type Marketingautomation struct {
 	Campaigns   *Campaigns
 	Contacts    *PanoraMarketingautomationContacts
 	Emails      *Emails
-	Events      *Events
+	Events      *PanoraEvents
 	Lists       *Lists
 	Messages    *Messages
 	Templates   *Templates
@@ -25,7 +25,7 @@ func newMarketingautomation(sdkConfig sdkConfiguration) *Marketingautomation {
 		Campaigns:        newCampaigns(sdkConfig),
 		Contacts:         newPanoraMarketingautomationContacts(sdkConfig),
 		Emails:           newEmails(sdkConfig),
-		Events:           newEvents(sdkConfig),
+		Events:           newPanoraEvents(sdkConfig),
 		Lists:            newLists(sdkConfig),
 		Messages:         newMessages(sdkConfig),
 		Templates:        newTemplates(sdkConfig),

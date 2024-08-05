@@ -3,12 +3,12 @@
 
 ### Available Operations
 
-* [List](#list) - List all Contacts
-* [Retrieve](#retrieve) - Retrieve Contacts
+* [List](#list) - List Contacts
+* [Retrieve](#retrieve) - Retrieve Contact
 
 ## List
 
-List all Contacts
+List Contacts
 
 ### Example Usage
 
@@ -16,7 +16,6 @@ List all Contacts
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -24,7 +23,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -59,7 +58,7 @@ func main() {
 
 ## Retrieve
 
-Retrieve Contacts from any connected Ticketing software
+Retrieve a Contact from any connected Ticketing software
 
 ### Example Usage
 
@@ -67,7 +66,6 @@ Retrieve Contacts from any connected Ticketing software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -75,7 +73,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 

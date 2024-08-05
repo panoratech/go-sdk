@@ -28,14 +28,14 @@ func newTimeoffbalances(sdkConfig sdkConfiguration) *Timeoffbalances {
 }
 
 // List  TimeoffBalances
-func (s *Timeoffbalances) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisTimeoffbalanceResponse, error) {
+func (s *Timeoffbalances) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisTimeoffbalancesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisTimeoffbalance",
+		OperationID:    "listHrisTimeoffbalances",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisTimeoffbalanceRequest{
+	request := operations.ListHrisTimeoffbalancesRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Timeoffbalances) List(ctx context.Context, xConnectionToken string, rem
 		}
 	}
 
-	res := &operations.ListHrisTimeoffbalanceResponse{
+	res := &operations.ListHrisTimeoffbalancesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Timeoffbalances) List(ctx context.Context, xConnectionToken string, rem
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisTimeoffbalanceResponseBody
+			var out operations.ListHrisTimeoffbalancesResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

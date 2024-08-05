@@ -15,7 +15,6 @@ Define target Field
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -24,13 +23,13 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.DefineTargetFieldDto{
-        ObjectTypeOwner: gosdk.String("<value>"),
-        Name: gosdk.String("<value>"),
-        Description: gosdk.String("Universal heuristic matrices"),
-        DataType: gosdk.String("decimal"),
+        ObjectTypeOwner: components.ObjectTypeOwnerCompany.ToPointer(),
+        Name: gosdk.String("fav_dish"),
+        Description: gosdk.String("My favorite dish"),
+        DataType: components.DataTypeString.ToPointer(),
     }
     ctx := context.Background()
     res, err := s.FieldMappings.Define.Definitions(ctx, request)

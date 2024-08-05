@@ -7,6 +7,7 @@ import (
 )
 
 type UpdateStatusRequest struct {
+	// id of the webhook to update.
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 

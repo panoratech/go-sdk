@@ -27,15 +27,15 @@ func newCampaigns(sdkConfig sdkConfiguration) *Campaigns {
 	}
 }
 
-// List  Campaigns
-func (s *Campaigns) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationCampaignResponse, error) {
+// List Campaigns
+func (s *Campaigns) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationCampaignsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listMarketingautomationCampaign",
+		OperationID:    "listMarketingautomationCampaigns",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListMarketingautomationCampaignRequest{
+	request := operations.ListMarketingautomationCampaignsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Campaigns) List(ctx context.Context, xConnectionToken string, remoteDat
 		}
 	}
 
-	res := &operations.ListMarketingautomationCampaignResponse{
+	res := &operations.ListMarketingautomationCampaignsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Campaigns) List(ctx context.Context, xConnectionToken string, remoteDat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListMarketingautomationCampaignResponseBody
+			var out operations.ListMarketingautomationCampaignsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -382,12 +382,12 @@ func (s *Campaigns) Create(ctx context.Context, xConnectionToken string, unified
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out components.UnifiedCampaignOutput
+			var out components.UnifiedMarketingautomationCampaignOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedCampaignOutput = &out
+			res.UnifiedMarketingautomationCampaignOutput = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -403,8 +403,8 @@ func (s *Campaigns) Create(ctx context.Context, xConnectionToken string, unified
 
 }
 
-// Retrieve Campaigns
-// Retrieve Campaigns from any connected Marketingautomation software
+// Retrieve Campaign
+// Retrieve a Campaign from any connected Marketingautomation software
 func (s *Campaigns) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveMarketingautomationCampaignResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -567,12 +567,12 @@ func (s *Campaigns) Retrieve(ctx context.Context, xConnectionToken string, id st
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out components.UnifiedCampaignOutput
+			var out components.UnifiedMarketingautomationCampaignOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedCampaignOutput = &out
+			res.UnifiedMarketingautomationCampaignOutput = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}

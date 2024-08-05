@@ -27,7 +27,7 @@ func newDrives(sdkConfig sdkConfiguration) *Drives {
 	}
 }
 
-// List  Drives
+// List Drives
 func (s *Drives) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListFilestorageDrivesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Drives) List(ctx context.Context, xConnectionToken string, remoteData *
 
 }
 
-// Retrieve Drives
-// Retrieve Drives from any connected Filestorage software
+// Retrieve Drive
+// Retrieve a Drive from any connected file storage service
 func (s *Drives) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveFilestorageDriveResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

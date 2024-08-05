@@ -17,7 +17,6 @@ List  Activities
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,22 +67,35 @@ Create Activities in any supported Ats software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
+	"github.com/panoratech/go-sdk/types"
 	"context"
 	"log"
 )
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    unifiedAtsActivityInput := components.UnifiedAtsActivityInput{}
+    unifiedAtsActivityInput := components.UnifiedAtsActivityInput{
+        ActivityType: components.UnifiedAtsActivityInputActivityTypeNote.ToPointer(),
+        Subject: gosdk.String("Email subject"),
+        Body: gosdk.String("Dear Diana, I love you"),
+        Visibility: components.UnifiedAtsActivityInputVisibilityPublic.ToPointer(),
+        CandidateID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        RemoteCreatedAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
+    }
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ats.Activities.Create(ctx, xConnectionToken, unifiedAtsActivityInput, nil)
+    res, err := s.Ats.Activities.Create(ctx, xConnectionToken, unifiedAtsActivityInput, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -95,13 +107,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `xConnectionToken`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | The connection token                                                                     |
-| `unifiedAtsActivityInput`                                                                | [components.UnifiedAtsActivityInput](../../models/components/unifiedatsactivityinput.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `remoteData`                                                                             | **bool*                                                                                  | :heavy_minus_sign:                                                                       | Set to true to include data from the original Ats software.                              |
-| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |                                                                                          |
+| `xConnectionToken`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | The connection token                                                                     |                                                                                          |
+| `unifiedAtsActivityInput`                                                                | [components.UnifiedAtsActivityInput](../../models/components/unifiedatsactivityinput.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |
+| `remoteData`                                                                             | **bool*                                                                                  | :heavy_minus_sign:                                                                       | Set to true to include data from the original Ats software.                              | false                                                                                    |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |                                                                                          |
 
 
 ### Response
@@ -121,7 +133,6 @@ Retrieve Activities from any connected Ats software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -129,13 +140,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ats.Activities.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Ats.Activities.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -147,13 +160,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |
-| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |
-| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the activity you want to retrieve.                    |
-| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Ats software. |
-| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |
+| Parameter                                                   | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ctx`                                                       | [context.Context](https://pkg.go.dev/context#Context)       | :heavy_check_mark:                                          | The context to use for the request.                         |                                                             |
+| `xConnectionToken`                                          | *string*                                                    | :heavy_check_mark:                                          | The connection token                                        |                                                             |
+| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | id of the activity you want to retrieve.                    | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                        |
+| `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Ats software. | false                                                       |
+| `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
 
 ### Response

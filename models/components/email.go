@@ -2,13 +2,72 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// EmailAddressType - The email address type. Authorized values are either PERSONAL or WORK.
+type EmailAddressType string
+
+const (
+	EmailAddressTypePersonal EmailAddressType = "PERSONAL"
+	EmailAddressTypeWork     EmailAddressType = "WORK"
+)
+
+func (e EmailAddressType) ToPointer() *EmailAddressType {
+	return &e
+}
+func (e *EmailAddressType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PERSONAL":
+		fallthrough
+	case "WORK":
+		*e = EmailAddressType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EmailAddressType: %v", v)
+	}
+}
+
+// OwnerType - The owner type of an email
+type OwnerType string
+
+const (
+	OwnerTypeCompany OwnerType = "COMPANY"
+	OwnerTypeContact OwnerType = "CONTACT"
+)
+
+func (e OwnerType) ToPointer() *OwnerType {
+	return &e
+}
+func (e *OwnerType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "COMPANY":
+		fallthrough
+	case "CONTACT":
+		*e = OwnerType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OwnerType: %v", v)
+	}
+}
+
 type Email struct {
 	// The email address
 	EmailAddress *string `json:"email_address"`
 	// The email address type. Authorized values are either PERSONAL or WORK.
-	EmailAddressType *string `json:"email_address_type"`
+	EmailAddressType *EmailAddressType `json:"email_address_type"`
 	// The owner type of an email
-	OwnerType *string `json:"owner_type,omitempty"`
+	OwnerType *OwnerType `json:"owner_type,omitempty"`
 }
 
 func (o *Email) GetEmailAddress() *string {
@@ -18,14 +77,14 @@ func (o *Email) GetEmailAddress() *string {
 	return o.EmailAddress
 }
 
-func (o *Email) GetEmailAddressType() *string {
+func (o *Email) GetEmailAddressType() *EmailAddressType {
 	if o == nil {
 		return nil
 	}
 	return o.EmailAddressType
 }
 
-func (o *Email) GetOwnerType() *string {
+func (o *Email) GetOwnerType() *OwnerType {
 	if o == nil {
 		return nil
 	}

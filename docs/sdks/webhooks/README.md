@@ -4,7 +4,7 @@
 ### Available Operations
 
 * [List](#list) - List webhooks
-* [Create](#create) - Add webhook metadata
+* [Create](#create) - Create webhook
 * [Delete](#delete) - Delete Webhook
 * [UpdateStatus](#updatestatus) - Update webhook status
 * [VerifyEvent](#verifyevent) - Verify payload signature of the webhook
@@ -19,7 +19,6 @@ List webhooks
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -27,7 +26,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -58,7 +57,7 @@ func main() {
 
 ## Create
 
-Add webhook metadata
+Create webhook
 
 ### Example Usage
 
@@ -66,7 +65,6 @@ Add webhook metadata
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -75,12 +73,13 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.WebhookDto{
-        URL: gosdk.String("http://limp-pastry.org"),
+        URL: gosdk.String("https://acme.com/webhook_receiver"),
+        Description: gosdk.String("Webhook to receive connection events"),
         Scope: []string{
-            "<value>",
+            "connection.created",
         },
     }
     ctx := context.Background()
@@ -120,7 +119,6 @@ Delete Webhook
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -128,9 +126,9 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
     ctx := context.Background()
     res, err := s.Webhooks.Delete(ctx, id)
     if err != nil {
@@ -144,11 +142,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | id of the webhook to delete.                             | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 
 ### Response
@@ -168,7 +166,6 @@ Update webhook status
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -176,9 +173,9 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
     ctx := context.Background()
     res, err := s.Webhooks.UpdateStatus(ctx, id)
     if err != nil {
@@ -192,11 +189,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | id of the webhook to update.                             | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 
 ### Response
@@ -216,7 +213,6 @@ Verify payload signature of the webhook
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -225,7 +221,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.SignatureVerificationDto{
         Payload: map[string]any{

@@ -27,15 +27,15 @@ func newGroups(sdkConfig sdkConfiguration) *Groups {
 	}
 }
 
-// List  Groups
-func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisGroupResponse, error) {
+// List Groups
+func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisGroupsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisGroup",
+		OperationID:    "listHrisGroups",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisGroupRequest{
+	request := operations.ListHrisGroupsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 		}
 	}
 
-	res := &operations.ListHrisGroupResponse{
+	res := &operations.ListHrisGroupsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisGroupResponseBody
+			var out operations.ListHrisGroupsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,8 +212,8 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 
 }
 
-// Retrieve Groups
-// Retrieve Groups from any connected Hris software
+// Retrieve Group
+// Retrieve a Group from any connected Hris software
 func (s *Groups) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisGroupResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

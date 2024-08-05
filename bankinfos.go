@@ -27,15 +27,15 @@ func newBankinfos(sdkConfig sdkConfiguration) *Bankinfos {
 	}
 }
 
-// List  Bankinfos
-func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisBankinfoResponse, error) {
+// List Bank Info
+func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisBankInfoResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisBankinfo",
+		OperationID:    "listHrisBankInfo",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisBankinfoRequest{
+	request := operations.ListHrisBankInfoRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteDat
 		}
 	}
 
-	res := &operations.ListHrisBankinfoResponse{
+	res := &operations.ListHrisBankInfoResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteDat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisBankinfoResponseBody
+			var out operations.ListHrisBankInfoResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,16 +212,16 @@ func (s *Bankinfos) List(ctx context.Context, xConnectionToken string, remoteDat
 
 }
 
-// Retrieve Bank Infos
-// Retrieve Bank Infos from any connected Hris software
-func (s *Bankinfos) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisBankinfoResponse, error) {
+// Retrieve Bank Info
+// Retrieve Bank Info from any connected Hris software
+func (s *Bankinfos) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisBankInfoResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "retrieveHrisBankinfo",
+		OperationID:    "retrieveHrisBankInfo",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.RetrieveHrisBankinfoRequest{
+	request := operations.RetrieveHrisBankInfoRequest{
 		XConnectionToken: xConnectionToken,
 		ID:               id,
 		RemoteData:       remoteData,
@@ -358,7 +358,7 @@ func (s *Bankinfos) Retrieve(ctx context.Context, xConnectionToken string, id st
 		}
 	}
 
-	res := &operations.RetrieveHrisBankinfoResponse{
+	res := &operations.RetrieveHrisBankInfoResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,

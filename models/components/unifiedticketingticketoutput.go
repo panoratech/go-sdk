@@ -3,9 +3,128 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// Status - The status of the ticket. Authorized values are OPEN or CLOSED.
+type Status string
+
+const (
+	StatusOpen   Status = "OPEN"
+	StatusClosed Status = "CLOSED"
+)
+
+func (e Status) ToPointer() *Status {
+	return &e
+}
+func (e *Status) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "OPEN":
+		fallthrough
+	case "CLOSED":
+		*e = Status(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Status: %v", v)
+	}
+}
+
+// Type - The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
+type Type string
+
+const (
+	TypeBug     Type = "BUG"
+	TypeSubtask Type = "SUBTASK"
+	TypeTask    Type = "TASK"
+	TypeToDo    Type = "TO-DO"
+)
+
+func (e Type) ToPointer() *Type {
+	return &e
+}
+func (e *Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "BUG":
+		fallthrough
+	case "SUBTASK":
+		fallthrough
+	case "TASK":
+		fallthrough
+	case "TO-DO":
+		*e = Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Type: %v", v)
+	}
+}
+
+// Priority - The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
+type Priority string
+
+const (
+	PriorityHigh   Priority = "HIGH"
+	PriorityMedium Priority = "MEDIUM"
+	PriorityLow    Priority = "LOW"
+)
+
+func (e Priority) ToPointer() *Priority {
+	return &e
+}
+func (e *Priority) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "HIGH":
+		fallthrough
+	case "MEDIUM":
+		fallthrough
+	case "LOW":
+		*e = Priority(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Priority: %v", v)
+	}
+}
+
+// UnifiedTicketingTicketOutputCreatorType - The creator type of the comment. Authorized values are either USER or CONTACT
+type UnifiedTicketingTicketOutputCreatorType string
+
+const (
+	UnifiedTicketingTicketOutputCreatorTypeUser    UnifiedTicketingTicketOutputCreatorType = "USER"
+	UnifiedTicketingTicketOutputCreatorTypeContact UnifiedTicketingTicketOutputCreatorType = "CONTACT"
+)
+
+func (e UnifiedTicketingTicketOutputCreatorType) ToPointer() *UnifiedTicketingTicketOutputCreatorType {
+	return &e
+}
+func (e *UnifiedTicketingTicketOutputCreatorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USER":
+		fallthrough
+	case "CONTACT":
+		*e = UnifiedTicketingTicketOutputCreatorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedTicketingTicketOutputCreatorType: %v", v)
+	}
+}
 
 // Comment - The comment of the ticket
 type Comment struct {
@@ -16,7 +135,7 @@ type Comment struct {
 	// The public status of the comment
 	IsPrivate *bool `json:"is_private,omitempty"`
 	// The creator type of the comment. Authorized values are either USER or CONTACT
-	CreatorType *string `json:"creator_type,omitempty"`
+	CreatorType *UnifiedTicketingTicketOutputCreatorType `json:"creator_type,omitempty"`
 	// The UUID of the ticket the comment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the contact which the comment belongs to (if no user_id specified)
@@ -48,7 +167,7 @@ func (o *Comment) GetIsPrivate() *bool {
 	return o.IsPrivate
 }
 
-func (o *Comment) GetCreatorType() *string {
+func (o *Comment) GetCreatorType() *UnifiedTicketingTicketOutputCreatorType {
 	if o == nil {
 		return nil
 	}
@@ -87,13 +206,13 @@ type UnifiedTicketingTicketOutput struct {
 	// The name of the ticket
 	Name *string `json:"name"`
 	// The status of the ticket. Authorized values are OPEN or CLOSED.
-	Status *string `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 	// The description of the ticket
 	Description *string `json:"description"`
 	// The date the ticket is due
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
-	Type *string `json:"type,omitempty"`
+	Type *Type `json:"type,omitempty"`
 	// The UUID of the parent ticket
 	ParentTicket *string `json:"parent_ticket,omitempty"`
 	// The collection UUIDs the ticket belongs to
@@ -103,7 +222,7 @@ type UnifiedTicketingTicketOutput struct {
 	// The date the ticket has been completed
 	CompletedAt *time.Time `json:"completed_at,omitempty"`
 	// The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
-	Priority *string `json:"priority,omitempty"`
+	Priority *Priority `json:"priority,omitempty"`
 	// The users UUIDs the ticket is assigned to
 	AssignedTo []string `json:"assigned_to,omitempty"`
 	// The comment of the ticket
@@ -112,7 +231,7 @@ type UnifiedTicketingTicketOutput struct {
 	AccountID *string `json:"account_id,omitempty"`
 	// The UUID of the contact which the ticket belongs to
 	ContactID *string `json:"contact_id,omitempty"`
-	// The attachments UUIDs tied to the ticket
+	// The attachements UUIDs tied to the ticket
 	Attachments []string `json:"attachments,omitempty"`
 	// The custom field mappings of the ticket between the remote 3rd party & Panora
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
@@ -146,7 +265,7 @@ func (o *UnifiedTicketingTicketOutput) GetName() *string {
 	return o.Name
 }
 
-func (o *UnifiedTicketingTicketOutput) GetStatus() *string {
+func (o *UnifiedTicketingTicketOutput) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}
@@ -167,7 +286,7 @@ func (o *UnifiedTicketingTicketOutput) GetDueDate() *time.Time {
 	return o.DueDate
 }
 
-func (o *UnifiedTicketingTicketOutput) GetType() *string {
+func (o *UnifiedTicketingTicketOutput) GetType() *Type {
 	if o == nil {
 		return nil
 	}
@@ -202,7 +321,7 @@ func (o *UnifiedTicketingTicketOutput) GetCompletedAt() *time.Time {
 	return o.CompletedAt
 }
 
-func (o *UnifiedTicketingTicketOutput) GetPriority() *string {
+func (o *UnifiedTicketingTicketOutput) GetPriority() *Priority {
 	if o == nil {
 		return nil
 	}

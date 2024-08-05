@@ -3,13 +3,13 @@
 
 ### Available Operations
 
-* [List](#list) - List  Timeoffs
+* [List](#list) - List Time Offs
 * [Create](#create) - Create Timeoffs
-* [Retrieve](#retrieve) - Retrieve Timeoffs
+* [Retrieve](#retrieve) - Retrieve Time Off
 
 ## List
 
-List  Timeoffs
+List Time Offs
 
 ### Example Usage
 
@@ -17,7 +17,6 @@ List  Timeoffs
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,7 +67,6 @@ Create Timeoffs in any supported Hris software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -77,7 +75,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
@@ -113,7 +111,7 @@ func main() {
 
 ## Retrieve
 
-Retrieve Timeoffs from any connected Hris software
+Retrieve a Time Off from any connected Hris software
 
 ### Example Usage
 
@@ -121,7 +119,6 @@ Retrieve Timeoffs from any connected Hris software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -129,13 +126,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Hris.Timeoffs.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Hris.Timeoffs.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -147,13 +146,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
-| `xConnectionToken`                                           | *string*                                                     | :heavy_check_mark:                                           | The connection token                                         |
-| `id`                                                         | *string*                                                     | :heavy_check_mark:                                           | id of the timeoff you want to retrieve.                      |
-| `remoteData`                                                 | **bool*                                                      | :heavy_minus_sign:                                           | Set to true to include data from the original Hris software. |
-| `opts`                                                       | [][operations.Option](../../models/operations/option.md)     | :heavy_minus_sign:                                           | The options for this request.                                |
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  | Example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |                                                              |
+| `xConnectionToken`                                           | *string*                                                     | :heavy_check_mark:                                           | The connection token                                         |                                                              |
+| `id`                                                         | *string*                                                     | :heavy_check_mark:                                           | id of the time off you want to retrieve.                     | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                         |
+| `remoteData`                                                 | **bool*                                                      | :heavy_minus_sign:                                           | Set to true to include data from the original Hris software. | false                                                        |
+| `opts`                                                       | [][operations.Option](../../models/operations/option.md)     | :heavy_minus_sign:                                           | The options for this request.                                |                                                              |
 
 
 ### Response

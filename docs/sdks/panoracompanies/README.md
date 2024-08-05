@@ -3,11 +3,12 @@
 
 ### Available Operations
 
-* [List](#list) - List  Companys
+* [List](#list) - List Companies
+* [Retrieve](#retrieve) - Retrieve Company
 
 ## List
 
-List  Companys
+List Companies
 
 ### Example Usage
 
@@ -15,7 +16,6 @@ List  Companys
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -23,7 +23,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -51,7 +51,60 @@ func main() {
 
 ### Response
 
-**[*operations.ListHrisCompanysResponse](../../models/operations/listhriscompanysresponse.md), error**
+**[*operations.ListHrisCompaniesResponse](../../models/operations/listhriscompaniesresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
+
+## Retrieve
+
+Retrieve a Company from any connected Hris software
+
+### Example Usage
+
+```go
+package main
+
+import(
+	gosdk "github.com/panoratech/go-sdk"
+	"context"
+	"log"
+)
+
+func main() {
+    s := gosdk.New(
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
+    )
+    var xConnectionToken string = "<value>"
+
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
+    ctx := context.Background()
+    res, err := s.Hris.Companies.Retrieve(ctx, xConnectionToken, id, remoteData)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.UnifiedHrisCompanyOutput != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  | Example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |                                                              |
+| `xConnectionToken`                                           | *string*                                                     | :heavy_check_mark:                                           | The connection token                                         |                                                              |
+| `id`                                                         | *string*                                                     | :heavy_check_mark:                                           | id of the company you want to retrieve.                      | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                         |
+| `remoteData`                                                 | **bool*                                                      | :heavy_minus_sign:                                           | Set to true to include data from the original Hris software. | false                                                        |
+| `opts`                                                       | [][operations.Option](../../models/operations/option.md)     | :heavy_minus_sign:                                           | The options for this request.                                |                                                              |
+
+
+### Response
+
+**[*operations.RetrieveHrisCompanyResponse](../../models/operations/retrievehriscompanyresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

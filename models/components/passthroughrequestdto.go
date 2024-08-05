@@ -9,20 +9,20 @@ import (
 	"github.com/panoratech/go-sdk/internal/utils"
 )
 
-type Method string
+type PassThroughRequestDtoMethod string
 
 const (
-	MethodGet    Method = "GET"
-	MethodPost   Method = "POST"
-	MethodPatch  Method = "PATCH"
-	MethodDelete Method = "DELETE"
-	MethodPut    Method = "PUT"
+	PassThroughRequestDtoMethodGet    PassThroughRequestDtoMethod = "GET"
+	PassThroughRequestDtoMethodPost   PassThroughRequestDtoMethod = "POST"
+	PassThroughRequestDtoMethodPatch  PassThroughRequestDtoMethod = "PATCH"
+	PassThroughRequestDtoMethodDelete PassThroughRequestDtoMethod = "DELETE"
+	PassThroughRequestDtoMethodPut    PassThroughRequestDtoMethod = "PUT"
 )
 
-func (e Method) ToPointer() *Method {
+func (e PassThroughRequestDtoMethod) ToPointer() *PassThroughRequestDtoMethod {
 	return &e
 }
-func (e *Method) UnmarshalJSON(data []byte) error {
+func (e *PassThroughRequestDtoMethod) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,29 +37,29 @@ func (e *Method) UnmarshalJSON(data []byte) error {
 	case "DELETE":
 		fallthrough
 	case "PUT":
-		*e = Method(v)
+		*e = PassThroughRequestDtoMethod(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Method: %v", v)
+		return fmt.Errorf("invalid value for PassThroughRequestDtoMethod: %v", v)
 	}
 }
 
-type DataType string
+type DataUnionType string
 
 const (
-	DataTypeMapOfAny        DataType = "mapOfAny"
-	DataTypeArrayOfMapOfAny DataType = "arrayOfMapOfAny"
+	DataUnionTypeMapOfAny        DataUnionType = "mapOfAny"
+	DataUnionTypeArrayOfMapOfAny DataUnionType = "arrayOfMapOfAny"
 )
 
 type Data struct {
 	MapOfAny        map[string]any
 	ArrayOfMapOfAny []map[string]any
 
-	Type DataType
+	Type DataUnionType
 }
 
 func CreateDataMapOfAny(mapOfAny map[string]any) Data {
-	typ := DataTypeMapOfAny
+	typ := DataUnionTypeMapOfAny
 
 	return Data{
 		MapOfAny: mapOfAny,
@@ -68,7 +68,7 @@ func CreateDataMapOfAny(mapOfAny map[string]any) Data {
 }
 
 func CreateDataArrayOfMapOfAny(arrayOfMapOfAny []map[string]any) Data {
-	typ := DataTypeArrayOfMapOfAny
+	typ := DataUnionTypeArrayOfMapOfAny
 
 	return Data{
 		ArrayOfMapOfAny: arrayOfMapOfAny,
@@ -81,14 +81,14 @@ func (u *Data) UnmarshalJSON(data []byte) error {
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = DataTypeMapOfAny
+		u.Type = DataUnionTypeMapOfAny
 		return nil
 	}
 
 	var arrayOfMapOfAny []map[string]any = []map[string]any{}
 	if err := utils.UnmarshalJSON(data, &arrayOfMapOfAny, "", true, true); err == nil {
 		u.ArrayOfMapOfAny = arrayOfMapOfAny
-		u.Type = DataTypeArrayOfMapOfAny
+		u.Type = DataUnionTypeArrayOfMapOfAny
 		return nil
 	}
 
@@ -108,15 +108,15 @@ func (u Data) MarshalJSON() ([]byte, error) {
 }
 
 type PassThroughRequestDto struct {
-	Method  Method         `json:"method"`
-	Path    *string        `json:"path"`
-	Data    *Data          `json:"data,omitempty"`
-	Headers map[string]any `json:"headers,omitempty"`
+	Method  PassThroughRequestDtoMethod `json:"method"`
+	Path    *string                     `json:"path"`
+	Data    *Data                       `json:"data"`
+	Headers map[string]any              `json:"headers"`
 }
 
-func (o *PassThroughRequestDto) GetMethod() Method {
+func (o *PassThroughRequestDto) GetMethod() PassThroughRequestDtoMethod {
 	if o == nil {
-		return Method("")
+		return PassThroughRequestDtoMethod("")
 	}
 	return o.Method
 }

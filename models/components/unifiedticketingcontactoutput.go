@@ -20,7 +20,7 @@ type UnifiedTicketingContactOutput struct {
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the contact
 	ID *string `json:"id,omitempty"`
-	// The id of the contact in the context of the 3rd Party
+	// The remote ID of the contact in the context of the 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the contact in the context of the 3rd Party
 	RemoteData map[string]any `json:"remote_data,omitempty"`

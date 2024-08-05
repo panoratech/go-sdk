@@ -3,19 +3,81 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
+// UnifiedAtsActivityInputActivityType - The type of activity
+type UnifiedAtsActivityInputActivityType string
+
+const (
+	UnifiedAtsActivityInputActivityTypeNote  UnifiedAtsActivityInputActivityType = "NOTE"
+	UnifiedAtsActivityInputActivityTypeEmail UnifiedAtsActivityInputActivityType = "EMAIL"
+	UnifiedAtsActivityInputActivityTypeOther UnifiedAtsActivityInputActivityType = "OTHER"
+)
+
+func (e UnifiedAtsActivityInputActivityType) ToPointer() *UnifiedAtsActivityInputActivityType {
+	return &e
+}
+func (e *UnifiedAtsActivityInputActivityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "NOTE":
+		fallthrough
+	case "EMAIL":
+		fallthrough
+	case "OTHER":
+		*e = UnifiedAtsActivityInputActivityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedAtsActivityInputActivityType: %v", v)
+	}
+}
+
+// UnifiedAtsActivityInputVisibility - The visibility of the activity
+type UnifiedAtsActivityInputVisibility string
+
+const (
+	UnifiedAtsActivityInputVisibilityAdminOnly UnifiedAtsActivityInputVisibility = "ADMIN_ONLY"
+	UnifiedAtsActivityInputVisibilityPublic    UnifiedAtsActivityInputVisibility = "PUBLIC"
+	UnifiedAtsActivityInputVisibilityPrivate   UnifiedAtsActivityInputVisibility = "PRIVATE"
+)
+
+func (e UnifiedAtsActivityInputVisibility) ToPointer() *UnifiedAtsActivityInputVisibility {
+	return &e
+}
+func (e *UnifiedAtsActivityInputVisibility) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ADMIN_ONLY":
+		fallthrough
+	case "PUBLIC":
+		fallthrough
+	case "PRIVATE":
+		*e = UnifiedAtsActivityInputVisibility(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedAtsActivityInputVisibility: %v", v)
+	}
+}
+
 type UnifiedAtsActivityInput struct {
 	// The type of activity
-	ActivityType *string `json:"activity_type,omitempty"`
+	ActivityType *UnifiedAtsActivityInputActivityType `json:"activity_type,omitempty"`
 	// The subject of the activity
 	Subject *string `json:"subject,omitempty"`
 	// The body of the activity
 	Body *string `json:"body,omitempty"`
 	// The visibility of the activity
-	Visibility *string `json:"visibility,omitempty"`
+	Visibility *UnifiedAtsActivityInputVisibility `json:"visibility,omitempty"`
 	// The UUID of the candidate
 	CandidateID *string `json:"candidate_id,omitempty"`
 	// The remote creation date of the activity
@@ -35,7 +97,7 @@ func (u *UnifiedAtsActivityInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedAtsActivityInput) GetActivityType() *string {
+func (o *UnifiedAtsActivityInput) GetActivityType() *UnifiedAtsActivityInputActivityType {
 	if o == nil {
 		return nil
 	}
@@ -56,7 +118,7 @@ func (o *UnifiedAtsActivityInput) GetBody() *string {
 	return o.Body
 }
 
-func (o *UnifiedAtsActivityInput) GetVisibility() *string {
+func (o *UnifiedAtsActivityInput) GetVisibility() *UnifiedAtsActivityInputVisibility {
 	if o == nil {
 		return nil
 	}

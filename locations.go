@@ -27,15 +27,15 @@ func newLocations(sdkConfig sdkConfiguration) *Locations {
 	}
 }
 
-// List  Locations
-func (s *Locations) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisLocationResponse, error) {
+// List Locations
+func (s *Locations) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisLocationsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisLocation",
+		OperationID:    "listHrisLocations",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisLocationRequest{
+	request := operations.ListHrisLocationsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -173,7 +173,7 @@ func (s *Locations) List(ctx context.Context, xConnectionToken string, remoteDat
 		}
 	}
 
-	res := &operations.ListHrisLocationResponse{
+	res := &operations.ListHrisLocationsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -191,7 +191,7 @@ func (s *Locations) List(ctx context.Context, xConnectionToken string, remoteDat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out operations.ListHrisLocationResponseBody
+			var out operations.ListHrisLocationsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -212,8 +212,8 @@ func (s *Locations) List(ctx context.Context, xConnectionToken string, remoteDat
 
 }
 
-// Retrieve Locations
-// Retrieve Locations from any connected Hris software
+// Retrieve Location
+// Retrieve a Location from any connected Hris software
 func (s *Locations) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisLocationResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

@@ -77,12 +77,16 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Panora API: A unified API to ship integrations
 type Panora struct {
+	Auth                *Auth
+	Connections         *Connections
 	Webhooks            *Webhooks
 	Ticketing           *Ticketing
 	Sync                *Sync
 	Crm                 *Crm
 	LinkedUsers         *LinkedUsers
+	Projects            *Projects
 	FieldMappings       *FieldMappings
+	Events              *Events
 	Passthrough         *Passthrough
 	Hris                *Hris
 	Marketingautomation *Marketingautomation
@@ -167,9 +171,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.2.0",
-			GenVersion:        "2.385.1",
-			UserAgent:         "speakeasy-sdk/go 0.2.0 2.385.1 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.3.0",
+			GenVersion:        "2.385.2",
+			UserAgent:         "speakeasy-sdk/go 0.3.0 2.385.2 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -189,6 +193,10 @@ func New(opts ...SDKOption) *Panora {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
+	sdk.Auth = newAuth(sdk.sdkConfiguration)
+
+	sdk.Connections = newConnections(sdk.sdkConfiguration)
+
 	sdk.Webhooks = newWebhooks(sdk.sdkConfiguration)
 
 	sdk.Ticketing = newTicketing(sdk.sdkConfiguration)
@@ -199,7 +207,11 @@ func New(opts ...SDKOption) *Panora {
 
 	sdk.LinkedUsers = newLinkedUsers(sdk.sdkConfiguration)
 
+	sdk.Projects = newProjects(sdk.sdkConfiguration)
+
 	sdk.FieldMappings = newFieldMappings(sdk.sdkConfiguration)
+
+	sdk.Events = newEvents(sdk.sdkConfiguration)
 
 	sdk.Passthrough = newPassthrough(sdk.sdkConfiguration)
 

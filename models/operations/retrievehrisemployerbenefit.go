@@ -9,7 +9,7 @@ import (
 type RetrieveHrisEmployerBenefitRequest struct {
 	// The connection token
 	XConnectionToken string `header:"style=simple,explode=false,name=x-connection-token"`
-	// id of the employerbenefit you want to retrieve.
+	// id of the employer benefit you want to retrieve.
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 	// Set to true to include data from the original Hris software.
 	RemoteData *bool `queryParam:"style=form,explode=true,name=remote_data"`

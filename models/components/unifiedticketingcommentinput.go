@@ -2,6 +2,38 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// UnifiedTicketingCommentInputCreatorType - The creator type of the comment. Authorized values are either USER or CONTACT
+type UnifiedTicketingCommentInputCreatorType string
+
+const (
+	UnifiedTicketingCommentInputCreatorTypeUser    UnifiedTicketingCommentInputCreatorType = "USER"
+	UnifiedTicketingCommentInputCreatorTypeContact UnifiedTicketingCommentInputCreatorType = "CONTACT"
+)
+
+func (e UnifiedTicketingCommentInputCreatorType) ToPointer() *UnifiedTicketingCommentInputCreatorType {
+	return &e
+}
+func (e *UnifiedTicketingCommentInputCreatorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USER":
+		fallthrough
+	case "CONTACT":
+		*e = UnifiedTicketingCommentInputCreatorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedTicketingCommentInputCreatorType: %v", v)
+	}
+}
+
 type UnifiedTicketingCommentInput struct {
 	// The body of the comment
 	Body *string `json:"body"`
@@ -10,7 +42,7 @@ type UnifiedTicketingCommentInput struct {
 	// The public status of the comment
 	IsPrivate *bool `json:"is_private,omitempty"`
 	// The creator type of the comment. Authorized values are either USER or CONTACT
-	CreatorType *string `json:"creator_type,omitempty"`
+	CreatorType *UnifiedTicketingCommentInputCreatorType `json:"creator_type,omitempty"`
 	// The UUID of the ticket the comment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the contact which the comment belongs to (if no user_id specified)
@@ -42,7 +74,7 @@ func (o *UnifiedTicketingCommentInput) GetIsPrivate() *bool {
 	return o.IsPrivate
 }
 
-func (o *UnifiedTicketingCommentInput) GetCreatorType() *string {
+func (o *UnifiedTicketingCommentInput) GetCreatorType() *UnifiedTicketingCommentInputCreatorType {
 	if o == nil {
 		return nil
 	}

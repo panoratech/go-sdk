@@ -27,7 +27,7 @@ func newComments(sdkConfig sdkConfiguration) *Comments {
 	}
 }
 
-// List  Comments
+// List Comments
 func (s *Comments) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListTicketingCommentsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -403,8 +403,8 @@ func (s *Comments) Create(ctx context.Context, xConnectionToken string, unifiedT
 
 }
 
-// Retrieve Comments
-// Retrieve Comments from any connected Ticketing software
+// Retrieve Comment
+// Retrieve a Comment from any connected Ticketing software
 func (s *Comments) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveTicketingCommentResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

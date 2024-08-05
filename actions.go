@@ -27,7 +27,7 @@ func newActions(sdkConfig sdkConfiguration) *Actions {
 	}
 }
 
-// List  Actions
+// List Actions
 func (s *Actions) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationActionResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

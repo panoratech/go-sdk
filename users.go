@@ -27,7 +27,7 @@ func newUsers(sdkConfig sdkConfiguration) *Users {
 	}
 }
 
-// List  Users
+// List Users
 func (s *Users) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListTicketingUsersResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Users) List(ctx context.Context, xConnectionToken string, remoteData *b
 
 }
 
-// Retrieve Users
-// Retrieve Users from any connected Ticketing software
+// Retrieve User
+// Retrieve a User from any connected Ticketing software
 func (s *Users) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveTicketingUserResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

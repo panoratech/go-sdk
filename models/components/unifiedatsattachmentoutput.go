@@ -3,9 +3,44 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// AttachmentType - The type of the file
+type AttachmentType string
+
+const (
+	AttachmentTypeResume      AttachmentType = "RESUME"
+	AttachmentTypeCoverLetter AttachmentType = "COVER_LETTER"
+	AttachmentTypeOfferLetter AttachmentType = "OFFER_LETTER"
+	AttachmentTypeOther       AttachmentType = "OTHER"
+)
+
+func (e AttachmentType) ToPointer() *AttachmentType {
+	return &e
+}
+func (e *AttachmentType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "RESUME":
+		fallthrough
+	case "COVER_LETTER":
+		fallthrough
+	case "OFFER_LETTER":
+		fallthrough
+	case "OTHER":
+		*e = AttachmentType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AttachmentType: %v", v)
+	}
+}
 
 type UnifiedAtsAttachmentOutput struct {
 	// The URL of the file
@@ -13,7 +48,7 @@ type UnifiedAtsAttachmentOutput struct {
 	// The name of the file
 	FileName *string `json:"file_name,omitempty"`
 	// The type of the file
-	AttachmentType *string `json:"attachment_type,omitempty"`
+	AttachmentType *AttachmentType `json:"attachment_type,omitempty"`
 	// The remote creation date of the attachment
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the attachment
@@ -59,7 +94,7 @@ func (o *UnifiedAtsAttachmentOutput) GetFileName() *string {
 	return o.FileName
 }
 
-func (o *UnifiedAtsAttachmentOutput) GetAttachmentType() *string {
+func (o *UnifiedAtsAttachmentOutput) GetAttachmentType() *AttachmentType {
 	if o == nil {
 		return nil
 	}

@@ -27,7 +27,7 @@ func newMessages(sdkConfig sdkConfiguration) *Messages {
 	}
 }
 
-// List  Messages
+// List Messages
 func (s *Messages) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListMarketingautomationMessagesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

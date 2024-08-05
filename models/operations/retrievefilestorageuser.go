@@ -37,8 +37,8 @@ func (o *RetrieveFilestorageUserRequest) GetRemoteData() *bool {
 }
 
 type RetrieveFilestorageUserResponse struct {
-	HTTPMeta          components.HTTPMetadata `json:"-"`
-	UnifiedUserOutput *components.UnifiedUserOutput
+	HTTPMeta                     components.HTTPMetadata `json:"-"`
+	UnifiedFilestorageUserOutput *components.UnifiedFilestorageUserOutput
 }
 
 func (o *RetrieveFilestorageUserResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -48,9 +48,9 @@ func (o *RetrieveFilestorageUserResponse) GetHTTPMeta() components.HTTPMetadata 
 	return o.HTTPMeta
 }
 
-func (o *RetrieveFilestorageUserResponse) GetUnifiedUserOutput() *components.UnifiedUserOutput {
+func (o *RetrieveFilestorageUserResponse) GetUnifiedFilestorageUserOutput() *components.UnifiedFilestorageUserOutput {
 	if o == nil {
 		return nil
 	}
-	return o.UnifiedUserOutput
+	return o.UnifiedFilestorageUserOutput
 }

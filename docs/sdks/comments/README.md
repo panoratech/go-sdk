@@ -3,13 +3,13 @@
 
 ### Available Operations
 
-* [List](#list) - List  Comments
+* [List](#list) - List Comments
 * [Create](#create) - Create Comments
-* [Retrieve](#retrieve) - Retrieve Comments
+* [Retrieve](#retrieve) - Retrieve Comment
 
 ## List
 
-List  Comments
+List Comments
 
 ### Example Usage
 
@@ -17,7 +17,6 @@ List  Comments
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,7 +67,6 @@ Create Comments in any supported Ticketing software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -77,12 +75,21 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
     unifiedTicketingCommentInput := components.UnifiedTicketingCommentInput{
-        Body: gosdk.String("<value>"),
+        Body: gosdk.String("Assigned to Eric !"),
+        HTMLBody: gosdk.String("<p>Assigned to Eric !</p>"),
+        IsPrivate: gosdk.Bool(false),
+        CreatorType: components.UnifiedTicketingCommentInputCreatorTypeUser.ToPointer(),
+        TicketID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        ContactID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Attachments: []string{
+            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+        },
     }
     ctx := context.Background()
     res, err := s.Ticketing.Comments.Create(ctx, xConnectionToken, unifiedTicketingCommentInput, nil)
@@ -115,7 +122,7 @@ func main() {
 
 ## Retrieve
 
-Retrieve Comments from any connected Ticketing software
+Retrieve a Comment from any connected Ticketing software
 
 ### Example Usage
 
@@ -123,7 +130,6 @@ Retrieve Comments from any connected Ticketing software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -131,7 +137,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 

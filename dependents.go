@@ -27,7 +27,7 @@ func newDependents(sdkConfig sdkConfiguration) *Dependents {
 	}
 }
 
-// List  Dependents
+// List Dependents
 func (s *Dependents) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisDependentsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -212,8 +212,8 @@ func (s *Dependents) List(ctx context.Context, xConnectionToken string, remoteDa
 
 }
 
-// Retrieve Dependents
-// Retrieve Dependents from any connected Hris software
+// Retrieve Dependent
+// Retrieve a Dependent from any connected Hris software
 func (s *Dependents) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisDependentResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,

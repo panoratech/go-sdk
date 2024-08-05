@@ -3,21 +3,59 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
+// OverallRecommendation - The overall recommendation
+type OverallRecommendation string
+
+const (
+	OverallRecommendationDefinitelyNo OverallRecommendation = "DEFINITELY_NO"
+	OverallRecommendationNo           OverallRecommendation = "NO"
+	OverallRecommendationYes          OverallRecommendation = "YES"
+	OverallRecommendationStrongYes    OverallRecommendation = "STRONG_YES"
+	OverallRecommendationNoDecision   OverallRecommendation = "NO_DECISION"
+)
+
+func (e OverallRecommendation) ToPointer() *OverallRecommendation {
+	return &e
+}
+func (e *OverallRecommendation) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DEFINITELY_NO":
+		fallthrough
+	case "NO":
+		fallthrough
+	case "YES":
+		fallthrough
+	case "STRONG_YES":
+		fallthrough
+	case "NO_DECISION":
+		*e = OverallRecommendation(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OverallRecommendation: %v", v)
+	}
+}
+
 type UnifiedAtsScorecardOutput struct {
 	// The overall recommendation
-	OverallRecommendation *string `json:"overall_recommendation,omitempty"`
+	OverallRecommendation *OverallRecommendation `json:"overall_recommendation,omitempty"`
 	// The UUID of the application
 	ApplicationID *string `json:"application_id,omitempty"`
 	// The UUID of the interview
 	InterviewID *string `json:"interview_id,omitempty"`
 	// The remote creation date of the scorecard
-	RemoteCreatedAt *string `json:"remote_created_at,omitempty"`
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The submission date of the scorecard
-	SubmittedAt *string `json:"submitted_at,omitempty"`
+	SubmittedAt *time.Time `json:"submitted_at,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the scorecard
@@ -43,7 +81,7 @@ func (u *UnifiedAtsScorecardOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedAtsScorecardOutput) GetOverallRecommendation() *string {
+func (o *UnifiedAtsScorecardOutput) GetOverallRecommendation() *OverallRecommendation {
 	if o == nil {
 		return nil
 	}
@@ -64,14 +102,14 @@ func (o *UnifiedAtsScorecardOutput) GetInterviewID() *string {
 	return o.InterviewID
 }
 
-func (o *UnifiedAtsScorecardOutput) GetRemoteCreatedAt() *string {
+func (o *UnifiedAtsScorecardOutput) GetRemoteCreatedAt() *time.Time {
 	if o == nil {
 		return nil
 	}
 	return o.RemoteCreatedAt
 }
 
-func (o *UnifiedAtsScorecardOutput) GetSubmittedAt() *string {
+func (o *UnifiedAtsScorecardOutput) GetSubmittedAt() *time.Time {
 	if o == nil {
 		return nil
 	}

@@ -28,7 +28,7 @@ func newSync(sdkConfig sdkConfiguration) *Sync {
 }
 
 // Status - Retrieve sync status of a certain vertical
-func (s *Sync) Status(ctx context.Context, vertical string, opts ...operations.Option) (*operations.StatusResponse, error) {
+func (s *Sync) Status(ctx context.Context, vertical operations.Vertical, opts ...operations.Option) (*operations.StatusResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "status",

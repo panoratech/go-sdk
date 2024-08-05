@@ -14,7 +14,7 @@ type UnifiedTicketingAttachmentInput struct {
 	// The UUID of the comment the attachment is tied to
 	CommentID *string `json:"comment_id,omitempty"`
 	// The custom field mappings of the attachment between the remote 3rd party & Panora
-	FieldMappings map[string]any `json:"field_mappings"`
+	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
 
 func (o *UnifiedTicketingAttachmentInput) GetFileName() *string {

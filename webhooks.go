@@ -199,7 +199,7 @@ func (s *Webhooks) List(ctx context.Context, opts ...operations.Option) (*operat
 
 }
 
-// Create - Add webhook metadata
+// Create webhook
 func (s *Webhooks) Create(ctx context.Context, request components.WebhookDto, opts ...operations.Option) (*operations.CreateWebhookPublicResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -529,7 +529,6 @@ func (s *Webhooks) Delete(ctx context.Context, id string, opts ...operations.Opt
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	switch {
-	case httpRes.StatusCode == 200:
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -706,7 +705,6 @@ func (s *Webhooks) UpdateStatus(ctx context.Context, id string, opts ...operatio
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	switch {
-	case httpRes.StatusCode == 200:
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -897,7 +895,6 @@ func (s *Webhooks) VerifyEvent(ctx context.Context, request components.Signature
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 201:
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:

@@ -17,7 +17,6 @@ List  Files
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -25,7 +24,7 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
     ctx := context.Background()
@@ -68,7 +67,6 @@ Create Files in any supported Filestorage software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/components"
 	"context"
@@ -77,20 +75,24 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
     var remoteData bool = false
 
     unifiedFilestorageFileInput := components.UnifiedFilestorageFileInput{
-        Name: gosdk.String("<value>"),
-        FileURL: gosdk.String("<value>"),
-        MimeType: gosdk.String("<value>"),
-        Size: gosdk.String("<value>"),
-        FolderID: gosdk.String("<value>"),
-        Permission: gosdk.String("<value>"),
-        SharedLink: gosdk.String("<value>"),
+        Name: gosdk.String("my_paris_photo.png"),
+        FileURL: gosdk.String("https://example.com/my_paris_photo.png"),
+        MimeType: gosdk.String("application/pdf"),
+        Size: gosdk.String("1024"),
+        FolderID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Permission: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        SharedLink: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
     }
     ctx := context.Background()
     res, err := s.Filestorage.Files.Create(ctx, xConnectionToken, remoteData, unifiedFilestorageFileInput)
@@ -131,7 +133,6 @@ Retrieve Files from any connected Filestorage software
 package main
 
 import(
-	"os"
 	gosdk "github.com/panoratech/go-sdk"
 	"context"
 	"log"
@@ -139,13 +140,15 @@ import(
 
 func main() {
     s := gosdk.New(
-        gosdk.WithSecurity(os.Getenv("API_KEY")),
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
+    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
+    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Filestorage.Files.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Filestorage.Files.Retrieve(ctx, xConnectionToken, id, remoteData)
     if err != nil {
         log.Fatal(err)
     }
@@ -157,13 +160,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
-| `xConnectionToken`                                                   | *string*                                                             | :heavy_check_mark:                                                   | The connection token                                                 |
-| `id`                                                                 | *string*                                                             | :heavy_check_mark:                                                   | id of the file you want to retrieve.                                 |
-| `remoteData`                                                         | **bool*                                                              | :heavy_minus_sign:                                                   | Set to true to include data from the original File Storage software. |
-| `opts`                                                               | [][operations.Option](../../models/operations/option.md)             | :heavy_minus_sign:                                                   | The options for this request.                                        |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |                                                                      |
+| `xConnectionToken`                                                   | *string*                                                             | :heavy_check_mark:                                                   | The connection token                                                 |                                                                      |
+| `id`                                                                 | *string*                                                             | :heavy_check_mark:                                                   | id of the file you want to retrieve.                                 | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                                 |
+| `remoteData`                                                         | **bool*                                                              | :heavy_minus_sign:                                                   | Set to true to include data from the original File Storage software. | false                                                                |
+| `opts`                                                               | [][operations.Option](../../models/operations/option.md)             | :heavy_minus_sign:                                                   | The options for this request.                                        |                                                                      |
 
 
 ### Response

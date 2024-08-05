@@ -1,5 +1,7 @@
 # Method
 
+HTTP method used for the event
+
 
 ## Values
 
@@ -7,6 +9,5 @@
 | -------------- | -------------- |
 | `MethodGet`    | GET            |
 | `MethodPost`   | POST           |
-| `MethodPatch`  | PATCH          |
-| `MethodDelete` | DELETE         |
 | `MethodPut`    | PUT            |
+| `MethodDelete` | DELETE         |

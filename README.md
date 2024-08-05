@@ -36,12 +36,11 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -65,10 +64,19 @@ func main() {
 * [Hello](docs/sdks/panora/README.md#hello)
 * [Health](docs/sdks/panora/README.md#health)
 
+
+### [Auth.Login](docs/sdks/login/README.md)
+
+* [SignIn](docs/sdks/login/README.md#signin) - Log In
+
+### [Connections](docs/sdks/connections/README.md)
+
+* [GetConnections](docs/sdks/connections/README.md#getconnections) - List Connections
+
 ### [Webhooks](docs/sdks/webhooks/README.md)
 
 * [List](docs/sdks/webhooks/README.md#list) - List webhooks
-* [Create](docs/sdks/webhooks/README.md#create) - Add webhook metadata
+* [Create](docs/sdks/webhooks/README.md#create) - Create webhook
 * [Delete](docs/sdks/webhooks/README.md#delete) - Delete Webhook
 * [UpdateStatus](docs/sdks/webhooks/README.md#updatestatus) - Update webhook status
 * [VerifyEvent](docs/sdks/webhooks/README.md#verifyevent) - Verify payload signature of the webhook
@@ -82,8 +90,8 @@ func main() {
 
 ### [Ticketing.Users](docs/sdks/users/README.md)
 
-* [List](docs/sdks/users/README.md#list) - List  Users
-* [Retrieve](docs/sdks/users/README.md#retrieve) - Retrieve Users
+* [List](docs/sdks/users/README.md#list) - List Users
+* [Retrieve](docs/sdks/users/README.md#retrieve) - Retrieve User
 
 ### [Ticketing.Accounts](docs/sdks/accounts/README.md)
 
@@ -92,24 +100,24 @@ func main() {
 
 ### [Ticketing.Contacts](docs/sdks/contacts/README.md)
 
-* [List](docs/sdks/contacts/README.md#list) - List all Contacts
-* [Retrieve](docs/sdks/contacts/README.md#retrieve) - Retrieve Contacts
+* [List](docs/sdks/contacts/README.md#list) - List Contacts
+* [Retrieve](docs/sdks/contacts/README.md#retrieve) - Retrieve Contact
 
 ### [Ticketing.Collections](docs/sdks/collections/README.md)
 
-* [List](docs/sdks/collections/README.md#list) - List  Collections
+* [List](docs/sdks/collections/README.md#list) - List Collections
 * [Retrieve](docs/sdks/collections/README.md#retrieve) - Retrieve Collections
 
 ### [Ticketing.Comments](docs/sdks/comments/README.md)
 
-* [List](docs/sdks/comments/README.md#list) - List  Comments
+* [List](docs/sdks/comments/README.md#list) - List Comments
 * [Create](docs/sdks/comments/README.md#create) - Create Comments
-* [Retrieve](docs/sdks/comments/README.md#retrieve) - Retrieve Comments
+* [Retrieve](docs/sdks/comments/README.md#retrieve) - Retrieve Comment
 
 ### [Ticketing.Tags](docs/sdks/tags/README.md)
 
-* [List](docs/sdks/tags/README.md#list) - List  Tags
-* [Retrieve](docs/sdks/tags/README.md#retrieve) - Retrieve Tags
+* [List](docs/sdks/tags/README.md#list) - List Tags
+* [Retrieve](docs/sdks/tags/README.md#retrieve) - Retrieve Tag
 
 ### [Ticketing.Teams](docs/sdks/teams/README.md)
 
@@ -142,19 +150,19 @@ func main() {
 
 ### [Crm.Deals](docs/sdks/deals/README.md)
 
-* [List](docs/sdks/deals/README.md#list) - List  Deals
+* [List](docs/sdks/deals/README.md#list) - List Deals
 * [Create](docs/sdks/deals/README.md#create) - Create Deals
 * [Retrieve](docs/sdks/deals/README.md#retrieve) - Retrieve Deals
 
 ### [Crm.Engagements](docs/sdks/engagements/README.md)
 
-* [List](docs/sdks/engagements/README.md#list) - List  Engagements
+* [List](docs/sdks/engagements/README.md#list) - List Engagements
 * [Create](docs/sdks/engagements/README.md#create) - Create Engagements
 * [Retrieve](docs/sdks/engagements/README.md#retrieve) - Retrieve Engagements
 
 ### [Crm.Notes](docs/sdks/notes/README.md)
 
-* [List](docs/sdks/notes/README.md#list) - List  Notes
+* [List](docs/sdks/notes/README.md#list) - List Notes
 * [Create](docs/sdks/notes/README.md#create) - Create Notes
 * [Retrieve](docs/sdks/notes/README.md#retrieve) - Retrieve Notes
 
@@ -165,7 +173,7 @@ func main() {
 
 ### [Crm.Tasks](docs/sdks/tasks/README.md)
 
-* [List](docs/sdks/tasks/README.md#list) - List  Tasks
+* [List](docs/sdks/tasks/README.md#list) - List Tasks
 * [Create](docs/sdks/tasks/README.md#create) - Create Tasks
 * [Retrieve](docs/sdks/tasks/README.md#retrieve) - Retrieve Tasks
 
@@ -183,13 +191,18 @@ func main() {
 
 * [ImportBatch](docs/sdks/batch/README.md#importbatch) - Add Batch Linked Users
 
-### [LinkedUsers.Single](docs/sdks/single/README.md)
+### [LinkedUsers.{id}](docs/sdks/id/README.md)
 
-* [Retrieve](docs/sdks/single/README.md#retrieve) - Retrieve Linked Users
+* [Retrieve](docs/sdks/id/README.md#retrieve) - Retrieve Linked Users
 
 ### [LinkedUsers.Fromremoteid](docs/sdks/fromremoteid/README.md)
 
 * [RemoteID](docs/sdks/fromremoteid/README.md#remoteid) - Retrieve a Linked User From A Remote Id
+
+### [Projects](docs/sdks/projects/README.md)
+
+* [GetProjects](docs/sdks/projects/README.md#getprojects) - Retrieve projects
+* [Create](docs/sdks/projects/README.md#create) - Create a project
 
 ### [FieldMappings](docs/sdks/fieldmappings/README.md)
 
@@ -203,6 +216,10 @@ func main() {
 
 * [Map](docs/sdks/map/README.md#map) - Map Custom Field
 
+### [Events](docs/sdks/events/README.md)
+
+* [GetPanoraCoreEvents](docs/sdks/events/README.md#getpanoracoreevents) - List Events
+
 ### [Passthrough](docs/sdks/passthrough/README.md)
 
 * [Request](docs/sdks/passthrough/README.md#request) - Make a passthrough request
@@ -210,68 +227,70 @@ func main() {
 
 ### [Hris.Bankinfos](docs/sdks/bankinfos/README.md)
 
-* [List](docs/sdks/bankinfos/README.md#list) - List  Bankinfos
-* [Retrieve](docs/sdks/bankinfos/README.md#retrieve) - Retrieve Bank Infos
+* [List](docs/sdks/bankinfos/README.md#list) - List Bank Info
+* [Retrieve](docs/sdks/bankinfos/README.md#retrieve) - Retrieve Bank Info
 
 ### [Hris.Benefits](docs/sdks/benefits/README.md)
 
-* [List](docs/sdks/benefits/README.md#list) - List  Benefits
-* [Retrieve](docs/sdks/benefits/README.md#retrieve) - Retrieve Benefits
+* [List](docs/sdks/benefits/README.md#list) - List Benefits
+* [Retrieve](docs/sdks/benefits/README.md#retrieve) - Retrieve Benefit
 
 ### [Hris.Companies](docs/sdks/panoracompanies/README.md)
 
-* [List](docs/sdks/panoracompanies/README.md#list) - List  Companys
+* [List](docs/sdks/panoracompanies/README.md#list) - List Companies
+* [Retrieve](docs/sdks/panoracompanies/README.md#retrieve) - Retrieve Company
 
 ### [Hris.Dependents](docs/sdks/dependents/README.md)
 
-* [List](docs/sdks/dependents/README.md#list) - List  Dependents
-* [Retrieve](docs/sdks/dependents/README.md#retrieve) - Retrieve Dependents
+* [List](docs/sdks/dependents/README.md#list) - List Dependents
+* [Retrieve](docs/sdks/dependents/README.md#retrieve) - Retrieve Dependent
 
 ### [Hris.Employeepayrollruns](docs/sdks/employeepayrollruns/README.md)
 
-* [List](docs/sdks/employeepayrollruns/README.md#list) - List  EmployeePayrollRuns
-* [Retrieve](docs/sdks/employeepayrollruns/README.md#retrieve) - Retrieve Employee Payroll Runs
+* [List](docs/sdks/employeepayrollruns/README.md#list) - List Employee Payroll Runs
+* [Retrieve](docs/sdks/employeepayrollruns/README.md#retrieve) - Retrieve Employee Payroll Run
 
 ### [Hris.Employees](docs/sdks/employees/README.md)
 
-* [List](docs/sdks/employees/README.md#list) - List  Employees
+* [List](docs/sdks/employees/README.md#list) - List Employees
 * [Create](docs/sdks/employees/README.md#create) - Create Employees
-* [Retrieve](docs/sdks/employees/README.md#retrieve) - Retrieven Employees
+* [Retrieve](docs/sdks/employees/README.md#retrieve) - Retrieve Employee
 
 ### [Hris.Employerbenefits](docs/sdks/employerbenefits/README.md)
 
-* [List](docs/sdks/employerbenefits/README.md#list) - List  EmployerBenefits
-* [Retrieve](docs/sdks/employerbenefits/README.md#retrieve) - Retrieve Employer Benefits
+* [List](docs/sdks/employerbenefits/README.md#list) - List Employer Benefits
+* [Retrieve](docs/sdks/employerbenefits/README.md#retrieve) - Retrieve Employer Benefit
 
 ### [Hris.Employments](docs/sdks/employments/README.md)
 
-* [List](docs/sdks/employments/README.md#list) - List  Employments
-* [Retrieve](docs/sdks/employments/README.md#retrieve) - Retrieve Employments
+* [List](docs/sdks/employments/README.md#list) - List Employments
+* [Retrieve](docs/sdks/employments/README.md#retrieve) - Retrieve Employment
 
 ### [Hris.Groups](docs/sdks/groups/README.md)
 
-* [List](docs/sdks/groups/README.md#list) - List  Groups
-* [Retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve Groups
+* [List](docs/sdks/groups/README.md#list) - List Groups
+* [Retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve Group
 
 ### [Hris.Locations](docs/sdks/locations/README.md)
 
-* [List](docs/sdks/locations/README.md#list) - List  Locations
-* [Retrieve](docs/sdks/locations/README.md#retrieve) - Retrieve Locations
+* [List](docs/sdks/locations/README.md#list) - List Locations
+* [Retrieve](docs/sdks/locations/README.md#retrieve) - Retrieve Location
 
 ### [Hris.Paygroups](docs/sdks/paygroups/README.md)
 
-* [List](docs/sdks/paygroups/README.md#list) - List  PayGroups
-* [Retrieve](docs/sdks/paygroups/README.md#retrieve) - Retrieve Pay Groups
+* [List](docs/sdks/paygroups/README.md#list) - List Pay Groups
+* [Retrieve](docs/sdks/paygroups/README.md#retrieve) - Retrieve Pay Group
 
 ### [Hris.Payrollruns](docs/sdks/payrollruns/README.md)
 
-* [List](docs/sdks/payrollruns/README.md#list) - List  PayrollRuns
+* [List](docs/sdks/payrollruns/README.md#list) - List Payroll Runs
+* [Retrieve](docs/sdks/payrollruns/README.md#retrieve) - Retrieve Payroll Run
 
 ### [Hris.Timeoffs](docs/sdks/timeoffs/README.md)
 
-* [List](docs/sdks/timeoffs/README.md#list) - List  Timeoffs
+* [List](docs/sdks/timeoffs/README.md#list) - List Time Offs
 * [Create](docs/sdks/timeoffs/README.md#create) - Create Timeoffs
-* [Retrieve](docs/sdks/timeoffs/README.md#retrieve) - Retrieve Timeoffs
+* [Retrieve](docs/sdks/timeoffs/README.md#retrieve) - Retrieve Time Off
 
 ### [Hris.Timeoffbalances](docs/sdks/timeoffbalances/README.md)
 
@@ -281,21 +300,21 @@ func main() {
 
 ### [Marketingautomation.Actions](docs/sdks/actions/README.md)
 
-* [List](docs/sdks/actions/README.md#list) - List  Actions
+* [List](docs/sdks/actions/README.md#list) - List Actions
 * [Create](docs/sdks/actions/README.md#create) - Create Action
 * [Retrieve](docs/sdks/actions/README.md#retrieve) - Retrieve Actions
 
 ### [Marketingautomation.Automations](docs/sdks/automations/README.md)
 
-* [List](docs/sdks/automations/README.md#list) - List  Automations
+* [List](docs/sdks/automations/README.md#list) - List Automations
 * [Create](docs/sdks/automations/README.md#create) - Create Automation
-* [Retrieve](docs/sdks/automations/README.md#retrieve) - Retrieve Automations
+* [Retrieve](docs/sdks/automations/README.md#retrieve) - Retrieve Automation
 
 ### [Marketingautomation.Campaigns](docs/sdks/campaigns/README.md)
 
-* [List](docs/sdks/campaigns/README.md#list) - List  Campaigns
+* [List](docs/sdks/campaigns/README.md#list) - List Campaigns
 * [Create](docs/sdks/campaigns/README.md#create) - Create Campaign
-* [Retrieve](docs/sdks/campaigns/README.md#retrieve) - Retrieve Campaigns
+* [Retrieve](docs/sdks/campaigns/README.md#retrieve) - Retrieve Campaign
 
 ### [Marketingautomation.Contacts](docs/sdks/panoramarketingautomationcontacts/README.md)
 
@@ -305,30 +324,30 @@ func main() {
 
 ### [Marketingautomation.Emails](docs/sdks/emails/README.md)
 
-* [List](docs/sdks/emails/README.md#list) - List  Emails
-* [Retrieve](docs/sdks/emails/README.md#retrieve) - Retrieve Emails
+* [List](docs/sdks/emails/README.md#list) - List Emails
+* [Retrieve](docs/sdks/emails/README.md#retrieve) - Retrieve Email
 
-### [Marketingautomation.Events](docs/sdks/events/README.md)
+### [Marketingautomation.Events](docs/sdks/panoraevents/README.md)
 
-* [List](docs/sdks/events/README.md#list) - List  Events
-* [Retrieve](docs/sdks/events/README.md#retrieve) - Retrieve Events
+* [List](docs/sdks/panoraevents/README.md#list) - List Events
+* [Retrieve](docs/sdks/panoraevents/README.md#retrieve) - Retrieve Event
 
 ### [Marketingautomation.Lists](docs/sdks/lists/README.md)
 
-* [List](docs/sdks/lists/README.md#list) - List  Lists
+* [List](docs/sdks/lists/README.md#list) - List Lists
 * [Create](docs/sdks/lists/README.md#create) - Create Lists
-* [Retrieve](docs/sdks/lists/README.md#retrieve) - Retrieve Lists
+* [Retrieve](docs/sdks/lists/README.md#retrieve) - Retrieve List
 
 ### [Marketingautomation.Messages](docs/sdks/messages/README.md)
 
-* [List](docs/sdks/messages/README.md#list) - List  Messages
+* [List](docs/sdks/messages/README.md#list) - List Messages
 * [Retrieve](docs/sdks/messages/README.md#retrieve) - Retrieve Messages
 
 ### [Marketingautomation.Templates](docs/sdks/templates/README.md)
 
-* [List](docs/sdks/templates/README.md#list) - List  Templates
+* [List](docs/sdks/templates/README.md#list) - List Templates
 * [Create](docs/sdks/templates/README.md#create) - Create Template
-* [Retrieve](docs/sdks/templates/README.md#retrieve) - Retrieve Templates
+* [Retrieve](docs/sdks/templates/README.md#retrieve) - Retrieve Template
 
 ### [Marketingautomation.Users](docs/sdks/panoramarketingautomationusers/README.md)
 
@@ -528,8 +547,8 @@ func main() {
 
 ### [Filestorage.Drives](docs/sdks/drives/README.md)
 
-* [List](docs/sdks/drives/README.md#list) - List  Drives
-* [Retrieve](docs/sdks/drives/README.md#retrieve) - Retrieve Drives
+* [List](docs/sdks/drives/README.md#list) - List Drives
+* [Retrieve](docs/sdks/drives/README.md#retrieve) - Retrieve Drive
 
 ### [Filestorage.Files](docs/sdks/files/README.md)
 
@@ -550,7 +569,7 @@ func main() {
 
 ### [Filestorage.Users](docs/sdks/panorafilestorageusers/README.md)
 
-* [List](docs/sdks/panorafilestorageusers/README.md#list) - List  Users
+* [List](docs/sdks/panorafilestorageusers/README.md#list) - List Users
 * [Retrieve](docs/sdks/panorafilestorageusers/README.md#retrieve) - Retrieve Users
 <!-- End Available Resources and Operations [operations] -->
 
@@ -569,12 +588,11 @@ import (
 	"github.com/panoratech/go-sdk/retry"
 	"log"
 	"models/operations"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -608,7 +626,6 @@ import (
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/retry"
 	"log"
-	"os"
 )
 
 func main() {
@@ -624,7 +641,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -660,12 +677,11 @@ import (
 	gosdk "github.com/panoratech/go-sdk"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -705,13 +721,12 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
 		gosdk.WithServerIndex(2),
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -737,13 +752,12 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
 		gosdk.WithServerURL("https://api.panora.dev"),
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -813,12 +827,11 @@ import (
 	"context"
 	gosdk "github.com/panoratech/go-sdk"
 	"log"
-	"os"
 )
 
 func main() {
 	s := gosdk.New(
-		gosdk.WithSecurity(os.Getenv("API_KEY")),
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()

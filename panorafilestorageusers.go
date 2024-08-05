@@ -27,7 +27,7 @@ func newPanoraFilestorageUsers(sdkConfig sdkConfiguration) *PanoraFilestorageUse
 	}
 }
 
-// List  Users
+// List Users
 func (s *PanoraFilestorageUsers) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListFilestorageUsersResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -376,12 +376,12 @@ func (s *PanoraFilestorageUsers) Retrieve(ctx context.Context, xConnectionToken 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out components.UnifiedUserOutput
+			var out components.UnifiedFilestorageUserOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedUserOutput = &out
+			res.UnifiedFilestorageUserOutput = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}

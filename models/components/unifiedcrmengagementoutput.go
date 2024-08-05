@@ -3,15 +3,74 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+// Direction - The direction of the engagement. Authorized values are INBOUND or OUTBOUND
+type Direction string
+
+const (
+	DirectionInbound  Direction = "INBOUND"
+	DirectionOutbound Direction = "OUTBOUND"
+)
+
+func (e Direction) ToPointer() *Direction {
+	return &e
+}
+func (e *Direction) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "INBOUND":
+		fallthrough
+	case "OUTBOUND":
+		*e = Direction(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Direction: %v", v)
+	}
+}
+
+// UnifiedCrmEngagementOutputType - The type of the engagement. Authorized values are EMAIL, CALL or MEETING
+type UnifiedCrmEngagementOutputType string
+
+const (
+	UnifiedCrmEngagementOutputTypeEmail   UnifiedCrmEngagementOutputType = "EMAIL"
+	UnifiedCrmEngagementOutputTypeCall    UnifiedCrmEngagementOutputType = "CALL"
+	UnifiedCrmEngagementOutputTypeMeeting UnifiedCrmEngagementOutputType = "MEETING"
+)
+
+func (e UnifiedCrmEngagementOutputType) ToPointer() *UnifiedCrmEngagementOutputType {
+	return &e
+}
+func (e *UnifiedCrmEngagementOutputType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "EMAIL":
+		fallthrough
+	case "CALL":
+		fallthrough
+	case "MEETING":
+		*e = UnifiedCrmEngagementOutputType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for UnifiedCrmEngagementOutputType: %v", v)
+	}
+}
 
 type UnifiedCrmEngagementOutput struct {
 	// The content of the engagement
 	Content *string `json:"content,omitempty"`
 	// The direction of the engagement. Authorized values are INBOUND or OUTBOUND
-	Direction *string `json:"direction,omitempty"`
+	Direction *Direction `json:"direction,omitempty"`
 	// The subject of the engagement
 	Subject *string `json:"subject,omitempty"`
 	// The start time of the engagement
@@ -19,7 +78,7 @@ type UnifiedCrmEngagementOutput struct {
 	// The end time of the engagement
 	EndTime *time.Time `json:"end_time,omitempty"`
 	// The type of the engagement. Authorized values are EMAIL, CALL or MEETING
-	Type *string `json:"type"`
+	Type *UnifiedCrmEngagementOutputType `json:"type"`
 	// The UUID of the user tied to the engagement
 	UserID *string `json:"user_id,omitempty"`
 	// The UUID of the company tied to the engagement
@@ -58,7 +117,7 @@ func (o *UnifiedCrmEngagementOutput) GetContent() *string {
 	return o.Content
 }
 
-func (o *UnifiedCrmEngagementOutput) GetDirection() *string {
+func (o *UnifiedCrmEngagementOutput) GetDirection() *Direction {
 	if o == nil {
 		return nil
 	}
@@ -86,7 +145,7 @@ func (o *UnifiedCrmEngagementOutput) GetEndTime() *time.Time {
 	return o.EndTime
 }
 
-func (o *UnifiedCrmEngagementOutput) GetType() *string {
+func (o *UnifiedCrmEngagementOutput) GetType() *UnifiedCrmEngagementOutputType {
 	if o == nil {
 		return nil
 	}
