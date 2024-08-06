@@ -4,7 +4,9 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/panoratech/go-sdk/internal/utils"
 )
 
 // UnifiedTicketingCommentInputCreatorType - The creator type of the comment. Authorized values are either USER or CONTACT
@@ -34,6 +36,69 @@ func (e *UnifiedTicketingCommentInputCreatorType) UnmarshalJSON(data []byte) err
 	}
 }
 
+type UnifiedTicketingCommentInputAttachmentsType string
+
+const (
+	UnifiedTicketingCommentInputAttachmentsTypeStr                              UnifiedTicketingCommentInputAttachmentsType = "str"
+	UnifiedTicketingCommentInputAttachmentsTypeUnifiedTicketingAttachmentOutput UnifiedTicketingCommentInputAttachmentsType = "UnifiedTicketingAttachmentOutput"
+)
+
+type UnifiedTicketingCommentInputAttachments struct {
+	Str                              *string
+	UnifiedTicketingAttachmentOutput *UnifiedTicketingAttachmentOutput
+
+	Type UnifiedTicketingCommentInputAttachmentsType
+}
+
+func CreateUnifiedTicketingCommentInputAttachmentsStr(str string) UnifiedTicketingCommentInputAttachments {
+	typ := UnifiedTicketingCommentInputAttachmentsTypeStr
+
+	return UnifiedTicketingCommentInputAttachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingCommentInputAttachmentsUnifiedTicketingAttachmentOutput(unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput) UnifiedTicketingCommentInputAttachments {
+	typ := UnifiedTicketingCommentInputAttachmentsTypeUnifiedTicketingAttachmentOutput
+
+	return UnifiedTicketingCommentInputAttachments{
+		UnifiedTicketingAttachmentOutput: &unifiedTicketingAttachmentOutput,
+		Type:                             typ,
+	}
+}
+
+func (u *UnifiedTicketingCommentInputAttachments) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput = UnifiedTicketingAttachmentOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingAttachmentOutput, "", true, true); err == nil {
+		u.UnifiedTicketingAttachmentOutput = &unifiedTicketingAttachmentOutput
+		u.Type = UnifiedTicketingCommentInputAttachmentsTypeUnifiedTicketingAttachmentOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingCommentInputAttachmentsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingCommentInputAttachments", string(data))
+}
+
+func (u UnifiedTicketingCommentInputAttachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingAttachmentOutput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingAttachmentOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingCommentInputAttachments: all fields are null")
+}
+
 type UnifiedTicketingCommentInput struct {
 	// The body of the comment
 	Body *string `json:"body"`
@@ -50,7 +115,7 @@ type UnifiedTicketingCommentInput struct {
 	// The UUID of the user which the comment belongs to (if no contact_id specified)
 	UserID *string `json:"user_id,omitempty"`
 	// The attachements UUIDs tied to the comment
-	Attachments []string `json:"attachments,omitempty"`
+	Attachments []UnifiedTicketingCommentInputAttachments `json:"attachments,omitempty"`
 }
 
 func (o *UnifiedTicketingCommentInput) GetBody() *string {
@@ -102,7 +167,7 @@ func (o *UnifiedTicketingCommentInput) GetUserID() *string {
 	return o.UserID
 }
 
-func (o *UnifiedTicketingCommentInput) GetAttachments() []string {
+func (o *UnifiedTicketingCommentInput) GetAttachments() []UnifiedTicketingCommentInputAttachments {
 	if o == nil {
 		return nil
 	}

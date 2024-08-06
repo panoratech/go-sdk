@@ -75,6 +75,8 @@ func (o *ListAtsJobInterviewStageResponseBody) GetData() []components.UnifiedAts
 type ListAtsJobInterviewStageResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAtsJobInterviewStageResponseBody
+
+	Next func() (*ListAtsJobInterviewStageResponse, error)
 }
 
 func (o *ListAtsJobInterviewStageResponse) GetHTTPMeta() components.HTTPMetadata {

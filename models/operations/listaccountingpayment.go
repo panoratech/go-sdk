@@ -75,6 +75,8 @@ func (o *ListAccountingPaymentResponseBody) GetData() []components.UnifiedAccoun
 type ListAccountingPaymentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingPaymentResponseBody
+
+	Next func() (*ListAccountingPaymentResponse, error)
 }
 
 func (o *ListAccountingPaymentResponse) GetHTTPMeta() components.HTTPMetadata {

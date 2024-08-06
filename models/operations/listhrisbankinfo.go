@@ -75,6 +75,8 @@ func (o *ListHrisBankInfoResponseBody) GetData() []components.UnifiedHrisBankinf
 type ListHrisBankInfoResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListHrisBankInfoResponseBody
+
+	Next func() (*ListHrisBankInfoResponse, error)
 }
 
 func (o *ListHrisBankInfoResponse) GetHTTPMeta() components.HTTPMetadata {

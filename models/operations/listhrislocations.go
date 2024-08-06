@@ -75,6 +75,8 @@ func (o *ListHrisLocationsResponseBody) GetData() []components.UnifiedHrisLocati
 type ListHrisLocationsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListHrisLocationsResponseBody
+
+	Next func() (*ListHrisLocationsResponse, error)
 }
 
 func (o *ListHrisLocationsResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: 73ce3778a891c9bdb1d0d00c8a42490f
+  docChecksum: f31581b6c385b4f8f05068b0f2598833
   docVersion: "1.0"
   speakeasyVersion: 1.352.2
   generationVersion: 2.385.2
-  releaseVersion: 0.3.0
-  configChecksum: 6b3f4c169f69546f8aadcd510536d80e
+  releaseVersion: 0.4.0
+  configChecksum: 17f4ad4e339e8430b37a2b63217baab5
   repoURL: https://github.com/panoratech/go-sdk.git
   installationURL: https://github.com/panoratech/go-sdk
 features:
@@ -25,6 +25,7 @@ features:
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
     nullables: 0.1.0
+    pagination: 2.82.1
     responseFormat: 0.1.2
     retries: 2.83.0
     sdkHooks: 0.1.0
@@ -54,13 +55,8 @@ generatedFiles:
   - tasks.go
   - panorausers.go
   - crm.go
-  - batch.go
-  - id.go
-  - fromremoteid.go
   - linkedusers.go
   - projects.go
-  - define.go
-  - map.go
   - fieldmappings.go
   - events.go
   - passthrough.go
@@ -213,8 +209,8 @@ generatedFiles:
   - /models/operations/remoteid.go
   - /models/operations/getprojects.go
   - /models/operations/createproject.go
-  - /models/operations/definecustomfield.go
   - /models/operations/definitions.go
+  - /models/operations/definecustomfield.go
   - /models/operations/map.go
   - /models/operations/getpanoracoreevents.go
   - /models/operations/request.go
@@ -376,17 +372,17 @@ generatedFiles:
   - /models/components/webhookdto.go
   - /models/components/signatureverificationdto.go
   - /models/components/unifiedticketingticketoutput.go
+  - /models/components/unifiedticketingattachmentinput.go
+  - /models/components/unifiedticketingattachmentoutput.go
+  - /models/components/unifiedticketingtagoutput.go
+  - /models/components/unifiedticketingcollectionoutput.go
   - /models/components/unifiedticketingticketinput.go
   - /models/components/unifiedticketinguseroutput.go
   - /models/components/unifiedticketingaccountoutput.go
   - /models/components/unifiedticketingcontactoutput.go
-  - /models/components/unifiedticketingcollectionoutput.go
   - /models/components/unifiedticketingcommentoutput.go
   - /models/components/unifiedticketingcommentinput.go
-  - /models/components/unifiedticketingtagoutput.go
   - /models/components/unifiedticketingteamoutput.go
-  - /models/components/unifiedticketingattachmentoutput.go
-  - /models/components/unifiedticketingattachmentinput.go
   - /models/components/resyncstatusdto.go
   - /models/components/unifiedcrmcompanyoutput.go
   - /models/components/phone.go
@@ -411,8 +407,8 @@ generatedFiles:
   - /models/components/projectresponse.go
   - /models/components/createprojectdto.go
   - /models/components/customfieldresponse.go
-  - /models/components/customfieldcreatedto.go
   - /models/components/definetargetfielddto.go
+  - /models/components/customfieldcreatedto.go
   - /models/components/mapfieldtoproviderdto.go
   - /models/components/eventresponse.go
   - /models/components/passthroughresponse.go
@@ -457,6 +453,7 @@ generatedFiles:
   - /models/components/unifiedatsattachmentinput.go
   - /models/components/unifiedatscandidateoutput.go
   - /models/components/url.go
+  - /models/components/unifiedatstagoutput.go
   - /models/components/unifiedatscandidateinput.go
   - /models/components/unifiedatsdepartmentoutput.go
   - /models/components/unifiedatsinterviewoutput.go
@@ -467,7 +464,6 @@ generatedFiles:
   - /models/components/unifiedatsofficeoutput.go
   - /models/components/unifiedatsrejectreasonoutput.go
   - /models/components/unifiedatsscorecardoutput.go
-  - /models/components/unifiedatstagoutput.go
   - /models/components/unifiedatsuseroutput.go
   - /models/components/unifiedatseeocsoutput.go
   - /models/components/unifiedaccountingaccountoutput.go
@@ -636,8 +632,8 @@ generatedFiles:
   - docs/models/operations/remoteidresponse.md
   - docs/models/operations/getprojectsresponse.md
   - docs/models/operations/createprojectresponse.md
-  - docs/models/operations/definecustomfieldresponse.md
   - docs/models/operations/definitionsresponse.md
+  - docs/models/operations/definecustomfieldresponse.md
   - docs/models/operations/mapresponse.md
   - docs/models/operations/getpanoracoreeventsrequest.md
   - docs/models/operations/getpanoracoreeventsresponse.md
@@ -1018,29 +1014,39 @@ generatedFiles:
   - docs/models/components/signatureverificationdto.md
   - docs/models/components/status.md
   - docs/models/components/type.md
+  - docs/models/components/collections.md
+  - docs/models/components/tags.md
   - docs/models/components/priority.md
   - docs/models/components/unifiedticketingticketoutputcreatortype.md
+  - docs/models/components/unifiedticketingticketoutputattachments.md
   - docs/models/components/comment.md
+  - docs/models/components/attachments.md
   - docs/models/components/unifiedticketingticketoutput.md
+  - docs/models/components/unifiedticketingattachmentinput.md
+  - docs/models/components/unifiedticketingattachmentoutput.md
+  - docs/models/components/unifiedticketingtagoutput.md
+  - docs/models/components/collectiontype.md
+  - docs/models/components/unifiedticketingcollectionoutput.md
   - docs/models/components/unifiedticketingticketinputstatus.md
   - docs/models/components/unifiedticketingticketinputtype.md
+  - docs/models/components/unifiedticketingticketinputcollections.md
+  - docs/models/components/unifiedticketingticketinputtags.md
   - docs/models/components/unifiedticketingticketinputpriority.md
   - docs/models/components/unifiedticketingticketinputcreatortype.md
+  - docs/models/components/unifiedticketingticketinputcommentattachments.md
   - docs/models/components/unifiedticketingticketinputcomment.md
+  - docs/models/components/unifiedticketingticketinputattachments.md
   - docs/models/components/unifiedticketingticketinput.md
   - docs/models/components/unifiedticketinguseroutput.md
   - docs/models/components/unifiedticketingaccountoutput.md
   - docs/models/components/unifiedticketingcontactoutput.md
-  - docs/models/components/collectiontype.md
-  - docs/models/components/unifiedticketingcollectionoutput.md
   - docs/models/components/creatortype.md
+  - docs/models/components/unifiedticketingcommentoutputattachments.md
   - docs/models/components/unifiedticketingcommentoutput.md
   - docs/models/components/unifiedticketingcommentinputcreatortype.md
+  - docs/models/components/unifiedticketingcommentinputattachments.md
   - docs/models/components/unifiedticketingcommentinput.md
-  - docs/models/components/unifiedticketingtagoutput.md
   - docs/models/components/unifiedticketingteamoutput.md
-  - docs/models/components/unifiedticketingattachmentoutput.md
-  - docs/models/components/unifiedticketingattachmentinput.md
   - docs/models/components/vertical.md
   - docs/models/components/resyncstatusdtostatus.md
   - docs/models/components/resyncstatusdto.md
@@ -1084,12 +1090,12 @@ generatedFiles:
   - docs/models/components/createprojectdto.md
   - docs/models/components/customfieldresponsedatatype.md
   - docs/models/components/customfieldresponse.md
-  - docs/models/components/customfieldcreatedtoobjecttypeowner.md
-  - docs/models/components/customfieldcreatedtodatatype.md
-  - docs/models/components/customfieldcreatedto.md
   - docs/models/components/objecttypeowner.md
   - docs/models/components/datatype.md
   - docs/models/components/definetargetfielddto.md
+  - docs/models/components/customfieldcreatedtoobjecttypeowner.md
+  - docs/models/components/customfieldcreatedtodatatype.md
+  - docs/models/components/customfieldcreatedto.md
   - docs/models/components/mapfieldtoproviderdto.md
   - docs/models/components/eventresponsetype.md
   - docs/models/components/eventresponsestatus.md
@@ -1144,8 +1150,15 @@ generatedFiles:
   - docs/models/components/unifiedatsattachmentoutput.md
   - docs/models/components/unifiedatsattachmentinputattachmenttype.md
   - docs/models/components/unifiedatsattachmentinput.md
+  - docs/models/components/unifiedatscandidateoutputattachments.md
+  - docs/models/components/applications.md
+  - docs/models/components/unifiedatscandidateoutputtags.md
   - docs/models/components/unifiedatscandidateoutput.md
   - docs/models/components/url.md
+  - docs/models/components/unifiedatstagoutput.md
+  - docs/models/components/unifiedatscandidateinputattachments.md
+  - docs/models/components/unifiedatscandidateinputapplications.md
+  - docs/models/components/unifiedatscandidateinputtags.md
   - docs/models/components/unifiedatscandidateinput.md
   - docs/models/components/unifiedatsdepartmentoutput.md
   - docs/models/components/unifiedatsinterviewoutputstatus.md
@@ -1164,7 +1177,6 @@ generatedFiles:
   - docs/models/components/unifiedatsrejectreasonoutput.md
   - docs/models/components/overallrecommendation.md
   - docs/models/components/unifiedatsscorecardoutput.md
-  - docs/models/components/unifiedatstagoutput.md
   - docs/models/components/accessrole.md
   - docs/models/components/unifiedatsuseroutput.md
   - docs/models/components/race.md
@@ -1205,6 +1217,7 @@ generatedFiles:
   - docs/models/components/unifiedfilestoragefileinput.md
   - docs/models/components/unifiedfilestoragefolderoutput.md
   - docs/models/components/unifiedfilestoragefolderinput.md
+  - docs/models/components/users.md
   - docs/models/components/unifiedfilestoragegroupoutput.md
   - docs/models/components/unifiedfilestorageuseroutput.md
   - docs/models/components/security.md
@@ -1235,13 +1248,8 @@ generatedFiles:
   - docs/sdks/tasks/README.md
   - docs/sdks/panorausers/README.md
   - docs/sdks/linkedusers/README.md
-  - docs/sdks/batch/README.md
-  - docs/sdks/id/README.md
-  - docs/sdks/fromremoteid/README.md
   - docs/sdks/projects/README.md
   - docs/sdks/fieldmappings/README.md
-  - docs/sdks/define/README.md
-  - docs/sdks/map/README.md
   - docs/sdks/events/README.md
   - docs/sdks/passthrough/README.md
   - docs/sdks/hris/README.md

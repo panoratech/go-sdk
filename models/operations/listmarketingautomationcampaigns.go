@@ -75,6 +75,8 @@ func (o *ListMarketingautomationCampaignsResponseBody) GetData() []components.Un
 type ListMarketingautomationCampaignsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListMarketingautomationCampaignsResponseBody
+
+	Next func() (*ListMarketingautomationCampaignsResponse, error)
 }
 
 func (o *ListMarketingautomationCampaignsResponse) GetHTTPMeta() components.HTTPMetadata {

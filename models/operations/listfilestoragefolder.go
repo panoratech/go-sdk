@@ -75,6 +75,8 @@ func (o *ListFilestorageFolderResponseBody) GetData() []components.UnifiedFilest
 type ListFilestorageFolderResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListFilestorageFolderResponseBody
+
+	Next func() (*ListFilestorageFolderResponse, error)
 }
 
 func (o *ListFilestorageFolderResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -75,6 +75,8 @@ func (o *ListCrmNoteResponseBody) GetData() []components.UnifiedCrmNoteOutput {
 type ListCrmNoteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListCrmNoteResponseBody
+
+	Next func() (*ListCrmNoteResponse, error)
 }
 
 func (o *ListCrmNoteResponse) GetHTTPMeta() components.HTTPMetadata {

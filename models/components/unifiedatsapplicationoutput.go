@@ -49,7 +49,7 @@ func (u UnifiedAtsApplicationOutput) MarshalJSON() ([]byte, error) {
 }
 
 func (u *UnifiedAtsApplicationOutput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &u, "", false, true); err != nil {
 		return err
 	}
 	return nil

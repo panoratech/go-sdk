@@ -53,7 +53,9 @@ Scope of the event
 | `EventResponseTypeAtsScorecardPulled`          | ats.scorecard.pulled                           |
 | `EventResponseTypeAtsTagPulled`                | ats.tag.pulled                                 |
 | `EventResponseTypeAtsUserPulled`               | ats.user.pulled                                |
+| `EventResponseTypeFilestorageFileCreated`      | filestorage.file.created                       |
 | `EventResponseTypeFilestorageFilePulled`       | filestorage.file.pulled                        |
+| `EventResponseTypeFilestorageFolderCreated`    | filestorage.folder.created                     |
 | `EventResponseTypeFilestorageFolderPulled`     | filestorage.folder.pulled                      |
 | `EventResponseTypeFilestorageGroupPulled`      | filestorage.group.pulled                       |
 | `EventResponseTypeFilestorageUserPulled`       | filestorage.user.pulled                        |

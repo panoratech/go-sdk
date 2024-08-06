@@ -75,6 +75,8 @@ func (o *ListAccountingTrackingCategorysResponseBody) GetData() []components.Uni
 type ListAccountingTrackingCategorysResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingTrackingCategorysResponseBody
+
+	Next func() (*ListAccountingTrackingCategorysResponse, error)
 }
 
 func (o *ListAccountingTrackingCategorysResponse) GetHTTPMeta() components.HTTPMetadata {

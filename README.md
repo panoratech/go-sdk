@@ -186,18 +186,9 @@ func main() {
 
 * [Create](docs/sdks/linkedusers/README.md#create) - Create Linked Users
 * [List](docs/sdks/linkedusers/README.md#list) - List Linked Users
-
-### [LinkedUsers.Batch](docs/sdks/batch/README.md)
-
-* [ImportBatch](docs/sdks/batch/README.md#importbatch) - Add Batch Linked Users
-
-### [LinkedUsers.{id}](docs/sdks/id/README.md)
-
-* [Retrieve](docs/sdks/id/README.md#retrieve) - Retrieve Linked Users
-
-### [LinkedUsers.Fromremoteid](docs/sdks/fromremoteid/README.md)
-
-* [RemoteID](docs/sdks/fromremoteid/README.md#remoteid) - Retrieve a Linked User From A Remote Id
+* [ImportBatch](docs/sdks/linkedusers/README.md#importbatch) - Add Batch Linked Users
+* [Retrieve](docs/sdks/linkedusers/README.md#retrieve) - Retrieve Linked Users
+* [RemoteID](docs/sdks/linkedusers/README.md#remoteid) - Retrieve a Linked User From A Remote Id
 
 ### [Projects](docs/sdks/projects/README.md)
 
@@ -206,15 +197,9 @@ func main() {
 
 ### [FieldMappings](docs/sdks/fieldmappings/README.md)
 
+* [Definitions](docs/sdks/fieldmappings/README.md#definitions) - Define target Field
 * [DefineCustomField](docs/sdks/fieldmappings/README.md#definecustomfield) - Create Custom Field
-
-### [FieldMappings.Define](docs/sdks/define/README.md)
-
-* [Definitions](docs/sdks/define/README.md#definitions) - Define target Field
-
-### [FieldMappings.Map](docs/sdks/map/README.md)
-
-* [Map](docs/sdks/map/README.md#map) - Map Custom Field
+* [Map](docs/sdks/fieldmappings/README.md#map) - Map Custom Field
 
 ### [Events](docs/sdks/events/README.md)
 
@@ -846,6 +831,60 @@ func main() {
 
 ```
 <!-- End Authentication [security] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```go
+package main
+
+import (
+	"context"
+	gosdk "github.com/panoratech/go-sdk"
+	"log"
+)
+
+func main() {
+	s := gosdk.New(
+		gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
+	)
+	var xConnectionToken string = "<value>"
+
+	var remoteData *bool = gosdk.Bool(true)
+
+	var limit *float64 = gosdk.Float64(10)
+
+	var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
+	ctx := context.Background()
+	res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, remoteData, limit, cursor)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.Object != nil {
+		for {
+			// handle items
+
+			res, err = res.Next()
+
+			if err != nil {
+				// handle error
+			}
+
+			if res == nil {
+				break
+			}
+		}
+
+	}
+}
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

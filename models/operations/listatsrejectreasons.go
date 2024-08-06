@@ -75,6 +75,8 @@ func (o *ListAtsRejectReasonsResponseBody) GetData() []components.UnifiedAtsReje
 type ListAtsRejectReasonsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAtsRejectReasonsResponseBody
+
+	Next func() (*ListAtsRejectReasonsResponse, error)
 }
 
 func (o *ListAtsRejectReasonsResponse) GetHTTPMeta() components.HTTPMetadata {

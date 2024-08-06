@@ -75,6 +75,8 @@ func (o *ListAccountingPurchaseOrderResponseBody) GetData() []components.Unified
 type ListAccountingPurchaseOrderResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingPurchaseOrderResponseBody
+
+	Next func() (*ListAccountingPurchaseOrderResponse, error)
 }
 
 func (o *ListAccountingPurchaseOrderResponse) GetHTTPMeta() components.HTTPMetadata {

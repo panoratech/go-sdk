@@ -75,6 +75,8 @@ func (o *ListAtsUsersResponseBody) GetData() []components.UnifiedAtsUserOutput {
 type ListAtsUsersResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAtsUsersResponseBody
+
+	Next func() (*ListAtsUsersResponse, error)
 }
 
 func (o *ListAtsUsersResponse) GetHTTPMeta() components.HTTPMetadata {

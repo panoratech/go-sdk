@@ -75,6 +75,8 @@ func (o *ListCrmContactsResponseBody) GetData() []components.UnifiedCrmContactOu
 type ListCrmContactsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListCrmContactsResponseBody
+
+	Next func() (*ListCrmContactsResponse, error)
 }
 
 func (o *ListCrmContactsResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -59,7 +59,9 @@ const (
 	EventResponseTypeAtsScorecardPulled          EventResponseType = "ats.scorecard.pulled"
 	EventResponseTypeAtsTagPulled                EventResponseType = "ats.tag.pulled"
 	EventResponseTypeAtsUserPulled               EventResponseType = "ats.user.pulled"
+	EventResponseTypeFilestorageFileCreated      EventResponseType = "filestorage.file.created"
 	EventResponseTypeFilestorageFilePulled       EventResponseType = "filestorage.file.pulled"
+	EventResponseTypeFilestorageFolderCreated    EventResponseType = "filestorage.folder.created"
 	EventResponseTypeFilestorageFolderPulled     EventResponseType = "filestorage.folder.pulled"
 	EventResponseTypeFilestorageGroupPulled      EventResponseType = "filestorage.group.pulled"
 	EventResponseTypeFilestorageUserPulled       EventResponseType = "filestorage.user.pulled"
@@ -170,7 +172,11 @@ func (e *EventResponseType) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "ats.user.pulled":
 		fallthrough
+	case "filestorage.file.created":
+		fallthrough
 	case "filestorage.file.pulled":
+		fallthrough
+	case "filestorage.folder.created":
 		fallthrough
 	case "filestorage.folder.pulled":
 		fallthrough

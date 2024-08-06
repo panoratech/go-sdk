@@ -75,6 +75,8 @@ func (o *ListTicketingCollectionsResponseBody) GetData() []components.UnifiedTic
 type ListTicketingCollectionsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListTicketingCollectionsResponseBody
+
+	Next func() (*ListTicketingCollectionsResponse, error)
 }
 
 func (o *ListTicketingCollectionsResponse) GetHTTPMeta() components.HTTPMetadata {

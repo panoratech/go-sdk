@@ -4,6 +4,7 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
@@ -69,6 +70,132 @@ func (e *UnifiedTicketingTicketInputType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type UnifiedTicketingTicketInputCollectionsType string
+
+const (
+	UnifiedTicketingTicketInputCollectionsTypeStr                              UnifiedTicketingTicketInputCollectionsType = "str"
+	UnifiedTicketingTicketInputCollectionsTypeUnifiedTicketingCollectionOutput UnifiedTicketingTicketInputCollectionsType = "UnifiedTicketingCollectionOutput"
+)
+
+type UnifiedTicketingTicketInputCollections struct {
+	Str                              *string
+	UnifiedTicketingCollectionOutput *UnifiedTicketingCollectionOutput
+
+	Type UnifiedTicketingTicketInputCollectionsType
+}
+
+func CreateUnifiedTicketingTicketInputCollectionsStr(str string) UnifiedTicketingTicketInputCollections {
+	typ := UnifiedTicketingTicketInputCollectionsTypeStr
+
+	return UnifiedTicketingTicketInputCollections{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingTicketInputCollectionsUnifiedTicketingCollectionOutput(unifiedTicketingCollectionOutput UnifiedTicketingCollectionOutput) UnifiedTicketingTicketInputCollections {
+	typ := UnifiedTicketingTicketInputCollectionsTypeUnifiedTicketingCollectionOutput
+
+	return UnifiedTicketingTicketInputCollections{
+		UnifiedTicketingCollectionOutput: &unifiedTicketingCollectionOutput,
+		Type:                             typ,
+	}
+}
+
+func (u *UnifiedTicketingTicketInputCollections) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingCollectionOutput UnifiedTicketingCollectionOutput = UnifiedTicketingCollectionOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingCollectionOutput, "", true, true); err == nil {
+		u.UnifiedTicketingCollectionOutput = &unifiedTicketingCollectionOutput
+		u.Type = UnifiedTicketingTicketInputCollectionsTypeUnifiedTicketingCollectionOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingTicketInputCollectionsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingTicketInputCollections", string(data))
+}
+
+func (u UnifiedTicketingTicketInputCollections) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingCollectionOutput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingCollectionOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingTicketInputCollections: all fields are null")
+}
+
+type UnifiedTicketingTicketInputTagsType string
+
+const (
+	UnifiedTicketingTicketInputTagsTypeStr                       UnifiedTicketingTicketInputTagsType = "str"
+	UnifiedTicketingTicketInputTagsTypeUnifiedTicketingTagOutput UnifiedTicketingTicketInputTagsType = "UnifiedTicketingTagOutput"
+)
+
+type UnifiedTicketingTicketInputTags struct {
+	Str                       *string
+	UnifiedTicketingTagOutput *UnifiedTicketingTagOutput
+
+	Type UnifiedTicketingTicketInputTagsType
+}
+
+func CreateUnifiedTicketingTicketInputTagsStr(str string) UnifiedTicketingTicketInputTags {
+	typ := UnifiedTicketingTicketInputTagsTypeStr
+
+	return UnifiedTicketingTicketInputTags{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingTicketInputTagsUnifiedTicketingTagOutput(unifiedTicketingTagOutput UnifiedTicketingTagOutput) UnifiedTicketingTicketInputTags {
+	typ := UnifiedTicketingTicketInputTagsTypeUnifiedTicketingTagOutput
+
+	return UnifiedTicketingTicketInputTags{
+		UnifiedTicketingTagOutput: &unifiedTicketingTagOutput,
+		Type:                      typ,
+	}
+}
+
+func (u *UnifiedTicketingTicketInputTags) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingTagOutput UnifiedTicketingTagOutput = UnifiedTicketingTagOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingTagOutput, "", true, true); err == nil {
+		u.UnifiedTicketingTagOutput = &unifiedTicketingTagOutput
+		u.Type = UnifiedTicketingTicketInputTagsTypeUnifiedTicketingTagOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingTicketInputTagsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingTicketInputTags", string(data))
+}
+
+func (u UnifiedTicketingTicketInputTags) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingTagOutput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingTagOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingTicketInputTags: all fields are null")
+}
+
 // UnifiedTicketingTicketInputPriority - The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
 type UnifiedTicketingTicketInputPriority string
 
@@ -126,6 +253,69 @@ func (e *UnifiedTicketingTicketInputCreatorType) UnmarshalJSON(data []byte) erro
 	}
 }
 
+type UnifiedTicketingTicketInputCommentAttachmentsType string
+
+const (
+	UnifiedTicketingTicketInputCommentAttachmentsTypeStr                              UnifiedTicketingTicketInputCommentAttachmentsType = "str"
+	UnifiedTicketingTicketInputCommentAttachmentsTypeUnifiedTicketingAttachmentOutput UnifiedTicketingTicketInputCommentAttachmentsType = "UnifiedTicketingAttachmentOutput"
+)
+
+type UnifiedTicketingTicketInputCommentAttachments struct {
+	Str                              *string
+	UnifiedTicketingAttachmentOutput *UnifiedTicketingAttachmentOutput
+
+	Type UnifiedTicketingTicketInputCommentAttachmentsType
+}
+
+func CreateUnifiedTicketingTicketInputCommentAttachmentsStr(str string) UnifiedTicketingTicketInputCommentAttachments {
+	typ := UnifiedTicketingTicketInputCommentAttachmentsTypeStr
+
+	return UnifiedTicketingTicketInputCommentAttachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingTicketInputCommentAttachmentsUnifiedTicketingAttachmentOutput(unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput) UnifiedTicketingTicketInputCommentAttachments {
+	typ := UnifiedTicketingTicketInputCommentAttachmentsTypeUnifiedTicketingAttachmentOutput
+
+	return UnifiedTicketingTicketInputCommentAttachments{
+		UnifiedTicketingAttachmentOutput: &unifiedTicketingAttachmentOutput,
+		Type:                             typ,
+	}
+}
+
+func (u *UnifiedTicketingTicketInputCommentAttachments) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput = UnifiedTicketingAttachmentOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingAttachmentOutput, "", true, true); err == nil {
+		u.UnifiedTicketingAttachmentOutput = &unifiedTicketingAttachmentOutput
+		u.Type = UnifiedTicketingTicketInputCommentAttachmentsTypeUnifiedTicketingAttachmentOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingTicketInputCommentAttachmentsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingTicketInputCommentAttachments", string(data))
+}
+
+func (u UnifiedTicketingTicketInputCommentAttachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingAttachmentOutput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingAttachmentOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingTicketInputCommentAttachments: all fields are null")
+}
+
 // UnifiedTicketingTicketInputComment - The comment of the ticket
 type UnifiedTicketingTicketInputComment struct {
 	// The body of the comment
@@ -143,7 +333,7 @@ type UnifiedTicketingTicketInputComment struct {
 	// The UUID of the user which the comment belongs to (if no contact_id specified)
 	UserID *string `json:"user_id,omitempty"`
 	// The attachements UUIDs tied to the comment
-	Attachments []string `json:"attachments,omitempty"`
+	Attachments []UnifiedTicketingTicketInputCommentAttachments `json:"attachments,omitempty"`
 }
 
 func (o *UnifiedTicketingTicketInputComment) GetBody() *string {
@@ -195,11 +385,74 @@ func (o *UnifiedTicketingTicketInputComment) GetUserID() *string {
 	return o.UserID
 }
 
-func (o *UnifiedTicketingTicketInputComment) GetAttachments() []string {
+func (o *UnifiedTicketingTicketInputComment) GetAttachments() []UnifiedTicketingTicketInputCommentAttachments {
 	if o == nil {
 		return nil
 	}
 	return o.Attachments
+}
+
+type UnifiedTicketingTicketInputAttachmentsType string
+
+const (
+	UnifiedTicketingTicketInputAttachmentsTypeStr                             UnifiedTicketingTicketInputAttachmentsType = "str"
+	UnifiedTicketingTicketInputAttachmentsTypeUnifiedTicketingAttachmentInput UnifiedTicketingTicketInputAttachmentsType = "UnifiedTicketingAttachmentInput"
+)
+
+type UnifiedTicketingTicketInputAttachments struct {
+	Str                             *string
+	UnifiedTicketingAttachmentInput *UnifiedTicketingAttachmentInput
+
+	Type UnifiedTicketingTicketInputAttachmentsType
+}
+
+func CreateUnifiedTicketingTicketInputAttachmentsStr(str string) UnifiedTicketingTicketInputAttachments {
+	typ := UnifiedTicketingTicketInputAttachmentsTypeStr
+
+	return UnifiedTicketingTicketInputAttachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingTicketInputAttachmentsUnifiedTicketingAttachmentInput(unifiedTicketingAttachmentInput UnifiedTicketingAttachmentInput) UnifiedTicketingTicketInputAttachments {
+	typ := UnifiedTicketingTicketInputAttachmentsTypeUnifiedTicketingAttachmentInput
+
+	return UnifiedTicketingTicketInputAttachments{
+		UnifiedTicketingAttachmentInput: &unifiedTicketingAttachmentInput,
+		Type:                            typ,
+	}
+}
+
+func (u *UnifiedTicketingTicketInputAttachments) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingAttachmentInput UnifiedTicketingAttachmentInput = UnifiedTicketingAttachmentInput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingAttachmentInput, "", true, true); err == nil {
+		u.UnifiedTicketingAttachmentInput = &unifiedTicketingAttachmentInput
+		u.Type = UnifiedTicketingTicketInputAttachmentsTypeUnifiedTicketingAttachmentInput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingTicketInputAttachmentsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingTicketInputAttachments", string(data))
+}
+
+func (u UnifiedTicketingTicketInputAttachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingAttachmentInput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingAttachmentInput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingTicketInputAttachments: all fields are null")
 }
 
 type UnifiedTicketingTicketInput struct {
@@ -216,9 +469,9 @@ type UnifiedTicketingTicketInput struct {
 	// The UUID of the parent ticket
 	ParentTicket *string `json:"parent_ticket,omitempty"`
 	// The collection UUIDs the ticket belongs to
-	Collections *string `json:"collections,omitempty"`
+	Collections []UnifiedTicketingTicketInputCollections `json:"collections,omitempty"`
 	// The tags names of the ticket
-	Tags []string `json:"tags,omitempty"`
+	Tags []UnifiedTicketingTicketInputTags `json:"tags,omitempty"`
 	// The date the ticket has been completed
 	CompletedAt *time.Time `json:"completed_at,omitempty"`
 	// The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
@@ -232,7 +485,7 @@ type UnifiedTicketingTicketInput struct {
 	// The UUID of the contact which the ticket belongs to
 	ContactID *string `json:"contact_id,omitempty"`
 	// The attachements UUIDs tied to the ticket
-	Attachments []string `json:"attachments,omitempty"`
+	Attachments []UnifiedTicketingTicketInputAttachments `json:"attachments,omitempty"`
 	// The custom field mappings of the ticket between the remote 3rd party & Panora
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 }
@@ -290,14 +543,14 @@ func (o *UnifiedTicketingTicketInput) GetParentTicket() *string {
 	return o.ParentTicket
 }
 
-func (o *UnifiedTicketingTicketInput) GetCollections() *string {
+func (o *UnifiedTicketingTicketInput) GetCollections() []UnifiedTicketingTicketInputCollections {
 	if o == nil {
 		return nil
 	}
 	return o.Collections
 }
 
-func (o *UnifiedTicketingTicketInput) GetTags() []string {
+func (o *UnifiedTicketingTicketInput) GetTags() []UnifiedTicketingTicketInputTags {
 	if o == nil {
 		return nil
 	}
@@ -346,7 +599,7 @@ func (o *UnifiedTicketingTicketInput) GetContactID() *string {
 	return o.ContactID
 }
 
-func (o *UnifiedTicketingTicketInput) GetAttachments() []string {
+func (o *UnifiedTicketingTicketInput) GetAttachments() []UnifiedTicketingTicketInputAttachments {
 	if o == nil {
 		return nil
 	}

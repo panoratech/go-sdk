@@ -3,9 +3,200 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
+
+type UnifiedAtsCandidateOutputAttachmentsType string
+
+const (
+	UnifiedAtsCandidateOutputAttachmentsTypeStr                        UnifiedAtsCandidateOutputAttachmentsType = "str"
+	UnifiedAtsCandidateOutputAttachmentsTypeUnifiedAtsAttachmentOutput UnifiedAtsCandidateOutputAttachmentsType = "UnifiedAtsAttachmentOutput"
+)
+
+type UnifiedAtsCandidateOutputAttachments struct {
+	Str                        *string
+	UnifiedAtsAttachmentOutput *UnifiedAtsAttachmentOutput
+
+	Type UnifiedAtsCandidateOutputAttachmentsType
+}
+
+func CreateUnifiedAtsCandidateOutputAttachmentsStr(str string) UnifiedAtsCandidateOutputAttachments {
+	typ := UnifiedAtsCandidateOutputAttachmentsTypeStr
+
+	return UnifiedAtsCandidateOutputAttachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedAtsCandidateOutputAttachmentsUnifiedAtsAttachmentOutput(unifiedAtsAttachmentOutput UnifiedAtsAttachmentOutput) UnifiedAtsCandidateOutputAttachments {
+	typ := UnifiedAtsCandidateOutputAttachmentsTypeUnifiedAtsAttachmentOutput
+
+	return UnifiedAtsCandidateOutputAttachments{
+		UnifiedAtsAttachmentOutput: &unifiedAtsAttachmentOutput,
+		Type:                       typ,
+	}
+}
+
+func (u *UnifiedAtsCandidateOutputAttachments) UnmarshalJSON(data []byte) error {
+
+	var unifiedAtsAttachmentOutput UnifiedAtsAttachmentOutput = UnifiedAtsAttachmentOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedAtsAttachmentOutput, "", true, true); err == nil {
+		u.UnifiedAtsAttachmentOutput = &unifiedAtsAttachmentOutput
+		u.Type = UnifiedAtsCandidateOutputAttachmentsTypeUnifiedAtsAttachmentOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedAtsCandidateOutputAttachmentsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedAtsCandidateOutputAttachments", string(data))
+}
+
+func (u UnifiedAtsCandidateOutputAttachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedAtsAttachmentOutput != nil {
+		return utils.MarshalJSON(u.UnifiedAtsAttachmentOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedAtsCandidateOutputAttachments: all fields are null")
+}
+
+type ApplicationsType string
+
+const (
+	ApplicationsTypeStr                         ApplicationsType = "str"
+	ApplicationsTypeUnifiedAtsApplicationOutput ApplicationsType = "UnifiedAtsApplicationOutput"
+)
+
+type Applications struct {
+	Str                         *string
+	UnifiedAtsApplicationOutput *UnifiedAtsApplicationOutput
+
+	Type ApplicationsType
+}
+
+func CreateApplicationsStr(str string) Applications {
+	typ := ApplicationsTypeStr
+
+	return Applications{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateApplicationsUnifiedAtsApplicationOutput(unifiedAtsApplicationOutput UnifiedAtsApplicationOutput) Applications {
+	typ := ApplicationsTypeUnifiedAtsApplicationOutput
+
+	return Applications{
+		UnifiedAtsApplicationOutput: &unifiedAtsApplicationOutput,
+		Type:                        typ,
+	}
+}
+
+func (u *Applications) UnmarshalJSON(data []byte) error {
+
+	var unifiedAtsApplicationOutput UnifiedAtsApplicationOutput = UnifiedAtsApplicationOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedAtsApplicationOutput, "", true, true); err == nil {
+		u.UnifiedAtsApplicationOutput = &unifiedAtsApplicationOutput
+		u.Type = ApplicationsTypeUnifiedAtsApplicationOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = ApplicationsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Applications", string(data))
+}
+
+func (u Applications) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedAtsApplicationOutput != nil {
+		return utils.MarshalJSON(u.UnifiedAtsApplicationOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Applications: all fields are null")
+}
+
+type UnifiedAtsCandidateOutputTagsType string
+
+const (
+	UnifiedAtsCandidateOutputTagsTypeStr                 UnifiedAtsCandidateOutputTagsType = "str"
+	UnifiedAtsCandidateOutputTagsTypeUnifiedAtsTagOutput UnifiedAtsCandidateOutputTagsType = "UnifiedAtsTagOutput"
+)
+
+type UnifiedAtsCandidateOutputTags struct {
+	Str                 *string
+	UnifiedAtsTagOutput *UnifiedAtsTagOutput
+
+	Type UnifiedAtsCandidateOutputTagsType
+}
+
+func CreateUnifiedAtsCandidateOutputTagsStr(str string) UnifiedAtsCandidateOutputTags {
+	typ := UnifiedAtsCandidateOutputTagsTypeStr
+
+	return UnifiedAtsCandidateOutputTags{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedAtsCandidateOutputTagsUnifiedAtsTagOutput(unifiedAtsTagOutput UnifiedAtsTagOutput) UnifiedAtsCandidateOutputTags {
+	typ := UnifiedAtsCandidateOutputTagsTypeUnifiedAtsTagOutput
+
+	return UnifiedAtsCandidateOutputTags{
+		UnifiedAtsTagOutput: &unifiedAtsTagOutput,
+		Type:                typ,
+	}
+}
+
+func (u *UnifiedAtsCandidateOutputTags) UnmarshalJSON(data []byte) error {
+
+	var unifiedAtsTagOutput UnifiedAtsTagOutput = UnifiedAtsTagOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedAtsTagOutput, "", true, true); err == nil {
+		u.UnifiedAtsTagOutput = &unifiedAtsTagOutput
+		u.Type = UnifiedAtsCandidateOutputTagsTypeUnifiedAtsTagOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedAtsCandidateOutputTagsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedAtsCandidateOutputTags", string(data))
+}
+
+func (u UnifiedAtsCandidateOutputTags) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedAtsTagOutput != nil {
+		return utils.MarshalJSON(u.UnifiedAtsTagOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedAtsCandidateOutputTags: all fields are null")
+}
 
 type UnifiedAtsCandidateOutput struct {
 	// The first name of the candidate
@@ -29,11 +220,11 @@ type UnifiedAtsCandidateOutput struct {
 	// The last interaction date with the candidate
 	LastInteractionAt *time.Time `json:"last_interaction_at,omitempty"`
 	// The attachments UUIDs of the candidate
-	Attachments []string `json:"attachments,omitempty"`
+	Attachments []UnifiedAtsCandidateOutputAttachments `json:"attachments,omitempty"`
 	// The applications UUIDs of the candidate
-	Applications []string `json:"applications,omitempty"`
+	Applications []Applications `json:"applications,omitempty"`
 	// The tags of the candidate
-	Tags []string `json:"tags,omitempty"`
+	Tags []UnifiedAtsCandidateOutputTags `json:"tags,omitempty"`
 	// The urls of the candidate, possible values for Url type are WEBSITE, BLOG, LINKEDIN, GITHUB, or OTHER
 	Urls []URL `json:"urls,omitempty"`
 	// The phone numbers of the candidate
@@ -135,21 +326,21 @@ func (o *UnifiedAtsCandidateOutput) GetLastInteractionAt() *time.Time {
 	return o.LastInteractionAt
 }
 
-func (o *UnifiedAtsCandidateOutput) GetAttachments() []string {
+func (o *UnifiedAtsCandidateOutput) GetAttachments() []UnifiedAtsCandidateOutputAttachments {
 	if o == nil {
 		return nil
 	}
 	return o.Attachments
 }
 
-func (o *UnifiedAtsCandidateOutput) GetApplications() []string {
+func (o *UnifiedAtsCandidateOutput) GetApplications() []Applications {
 	if o == nil {
 		return nil
 	}
 	return o.Applications
 }
 
-func (o *UnifiedAtsCandidateOutput) GetTags() []string {
+func (o *UnifiedAtsCandidateOutput) GetTags() []UnifiedAtsCandidateOutputTags {
 	if o == nil {
 		return nil
 	}
