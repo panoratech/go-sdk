@@ -12,9 +12,11 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 	"github.com/panoratech/go-sdk/models/operations"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
+	"github.com/spyzhov/ajson"
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 type Actions struct {
@@ -186,6 +188,45 @@ func (s *Actions) List(ctx context.Context, xConnectionToken string, remoteData 
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+	res.Next =
+		func() (*operations.ListMarketingautomationActionResponse, error) {
+			b, err := ajson.Unmarshal(rawBody)
+			if err != nil {
+				return nil, err
+			}
+			nC, err := ajson.Eval(b, "$.next_cursor")
+			if err != nil {
+				return nil, err
+			}
+			var nCVal string
+
+			if nC.IsNumeric() {
+				numVal, err := nC.GetNumeric()
+				if err != nil {
+					return nil, err
+				}
+				// GetNumeric returns as float64 so convert to the appropriate type.
+				nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+			} else {
+				val, err := nC.Value()
+				if err != nil {
+					return nil, err
+				}
+				if val == nil {
+					return nil, nil
+				}
+				nCVal = val.(string)
+			}
+
+			return s.List(
+				ctx,
+				xConnectionToken,
+				remoteData,
+				limit,
+				&nCVal,
+				opts...,
+			)
+		}
 
 	switch {
 	case httpRes.StatusCode == 200:

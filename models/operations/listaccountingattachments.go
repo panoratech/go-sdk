@@ -75,6 +75,8 @@ func (o *ListAccountingAttachmentsResponseBody) GetData() []components.UnifiedAc
 type ListAccountingAttachmentsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingAttachmentsResponseBody
+
+	Next func() (*ListAccountingAttachmentsResponse, error)
 }
 
 func (o *ListAccountingAttachmentsResponse) GetHTTPMeta() components.HTTPMetadata {

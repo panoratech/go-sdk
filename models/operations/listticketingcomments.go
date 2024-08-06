@@ -75,6 +75,8 @@ func (o *ListTicketingCommentsResponseBody) GetData() []components.UnifiedTicket
 type ListTicketingCommentsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListTicketingCommentsResponseBody
+
+	Next func() (*ListTicketingCommentsResponse, error)
 }
 
 func (o *ListTicketingCommentsResponse) GetHTTPMeta() components.HTTPMetadata {

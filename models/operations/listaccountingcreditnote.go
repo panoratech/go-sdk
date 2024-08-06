@@ -75,6 +75,8 @@ func (o *ListAccountingCreditNoteResponseBody) GetData() []components.UnifiedAcc
 type ListAccountingCreditNoteResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingCreditNoteResponseBody
+
+	Next func() (*ListAccountingCreditNoteResponse, error)
 }
 
 func (o *ListAccountingCreditNoteResponse) GetHTTPMeta() components.HTTPMetadata {

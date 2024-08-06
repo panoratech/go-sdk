@@ -75,6 +75,8 @@ func (o *ListAtsActivityResponseBody) GetData() []components.UnifiedAtsActivityO
 type ListAtsActivityResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAtsActivityResponseBody
+
+	Next func() (*ListAtsActivityResponse, error)
 }
 
 func (o *ListAtsActivityResponse) GetHTTPMeta() components.HTTPMetadata {

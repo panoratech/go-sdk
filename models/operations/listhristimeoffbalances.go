@@ -75,6 +75,8 @@ func (o *ListHrisTimeoffbalancesResponseBody) GetData() []components.UnifiedHris
 type ListHrisTimeoffbalancesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListHrisTimeoffbalancesResponseBody
+
+	Next func() (*ListHrisTimeoffbalancesResponse, error)
 }
 
 func (o *ListHrisTimeoffbalancesResponse) GetHTTPMeta() components.HTTPMetadata {

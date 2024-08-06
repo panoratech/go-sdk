@@ -75,6 +75,8 @@ func (o *ListCrmEngagementsResponseBody) GetData() []components.UnifiedCrmEngage
 type ListCrmEngagementsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListCrmEngagementsResponseBody
+
+	Next func() (*ListCrmEngagementsResponse, error)
 }
 
 func (o *ListCrmEngagementsResponse) GetHTTPMeta() components.HTTPMetadata {

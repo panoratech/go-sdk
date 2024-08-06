@@ -75,6 +75,8 @@ func (o *ListAccountingPhonenumberResponseBody) GetData() []components.UnifiedAc
 type ListAccountingPhonenumberResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingPhonenumberResponseBody
+
+	Next func() (*ListAccountingPhonenumberResponse, error)
 }
 
 func (o *ListAccountingPhonenumberResponse) GetHTTPMeta() components.HTTPMetadata {

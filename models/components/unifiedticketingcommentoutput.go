@@ -4,6 +4,7 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
@@ -36,6 +37,69 @@ func (e *CreatorType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type UnifiedTicketingCommentOutputAttachmentsType string
+
+const (
+	UnifiedTicketingCommentOutputAttachmentsTypeStr                              UnifiedTicketingCommentOutputAttachmentsType = "str"
+	UnifiedTicketingCommentOutputAttachmentsTypeUnifiedTicketingAttachmentOutput UnifiedTicketingCommentOutputAttachmentsType = "UnifiedTicketingAttachmentOutput"
+)
+
+type UnifiedTicketingCommentOutputAttachments struct {
+	Str                              *string
+	UnifiedTicketingAttachmentOutput *UnifiedTicketingAttachmentOutput
+
+	Type UnifiedTicketingCommentOutputAttachmentsType
+}
+
+func CreateUnifiedTicketingCommentOutputAttachmentsStr(str string) UnifiedTicketingCommentOutputAttachments {
+	typ := UnifiedTicketingCommentOutputAttachmentsTypeStr
+
+	return UnifiedTicketingCommentOutputAttachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateUnifiedTicketingCommentOutputAttachmentsUnifiedTicketingAttachmentOutput(unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput) UnifiedTicketingCommentOutputAttachments {
+	typ := UnifiedTicketingCommentOutputAttachmentsTypeUnifiedTicketingAttachmentOutput
+
+	return UnifiedTicketingCommentOutputAttachments{
+		UnifiedTicketingAttachmentOutput: &unifiedTicketingAttachmentOutput,
+		Type:                             typ,
+	}
+}
+
+func (u *UnifiedTicketingCommentOutputAttachments) UnmarshalJSON(data []byte) error {
+
+	var unifiedTicketingAttachmentOutput UnifiedTicketingAttachmentOutput = UnifiedTicketingAttachmentOutput{}
+	if err := utils.UnmarshalJSON(data, &unifiedTicketingAttachmentOutput, "", true, true); err == nil {
+		u.UnifiedTicketingAttachmentOutput = &unifiedTicketingAttachmentOutput
+		u.Type = UnifiedTicketingCommentOutputAttachmentsTypeUnifiedTicketingAttachmentOutput
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = UnifiedTicketingCommentOutputAttachmentsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UnifiedTicketingCommentOutputAttachments", string(data))
+}
+
+func (u UnifiedTicketingCommentOutputAttachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.UnifiedTicketingAttachmentOutput != nil {
+		return utils.MarshalJSON(u.UnifiedTicketingAttachmentOutput, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type UnifiedTicketingCommentOutputAttachments: all fields are null")
+}
+
 type UnifiedTicketingCommentOutput struct {
 	// The body of the comment
 	Body *string `json:"body"`
@@ -52,7 +116,7 @@ type UnifiedTicketingCommentOutput struct {
 	// The UUID of the user which the comment belongs to (if no contact_id specified)
 	UserID *string `json:"user_id,omitempty"`
 	// The attachements UUIDs tied to the comment
-	Attachments []string `json:"attachments,omitempty"`
+	Attachments []UnifiedTicketingCommentOutputAttachments `json:"attachments,omitempty"`
 	// The UUID of the comment
 	ID *string `json:"id,omitempty"`
 	// The id of the comment in the context of the 3rd Party
@@ -125,7 +189,7 @@ func (o *UnifiedTicketingCommentOutput) GetUserID() *string {
 	return o.UserID
 }
 
-func (o *UnifiedTicketingCommentOutput) GetAttachments() []string {
+func (o *UnifiedTicketingCommentOutput) GetAttachments() []UnifiedTicketingCommentOutputAttachments {
 	if o == nil {
 		return nil
 	}

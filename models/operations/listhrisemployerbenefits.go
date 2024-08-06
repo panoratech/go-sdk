@@ -75,6 +75,8 @@ func (o *ListHrisEmployerBenefitsResponseBody) GetData() []components.UnifiedHri
 type ListHrisEmployerBenefitsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListHrisEmployerBenefitsResponseBody
+
+	Next func() (*ListHrisEmployerBenefitsResponse, error)
 }
 
 func (o *ListHrisEmployerBenefitsResponse) GetHTTPMeta() components.HTTPMetadata {

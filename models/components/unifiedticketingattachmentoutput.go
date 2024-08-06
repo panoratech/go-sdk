@@ -37,7 +37,7 @@ func (u UnifiedTicketingAttachmentOutput) MarshalJSON() ([]byte, error) {
 }
 
 func (u *UnifiedTicketingAttachmentOutput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &u, "", false, true); err != nil {
 		return err
 	}
 	return nil

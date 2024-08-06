@@ -75,6 +75,8 @@ func (o *ListAccountingAddressResponseBody) GetData() []components.UnifiedAccoun
 type ListAccountingAddressResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAccountingAddressResponseBody
+
+	Next func() (*ListAccountingAddressResponse, error)
 }
 
 func (o *ListAccountingAddressResponse) GetHTTPMeta() components.HTTPMetadata {

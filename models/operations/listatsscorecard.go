@@ -75,6 +75,8 @@ func (o *ListAtsScorecardResponseBody) GetData() []components.UnifiedAtsScorecar
 type ListAtsScorecardResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Object   *ListAtsScorecardResponseBody
+
+	Next func() (*ListAtsScorecardResponse, error)
 }
 
 func (o *ListAtsScorecardResponse) GetHTTPMeta() components.HTTPMetadata {
