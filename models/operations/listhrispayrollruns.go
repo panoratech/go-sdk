@@ -3,6 +3,7 @@
 package operations
 
 import (
+	"github.com/panoratech/go-sdk/internal/utils"
 	"github.com/panoratech/go-sdk/models/components"
 )
 
@@ -12,9 +13,20 @@ type ListHrisPayrollRunsRequest struct {
 	// Set to true to include data from the original software.
 	RemoteData *bool `queryParam:"style=form,explode=true,name=remote_data"`
 	// Set to get the number of records.
-	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
+	Limit *float64 `default:"30" queryParam:"style=form,explode=true,name=limit"`
 	// Set to get the number of records after this cursor.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
+}
+
+func (l ListHrisPayrollRunsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListHrisPayrollRunsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ListHrisPayrollRunsRequest) GetXConnectionToken() string {

@@ -3,14 +3,14 @@
 package components
 
 type LoginDto struct {
-	IDUser       string `json:"id_user"`
-	Email        string `json:"email"`
-	PasswordHash string `json:"password_hash"`
+	IDUser       *string `json:"id_user,omitempty"`
+	Email        string  `json:"email"`
+	PasswordHash string  `json:"password_hash"`
 }
 
-func (o *LoginDto) GetIDUser() string {
+func (o *LoginDto) GetIDUser() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.IDUser
 }

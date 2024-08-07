@@ -3,12 +3,24 @@
 package operations
 
 import (
+	"github.com/panoratech/go-sdk/internal/utils"
 	"github.com/panoratech/go-sdk/models/components"
 )
 
 type GetPanoraCoreEventsRequest struct {
-	Page  *float64 `queryParam:"style=form,explode=true,name=page"`
-	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
+	Page  *float64 `default:"1" queryParam:"style=form,explode=true,name=page"`
+	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
+}
+
+func (g GetPanoraCoreEventsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetPanoraCoreEventsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetPanoraCoreEventsRequest) GetPage() *float64 {

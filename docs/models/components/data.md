@@ -1,17 +1,7 @@
 # Data
 
 
-## Supported Types
+## Fields
 
-### 
-
-```go
-data := components.CreateDataMapOfAny(map[string]any{/* values here */})
-```
-
-### 
-
-```go
-data := components.CreateDataArrayOfMapOfAny([]map[string]any{/* values here */})
-```
-
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |

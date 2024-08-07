@@ -12,11 +12,8 @@ import (
 type PassThroughRequestDtoMethod string
 
 const (
-	PassThroughRequestDtoMethodGet    PassThroughRequestDtoMethod = "GET"
-	PassThroughRequestDtoMethodPost   PassThroughRequestDtoMethod = "POST"
-	PassThroughRequestDtoMethodPatch  PassThroughRequestDtoMethod = "PATCH"
-	PassThroughRequestDtoMethodDelete PassThroughRequestDtoMethod = "DELETE"
-	PassThroughRequestDtoMethodPut    PassThroughRequestDtoMethod = "PUT"
+	PassThroughRequestDtoMethodGet  PassThroughRequestDtoMethod = "GET"
+	PassThroughRequestDtoMethodPost PassThroughRequestDtoMethod = "POST"
 )
 
 func (e PassThroughRequestDtoMethod) ToPointer() *PassThroughRequestDtoMethod {
@@ -31,12 +28,6 @@ func (e *PassThroughRequestDtoMethod) UnmarshalJSON(data []byte) error {
 	case "GET":
 		fallthrough
 	case "POST":
-		fallthrough
-	case "PATCH":
-		fallthrough
-	case "DELETE":
-		fallthrough
-	case "PUT":
 		*e = PassThroughRequestDtoMethod(v)
 		return nil
 	default:
@@ -44,58 +35,61 @@ func (e *PassThroughRequestDtoMethod) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type DataUnionType string
+type Data struct {
+}
+
+type RequestFormatType string
 
 const (
-	DataUnionTypeMapOfAny        DataUnionType = "mapOfAny"
-	DataUnionTypeArrayOfMapOfAny DataUnionType = "arrayOfMapOfAny"
+	RequestFormatTypeMapOfAny        RequestFormatType = "mapOfAny"
+	RequestFormatTypeArrayOfMapOfAny RequestFormatType = "arrayOfMapOfAny"
 )
 
-type Data struct {
+type RequestFormat struct {
 	MapOfAny        map[string]any
 	ArrayOfMapOfAny []map[string]any
 
-	Type DataUnionType
+	Type RequestFormatType
 }
 
-func CreateDataMapOfAny(mapOfAny map[string]any) Data {
-	typ := DataUnionTypeMapOfAny
+func CreateRequestFormatMapOfAny(mapOfAny map[string]any) RequestFormat {
+	typ := RequestFormatTypeMapOfAny
 
-	return Data{
+	return RequestFormat{
 		MapOfAny: mapOfAny,
 		Type:     typ,
 	}
 }
 
-func CreateDataArrayOfMapOfAny(arrayOfMapOfAny []map[string]any) Data {
-	typ := DataUnionTypeArrayOfMapOfAny
+func CreateRequestFormatArrayOfMapOfAny(arrayOfMapOfAny []map[string]any) RequestFormat {
+	typ := RequestFormatTypeArrayOfMapOfAny
 
-	return Data{
+	return RequestFormat{
 		ArrayOfMapOfAny: arrayOfMapOfAny,
 		Type:            typ,
 	}
 }
 
-func (u *Data) UnmarshalJSON(data []byte) error {
+func (u *RequestFormat) UnmarshalJSON(data []byte) error {
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = DataUnionTypeMapOfAny
+		u.Type = RequestFormatTypeMapOfAny
 		return nil
 	}
 
 	var arrayOfMapOfAny []map[string]any = []map[string]any{}
 	if err := utils.UnmarshalJSON(data, &arrayOfMapOfAny, "", true, true); err == nil {
 		u.ArrayOfMapOfAny = arrayOfMapOfAny
-		u.Type = DataUnionTypeArrayOfMapOfAny
+		u.Type = RequestFormatTypeArrayOfMapOfAny
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Data", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for RequestFormat", string(data))
 }
 
-func (u Data) MarshalJSON() ([]byte, error) {
+func (u RequestFormat) MarshalJSON() ([]byte, error) {
 	if u.MapOfAny != nil {
 		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
@@ -104,14 +98,19 @@ func (u Data) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ArrayOfMapOfAny, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Data: all fields are null")
+	return nil, errors.New("could not marshal union type RequestFormat: all fields are null")
+}
+
+type Headers struct {
 }
 
 type PassThroughRequestDto struct {
-	Method  PassThroughRequestDtoMethod `json:"method"`
-	Path    *string                     `json:"path"`
-	Data    *Data                       `json:"data"`
-	Headers map[string]any              `json:"headers"`
+	Method          PassThroughRequestDtoMethod `json:"method"`
+	Path            *string                     `json:"path"`
+	Data            *Data                       `json:"data,omitempty"`
+	RequestFormat   *RequestFormat              `json:"request_format,omitempty"`
+	OverrideBaseURL map[string]any              `json:"overrideBaseUrl,omitempty"`
+	Headers         *Headers                    `json:"headers,omitempty"`
 }
 
 func (o *PassThroughRequestDto) GetMethod() PassThroughRequestDtoMethod {
@@ -135,7 +134,21 @@ func (o *PassThroughRequestDto) GetData() *Data {
 	return o.Data
 }
 
-func (o *PassThroughRequestDto) GetHeaders() map[string]any {
+func (o *PassThroughRequestDto) GetRequestFormat() *RequestFormat {
+	if o == nil {
+		return nil
+	}
+	return o.RequestFormat
+}
+
+func (o *PassThroughRequestDto) GetOverrideBaseURL() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.OverrideBaseURL
+}
+
+func (o *PassThroughRequestDto) GetHeaders() *Headers {
 	if o == nil {
 		return nil
 	}

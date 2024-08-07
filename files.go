@@ -255,7 +255,7 @@ func (s *Files) List(ctx context.Context, xConnectionToken string, remoteData *b
 
 // Create Files
 // Create Files in any supported Filestorage software
-func (s *Files) Create(ctx context.Context, xConnectionToken string, remoteData bool, unifiedFilestorageFileInput components.UnifiedFilestorageFileInput, opts ...operations.Option) (*operations.CreateFilestorageFileResponse, error) {
+func (s *Files) Create(ctx context.Context, xConnectionToken string, unifiedFilestorageFileInput components.UnifiedFilestorageFileInput, remoteData *bool, opts ...operations.Option) (*operations.CreateFilestorageFileResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createFilestorageFile",

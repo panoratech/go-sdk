@@ -255,7 +255,7 @@ func (s *Folders) List(ctx context.Context, xConnectionToken string, remoteData 
 
 // Create Folders
 // Create Folders in any supported Filestorage software
-func (s *Folders) Create(ctx context.Context, xConnectionToken string, remoteData bool, unifiedFilestorageFolderInput components.UnifiedFilestorageFolderInput, opts ...operations.Option) (*operations.CreateFilestorageFolderResponse, error) {
+func (s *Folders) Create(ctx context.Context, xConnectionToken string, unifiedFilestorageFolderInput components.UnifiedFilestorageFolderInput, remoteData *bool, opts ...operations.Option) (*operations.CreateFilestorageFolderResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "createFilestorageFolder",
