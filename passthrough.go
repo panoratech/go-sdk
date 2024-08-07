@@ -18,17 +18,20 @@ import (
 )
 
 type Passthrough struct {
+	Retryid *Retryid
+
 	sdkConfiguration sdkConfiguration
 }
 
 func newPassthrough(sdkConfig sdkConfiguration) *Passthrough {
 	return &Passthrough{
 		sdkConfiguration: sdkConfig,
+		Retryid:          newRetryid(sdkConfig),
 	}
 }
 
 // Request - Make a passthrough request
-func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedUserID string, vertical string, passThroughRequestDto components.PassThroughRequestDto, opts ...operations.Option) (*operations.RequestResponse, error) {
+func (s *Passthrough) Request(ctx context.Context, xConnectionToken string, passThroughRequestDto components.PassThroughRequestDto, opts ...operations.Option) (*operations.RequestResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "request",
@@ -36,9 +39,7 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 	}
 
 	request := operations.RequestRequest{
-		IntegrationID:         integrationID,
-		LinkedUserID:          linkedUserID,
-		Vertical:              vertical,
+		XConnectionToken:      xConnectionToken,
 		PassThroughRequestDto: passThroughRequestDto,
 	}
 
@@ -84,9 +85,7 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
+	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -192,15 +191,27 @@ func (s *Passthrough) Request(ctx context.Context, integrationID string, linkedU
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 
 	switch {
-	case httpRes.StatusCode == 201:
+	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out components.PassThroughResponse
+			var out operations.RequestResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.PassThroughResponse = &out
+			res.TwoHundredApplicationJSONObject = &out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 201:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			var out operations.RequestPassthroughResponseBody
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.TwoHundredAndOneApplicationJSONObject = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}

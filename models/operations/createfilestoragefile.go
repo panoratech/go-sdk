@@ -8,8 +8,9 @@ import (
 
 type CreateFilestorageFileRequest struct {
 	// The connection token
-	XConnectionToken            string                                 `header:"style=simple,explode=false,name=x-connection-token"`
-	RemoteData                  bool                                   `queryParam:"style=form,explode=true,name=remote_data"`
+	XConnectionToken string `header:"style=simple,explode=false,name=x-connection-token"`
+	// Set to true to include data from the original Accounting software.
+	RemoteData                  *bool                                  `queryParam:"style=form,explode=true,name=remote_data"`
 	UnifiedFilestorageFileInput components.UnifiedFilestorageFileInput `request:"mediaType=application/json"`
 }
 
@@ -20,9 +21,9 @@ func (o *CreateFilestorageFileRequest) GetXConnectionToken() string {
 	return o.XConnectionToken
 }
 
-func (o *CreateFilestorageFileRequest) GetRemoteData() bool {
+func (o *CreateFilestorageFileRequest) GetRemoteData() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.RemoteData
 }

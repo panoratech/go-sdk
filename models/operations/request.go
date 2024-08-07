@@ -7,31 +7,15 @@ import (
 )
 
 type RequestRequest struct {
-	IntegrationID         string                           `queryParam:"style=form,explode=true,name=integrationId"`
-	LinkedUserID          string                           `queryParam:"style=form,explode=true,name=linkedUserId"`
-	Vertical              string                           `queryParam:"style=form,explode=true,name=vertical"`
+	XConnectionToken      string                           `header:"style=simple,explode=false,name=x-connection-token"`
 	PassThroughRequestDto components.PassThroughRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *RequestRequest) GetIntegrationID() string {
+func (o *RequestRequest) GetXConnectionToken() string {
 	if o == nil {
 		return ""
 	}
-	return o.IntegrationID
-}
-
-func (o *RequestRequest) GetLinkedUserID() string {
-	if o == nil {
-		return ""
-	}
-	return o.LinkedUserID
-}
-
-func (o *RequestRequest) GetVertical() string {
-	if o == nil {
-		return ""
-	}
-	return o.Vertical
+	return o.XConnectionToken
 }
 
 func (o *RequestRequest) GetPassThroughRequestDto() components.PassThroughRequestDto {
@@ -41,9 +25,16 @@ func (o *RequestRequest) GetPassThroughRequestDto() components.PassThroughReques
 	return o.PassThroughRequestDto
 }
 
+type RequestPassthroughResponseBody struct {
+}
+
+type RequestResponseBody struct {
+}
+
 type RequestResponse struct {
-	HTTPMeta            components.HTTPMetadata `json:"-"`
-	PassThroughResponse *components.PassThroughResponse
+	HTTPMeta                              components.HTTPMetadata `json:"-"`
+	TwoHundredApplicationJSONObject       *RequestResponseBody
+	TwoHundredAndOneApplicationJSONObject *RequestPassthroughResponseBody
 }
 
 func (o *RequestResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -53,9 +44,16 @@ func (o *RequestResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *RequestResponse) GetPassThroughResponse() *components.PassThroughResponse {
+func (o *RequestResponse) GetTwoHundredApplicationJSONObject() *RequestResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.PassThroughResponse
+	return o.TwoHundredApplicationJSONObject
+}
+
+func (o *RequestResponse) GetTwoHundredAndOneApplicationJSONObject() *RequestPassthroughResponseBody {
+	if o == nil {
+		return nil
+	}
+	return o.TwoHundredAndOneApplicationJSONObject
 }

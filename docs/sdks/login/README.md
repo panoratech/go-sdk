@@ -26,7 +26,6 @@ func main() {
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
     request := components.LoginDto{
-        IDUser: "<value>",
         Email: "Oda.Treutel97@hotmail.com",
         PasswordHash: "<value>",
     }

@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: f31581b6c385b4f8f05068b0f2598833
+  docChecksum: 0ec320fe6c4af64ca01910309ed024e7
   docVersion: "1.0"
-  speakeasyVersion: 1.352.2
-  generationVersion: 2.385.2
-  releaseVersion: 0.4.0
-  configChecksum: 17f4ad4e339e8430b37a2b63217baab5
+  speakeasyVersion: 1.355.0
+  generationVersion: 2.387.0
+  releaseVersion: 0.5.0
+  configChecksum: cdff4b1f4a9f0167df16cdb403cffcc3
   repoURL: https://github.com/panoratech/go-sdk.git
   installationURL: https://github.com/panoratech/go-sdk
 features:
   go:
     additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.5
     core: 3.5.3
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
@@ -59,6 +60,7 @@ generatedFiles:
   - projects.go
   - fieldmappings.go
   - events.go
+  - retryid.go
   - passthrough.go
   - bankinfos.go
   - benefits.go
@@ -129,6 +131,11 @@ generatedFiles:
   - panoragroups.go
   - panorafilestorageusers.go
   - filestorage.go
+  - products.go
+  - orders.go
+  - customers.go
+  - fulfillments.go
+  - ecommerce.go
   - panora.go
   - go.mod
   - models/sdkerrors/sdkerror.go
@@ -209,11 +216,15 @@ generatedFiles:
   - /models/operations/remoteid.go
   - /models/operations/getprojects.go
   - /models/operations/createproject.go
+  - /models/operations/getfieldmappingvalues.go
+  - /models/operations/getfieldmappingsentities.go
+  - /models/operations/getfieldmappings.go
   - /models/operations/definitions.go
   - /models/operations/definecustomfield.go
   - /models/operations/map.go
   - /models/operations/getpanoracoreevents.go
   - /models/operations/request.go
+  - /models/operations/getretriedrequestresponse.go
   - /models/operations/listhrisbankinfo.go
   - /models/operations/retrievehrisbankinfo.go
   - /models/operations/listhrisbenefits.go
@@ -365,6 +376,16 @@ generatedFiles:
   - /models/operations/retrievefilestoragegroup.go
   - /models/operations/listfilestorageusers.go
   - /models/operations/retrievefilestorageuser.go
+  - /models/operations/listecommerceproducts.go
+  - /models/operations/createecommerceproduct.go
+  - /models/operations/retrieveecommerceproduct.go
+  - /models/operations/listecommerceorders.go
+  - /models/operations/createecommerceorder.go
+  - /models/operations/retrieveecommerceorder.go
+  - /models/operations/listecommercecustomers.go
+  - /models/operations/retrieveecommercecustomer.go
+  - /models/operations/listecommercefulfillments.go
+  - /models/operations/retrieveecommercefulfillment.go
   - /models/components/httpmetadata.go
   - /models/components/logindto.go
   - /models/components/connection.go
@@ -411,7 +432,6 @@ generatedFiles:
   - /models/components/customfieldcreatedto.go
   - /models/components/mapfieldtoproviderdto.go
   - /models/components/eventresponse.go
-  - /models/components/passthroughresponse.go
   - /models/components/passthroughrequestdto.go
   - /models/components/unifiedhrisbankinfooutput.go
   - /models/components/unifiedhrisbenefitoutput.go
@@ -501,6 +521,12 @@ generatedFiles:
   - /models/components/unifiedfilestoragefolderinput.go
   - /models/components/unifiedfilestoragegroupoutput.go
   - /models/components/unifiedfilestorageuseroutput.go
+  - /models/components/unifiedecommerceproductoutput.go
+  - /models/components/unifiedecommerceproductinput.go
+  - /models/components/unifiedecommerceorderoutput.go
+  - /models/components/unifiedecommerceorderinput.go
+  - /models/components/unifiedecommercecustomeroutput.go
+  - /models/components/unifiedecommercefulfillmentoutput.go
   - /models/components/security.go
   - docs/models/operations/helloresponse.md
   - docs/models/operations/healthresponse.md
@@ -632,13 +658,20 @@ generatedFiles:
   - docs/models/operations/remoteidresponse.md
   - docs/models/operations/getprojectsresponse.md
   - docs/models/operations/createprojectresponse.md
+  - docs/models/operations/getfieldmappingvaluesresponse.md
+  - docs/models/operations/getfieldmappingsentitiesresponse.md
+  - docs/models/operations/getfieldmappingsresponse.md
   - docs/models/operations/definitionsresponse.md
   - docs/models/operations/definecustomfieldresponse.md
   - docs/models/operations/mapresponse.md
   - docs/models/operations/getpanoracoreeventsrequest.md
   - docs/models/operations/getpanoracoreeventsresponse.md
   - docs/models/operations/requestrequest.md
+  - docs/models/operations/requestpassthroughresponsebody.md
+  - docs/models/operations/requestresponsebody.md
   - docs/models/operations/requestresponse.md
+  - docs/models/operations/getretriedrequestresponserequest.md
+  - docs/models/operations/getretriedrequestresponseresponse.md
   - docs/models/operations/listhrisbankinforequest.md
   - docs/models/operations/listhrisbankinforesponsebody.md
   - docs/models/operations/listhrisbankinforesponse.md
@@ -1005,6 +1038,30 @@ generatedFiles:
   - docs/models/operations/listfilestorageusersresponse.md
   - docs/models/operations/retrievefilestorageuserrequest.md
   - docs/models/operations/retrievefilestorageuserresponse.md
+  - docs/models/operations/listecommerceproductsrequest.md
+  - docs/models/operations/listecommerceproductsresponsebody.md
+  - docs/models/operations/listecommerceproductsresponse.md
+  - docs/models/operations/createecommerceproductrequest.md
+  - docs/models/operations/createecommerceproductresponse.md
+  - docs/models/operations/retrieveecommerceproductrequest.md
+  - docs/models/operations/retrieveecommerceproductresponse.md
+  - docs/models/operations/listecommerceordersrequest.md
+  - docs/models/operations/listecommerceordersresponsebody.md
+  - docs/models/operations/listecommerceordersresponse.md
+  - docs/models/operations/createecommerceorderrequest.md
+  - docs/models/operations/createecommerceorderresponse.md
+  - docs/models/operations/retrieveecommerceorderrequest.md
+  - docs/models/operations/retrieveecommerceorderresponse.md
+  - docs/models/operations/listecommercecustomersrequest.md
+  - docs/models/operations/listecommercecustomersresponsebody.md
+  - docs/models/operations/listecommercecustomersresponse.md
+  - docs/models/operations/retrieveecommercecustomerrequest.md
+  - docs/models/operations/retrieveecommercecustomerresponse.md
+  - docs/models/operations/listecommercefulfillmentsrequest.md
+  - docs/models/operations/listecommercefulfillmentsresponsebody.md
+  - docs/models/operations/listecommercefulfillmentsresponse.md
+  - docs/models/operations/retrieveecommercefulfillmentrequest.md
+  - docs/models/operations/retrieveecommercefulfillmentresponse.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/logindto.md
   - docs/models/components/tokentype.md
@@ -1101,10 +1158,10 @@ generatedFiles:
   - docs/models/components/eventresponsestatus.md
   - docs/models/components/method.md
   - docs/models/components/eventresponse.md
-  - docs/models/components/passthroughresponsedata.md
-  - docs/models/components/passthroughresponse.md
   - docs/models/components/passthroughrequestdtomethod.md
   - docs/models/components/data.md
+  - docs/models/components/requestformat.md
+  - docs/models/components/headers.md
   - docs/models/components/passthroughrequestdto.md
   - docs/models/components/unifiedhrisbankinfooutput.md
   - docs/models/components/unifiedhrisbenefitoutput.md
@@ -1220,6 +1277,28 @@ generatedFiles:
   - docs/models/components/users.md
   - docs/models/components/unifiedfilestoragegroupoutput.md
   - docs/models/components/unifiedfilestorageuseroutput.md
+  - docs/models/components/variants.md
+  - docs/models/components/fieldmappings.md
+  - docs/models/components/remotedata.md
+  - docs/models/components/unifiedecommerceproductoutput.md
+  - docs/models/components/unifiedecommerceproductinputvariants.md
+  - docs/models/components/unifiedecommerceproductinputfieldmappings.md
+  - docs/models/components/unifiedecommerceproductinput.md
+  - docs/models/components/items.md
+  - docs/models/components/unifiedecommerceorderoutputfieldmappings.md
+  - docs/models/components/unifiedecommerceorderoutputremotedata.md
+  - docs/models/components/unifiedecommerceorderoutput.md
+  - docs/models/components/unifiedecommerceorderinputitems.md
+  - docs/models/components/unifiedecommerceorderinputfieldmappings.md
+  - docs/models/components/unifiedecommerceorderinput.md
+  - docs/models/components/addresses.md
+  - docs/models/components/unifiedecommercecustomeroutputfieldmappings.md
+  - docs/models/components/unifiedecommercecustomeroutputremotedata.md
+  - docs/models/components/unifiedecommercecustomeroutput.md
+  - docs/models/components/unifiedecommercefulfillmentoutputitems.md
+  - docs/models/components/unifiedecommercefulfillmentoutputfieldmappings.md
+  - docs/models/components/unifiedecommercefulfillmentoutputremotedata.md
+  - docs/models/components/unifiedecommercefulfillmentoutput.md
   - docs/models/components/security.md
   - docs/models/operations/option.md
   - docs/sdks/panora/README.md
@@ -1252,6 +1331,7 @@ generatedFiles:
   - docs/sdks/fieldmappings/README.md
   - docs/sdks/events/README.md
   - docs/sdks/passthrough/README.md
+  - docs/sdks/retryid/README.md
   - docs/sdks/hris/README.md
   - docs/sdks/bankinfos/README.md
   - docs/sdks/benefits/README.md
@@ -1321,6 +1401,11 @@ generatedFiles:
   - docs/sdks/folders/README.md
   - docs/sdks/panoragroups/README.md
   - docs/sdks/panorafilestorageusers/README.md
+  - docs/sdks/ecommerce/README.md
+  - docs/sdks/products/README.md
+  - docs/sdks/orders/README.md
+  - docs/sdks/customers/README.md
+  - docs/sdks/fulfillments/README.md
   - USAGE.md
   - models/operations/options.go
   - .gitattributes

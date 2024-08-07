@@ -93,6 +93,7 @@ type Panora struct {
 	Ats                 *Ats
 	Accounting          *Accounting
 	Filestorage         *Filestorage
+	Ecommerce           *Ecommerce
 
 	sdkConfiguration sdkConfiguration
 }
@@ -171,9 +172,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.4.0",
-			GenVersion:        "2.385.2",
-			UserAgent:         "speakeasy-sdk/go 0.4.0 2.385.2 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.5.0",
+			GenVersion:        "2.387.0",
+			UserAgent:         "speakeasy-sdk/go 0.5.0 2.387.0 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -224,6 +225,8 @@ func New(opts ...SDKOption) *Panora {
 	sdk.Accounting = newAccounting(sdk.sdkConfiguration)
 
 	sdk.Filestorage = newFilestorage(sdk.sdkConfiguration)
+
+	sdk.Ecommerce = newEcommerce(sdk.sdkConfiguration)
 
 	return sdk
 }

@@ -197,6 +197,9 @@ func main() {
 
 ### [FieldMappings](docs/sdks/fieldmappings/README.md)
 
+* [GetFieldMappingValues](docs/sdks/fieldmappings/README.md#getfieldmappingvalues) - Retrieve field mappings values
+* [GetFieldMappingsEntities](docs/sdks/fieldmappings/README.md#getfieldmappingsentities) - Retrieve field mapping entities
+* [GetFieldMappings](docs/sdks/fieldmappings/README.md#getfieldmappings) - Retrieve field mappings
 * [Definitions](docs/sdks/fieldmappings/README.md#definitions) - Define target Field
 * [DefineCustomField](docs/sdks/fieldmappings/README.md#definecustomfield) - Create Custom Field
 * [Map](docs/sdks/fieldmappings/README.md#map) - Map Custom Field
@@ -208,6 +211,10 @@ func main() {
 ### [Passthrough](docs/sdks/passthrough/README.md)
 
 * [Request](docs/sdks/passthrough/README.md#request) - Make a passthrough request
+
+### [Passthrough.{retryid}](docs/sdks/retryid/README.md)
+
+* [GetRetriedRequestResponse](docs/sdks/retryid/README.md#getretriedrequestresponse) - Retrieve response of a failed passthrough request due to rate limits
 
 
 ### [Hris.Bankinfos](docs/sdks/bankinfos/README.md)
@@ -556,6 +563,29 @@ func main() {
 
 * [List](docs/sdks/panorafilestorageusers/README.md#list) - List Users
 * [Retrieve](docs/sdks/panorafilestorageusers/README.md#retrieve) - Retrieve Users
+
+
+### [Ecommerce.Products](docs/sdks/products/README.md)
+
+* [List](docs/sdks/products/README.md#list) - List a batch of Products
+* [Create](docs/sdks/products/README.md#create) - Create Products
+* [Retrieve](docs/sdks/products/README.md#retrieve) - Retrieve a Product
+
+### [Ecommerce.Orders](docs/sdks/orders/README.md)
+
+* [List](docs/sdks/orders/README.md#list) - List a batch of Orders
+* [Create](docs/sdks/orders/README.md#create) - Create Orders
+* [Retrieve](docs/sdks/orders/README.md#retrieve) - Retrieve a Order
+
+### [Ecommerce.Customers](docs/sdks/customers/README.md)
+
+* [List](docs/sdks/customers/README.md#list) - List a batch of Customers
+* [Retrieve](docs/sdks/customers/README.md#retrieve) - Retrieve a Customer
+
+### [Ecommerce.Fulfillments](docs/sdks/fulfillments/README.md)
+
+* [List](docs/sdks/fulfillments/README.md#list) - List a batch of Fulfillments
+* [Retrieve](docs/sdks/fulfillments/README.md#retrieve) - Retrieve a Fulfillment
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Retries [retries] -->
