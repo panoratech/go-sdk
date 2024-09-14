@@ -2,5 +2,200 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingExpenseOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingExpenseOutputFieldMappings struct {
+}
+
+// UnifiedAccountingExpenseOutputRemoteData - The remote data of the expense in the context of the 3rd Party
+type UnifiedAccountingExpenseOutputRemoteData struct {
+}
+
 type UnifiedAccountingExpenseOutput struct {
+	// The date of the expense transaction
+	TransactionDate *time.Time `json:"transaction_date,omitempty"`
+	// The total amount of the expense
+	TotalAmount *float64 `json:"total_amount,omitempty"`
+	// The sub-total amount of the expense (before tax)
+	SubTotal *float64 `json:"sub_total,omitempty"`
+	// The total tax amount of the expense
+	TotalTaxAmount *float64 `json:"total_tax_amount,omitempty"`
+	// The currency of the expense
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the expense
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// A memo or description for the expense
+	Memo *string `json:"memo,omitempty"`
+	// The UUID of the associated account
+	AccountID *string `json:"account_id,omitempty"`
+	// The UUID of the associated contact
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The UUIDs of the tracking categories associated with the expense
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The line items associated with this expense
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingExpenseOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the expense record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the expense in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the expense in the context of the 3rd Party
+	RemoteData *UnifiedAccountingExpenseOutputRemoteData `json:"remote_data,omitempty"`
+	// The date when the expense was created in the remote system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The created date of the expense record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the expense record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingExpenseOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingExpenseOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetTransactionDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionDate
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetTotalAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAmount
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetSubTotal() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.SubTotal
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetTotalTaxAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalTaxAmount
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetMemo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Memo
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetFieldMappings() *UnifiedAccountingExpenseOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetRemoteData() *UnifiedAccountingExpenseOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingExpenseOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

@@ -2,5 +2,236 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingPurchaseorderOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingPurchaseorderOutputFieldMappings struct {
+}
+
+// UnifiedAccountingPurchaseorderOutputRemoteData - The remote data of the purchase order in the context of the 3rd Party
+type UnifiedAccountingPurchaseorderOutputRemoteData struct {
+}
+
 type UnifiedAccountingPurchaseorderOutput struct {
+	// The status of the purchase order
+	Status *string `json:"status,omitempty"`
+	// The issue date of the purchase order
+	IssueDate *time.Time `json:"issue_date,omitempty"`
+	// The purchase order number
+	PurchaseOrderNumber *string `json:"purchase_order_number,omitempty"`
+	// The delivery date for the purchase order
+	DeliveryDate *time.Time `json:"delivery_date,omitempty"`
+	// The UUID of the delivery address
+	DeliveryAddress *string `json:"delivery_address,omitempty"`
+	// The UUID of the customer
+	Customer *string `json:"customer,omitempty"`
+	// The UUID of the vendor
+	Vendor *string `json:"vendor,omitempty"`
+	// A memo or note for the purchase order
+	Memo *string `json:"memo,omitempty"`
+	// The UUID of the company
+	CompanyID *string `json:"company_id,omitempty"`
+	// The total amount of the purchase order in cents
+	TotalAmount *float64 `json:"total_amount,omitempty"`
+	// The currency of the purchase order
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the purchase order
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The UUIDs of the tracking categories associated with the purchase order
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The UUID of the associated accounting period
+	AccountingPeriodID *string `json:"accounting_period_id,omitempty"`
+	// The line items associated with this purchase order
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingPurchaseorderOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the purchase order record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the purchase order in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The date when the purchase order was created in the remote system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The date when the purchase order was last updated in the remote system
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The remote data of the purchase order in the context of the 3rd Party
+	RemoteData *UnifiedAccountingPurchaseorderOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the purchase order record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the purchase order record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingPurchaseorderOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingPurchaseorderOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetIssueDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.IssueDate
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetPurchaseOrderNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PurchaseOrderNumber
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetDeliveryDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DeliveryDate
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetDeliveryAddress() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DeliveryAddress
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetCustomer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Customer
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetVendor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Vendor
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetMemo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Memo
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetCompanyID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyID
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetTotalAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAmount
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetAccountingPeriodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountingPeriodID
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetFieldMappings() *UnifiedAccountingPurchaseorderOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetRemoteUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetRemoteData() *UnifiedAccountingPurchaseorderOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingPurchaseorderOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

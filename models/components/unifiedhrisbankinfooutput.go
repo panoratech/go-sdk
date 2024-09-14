@@ -2,5 +2,146 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// FieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type FieldMappings struct {
+}
+
+// RemoteData - The remote data of the bank info in the context of the 3rd Party
+type RemoteData struct {
+}
+
 type UnifiedHrisBankinfoOutput struct {
+	// The type of the bank account
+	AccountType *string `json:"account_type,omitempty"`
+	// The name of the bank
+	BankName *string `json:"bank_name,omitempty"`
+	// The account number
+	AccountNumber *string `json:"account_number,omitempty"`
+	// The routing number of the bank
+	RoutingNumber *string `json:"routing_number,omitempty"`
+	// The UUID of the associated employee
+	EmployeeID *string `json:"employee_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *FieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the bank info record
+	ID *string `json:"id"`
+	// The remote ID of the bank info in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the bank info in the context of the 3rd Party
+	RemoteData *RemoteData `json:"remote_data,omitempty"`
+	// The date when the bank info was created in the 3rd party system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The created date of the bank info record
+	CreatedAt *time.Time `json:"created_at"`
+	// The last modified date of the bank info record
+	ModifiedAt *time.Time `json:"modified_at"`
+	// Indicates if the bank info was deleted in the remote system
+	RemoteWasDeleted *bool `json:"remote_was_deleted"`
+}
+
+func (u UnifiedHrisBankinfoOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedHrisBankinfoOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetAccountType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountType
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetBankName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BankName
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetAccountNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountNumber
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetRoutingNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RoutingNumber
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetEmployeeID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EmployeeID
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetFieldMappings() *FieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetRemoteData() *RemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
+}
+
+func (o *UnifiedHrisBankinfoOutput) GetRemoteWasDeleted() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteWasDeleted
 }

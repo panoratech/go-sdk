@@ -1,6 +1,8 @@
 # PanoraTicketingAttachments
 (*Ticketing.Attachments*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List  Attachments
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Ticketing.Attachments.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ticketing.Attachments.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListTicketingAttachmentsResponse](../../models/operations/listticketingattachmentsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,9 +95,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedTicketingAttachmentInput := components.UnifiedTicketingAttachmentInput{
+    ctx := context.Background()
+    res, err := s.Ticketing.Attachments.Create(ctx, "<value>", components.UnifiedTicketingAttachmentInput{
         FileName: gosdk.String("features_planning.pdf"),
         FileURL: gosdk.String("https://example.com/features_planning.pdf"),
         Uploader: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
@@ -108,9 +107,7 @@ func main() {
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-    ctx := context.Background()
-    res, err := s.Ticketing.Attachments.Create(ctx, xConnectionToken, unifiedTicketingAttachmentInput, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -130,13 +127,16 @@ func main() {
 | `remoteData`                                                                                             | **bool*                                                                                                  | :heavy_minus_sign:                                                                                       | Set to true to include data from the original Ticketing software.                                        |
 | `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.CreateTicketingAttachmentResponse](../../models/operations/createticketingattachmentresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -157,13 +157,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Attachments.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Ticketing.Attachments.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -183,10 +179,12 @@ func main() {
 | `remoteData`                                                      | **bool*                                                           | :heavy_minus_sign:                                                | Set to true to include data from the original Ticketing software. | false                                                             |
 | `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |                                                                   |
 
-
 ### Response
 
 **[*operations.RetrieveTicketingAttachmentResponse](../../models/operations/retrieveticketingattachmentresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

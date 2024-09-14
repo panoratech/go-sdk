@@ -2,5 +2,155 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedHrisPayrollrunOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedHrisPayrollrunOutputFieldMappings struct {
+}
+
+// UnifiedHrisPayrollrunOutputRemoteData - The remote data of the payroll run in the context of the 3rd Party
+type UnifiedHrisPayrollrunOutputRemoteData struct {
+}
+
 type UnifiedHrisPayrollrunOutput struct {
+	// The state of the payroll run
+	RunState *string `json:"run_state,omitempty"`
+	// The type of the payroll run
+	RunType *string `json:"run_type,omitempty"`
+	// The start date of the payroll run
+	StartDate *time.Time `json:"start_date,omitempty"`
+	// The end date of the payroll run
+	EndDate *time.Time `json:"end_date,omitempty"`
+	// The check date of the payroll run
+	CheckDate *time.Time `json:"check_date,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedHrisPayrollrunOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the payroll run record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the payroll run in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the payroll run in the context of the 3rd Party
+	RemoteData *UnifiedHrisPayrollrunOutputRemoteData `json:"remote_data,omitempty"`
+	// The date when the payroll run was created in the 3rd party system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The created date of the payroll run record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the payroll run record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+	// Indicates if the payroll run was deleted in the remote system
+	RemoteWasDeleted *bool `json:"remote_was_deleted,omitempty"`
+	// The UUIDs of the employee payroll runs associated with this payroll run
+	EmployeePayrollRuns []string `json:"employee_payroll_runs,omitempty"`
+}
+
+func (u UnifiedHrisPayrollrunOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedHrisPayrollrunOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRunState() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RunState
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRunType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RunType
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetStartDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.StartDate
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetEndDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.EndDate
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetCheckDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CheckDate
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetFieldMappings() *UnifiedHrisPayrollrunOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRemoteData() *UnifiedHrisPayrollrunOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetRemoteWasDeleted() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteWasDeleted
+}
+
+func (o *UnifiedHrisPayrollrunOutput) GetEmployeePayrollRuns() []string {
+	if o == nil {
+		return nil
+	}
+	return o.EmployeePayrollRuns
 }

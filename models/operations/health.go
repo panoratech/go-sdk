@@ -8,7 +8,7 @@ import (
 
 type HealthResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// API is healthy
+	// Api is healthy
 	Number *float64
 }
 

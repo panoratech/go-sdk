@@ -3,81 +3,19 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
-// ActivityType - The type of activity
-type ActivityType string
-
-const (
-	ActivityTypeNote  ActivityType = "NOTE"
-	ActivityTypeEmail ActivityType = "EMAIL"
-	ActivityTypeOther ActivityType = "OTHER"
-)
-
-func (e ActivityType) ToPointer() *ActivityType {
-	return &e
-}
-func (e *ActivityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "NOTE":
-		fallthrough
-	case "EMAIL":
-		fallthrough
-	case "OTHER":
-		*e = ActivityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityType: %v", v)
-	}
-}
-
-// Visibility - The visibility of the activity
-type Visibility string
-
-const (
-	VisibilityAdminOnly Visibility = "ADMIN_ONLY"
-	VisibilityPublic    Visibility = "PUBLIC"
-	VisibilityPrivate   Visibility = "PRIVATE"
-)
-
-func (e Visibility) ToPointer() *Visibility {
-	return &e
-}
-func (e *Visibility) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ADMIN_ONLY":
-		fallthrough
-	case "PUBLIC":
-		fallthrough
-	case "PRIVATE":
-		*e = Visibility(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Visibility: %v", v)
-	}
-}
-
 type UnifiedAtsActivityOutput struct {
-	// The type of activity
-	ActivityType *ActivityType `json:"activity_type,omitempty"`
+	// The type of activity. NOTE, EMAIL or OTHER
+	ActivityType *string `json:"activity_type,omitempty"`
 	// The subject of the activity
 	Subject *string `json:"subject,omitempty"`
 	// The body of the activity
 	Body *string `json:"body,omitempty"`
-	// The visibility of the activity
-	Visibility *Visibility `json:"visibility,omitempty"`
+	// The visibility of the activity. ADMIN_ONLY, PUBLIC or PRIVATE
+	Visibility *string `json:"visibility,omitempty"`
 	// The UUID of the candidate
 	CandidateID *string `json:"candidate_id,omitempty"`
 	// The remote creation date of the activity
@@ -107,7 +45,7 @@ func (u *UnifiedAtsActivityOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedAtsActivityOutput) GetActivityType() *ActivityType {
+func (o *UnifiedAtsActivityOutput) GetActivityType() *string {
 	if o == nil {
 		return nil
 	}
@@ -128,7 +66,7 @@ func (o *UnifiedAtsActivityOutput) GetBody() *string {
 	return o.Body
 }
 
-func (o *UnifiedAtsActivityOutput) GetVisibility() *Visibility {
+func (o *UnifiedAtsActivityOutput) GetVisibility() *string {
 	if o == nil {
 		return nil
 	}

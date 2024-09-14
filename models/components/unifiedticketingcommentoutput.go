@@ -3,39 +3,11 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// CreatorType - The creator type of the comment. Authorized values are either USER or CONTACT
-type CreatorType string
-
-const (
-	CreatorTypeUser    CreatorType = "USER"
-	CreatorTypeContact CreatorType = "CONTACT"
-)
-
-func (e CreatorType) ToPointer() *CreatorType {
-	return &e
-}
-func (e *CreatorType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "USER":
-		fallthrough
-	case "CONTACT":
-		*e = CreatorType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CreatorType: %v", v)
-	}
-}
 
 type UnifiedTicketingCommentOutputAttachmentsType string
 
@@ -108,7 +80,7 @@ type UnifiedTicketingCommentOutput struct {
 	// The public status of the comment
 	IsPrivate *bool `json:"is_private,omitempty"`
 	// The creator type of the comment. Authorized values are either USER or CONTACT
-	CreatorType *CreatorType `json:"creator_type,omitempty"`
+	CreatorType *string `json:"creator_type,omitempty"`
 	// The UUID of the ticket the comment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the contact which the comment belongs to (if no user_id specified)
@@ -161,7 +133,7 @@ func (o *UnifiedTicketingCommentOutput) GetIsPrivate() *bool {
 	return o.IsPrivate
 }
 
-func (o *UnifiedTicketingCommentOutput) GetCreatorType() *CreatorType {
+func (o *UnifiedTicketingCommentOutput) GetCreatorType() *string {
 	if o == nil {
 		return nil
 	}

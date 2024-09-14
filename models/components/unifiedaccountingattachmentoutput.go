@@ -2,5 +2,110 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingAttachmentOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingAttachmentOutputFieldMappings struct {
+}
+
+// UnifiedAccountingAttachmentOutputRemoteData - The remote data of the attachment in the context of the 3rd Party
+type UnifiedAccountingAttachmentOutputRemoteData struct {
+}
+
 type UnifiedAccountingAttachmentOutput struct {
+	// The name of the attached file
+	FileName *string `json:"file_name,omitempty"`
+	// The URL where the file can be accessed
+	FileURL *string `json:"file_url,omitempty"`
+	// The UUID of the associated account
+	AccountID *string `json:"account_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingAttachmentOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the attachment record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the attachment in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the attachment in the context of the 3rd Party
+	RemoteData *UnifiedAccountingAttachmentOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the attachment record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the attachment record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingAttachmentOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingAttachmentOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetFileName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileName
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetFileURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileURL
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetFieldMappings() *UnifiedAccountingAttachmentOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetRemoteData() *UnifiedAccountingAttachmentOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingAttachmentOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

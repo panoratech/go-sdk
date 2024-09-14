@@ -2,5 +2,164 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingContactOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingContactOutputFieldMappings struct {
+}
+
+// UnifiedAccountingContactOutputRemoteData - The remote data of the contact in the context of the 3rd Party
+type UnifiedAccountingContactOutputRemoteData struct {
+}
+
 type UnifiedAccountingContactOutput struct {
+	// The name of the contact
+	Name *string `json:"name,omitempty"`
+	// Indicates if the contact is a supplier
+	IsSupplier *bool `json:"is_supplier,omitempty"`
+	// Indicates if the contact is a customer
+	IsCustomer *bool `json:"is_customer,omitempty"`
+	// The email address of the contact
+	EmailAddress *string `json:"email_address,omitempty"`
+	// The tax number of the contact
+	TaxNumber *string `json:"tax_number,omitempty"`
+	// The status of the contact
+	Status *string `json:"status,omitempty"`
+	// The currency associated with the contact
+	Currency *string `json:"currency,omitempty"`
+	// The date when the contact was last updated in the remote system
+	RemoteUpdatedAt *string `json:"remote_updated_at,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingContactOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the contact record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the contact in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the contact in the context of the 3rd Party
+	RemoteData *UnifiedAccountingContactOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the contact record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the contact record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingContactOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingContactOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingContactOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingContactOutput) GetIsSupplier() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsSupplier
+}
+
+func (o *UnifiedAccountingContactOutput) GetIsCustomer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsCustomer
+}
+
+func (o *UnifiedAccountingContactOutput) GetEmailAddress() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EmailAddress
+}
+
+func (o *UnifiedAccountingContactOutput) GetTaxNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxNumber
+}
+
+func (o *UnifiedAccountingContactOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingContactOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingContactOutput) GetRemoteUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingContactOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingContactOutput) GetFieldMappings() *UnifiedAccountingContactOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingContactOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingContactOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingContactOutput) GetRemoteData() *UnifiedAccountingContactOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingContactOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingContactOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

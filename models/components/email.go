@@ -7,33 +7,6 @@ import (
 	"fmt"
 )
 
-// EmailAddressType - The email address type. Authorized values are either PERSONAL or WORK.
-type EmailAddressType string
-
-const (
-	EmailAddressTypePersonal EmailAddressType = "PERSONAL"
-	EmailAddressTypeWork     EmailAddressType = "WORK"
-)
-
-func (e EmailAddressType) ToPointer() *EmailAddressType {
-	return &e
-}
-func (e *EmailAddressType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PERSONAL":
-		fallthrough
-	case "WORK":
-		*e = EmailAddressType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EmailAddressType: %v", v)
-	}
-}
-
 // OwnerType - The owner type of an email
 type OwnerType string
 
@@ -65,7 +38,7 @@ type Email struct {
 	// The email address
 	EmailAddress *string `json:"email_address"`
 	// The email address type. Authorized values are either PERSONAL or WORK.
-	EmailAddressType *EmailAddressType `json:"email_address_type"`
+	EmailAddressType *string `json:"email_address_type"`
 	// The owner type of an email
 	OwnerType *OwnerType `json:"owner_type,omitempty"`
 }
@@ -77,7 +50,7 @@ func (o *Email) GetEmailAddress() *string {
 	return o.EmailAddress
 }
 
-func (o *Email) GetEmailAddressType() *EmailAddressType {
+func (o *Email) GetEmailAddressType() *string {
 	if o == nil {
 		return nil
 	}

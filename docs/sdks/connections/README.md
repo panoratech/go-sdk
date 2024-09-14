@@ -1,11 +1,13 @@
 # Connections
 (*Connections*)
 
+## Overview
+
 ### Available Operations
 
-* [GetConnections](#getconnections) - List Connections
+* [Retrieve](#retrieve) - List Connections
 
-## GetConnections
+## Retrieve
 
 List Connections
 
@@ -26,7 +28,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Connections.GetConnections(ctx)
+    res, err := s.Connections.Retrieve(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -43,10 +45,12 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
-**[*operations.GetConnectionsResponse](../../models/operations/getconnectionsresponse.md), error**
+**[*operations.RetrieveConnectionsResponse](../../models/operations/retrieveconnectionsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

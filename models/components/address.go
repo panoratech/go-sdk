@@ -2,38 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-// AddressType - The address type. Authorized values are either PERSONAL or WORK.
-type AddressType string
-
-const (
-	AddressTypePersonal AddressType = "PERSONAL"
-	AddressTypeWork     AddressType = "WORK"
-)
-
-func (e AddressType) ToPointer() *AddressType {
-	return &e
-}
-func (e *AddressType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PERSONAL":
-		fallthrough
-	case "WORK":
-		*e = AddressType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AddressType: %v", v)
-	}
-}
-
 type Address struct {
 	// The street
 	Street1 *string `json:"street_1"`
@@ -48,7 +16,7 @@ type Address struct {
 	// The country
 	Country *string `json:"country"`
 	// The address type. Authorized values are either PERSONAL or WORK.
-	AddressType *AddressType `json:"address_type"`
+	AddressType *string `json:"address_type"`
 	// The owner type of the address
 	OwnerType *string `json:"owner_type"`
 }
@@ -95,7 +63,7 @@ func (o *Address) GetCountry() *string {
 	return o.Country
 }
 
-func (o *Address) GetAddressType() *AddressType {
+func (o *Address) GetAddressType() *string {
 	if o == nil {
 		return nil
 	}

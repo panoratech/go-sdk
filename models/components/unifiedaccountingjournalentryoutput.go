@@ -2,5 +2,209 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingJournalentryOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingJournalentryOutputFieldMappings struct {
+}
+
+// UnifiedAccountingJournalentryOutputRemoteData - The remote data of the journal entry in the context of the 3rd Party
+type UnifiedAccountingJournalentryOutputRemoteData struct {
+}
+
 type UnifiedAccountingJournalentryOutput struct {
+	// The date of the transaction
+	TransactionDate *time.Time `json:"transaction_date,omitempty"`
+	// The payments associated with the journal entry
+	Payments []string `json:"payments,omitempty"`
+	// The applied payments for the journal entry
+	AppliedPayments []string `json:"applied_payments,omitempty"`
+	// A memo or note for the journal entry
+	Memo *string `json:"memo,omitempty"`
+	// The currency of the journal entry
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the journal entry
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The UUID of the associated company info
+	IDAccCompanyInfo *string `json:"id_acc_company_info,omitempty"`
+	// The journal number
+	JournalNumber *string `json:"journal_number,omitempty"`
+	// The UUIDs of the tracking categories associated with the journal entry
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The UUID of the associated accounting period
+	IDAccAccountingPeriod *string `json:"id_acc_accounting_period,omitempty"`
+	// The posting status of the journal entry
+	PostingStatus *string `json:"posting_status,omitempty"`
+	// The line items associated with this journal entry
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingJournalentryOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the journal entry record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the journal entry in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The date when the journal entry was created in the remote system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The date when the journal entry was last modified in the remote system
+	RemoteModiifiedAt *time.Time `json:"remote_modiified_at,omitempty"`
+	// The remote data of the journal entry in the context of the 3rd Party
+	RemoteData *UnifiedAccountingJournalentryOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the journal entry record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the journal entry record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingJournalentryOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingJournalentryOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetTransactionDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionDate
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetPayments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Payments
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetAppliedPayments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AppliedPayments
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetMemo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Memo
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetIDAccCompanyInfo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IDAccCompanyInfo
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetJournalNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.JournalNumber
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetIDAccAccountingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IDAccAccountingPeriod
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetPostingStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PostingStatus
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetFieldMappings() *UnifiedAccountingJournalentryOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetRemoteModiifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteModiifiedAt
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetRemoteData() *UnifiedAccountingJournalentryOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingJournalentryOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

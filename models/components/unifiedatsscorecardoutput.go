@@ -3,51 +3,13 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
-// OverallRecommendation - The overall recommendation
-type OverallRecommendation string
-
-const (
-	OverallRecommendationDefinitelyNo OverallRecommendation = "DEFINITELY_NO"
-	OverallRecommendationNo           OverallRecommendation = "NO"
-	OverallRecommendationYes          OverallRecommendation = "YES"
-	OverallRecommendationStrongYes    OverallRecommendation = "STRONG_YES"
-	OverallRecommendationNoDecision   OverallRecommendation = "NO_DECISION"
-)
-
-func (e OverallRecommendation) ToPointer() *OverallRecommendation {
-	return &e
-}
-func (e *OverallRecommendation) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DEFINITELY_NO":
-		fallthrough
-	case "NO":
-		fallthrough
-	case "YES":
-		fallthrough
-	case "STRONG_YES":
-		fallthrough
-	case "NO_DECISION":
-		*e = OverallRecommendation(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OverallRecommendation: %v", v)
-	}
-}
-
 type UnifiedAtsScorecardOutput struct {
 	// The overall recommendation
-	OverallRecommendation *OverallRecommendation `json:"overall_recommendation,omitempty"`
+	OverallRecommendation *string `json:"overall_recommendation,omitempty"`
 	// The UUID of the application
 	ApplicationID *string `json:"application_id,omitempty"`
 	// The UUID of the interview
@@ -81,7 +43,7 @@ func (u *UnifiedAtsScorecardOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedAtsScorecardOutput) GetOverallRecommendation() *OverallRecommendation {
+func (o *UnifiedAtsScorecardOutput) GetOverallRecommendation() *string {
 	if o == nil {
 		return nil
 	}

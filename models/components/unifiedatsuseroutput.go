@@ -3,47 +3,9 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// AccessRole - The access role of the user
-type AccessRole string
-
-const (
-	AccessRoleSuperAdmin        AccessRole = "SUPER_ADMIN"
-	AccessRoleAdmin             AccessRole = "ADMIN"
-	AccessRoleTeamMember        AccessRole = "TEAM_MEMBER"
-	AccessRoleLimitedTeamMember AccessRole = "LIMITED_TEAM_MEMBER"
-	AccessRoleInterviewer       AccessRole = "INTERVIEWER"
-)
-
-func (e AccessRole) ToPointer() *AccessRole {
-	return &e
-}
-func (e *AccessRole) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SUPER_ADMIN":
-		fallthrough
-	case "ADMIN":
-		fallthrough
-	case "TEAM_MEMBER":
-		fallthrough
-	case "LIMITED_TEAM_MEMBER":
-		fallthrough
-	case "INTERVIEWER":
-		*e = AccessRole(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccessRole: %v", v)
-	}
-}
 
 type UnifiedAtsUserOutput struct {
 	// The first name of the user
@@ -55,7 +17,7 @@ type UnifiedAtsUserOutput struct {
 	// Whether the user is disabled
 	Disabled *bool `json:"disabled,omitempty"`
 	// The access role of the user
-	AccessRole *AccessRole `json:"access_role,omitempty"`
+	AccessRole *string `json:"access_role,omitempty"`
 	// The remote creation date of the user
 	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
 	// The remote modification date of the user
@@ -113,7 +75,7 @@ func (o *UnifiedAtsUserOutput) GetDisabled() *bool {
 	return o.Disabled
 }
 
-func (o *UnifiedAtsUserOutput) GetAccessRole() *AccessRole {
+func (o *UnifiedAtsUserOutput) GetAccessRole() *string {
 	if o == nil {
 		return nil
 	}

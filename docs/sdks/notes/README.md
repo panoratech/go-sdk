@@ -1,6 +1,8 @@
 # Notes
 (*Crm.Notes*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List Notes
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Crm.Notes.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Notes.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListCrmNoteResponse](../../models/operations/listcrmnoteresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,9 +95,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedCrmNoteInput := components.UnifiedCrmNoteInput{
+    ctx := context.Background()
+    res, err := s.Crm.Notes.Create(ctx, "<value>", components.UnifiedCrmNoteInput{
         Content: gosdk.String("My notes taken during the meeting"),
         UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
         CompanyID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
@@ -108,11 +107,7 @@ func main() {
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-
-    var remoteData *bool = gosdk.Bool(false)
-    ctx := context.Background()
-    res, err := s.Crm.Notes.Create(ctx, xConnectionToken, unifiedCrmNoteInput, remoteData)
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -132,13 +127,16 @@ func main() {
 | `remoteData`                                                                     | **bool*                                                                          | :heavy_minus_sign:                                                               | Set to true to include data from the original Crm software.                      | false                                                                            |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
-
 ### Response
 
 **[*operations.CreateCrmNoteResponse](../../models/operations/createcrmnoteresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -159,13 +157,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Notes.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Notes.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -185,10 +179,12 @@ func main() {
 | `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Crm software. | false                                                       |
 | `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
-
 ### Response
 
 **[*operations.RetrieveCrmNoteResponse](../../models/operations/retrievecrmnoteresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

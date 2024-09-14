@@ -3,152 +3,9 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// Race - The race of the candidate
-type Race string
-
-const (
-	RaceAmericanIndianOrAlaskanNative        Race = "AMERICAN_INDIAN_OR_ALASKAN_NATIVE"
-	RaceAsian                                Race = "ASIAN"
-	RaceBlackOrAfricanAmerican               Race = "BLACK_OR_AFRICAN_AMERICAN"
-	RaceHispanicOrLatino                     Race = "HISPANIC_OR_LATINO"
-	RaceWhite                                Race = "WHITE"
-	RaceNativeHawaiianOrOtherPacificIslander Race = "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER"
-	RaceTwoOrMoreRaces                       Race = "TWO_OR_MORE_RACES"
-	RaceDeclineToSelfIdentify                Race = "DECLINE_TO_SELF_IDENTIFY"
-)
-
-func (e Race) ToPointer() *Race {
-	return &e
-}
-func (e *Race) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AMERICAN_INDIAN_OR_ALASKAN_NATIVE":
-		fallthrough
-	case "ASIAN":
-		fallthrough
-	case "BLACK_OR_AFRICAN_AMERICAN":
-		fallthrough
-	case "HISPANIC_OR_LATINO":
-		fallthrough
-	case "WHITE":
-		fallthrough
-	case "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER":
-		fallthrough
-	case "TWO_OR_MORE_RACES":
-		fallthrough
-	case "DECLINE_TO_SELF_IDENTIFY":
-		*e = Race(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Race: %v", v)
-	}
-}
-
-// Gender - The gender of the candidate
-type Gender string
-
-const (
-	GenderMale                  Gender = "MALE"
-	GenderFemale                Gender = "FEMALE"
-	GenderNonBinary             Gender = "NON_BINARY"
-	GenderOther                 Gender = "OTHER"
-	GenderDeclineToSelfIdentify Gender = "DECLINE_TO_SELF_IDENTIFY"
-)
-
-func (e Gender) ToPointer() *Gender {
-	return &e
-}
-func (e *Gender) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MALE":
-		fallthrough
-	case "FEMALE":
-		fallthrough
-	case "NON_BINARY":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "DECLINE_TO_SELF_IDENTIFY":
-		*e = Gender(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Gender: %v", v)
-	}
-}
-
-// VeteranStatus - The veteran status of the candidate
-type VeteranStatus string
-
-const (
-	VeteranStatusIAmNotAProtectedVeteran                                     VeteranStatus = "I_AM_NOT_A_PROTECTED_VETERAN"
-	VeteranStatusIIdentifyAsOneOrMoreOfTheClassificationsOfAProtectedVeteran VeteranStatus = "I_IDENTIFY_AS_ONE_OR_MORE_OF_THE_CLASSIFICATIONS_OF_A_PROTECTED_VETERAN"
-	VeteranStatusIDontWishToAnswer                                           VeteranStatus = "I_DONT_WISH_TO_ANSWER"
-)
-
-func (e VeteranStatus) ToPointer() *VeteranStatus {
-	return &e
-}
-func (e *VeteranStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "I_AM_NOT_A_PROTECTED_VETERAN":
-		fallthrough
-	case "I_IDENTIFY_AS_ONE_OR_MORE_OF_THE_CLASSIFICATIONS_OF_A_PROTECTED_VETERAN":
-		fallthrough
-	case "I_DONT_WISH_TO_ANSWER":
-		*e = VeteranStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for VeteranStatus: %v", v)
-	}
-}
-
-// DisabilityStatus - The disability status of the candidate
-type DisabilityStatus string
-
-const (
-	DisabilityStatusYesIHaveADisabilityOrPreviouslyHadADisability DisabilityStatus = "YES_I_HAVE_A_DISABILITY_OR_PREVIOUSLY_HAD_A_DISABILITY"
-	DisabilityStatusNoIDontHaveADisability                        DisabilityStatus = "NO_I_DONT_HAVE_A_DISABILITY"
-	DisabilityStatusIDontWishToAnswer                             DisabilityStatus = "I_DONT_WISH_TO_ANSWER"
-)
-
-func (e DisabilityStatus) ToPointer() *DisabilityStatus {
-	return &e
-}
-func (e *DisabilityStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "YES_I_HAVE_A_DISABILITY_OR_PREVIOUSLY_HAD_A_DISABILITY":
-		fallthrough
-	case "NO_I_DONT_HAVE_A_DISABILITY":
-		fallthrough
-	case "I_DONT_WISH_TO_ANSWER":
-		*e = DisabilityStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DisabilityStatus: %v", v)
-	}
-}
 
 type UnifiedAtsEeocsOutput struct {
 	// The UUID of the candidate
@@ -156,13 +13,13 @@ type UnifiedAtsEeocsOutput struct {
 	// The submission date of the EEOC
 	SubmittedAt *time.Time `json:"submitted_at,omitempty"`
 	// The race of the candidate
-	Race *Race `json:"race,omitempty"`
+	Race *string `json:"race,omitempty"`
 	// The gender of the candidate
-	Gender *Gender `json:"gender,omitempty"`
+	Gender *string `json:"gender,omitempty"`
 	// The veteran status of the candidate
-	VeteranStatus *VeteranStatus `json:"veteran_status,omitempty"`
+	VeteranStatus *string `json:"veteran_status,omitempty"`
 	// The disability status of the candidate
-	DisabilityStatus *DisabilityStatus `json:"disability_status,omitempty"`
+	DisabilityStatus *string `json:"disability_status,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
 	FieldMappings map[string]any `json:"field_mappings,omitempty"`
 	// The UUID of the EEOC
@@ -202,28 +59,28 @@ func (o *UnifiedAtsEeocsOutput) GetSubmittedAt() *time.Time {
 	return o.SubmittedAt
 }
 
-func (o *UnifiedAtsEeocsOutput) GetRace() *Race {
+func (o *UnifiedAtsEeocsOutput) GetRace() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Race
 }
 
-func (o *UnifiedAtsEeocsOutput) GetGender() *Gender {
+func (o *UnifiedAtsEeocsOutput) GetGender() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Gender
 }
 
-func (o *UnifiedAtsEeocsOutput) GetVeteranStatus() *VeteranStatus {
+func (o *UnifiedAtsEeocsOutput) GetVeteranStatus() *string {
 	if o == nil {
 		return nil
 	}
 	return o.VeteranStatus
 }
 
-func (o *UnifiedAtsEeocsOutput) GetDisabilityStatus() *DisabilityStatus {
+func (o *UnifiedAtsEeocsOutput) GetDisabilityStatus() *string {
 	if o == nil {
 		return nil
 	}

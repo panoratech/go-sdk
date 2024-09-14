@@ -1,6 +1,8 @@
 # Tickets
 (*Ticketing.Tickets*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List  Tickets
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ticketing.Tickets.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListTicketingTicketResponse](../../models/operations/listticketingticketresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,9 +86,9 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
-	"github.com/panoratech/go-sdk/types"
 	"context"
+	"github.com/panoratech/go-sdk/types"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -97,30 +96,30 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedTicketingTicketInput := components.UnifiedTicketingTicketInput{
+    ctx := context.Background()
+    res, err := s.Ticketing.Tickets.Create(ctx, "<value>", components.UnifiedTicketingTicketInput{
         Name: gosdk.String("Customer Service Inquiry"),
-        Status: components.UnifiedTicketingTicketInputStatusOpen.ToPointer(),
+        Status: gosdk.String("OPEN"),
         Description: gosdk.String("Help customer"),
         DueDate: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
-        Type: components.UnifiedTicketingTicketInputTypeBug.ToPointer(),
+        Type: gosdk.String("BUG"),
         ParentTicket: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
         Collections: []components.UnifiedTicketingTicketInputCollections{
             components.CreateUnifiedTicketingTicketInputCollectionsStr(
-            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+                "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
             ),
         },
         Tags: []components.UnifiedTicketingTicketInputTags{
             components.CreateUnifiedTicketingTicketInputTagsStr(
-            "my_tag",
+                "my_tag",
             ),
             components.CreateUnifiedTicketingTicketInputTagsStr(
-            "urgent_tag",
+                "urgent_tag",
             ),
         },
         CompletedAt: types.MustNewTimeFromString("2024-10-01T12:00:00Z"),
-        Priority: components.UnifiedTicketingTicketInputPriorityHigh.ToPointer(),
+        Priority: gosdk.String("HIGH"),
         AssignedTo: []string{
             "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
         },
@@ -128,13 +127,13 @@ func main() {
             Body: gosdk.String("Assigned to Eric !"),
             HTMLBody: gosdk.String("<p>Assigned to Eric !</p>"),
             IsPrivate: gosdk.Bool(false),
-            CreatorType: components.UnifiedTicketingTicketInputCreatorTypeUser.ToPointer(),
+            CreatorType: gosdk.String("USER"),
             TicketID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
             ContactID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
             UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
             Attachments: []components.UnifiedTicketingTicketInputCommentAttachments{
                 components.CreateUnifiedTicketingTicketInputCommentAttachmentsStr(
-                "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+                    "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
                 ),
             },
         },
@@ -142,18 +141,14 @@ func main() {
         ContactID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
         Attachments: []components.UnifiedTicketingTicketInputAttachments{
             components.CreateUnifiedTicketingTicketInputAttachmentsStr(
-            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+                "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
             ),
         },
         FieldMappings: map[string]any{
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-
-    var remoteData *bool = gosdk.Bool(false)
-    ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Create(ctx, xConnectionToken, unifiedTicketingTicketInput, remoteData)
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -173,13 +168,16 @@ func main() {
 | `remoteData`                                                                                     | **bool*                                                                                          | :heavy_minus_sign:                                                                               | Set to true to include data from the original Ticketing software.                                | false                                                                                            |
 | `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |                                                                                                  |
 
-
 ### Response
 
 **[*operations.CreateTicketingTicketResponse](../../models/operations/createticketingticketresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -200,13 +198,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ticketing.Tickets.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Ticketing.Tickets.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -226,10 +220,12 @@ func main() {
 | `remoteData`                                                      | **bool*                                                           | :heavy_minus_sign:                                                | Set to true to include data from the original Ticketing software. | false                                                             |
 | `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |                                                                   |
 
-
 ### Response
 
 **[*operations.RetrieveTicketingTicketResponse](../../models/operations/retrieveticketingticketresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

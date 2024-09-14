@@ -2,5 +2,142 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingPaymentInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingPaymentInputFieldMappings struct {
+}
+
 type UnifiedAccountingPaymentInput struct {
+	// The UUID of the associated invoice
+	InvoiceID *string `json:"invoice_id,omitempty"`
+	// The date of the transaction
+	TransactionDate *time.Time `json:"transaction_date,omitempty"`
+	// The UUID of the associated contact
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the associated account
+	AccountID *string `json:"account_id,omitempty"`
+	// The currency of the payment
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the payment
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The total amount of the payment in cents
+	TotalAmount *float64 `json:"total_amount,omitempty"`
+	// The type of payment
+	Type *string `json:"type,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The UUID of the associated accounting period
+	AccountingPeriodID *string `json:"accounting_period_id,omitempty"`
+	// The UUIDs of the tracking categories associated with the payment
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The line items associated with this payment
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingPaymentInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (u UnifiedAccountingPaymentInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingPaymentInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingPaymentInput) GetInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.InvoiceID
+}
+
+func (o *UnifiedAccountingPaymentInput) GetTransactionDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionDate
+}
+
+func (o *UnifiedAccountingPaymentInput) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedAccountingPaymentInput) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *UnifiedAccountingPaymentInput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingPaymentInput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingPaymentInput) GetTotalAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAmount
+}
+
+func (o *UnifiedAccountingPaymentInput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingPaymentInput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingPaymentInput) GetAccountingPeriodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountingPeriodID
+}
+
+func (o *UnifiedAccountingPaymentInput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingPaymentInput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingPaymentInput) GetFieldMappings() *UnifiedAccountingPaymentInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

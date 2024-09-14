@@ -2,5 +2,99 @@
 
 package components
 
+// UnifiedAccountingContactInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingContactInputFieldMappings struct {
+}
+
 type UnifiedAccountingContactInput struct {
+	// The name of the contact
+	Name *string `json:"name,omitempty"`
+	// Indicates if the contact is a supplier
+	IsSupplier *bool `json:"is_supplier,omitempty"`
+	// Indicates if the contact is a customer
+	IsCustomer *bool `json:"is_customer,omitempty"`
+	// The email address of the contact
+	EmailAddress *string `json:"email_address,omitempty"`
+	// The tax number of the contact
+	TaxNumber *string `json:"tax_number,omitempty"`
+	// The status of the contact
+	Status *string `json:"status,omitempty"`
+	// The currency associated with the contact
+	Currency *string `json:"currency,omitempty"`
+	// The date when the contact was last updated in the remote system
+	RemoteUpdatedAt *string `json:"remote_updated_at,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingContactInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (o *UnifiedAccountingContactInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingContactInput) GetIsSupplier() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsSupplier
+}
+
+func (o *UnifiedAccountingContactInput) GetIsCustomer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsCustomer
+}
+
+func (o *UnifiedAccountingContactInput) GetEmailAddress() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EmailAddress
+}
+
+func (o *UnifiedAccountingContactInput) GetTaxNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxNumber
+}
+
+func (o *UnifiedAccountingContactInput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingContactInput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingContactInput) GetRemoteUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingContactInput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingContactInput) GetFieldMappings() *UnifiedAccountingContactInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

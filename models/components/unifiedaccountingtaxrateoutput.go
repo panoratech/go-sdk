@@ -2,5 +2,119 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingTaxrateOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingTaxrateOutputFieldMappings struct {
+}
+
+// UnifiedAccountingTaxrateOutputRemoteData - The remote data of the tax rate in the context of the 3rd Party
+type UnifiedAccountingTaxrateOutputRemoteData struct {
+}
+
 type UnifiedAccountingTaxrateOutput struct {
+	// The description of the tax rate
+	Description *string `json:"description,omitempty"`
+	// The total tax rate in basis points (e.g., 2000 for 20%)
+	TotalTaxRatge *float64 `json:"total_tax_ratge,omitempty"`
+	// The effective tax rate in basis points (e.g., 1900 for 19%)
+	EffectiveTaxRate *float64 `json:"effective_tax_rate,omitempty"`
+	// The UUID of the associated company
+	CompanyID *string `json:"company_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingTaxrateOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the tax rate record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the tax rate in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the tax rate in the context of the 3rd Party
+	RemoteData *UnifiedAccountingTaxrateOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the tax rate record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the tax rate record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingTaxrateOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingTaxrateOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetTotalTaxRatge() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalTaxRatge
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetEffectiveTaxRate() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.EffectiveTaxRate
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetCompanyID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyID
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetFieldMappings() *UnifiedAccountingTaxrateOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetRemoteData() *UnifiedAccountingTaxrateOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingTaxrateOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

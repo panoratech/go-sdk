@@ -13,7 +13,7 @@ type ListAtsUsersRequest struct {
 	// Set to true to include data from the original software.
 	RemoteData *bool `queryParam:"style=form,explode=true,name=remote_data"`
 	// Set to get the number of records.
-	Limit *float64 `default:"30" queryParam:"style=form,explode=true,name=limit"`
+	Limit *float64 `default:"50" queryParam:"style=form,explode=true,name=limit"`
 	// Set to get the number of records after this cursor.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 }

@@ -1,9 +1,9 @@
-speakeasyVersion: 1.355.0
+speakeasyVersion: 1.396.9
 sources:
     Panora-OAS:
         sourceNamespace: go-sdk
-        sourceRevisionDigest: sha256:782245a2dada2917f06fcb23ec7c99760929b65f708ad50c25fcd2bc2793f05f
-        sourceBlobDigest: sha256:f8e012fb5f93d98e1e718f0069c48f9bf739552391bd582ba1a1e694d90b4c9f
+        sourceRevisionDigest: sha256:448c080067d9756b394d0eb23b801aab8f0d7368672cf91cc2220dee09c93355
+        sourceBlobDigest: sha256:713f0a4faf73742f535cfe53b021385e24d65199df45d99217e68df12be7c42b
         tags:
             - latest
             - main
@@ -11,11 +11,10 @@ targets:
     panora:
         source: Panora-OAS
         sourceNamespace: go-sdk
-        sourceRevisionDigest: sha256:782245a2dada2917f06fcb23ec7c99760929b65f708ad50c25fcd2bc2793f05f
-        sourceBlobDigest: sha256:f8e012fb5f93d98e1e718f0069c48f9bf739552391bd582ba1a1e694d90b4c9f
+        sourceRevisionDigest: sha256:448c080067d9756b394d0eb23b801aab8f0d7368672cf91cc2220dee09c93355
+        sourceBlobDigest: sha256:713f0a4faf73742f535cfe53b021385e24d65199df45d99217e68df12be7c42b
         codeSamplesNamespace: go-sdk
-        codeSamplesRevisionDigest: sha256:010936b9384bb61f634c08b20df05ead90b7b6052dd5d8db5d3d20b665b6a87b
-        outLocation: /github/workspace/repo
+        codeSamplesRevisionDigest: sha256:d3851a6548e3b9452e30507c0c1298e9b9967053f7ff96d6a89097e1cc254d75
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

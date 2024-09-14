@@ -2,9 +2,6 @@
 
 package components
 
-type UnifiedEcommerceProductInputVariants struct {
-}
-
 // UnifiedEcommerceProductInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
 type UnifiedEcommerceProductInputFieldMappings struct {
 }
@@ -23,7 +20,7 @@ type UnifiedEcommerceProductInput struct {
 	// The vendor of the product
 	Vendor *string `json:"vendor,omitempty"`
 	// The variants of the product
-	Variants []UnifiedEcommerceProductInputVariants `json:"variants,omitempty"`
+	Variants []Variant `json:"variants,omitempty"`
 	// The tags associated with the product
 	Tags []string `json:"tags,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
@@ -72,7 +69,7 @@ func (o *UnifiedEcommerceProductInput) GetVendor() *string {
 	return o.Vendor
 }
 
-func (o *UnifiedEcommerceProductInput) GetVariants() []UnifiedEcommerceProductInputVariants {
+func (o *UnifiedEcommerceProductInput) GetVariants() []Variant {
 	if o == nil {
 		return nil
 	}

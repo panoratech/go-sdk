@@ -2,5 +2,45 @@
 
 package components
 
+// UnifiedAccountingAttachmentInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingAttachmentInputFieldMappings struct {
+}
+
 type UnifiedAccountingAttachmentInput struct {
+	// The name of the attached file
+	FileName *string `json:"file_name,omitempty"`
+	// The URL where the file can be accessed
+	FileURL *string `json:"file_url,omitempty"`
+	// The UUID of the associated account
+	AccountID *string `json:"account_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingAttachmentInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (o *UnifiedAccountingAttachmentInput) GetFileName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileName
+}
+
+func (o *UnifiedAccountingAttachmentInput) GetFileURL() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FileURL
+}
+
+func (o *UnifiedAccountingAttachmentInput) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *UnifiedAccountingAttachmentInput) GetFieldMappings() *UnifiedAccountingAttachmentInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

@@ -3,38 +3,9 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// CollectionType - The type of the collection. Authorized values are either PROJECT or LIST
-type CollectionType string
-
-const (
-	CollectionTypeProject CollectionType = "PROJECT"
-	CollectionTypeList    CollectionType = "LIST"
-)
-
-func (e CollectionType) ToPointer() *CollectionType {
-	return &e
-}
-func (e *CollectionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PROJECT":
-		fallthrough
-	case "LIST":
-		*e = CollectionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CollectionType: %v", v)
-	}
-}
 
 type UnifiedTicketingCollectionOutput struct {
 	// The name of the collection
@@ -42,7 +13,7 @@ type UnifiedTicketingCollectionOutput struct {
 	// The description of the collection
 	Description *string `json:"description,omitempty"`
 	// The type of the collection. Authorized values are either PROJECT or LIST
-	CollectionType *CollectionType `json:"collection_type,omitempty"`
+	CollectionType *string `json:"collection_type,omitempty"`
 	// The UUID of the collection
 	ID *string `json:"id,omitempty"`
 	// The id of the collection in the context of the 3rd Party
@@ -80,7 +51,7 @@ func (o *UnifiedTicketingCollectionOutput) GetDescription() *string {
 	return o.Description
 }
 
-func (o *UnifiedTicketingCollectionOutput) GetCollectionType() *CollectionType {
+func (o *UnifiedTicketingCollectionOutput) GetCollectionType() *string {
 	if o == nil {
 		return nil
 	}

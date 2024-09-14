@@ -1,6 +1,8 @@
 # FieldMappings
 (*FieldMappings*)
 
+## Overview
+
 ### Available Operations
 
 * [GetFieldMappingValues](#getfieldmappingvalues) - Retrieve field mappings values
@@ -48,13 +50,16 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
 **[*operations.GetFieldMappingValuesResponse](../../models/operations/getfieldmappingvaluesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetFieldMappingsEntities
 
@@ -94,13 +99,16 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
 **[*operations.GetFieldMappingsEntitiesResponse](../../models/operations/getfieldmappingsentitiesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetFieldMappings
 
@@ -140,13 +148,16 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
 **[*operations.GetFieldMappingsResponse](../../models/operations/getfieldmappingsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Definitions
 
@@ -159,8 +170,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -168,14 +179,14 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    request := components.DefineTargetFieldDto{
+
+    ctx := context.Background()
+    res, err := s.FieldMappings.Definitions(ctx, components.DefineTargetFieldDto{
         ObjectTypeOwner: components.ObjectTypeOwnerCompany.ToPointer(),
         Name: gosdk.String("fav_dish"),
         Description: gosdk.String("My favorite dish"),
         DataType: components.DataTypeString.ToPointer(),
-    }
-    ctx := context.Background()
-    res, err := s.FieldMappings.Definitions(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -193,13 +204,16 @@ func main() {
 | `request`                                                                          | [components.DefineTargetFieldDto](../../models/components/definetargetfielddto.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.DefinitionsResponse](../../models/operations/definitionsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DefineCustomField
 
@@ -212,8 +226,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -221,7 +235,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    request := components.CustomFieldCreateDto{
+
+    ctx := context.Background()
+    res, err := s.FieldMappings.DefineCustomField(ctx, components.CustomFieldCreateDto{
         ObjectTypeOwner: components.CustomFieldCreateDtoObjectTypeOwnerCompany.ToPointer(),
         Name: gosdk.String("my_favorite_dish"),
         Description: gosdk.String("Favorite Dish"),
@@ -229,9 +245,7 @@ func main() {
         SourceCustomFieldID: gosdk.String("id_1"),
         SourceProvider: gosdk.String("hubspot"),
         LinkedUserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
-    }
-    ctx := context.Background()
-    res, err := s.FieldMappings.DefineCustomField(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -249,13 +263,16 @@ func main() {
 | `request`                                                                          | [components.CustomFieldCreateDto](../../models/components/customfieldcreatedto.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.DefineCustomFieldResponse](../../models/operations/definecustomfieldresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Map
 
@@ -268,8 +285,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -277,14 +294,14 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    request := components.MapFieldToProviderDto{
+
+    ctx := context.Background()
+    res, err := s.FieldMappings.Map(ctx, components.MapFieldToProviderDto{
         AttributeID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
         SourceCustomFieldID: gosdk.String("id_1"),
         SourceProvider: gosdk.String("hubspot"),
         LinkedUserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
-    }
-    ctx := context.Background()
-    res, err := s.FieldMappings.Map(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -302,10 +319,12 @@ func main() {
 | `request`                                                                            | [components.MapFieldToProviderDto](../../models/components/mapfieldtoproviderdto.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.MapResponse](../../models/operations/mapresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

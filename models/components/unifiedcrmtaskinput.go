@@ -2,45 +2,13 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-// UnifiedCrmTaskInputStatus - The status of the task. Authorized values are PENDING, COMPLETED.
-type UnifiedCrmTaskInputStatus string
-
-const (
-	UnifiedCrmTaskInputStatusPending   UnifiedCrmTaskInputStatus = "PENDING"
-	UnifiedCrmTaskInputStatusCompleted UnifiedCrmTaskInputStatus = "COMPLETED"
-)
-
-func (e UnifiedCrmTaskInputStatus) ToPointer() *UnifiedCrmTaskInputStatus {
-	return &e
-}
-func (e *UnifiedCrmTaskInputStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PENDING":
-		fallthrough
-	case "COMPLETED":
-		*e = UnifiedCrmTaskInputStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedCrmTaskInputStatus: %v", v)
-	}
-}
-
 type UnifiedCrmTaskInput struct {
 	// The subject of the task
 	Subject *string `json:"subject"`
 	// The content of the task
 	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status *UnifiedCrmTaskInputStatus `json:"status"`
+	Status *string `json:"status"`
 	// The due date of the task
 	DueDate *string `json:"due_date,omitempty"`
 	// The finished date of the task
@@ -69,7 +37,7 @@ func (o *UnifiedCrmTaskInput) GetContent() *string {
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskInput) GetStatus() *UnifiedCrmTaskInputStatus {
+func (o *UnifiedCrmTaskInput) GetStatus() *string {
 	if o == nil {
 		return nil
 	}
