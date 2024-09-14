@@ -3,72 +3,11 @@
 package components
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// UnifiedTicketingTicketInputStatus - The status of the ticket. Authorized values are OPEN or CLOSED.
-type UnifiedTicketingTicketInputStatus string
-
-const (
-	UnifiedTicketingTicketInputStatusOpen   UnifiedTicketingTicketInputStatus = "OPEN"
-	UnifiedTicketingTicketInputStatusClosed UnifiedTicketingTicketInputStatus = "CLOSED"
-)
-
-func (e UnifiedTicketingTicketInputStatus) ToPointer() *UnifiedTicketingTicketInputStatus {
-	return &e
-}
-func (e *UnifiedTicketingTicketInputStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "OPEN":
-		fallthrough
-	case "CLOSED":
-		*e = UnifiedTicketingTicketInputStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedTicketingTicketInputStatus: %v", v)
-	}
-}
-
-// UnifiedTicketingTicketInputType - The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
-type UnifiedTicketingTicketInputType string
-
-const (
-	UnifiedTicketingTicketInputTypeBug     UnifiedTicketingTicketInputType = "BUG"
-	UnifiedTicketingTicketInputTypeSubtask UnifiedTicketingTicketInputType = "SUBTASK"
-	UnifiedTicketingTicketInputTypeTask    UnifiedTicketingTicketInputType = "TASK"
-	UnifiedTicketingTicketInputTypeToDo    UnifiedTicketingTicketInputType = "TO-DO"
-)
-
-func (e UnifiedTicketingTicketInputType) ToPointer() *UnifiedTicketingTicketInputType {
-	return &e
-}
-func (e *UnifiedTicketingTicketInputType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BUG":
-		fallthrough
-	case "SUBTASK":
-		fallthrough
-	case "TASK":
-		fallthrough
-	case "TO-DO":
-		*e = UnifiedTicketingTicketInputType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedTicketingTicketInputType: %v", v)
-	}
-}
 
 type UnifiedTicketingTicketInputCollectionsType string
 
@@ -196,63 +135,6 @@ func (u UnifiedTicketingTicketInputTags) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type UnifiedTicketingTicketInputTags: all fields are null")
 }
 
-// UnifiedTicketingTicketInputPriority - The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
-type UnifiedTicketingTicketInputPriority string
-
-const (
-	UnifiedTicketingTicketInputPriorityHigh   UnifiedTicketingTicketInputPriority = "HIGH"
-	UnifiedTicketingTicketInputPriorityMedium UnifiedTicketingTicketInputPriority = "MEDIUM"
-	UnifiedTicketingTicketInputPriorityLow    UnifiedTicketingTicketInputPriority = "LOW"
-)
-
-func (e UnifiedTicketingTicketInputPriority) ToPointer() *UnifiedTicketingTicketInputPriority {
-	return &e
-}
-func (e *UnifiedTicketingTicketInputPriority) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "HIGH":
-		fallthrough
-	case "MEDIUM":
-		fallthrough
-	case "LOW":
-		*e = UnifiedTicketingTicketInputPriority(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedTicketingTicketInputPriority: %v", v)
-	}
-}
-
-// UnifiedTicketingTicketInputCreatorType - The creator type of the comment. Authorized values are either USER or CONTACT
-type UnifiedTicketingTicketInputCreatorType string
-
-const (
-	UnifiedTicketingTicketInputCreatorTypeUser    UnifiedTicketingTicketInputCreatorType = "USER"
-	UnifiedTicketingTicketInputCreatorTypeContact UnifiedTicketingTicketInputCreatorType = "CONTACT"
-)
-
-func (e UnifiedTicketingTicketInputCreatorType) ToPointer() *UnifiedTicketingTicketInputCreatorType {
-	return &e
-}
-func (e *UnifiedTicketingTicketInputCreatorType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "USER":
-		fallthrough
-	case "CONTACT":
-		*e = UnifiedTicketingTicketInputCreatorType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedTicketingTicketInputCreatorType: %v", v)
-	}
-}
-
 type UnifiedTicketingTicketInputCommentAttachmentsType string
 
 const (
@@ -325,7 +207,7 @@ type UnifiedTicketingTicketInputComment struct {
 	// The public status of the comment
 	IsPrivate *bool `json:"is_private,omitempty"`
 	// The creator type of the comment. Authorized values are either USER or CONTACT
-	CreatorType *UnifiedTicketingTicketInputCreatorType `json:"creator_type,omitempty"`
+	CreatorType *string `json:"creator_type,omitempty"`
 	// The UUID of the ticket the comment is tied to
 	TicketID *string `json:"ticket_id,omitempty"`
 	// The UUID of the contact which the comment belongs to (if no user_id specified)
@@ -357,7 +239,7 @@ func (o *UnifiedTicketingTicketInputComment) GetIsPrivate() *bool {
 	return o.IsPrivate
 }
 
-func (o *UnifiedTicketingTicketInputComment) GetCreatorType() *UnifiedTicketingTicketInputCreatorType {
+func (o *UnifiedTicketingTicketInputComment) GetCreatorType() *string {
 	if o == nil {
 		return nil
 	}
@@ -459,13 +341,13 @@ type UnifiedTicketingTicketInput struct {
 	// The name of the ticket
 	Name *string `json:"name"`
 	// The status of the ticket. Authorized values are OPEN or CLOSED.
-	Status *UnifiedTicketingTicketInputStatus `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	// The description of the ticket
 	Description *string `json:"description"`
 	// The date the ticket is due
 	DueDate *time.Time `json:"due_date,omitempty"`
 	// The type of the ticket. Authorized values are PROBLEM, QUESTION, or TASK
-	Type *UnifiedTicketingTicketInputType `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 	// The UUID of the parent ticket
 	ParentTicket *string `json:"parent_ticket,omitempty"`
 	// The collection UUIDs the ticket belongs to
@@ -475,7 +357,7 @@ type UnifiedTicketingTicketInput struct {
 	// The date the ticket has been completed
 	CompletedAt *time.Time `json:"completed_at,omitempty"`
 	// The priority of the ticket. Authorized values are HIGH, MEDIUM or LOW.
-	Priority *UnifiedTicketingTicketInputPriority `json:"priority,omitempty"`
+	Priority *string `json:"priority,omitempty"`
 	// The users UUIDs the ticket is assigned to
 	AssignedTo []string `json:"assigned_to,omitempty"`
 	// The comment of the ticket
@@ -508,7 +390,7 @@ func (o *UnifiedTicketingTicketInput) GetName() *string {
 	return o.Name
 }
 
-func (o *UnifiedTicketingTicketInput) GetStatus() *UnifiedTicketingTicketInputStatus {
+func (o *UnifiedTicketingTicketInput) GetStatus() *string {
 	if o == nil {
 		return nil
 	}
@@ -529,7 +411,7 @@ func (o *UnifiedTicketingTicketInput) GetDueDate() *time.Time {
 	return o.DueDate
 }
 
-func (o *UnifiedTicketingTicketInput) GetType() *UnifiedTicketingTicketInputType {
+func (o *UnifiedTicketingTicketInput) GetType() *string {
 	if o == nil {
 		return nil
 	}
@@ -564,7 +446,7 @@ func (o *UnifiedTicketingTicketInput) GetCompletedAt() *time.Time {
 	return o.CompletedAt
 }
 
-func (o *UnifiedTicketingTicketInput) GetPriority() *UnifiedTicketingTicketInputPriority {
+func (o *UnifiedTicketingTicketInput) GetPriority() *string {
 	if o == nil {
 		return nil
 	}

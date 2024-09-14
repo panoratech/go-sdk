@@ -2,5 +2,173 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingAddressOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingAddressOutputFieldMappings struct {
+}
+
+// UnifiedAccountingAddressOutputRemoteData - The remote data of the address in the context of the 3rd Party
+type UnifiedAccountingAddressOutputRemoteData struct {
+}
+
 type UnifiedAccountingAddressOutput struct {
+	// The type of the address
+	Type *string `json:"type,omitempty"`
+	// The first line of the street address
+	Street1 *string `json:"street_1,omitempty"`
+	// The second line of the street address
+	Street2 *string `json:"street_2,omitempty"`
+	// The city of the address
+	City *string `json:"city,omitempty"`
+	// The state of the address
+	State *string `json:"state,omitempty"`
+	// The country subdivision (e.g., province or state) of the address
+	CountrySubdivision *string `json:"country_subdivision,omitempty"`
+	// The country of the address
+	Country *string `json:"country,omitempty"`
+	// The zip or postal code of the address
+	Zip *string `json:"zip,omitempty"`
+	// The UUID of the associated contact
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingAddressOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the address record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the address in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the address in the context of the 3rd Party
+	RemoteData *UnifiedAccountingAddressOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the address record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the address record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingAddressOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingAddressOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingAddressOutput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingAddressOutput) GetStreet1() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Street1
+}
+
+func (o *UnifiedAccountingAddressOutput) GetStreet2() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Street2
+}
+
+func (o *UnifiedAccountingAddressOutput) GetCity() *string {
+	if o == nil {
+		return nil
+	}
+	return o.City
+}
+
+func (o *UnifiedAccountingAddressOutput) GetState() *string {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
+func (o *UnifiedAccountingAddressOutput) GetCountrySubdivision() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CountrySubdivision
+}
+
+func (o *UnifiedAccountingAddressOutput) GetCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Country
+}
+
+func (o *UnifiedAccountingAddressOutput) GetZip() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Zip
+}
+
+func (o *UnifiedAccountingAddressOutput) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedAccountingAddressOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingAddressOutput) GetFieldMappings() *UnifiedAccountingAddressOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingAddressOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingAddressOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingAddressOutput) GetRemoteData() *UnifiedAccountingAddressOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingAddressOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingAddressOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

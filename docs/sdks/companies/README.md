@@ -1,6 +1,8 @@
 # Companies
 (*Crm.Companies*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List Companies
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Crm.Companies.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Companies.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListCrmCompanyResponse](../../models/operations/listcrmcompanyresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,46 +95,42 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedCrmCompanyInput := components.UnifiedCrmCompanyInput{
+    ctx := context.Background()
+    res, err := s.Crm.Companies.Create(ctx, "<value>", components.UnifiedCrmCompanyInput{
         Name: gosdk.String("Acme"),
-        Industry: components.UnifiedCrmCompanyInputIndustryAccounting.ToPointer(),
+        Industry: gosdk.String("ACCOUNTING"),
         NumberOfEmployees: gosdk.Float64(10),
         UserID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
         EmailAddresses: []components.Email{
             components.Email{
                 EmailAddress: gosdk.String("acme@gmail.com"),
-                EmailAddressType: components.EmailAddressTypeWork.ToPointer(),
+                EmailAddressType: gosdk.String("WORK"),
             },
         },
         Addresses: []components.Address{
             components.Address{
                 Street1: gosdk.String("5th Avenue"),
-                Street2: gosdk.String("<value>"),
+                Street2: gosdk.String("Street 2"),
                 City: gosdk.String("New York"),
                 State: gosdk.String("NY"),
-                PostalCode: gosdk.String("46842"),
+                PostalCode: gosdk.String("10001"),
                 Country: gosdk.String("USA"),
-                AddressType: components.AddressTypeWork.ToPointer(),
+                AddressType: gosdk.String("WORK"),
                 OwnerType: gosdk.String("<value>"),
             },
         },
         PhoneNumbers: []components.Phone{
             components.Phone{
                 PhoneNumber: gosdk.String("+33660606067"),
-                PhoneType: components.PhoneTypeWork.ToPointer(),
+                PhoneType: gosdk.String("WORK"),
             },
         },
         FieldMappings: map[string]any{
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-
-    var remoteData *bool = gosdk.Bool(false)
-    ctx := context.Background()
-    res, err := s.Crm.Companies.Create(ctx, xConnectionToken, unifiedCrmCompanyInput, remoteData)
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -155,13 +150,16 @@ func main() {
 | `remoteData`                                                                           | **bool*                                                                                | :heavy_minus_sign:                                                                     | Set to true to include data from the original CRM software.                            | false                                                                                  |
 | `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |                                                                                        |
 
-
 ### Response
 
 **[*operations.CreateCrmCompanyResponse](../../models/operations/createcrmcompanyresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -182,13 +180,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Companies.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Companies.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -208,10 +202,12 @@ func main() {
 | `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Crm software. | false                                                       |
 | `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
-
 ### Response
 
 **[*operations.RetrieveCrmCompanyResponse](../../models/operations/retrievecrmcompanyresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

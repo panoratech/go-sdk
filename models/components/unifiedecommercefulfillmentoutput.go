@@ -2,8 +2,8 @@
 
 package components
 
-// UnifiedEcommerceFulfillmentOutputItems - The items in the fulfilment
-type UnifiedEcommerceFulfillmentOutputItems struct {
+// Items - The items in the fulfilment
+type Items struct {
 }
 
 // UnifiedEcommerceFulfillmentOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
@@ -22,7 +22,7 @@ type UnifiedEcommerceFulfillmentOutput struct {
 	// The tracking numbers of the fulfilment
 	TrackingNumbers []string `json:"tracking_numbers,omitempty"`
 	// The items in the fulfilment
-	Items *UnifiedEcommerceFulfillmentOutputItems `json:"items,omitempty"`
+	Items *Items `json:"items,omitempty"`
 	// The UUID of the order associated with the fulfilment
 	OrderID *string `json:"order_id,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
@@ -60,7 +60,7 @@ func (o *UnifiedEcommerceFulfillmentOutput) GetTrackingNumbers() []string {
 	return o.TrackingNumbers
 }
 
-func (o *UnifiedEcommerceFulfillmentOutput) GetItems() *UnifiedEcommerceFulfillmentOutputItems {
+func (o *UnifiedEcommerceFulfillmentOutput) GetItems() *Items {
 	if o == nil {
 		return nil
 	}

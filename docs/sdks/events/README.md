@@ -1,6 +1,8 @@
 # Events
 (*Events*)
 
+## Overview
+
 ### Available Operations
 
 * [GetPanoraCoreEvents](#getpanoracoreevents) - List Events
@@ -45,10 +47,12 @@ func main() {
 | `limit`                                                  | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
 **[*operations.GetPanoraCoreEventsResponse](../../models/operations/getpanoracoreeventsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

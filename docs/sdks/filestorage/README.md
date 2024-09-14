@@ -1,5 +1,2 @@
 # Filestorage
 (*Filestorage*)
-
-### Available Operations
-

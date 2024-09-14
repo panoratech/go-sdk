@@ -2,5 +2,119 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingTrackingcategoryOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingTrackingcategoryOutputFieldMappings struct {
+}
+
+// UnifiedAccountingTrackingcategoryOutputRemoteData - The remote data of the tracking category in the context of the 3rd Party
+type UnifiedAccountingTrackingcategoryOutputRemoteData struct {
+}
+
 type UnifiedAccountingTrackingcategoryOutput struct {
+	// The name of the tracking category
+	Name *string `json:"name,omitempty"`
+	// The status of the tracking category
+	Status *string `json:"status,omitempty"`
+	// The type of the tracking category
+	CategoryType *string `json:"category_type,omitempty"`
+	// The UUID of the parent category, if applicable
+	ParentCategory *string `json:"parent_category,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingTrackingcategoryOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the tracking category record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the tracking category in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the tracking category in the context of the 3rd Party
+	RemoteData *UnifiedAccountingTrackingcategoryOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the tracking category record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the tracking category record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingTrackingcategoryOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingTrackingcategoryOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetCategoryType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CategoryType
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetParentCategory() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ParentCategory
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetFieldMappings() *UnifiedAccountingTrackingcategoryOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetRemoteData() *UnifiedAccountingTrackingcategoryOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingTrackingcategoryOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

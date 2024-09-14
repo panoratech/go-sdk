@@ -2,5 +2,164 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingCompanyinfoOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingCompanyinfoOutputFieldMappings struct {
+}
+
+// UnifiedAccountingCompanyinfoOutputRemoteData - The remote data of the company info in the context of the 3rd Party
+type UnifiedAccountingCompanyinfoOutputRemoteData struct {
+}
+
 type UnifiedAccountingCompanyinfoOutput struct {
+	// The name of the company
+	Name *string `json:"name,omitempty"`
+	// The legal name of the company
+	LegalName *string `json:"legal_name,omitempty"`
+	// The tax number of the company
+	TaxNumber *string `json:"tax_number,omitempty"`
+	// The month of the fiscal year end (1-12)
+	FiscalYearEndMonth *float64 `json:"fiscal_year_end_month,omitempty"`
+	// The day of the fiscal year end (1-31)
+	FiscalYearEndDay *float64 `json:"fiscal_year_end_day,omitempty"`
+	// The currency used by the company
+	Currency *string `json:"currency,omitempty"`
+	// The URLs associated with the company
+	Urls []string `json:"urls,omitempty"`
+	// The UUIDs of the tracking categories used by the company
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingCompanyinfoOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the company info record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the company info in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the company info in the context of the 3rd Party
+	RemoteData *UnifiedAccountingCompanyinfoOutputRemoteData `json:"remote_data,omitempty"`
+	// The date when the company info was created in the remote system
+	RemoteCreatedAt *time.Time `json:"remote_created_at,omitempty"`
+	// The created date of the company info record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the company info record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingCompanyinfoOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingCompanyinfoOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetLegalName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LegalName
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetTaxNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxNumber
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetFiscalYearEndMonth() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.FiscalYearEndMonth
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetFiscalYearEndDay() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.FiscalYearEndDay
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetUrls() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Urls
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetFieldMappings() *UnifiedAccountingCompanyinfoOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetRemoteData() *UnifiedAccountingCompanyinfoOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetRemoteCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingCompanyinfoOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

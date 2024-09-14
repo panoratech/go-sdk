@@ -1,6 +1,8 @@
 # Invoices
 (*Accounting.Invoices*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List  Invoices
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Accounting.Invoices.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Accounting.Invoices.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListAccountingInvoiceResponse](../../models/operations/listaccountinginvoiceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,9 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/types"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,13 +96,44 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedAccountingInvoiceInput := components.UnifiedAccountingInvoiceInput{}
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Accounting.Invoices.Create(ctx, xConnectionToken, unifiedAccountingInvoiceInput, remoteData)
+    res, err := s.Accounting.Invoices.Create(ctx, "<value>", components.UnifiedAccountingInvoiceInput{
+        Type: gosdk.String("Sales"),
+        Number: gosdk.String("INV-001"),
+        IssueDate: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+        DueDate: types.MustNewTimeFromString("2024-07-15T12:00:00Z"),
+        PaidOnDate: types.MustNewTimeFromString("2024-07-10T12:00:00Z"),
+        Memo: gosdk.String("Payment for services rendered"),
+        Currency: gosdk.String("USD"),
+        ExchangeRate: gosdk.String("1.2"),
+        TotalDiscount: gosdk.Float64(1000),
+        SubTotal: gosdk.Float64(10000),
+        Status: gosdk.String("Paid"),
+        TotalTaxAmount: gosdk.Float64(1000),
+        TotalAmount: gosdk.Float64(11000),
+        Balance: gosdk.Float64(0),
+        ContactID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        AccountingPeriodID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        TrackingCategories: []string{
+            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+        },
+        LineItems: []components.LineItem{
+            components.LineItem{
+                Name: gosdk.String("Net Income"),
+                Value: gosdk.Float64(100000),
+                Type: gosdk.String("Operating Activities"),
+                ParentItem: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+                RemoteID: gosdk.String("report_item_1234"),
+                RemoteGeneratedAt: types.MustNewTimeFromString("2024-07-01T12:00:00Z"),
+                CompanyInfoID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+                CreatedAt: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+                ModifiedAt: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+            },
+        },
+        FieldMappings: &components.UnifiedAccountingInvoiceInputFieldMappings{},
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -122,13 +153,16 @@ func main() {
 | `remoteData`                                                                                         | **bool*                                                                                              | :heavy_minus_sign:                                                                                   | Set to true to include data from the original Accounting software.                                   | false                                                                                                |
 | `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |                                                                                                      |
 
-
 ### Response
 
 **[*operations.CreateAccountingInvoiceResponse](../../models/operations/createaccountinginvoiceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -149,13 +183,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Accounting.Invoices.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Accounting.Invoices.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -175,10 +205,12 @@ func main() {
 | `remoteData`                                                       | **bool*                                                            | :heavy_minus_sign:                                                 | Set to true to include data from the original Accounting software. | false                                                              |
 | `opts`                                                             | [][operations.Option](../../models/operations/option.md)           | :heavy_minus_sign:                                                 | The options for this request.                                      |                                                                    |
 
-
 ### Response
 
 **[*operations.RetrieveAccountingInvoiceResponse](../../models/operations/retrieveaccountinginvoiceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

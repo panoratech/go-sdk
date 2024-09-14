@@ -2,5 +2,119 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingPhonenumberOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingPhonenumberOutputFieldMappings struct {
+}
+
+// UnifiedAccountingPhonenumberOutputRemoteData - The remote data of the phone number in the context of the 3rd Party
+type UnifiedAccountingPhonenumberOutputRemoteData struct {
+}
+
 type UnifiedAccountingPhonenumberOutput struct {
+	// The phone number
+	Number *string `json:"number,omitempty"`
+	// The type of phone number
+	Type *string `json:"type,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The UUID of the associated contact
+	ContactID *string `json:"contact_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingPhonenumberOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the phone number record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the phone number in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the phone number in the context of the 3rd Party
+	RemoteData *UnifiedAccountingPhonenumberOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the phone number record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the phone number record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingPhonenumberOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingPhonenumberOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Number
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetFieldMappings() *UnifiedAccountingPhonenumberOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetRemoteData() *UnifiedAccountingPhonenumberOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingPhonenumberOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

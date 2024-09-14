@@ -2,5 +2,173 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingAccountOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingAccountOutputFieldMappings struct {
+}
+
+// UnifiedAccountingAccountOutputRemoteData - The remote data of the account in the context of the 3rd Party
+type UnifiedAccountingAccountOutputRemoteData struct {
+}
+
 type UnifiedAccountingAccountOutput struct {
+	// The name of the account
+	Name *string `json:"name,omitempty"`
+	// A description of the account
+	Description *string `json:"description,omitempty"`
+	// The classification of the account
+	Classification *string `json:"classification,omitempty"`
+	// The type of the account
+	Type *string `json:"type,omitempty"`
+	// The status of the account
+	Status *string `json:"status,omitempty"`
+	// The current balance of the account
+	CurrentBalance *float64 `json:"current_balance,omitempty"`
+	// The currency of the account
+	Currency *string `json:"currency,omitempty"`
+	// The account number
+	AccountNumber *string `json:"account_number,omitempty"`
+	// The UUID of the parent account
+	ParentAccount *string `json:"parent_account,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingAccountOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the account record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the account in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the account in the context of the 3rd Party
+	RemoteData *UnifiedAccountingAccountOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the account record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the account record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingAccountOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingAccountOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingAccountOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingAccountOutput) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UnifiedAccountingAccountOutput) GetClassification() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Classification
+}
+
+func (o *UnifiedAccountingAccountOutput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingAccountOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingAccountOutput) GetCurrentBalance() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.CurrentBalance
+}
+
+func (o *UnifiedAccountingAccountOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingAccountOutput) GetAccountNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountNumber
+}
+
+func (o *UnifiedAccountingAccountOutput) GetParentAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ParentAccount
+}
+
+func (o *UnifiedAccountingAccountOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingAccountOutput) GetFieldMappings() *UnifiedAccountingAccountOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingAccountOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingAccountOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingAccountOutput) GetRemoteData() *UnifiedAccountingAccountOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingAccountOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingAccountOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

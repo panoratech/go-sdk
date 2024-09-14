@@ -9,72 +9,72 @@ import (
 	"time"
 )
 
-// EventResponseType - Scope of the event
-type EventResponseType string
+// Type - Scope of the event
+type Type string
 
 const (
-	EventResponseTypeCrmContactCreated           EventResponseType = "crm.contact.created"
-	EventResponseTypeCrmContactPulled            EventResponseType = "crm.contact.pulled"
-	EventResponseTypeCrmCompanyCreated           EventResponseType = "crm.company.created"
-	EventResponseTypeCrmCompanyPulled            EventResponseType = "crm.company.pulled"
-	EventResponseTypeCrmDealCreated              EventResponseType = "crm.deal.created"
-	EventResponseTypeCrmDealPulled               EventResponseType = "crm.deal.pulled"
-	EventResponseTypeCrmEngagementCreated        EventResponseType = "crm.engagement.created"
-	EventResponseTypeCrmEngagementPulled         EventResponseType = "crm.engagement.pulled"
-	EventResponseTypeCrmNoteCreated              EventResponseType = "crm.note.created"
-	EventResponseTypeCrmNotePulled               EventResponseType = "crm.note.pulled"
-	EventResponseTypeCrmStagePulled              EventResponseType = "crm.stage.pulled"
-	EventResponseTypeCrmTaskPulled               EventResponseType = "crm.task.pulled"
-	EventResponseTypeCrmTaskCreated              EventResponseType = "crm.task.created"
-	EventResponseTypeCrmUserPulled               EventResponseType = "crm.user.pulled"
-	EventResponseTypeTicketingTicketCreated      EventResponseType = "ticketing.ticket.created"
-	EventResponseTypeTicketingTicketPulled       EventResponseType = "ticketing.ticket.pulled"
-	EventResponseTypeTicketingCommentCreated     EventResponseType = "ticketing.comment.created"
-	EventResponseTypeTicketingCommentPulled      EventResponseType = "ticketing.comment.pulled"
-	EventResponseTypeTicketingAttachmentCreated  EventResponseType = "ticketing.attachment.created"
-	EventResponseTypeTicketingAttachmentPulled   EventResponseType = "ticketing.attachment.pulled"
-	EventResponseTypeTicketingCollectionPulled   EventResponseType = "ticketing.collection.pulled"
-	EventResponseTypeTicketingAccountPulled      EventResponseType = "ticketing.account.pulled"
-	EventResponseTypeTicketingContactPulled      EventResponseType = "ticketing.contact.pulled"
-	EventResponseTypeTicketingTagPulled          EventResponseType = "ticketing.tag.pulled"
-	EventResponseTypeTicketingTeamPulled         EventResponseType = "ticketing.team.pulled"
-	EventResponseTypeTicketingUserPulled         EventResponseType = "ticketing.user.pulled"
-	EventResponseTypeAtsActivityCreated          EventResponseType = "ats.activity.created"
-	EventResponseTypeAtsActivityPulled           EventResponseType = "ats.activity.pulled"
-	EventResponseTypeAtsApplicationCreated       EventResponseType = "ats.application.created"
-	EventResponseTypeAtsApplicationPulled        EventResponseType = "ats.application.pulled"
-	EventResponseTypeAtsAttachmentCreated        EventResponseType = "ats.attachment.created"
-	EventResponseTypeAtsAttachmentPulled         EventResponseType = "ats.attachment.pulled"
-	EventResponseTypeAtsCandidateCreated         EventResponseType = "ats.candidate.created"
-	EventResponseTypeAtsCandidatePulled          EventResponseType = "ats.candidate.pulled"
-	EventResponseTypeAtsDepartmentPulled         EventResponseType = "ats.department.pulled"
-	EventResponseTypeAtsEecosPulled              EventResponseType = "ats.eecos.pulled"
-	EventResponseTypeAtsInterviewCreated         EventResponseType = "ats.interview.created"
-	EventResponseTypeAtsInterviewPulled          EventResponseType = "ats.interview.pulled"
-	EventResponseTypeAtsJobPulled                EventResponseType = "ats.job.pulled"
-	EventResponseTypeAtsJobinterviewstagePulled  EventResponseType = "ats.jobinterviewstage.pulled"
-	EventResponseTypeAtsOfferCreated             EventResponseType = "ats.offer.created"
-	EventResponseTypeAtsOfficePulled             EventResponseType = "ats.office.pulled"
-	EventResponseTypeAtsRejectreasonPulled       EventResponseType = "ats.rejectreason.pulled"
-	EventResponseTypeAtsScorecardPulled          EventResponseType = "ats.scorecard.pulled"
-	EventResponseTypeAtsTagPulled                EventResponseType = "ats.tag.pulled"
-	EventResponseTypeAtsUserPulled               EventResponseType = "ats.user.pulled"
-	EventResponseTypeFilestorageFileCreated      EventResponseType = "filestorage.file.created"
-	EventResponseTypeFilestorageFilePulled       EventResponseType = "filestorage.file.pulled"
-	EventResponseTypeFilestorageFolderCreated    EventResponseType = "filestorage.folder.created"
-	EventResponseTypeFilestorageFolderPulled     EventResponseType = "filestorage.folder.pulled"
-	EventResponseTypeFilestorageGroupPulled      EventResponseType = "filestorage.group.pulled"
-	EventResponseTypeFilestorageUserPulled       EventResponseType = "filestorage.user.pulled"
-	EventResponseTypeFilestorageDrivePulled      EventResponseType = "filestorage.drive.pulled"
-	EventResponseTypeFilestoragePermissionPulled EventResponseType = "filestorage.permission.pulled"
-	EventResponseTypeFilestorageSharedlinkPulled EventResponseType = "filestorage.sharedlink.pulled"
-	EventResponseTypeConnectionCreated           EventResponseType = "connection.created"
+	TypeCrmContactCreated           Type = "crm.contact.created"
+	TypeCrmContactPulled            Type = "crm.contact.pulled"
+	TypeCrmCompanyCreated           Type = "crm.company.created"
+	TypeCrmCompanyPulled            Type = "crm.company.pulled"
+	TypeCrmDealCreated              Type = "crm.deal.created"
+	TypeCrmDealPulled               Type = "crm.deal.pulled"
+	TypeCrmEngagementCreated        Type = "crm.engagement.created"
+	TypeCrmEngagementPulled         Type = "crm.engagement.pulled"
+	TypeCrmNoteCreated              Type = "crm.note.created"
+	TypeCrmNotePulled               Type = "crm.note.pulled"
+	TypeCrmStagePulled              Type = "crm.stage.pulled"
+	TypeCrmTaskPulled               Type = "crm.task.pulled"
+	TypeCrmTaskCreated              Type = "crm.task.created"
+	TypeCrmUserPulled               Type = "crm.user.pulled"
+	TypeTicketingTicketCreated      Type = "ticketing.ticket.created"
+	TypeTicketingTicketPulled       Type = "ticketing.ticket.pulled"
+	TypeTicketingCommentCreated     Type = "ticketing.comment.created"
+	TypeTicketingCommentPulled      Type = "ticketing.comment.pulled"
+	TypeTicketingAttachmentCreated  Type = "ticketing.attachment.created"
+	TypeTicketingAttachmentPulled   Type = "ticketing.attachment.pulled"
+	TypeTicketingCollectionPulled   Type = "ticketing.collection.pulled"
+	TypeTicketingAccountPulled      Type = "ticketing.account.pulled"
+	TypeTicketingContactPulled      Type = "ticketing.contact.pulled"
+	TypeTicketingTagPulled          Type = "ticketing.tag.pulled"
+	TypeTicketingTeamPulled         Type = "ticketing.team.pulled"
+	TypeTicketingUserPulled         Type = "ticketing.user.pulled"
+	TypeAtsActivityCreated          Type = "ats.activity.created"
+	TypeAtsActivityPulled           Type = "ats.activity.pulled"
+	TypeAtsApplicationCreated       Type = "ats.application.created"
+	TypeAtsApplicationPulled        Type = "ats.application.pulled"
+	TypeAtsAttachmentCreated        Type = "ats.attachment.created"
+	TypeAtsAttachmentPulled         Type = "ats.attachment.pulled"
+	TypeAtsCandidateCreated         Type = "ats.candidate.created"
+	TypeAtsCandidatePulled          Type = "ats.candidate.pulled"
+	TypeAtsDepartmentPulled         Type = "ats.department.pulled"
+	TypeAtsEecosPulled              Type = "ats.eecos.pulled"
+	TypeAtsInterviewCreated         Type = "ats.interview.created"
+	TypeAtsInterviewPulled          Type = "ats.interview.pulled"
+	TypeAtsJobPulled                Type = "ats.job.pulled"
+	TypeAtsJobinterviewstagePulled  Type = "ats.jobinterviewstage.pulled"
+	TypeAtsOfferCreated             Type = "ats.offer.created"
+	TypeAtsOfficePulled             Type = "ats.office.pulled"
+	TypeAtsRejectreasonPulled       Type = "ats.rejectreason.pulled"
+	TypeAtsScorecardPulled          Type = "ats.scorecard.pulled"
+	TypeAtsTagPulled                Type = "ats.tag.pulled"
+	TypeAtsUserPulled               Type = "ats.user.pulled"
+	TypeFilestorageFileCreated      Type = "filestorage.file.created"
+	TypeFilestorageFilePulled       Type = "filestorage.file.pulled"
+	TypeFilestorageFolderCreated    Type = "filestorage.folder.created"
+	TypeFilestorageFolderPulled     Type = "filestorage.folder.pulled"
+	TypeFilestorageGroupPulled      Type = "filestorage.group.pulled"
+	TypeFilestorageUserPulled       Type = "filestorage.user.pulled"
+	TypeFilestorageDrivePulled      Type = "filestorage.drive.pulled"
+	TypeFilestoragePermissionPulled Type = "filestorage.permission.pulled"
+	TypeFilestorageSharedlinkPulled Type = "filestorage.sharedlink.pulled"
+	TypeConnectionCreated           Type = "connection.created"
 )
 
-func (e EventResponseType) ToPointer() *EventResponseType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
-func (e *EventResponseType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -191,10 +191,10 @@ func (e *EventResponseType) UnmarshalJSON(data []byte) error {
 	case "filestorage.sharedlink.pulled":
 		fallthrough
 	case "connection.created":
-		*e = EventResponseType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EventResponseType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -266,7 +266,7 @@ type EventResponse struct {
 	// Project ID associated with the event
 	IDProject string `json:"id_project"`
 	// Scope of the event
-	Type EventResponseType `json:"type"`
+	Type Type `json:"type"`
 	// Status of the event
 	Status EventResponseStatus `json:"status"`
 	// Direction of the event
@@ -315,9 +315,9 @@ func (o *EventResponse) GetIDProject() string {
 	return o.IDProject
 }
 
-func (o *EventResponse) GetType() EventResponseType {
+func (o *EventResponse) GetType() Type {
 	if o == nil {
-		return EventResponseType("")
+		return Type("")
 	}
 	return o.Type
 }

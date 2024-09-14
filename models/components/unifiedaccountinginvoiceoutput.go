@@ -2,5 +2,254 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingInvoiceOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingInvoiceOutputFieldMappings struct {
+}
+
+// UnifiedAccountingInvoiceOutputRemoteData - The remote data of the invoice in the context of the 3rd Party
+type UnifiedAccountingInvoiceOutputRemoteData struct {
+}
+
 type UnifiedAccountingInvoiceOutput struct {
+	// The type of the invoice
+	Type *string `json:"type,omitempty"`
+	// The invoice number
+	Number *string `json:"number,omitempty"`
+	// The date the invoice was issued
+	IssueDate *time.Time `json:"issue_date,omitempty"`
+	// The due date of the invoice
+	DueDate *time.Time `json:"due_date,omitempty"`
+	// The date the invoice was paid
+	PaidOnDate *time.Time `json:"paid_on_date,omitempty"`
+	// A memo or note on the invoice
+	Memo *string `json:"memo,omitempty"`
+	// The currency of the invoice
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the invoice
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The total discount applied to the invoice
+	TotalDiscount *float64 `json:"total_discount,omitempty"`
+	// The subtotal of the invoice
+	SubTotal *float64 `json:"sub_total,omitempty"`
+	// The status of the invoice
+	Status *string `json:"status,omitempty"`
+	// The total tax amount on the invoice
+	TotalTaxAmount *float64 `json:"total_tax_amount,omitempty"`
+	// The total amount of the invoice
+	TotalAmount *float64 `json:"total_amount,omitempty"`
+	// The remaining balance on the invoice
+	Balance *float64 `json:"balance,omitempty"`
+	// The UUID of the associated contact
+	ContactID *string `json:"contact_id,omitempty"`
+	// The UUID of the associated accounting period
+	AccountingPeriodID *string `json:"accounting_period_id,omitempty"`
+	// The UUIDs of the tracking categories associated with the invoice
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The line items associated with this invoice
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingInvoiceOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the invoice record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the invoice in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the invoice in the context of the 3rd Party
+	RemoteData *UnifiedAccountingInvoiceOutputRemoteData `json:"remote_data,omitempty"`
+	// The date when the invoice was last updated in the remote system
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The created date of the invoice record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the invoice record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingInvoiceOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingInvoiceOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Number
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetIssueDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.IssueDate
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetDueDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DueDate
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetPaidOnDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.PaidOnDate
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetMemo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Memo
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetTotalDiscount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalDiscount
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetSubTotal() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.SubTotal
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetTotalTaxAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalTaxAmount
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetTotalAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAmount
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetBalance() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Balance
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetContactID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContactID
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetAccountingPeriodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountingPeriodID
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetFieldMappings() *UnifiedAccountingInvoiceOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetRemoteData() *UnifiedAccountingInvoiceOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetRemoteUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingInvoiceOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

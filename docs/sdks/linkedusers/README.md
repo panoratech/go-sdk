@@ -1,6 +1,8 @@
 # LinkedUsers
 (*LinkedUsers*)
 
+## Overview
+
 ### Available Operations
 
 * [Create](#create) - Create Linked Users
@@ -20,8 +22,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -29,12 +31,12 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    request := components.CreateLinkedUserDto{
+
+    ctx := context.Background()
+    res, err := s.LinkedUsers.Create(ctx, components.CreateLinkedUserDto{
         LinkedUserOriginID: "id_1",
         Alias: gosdk.String("acme"),
-    }
-    ctx := context.Background()
-    res, err := s.LinkedUsers.Create(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -52,13 +54,16 @@ func main() {
 | `request`                                                                        | [components.CreateLinkedUserDto](../../models/components/createlinkeduserdto.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.CreateLinkedUserResponse](../../models/operations/createlinkeduserresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## List
 
@@ -98,13 +103,16 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
-
 ### Response
 
 **[*operations.ListLinkedUsersResponse](../../models/operations/listlinkedusersresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ImportBatch
 
@@ -117,8 +125,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -126,14 +134,14 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    request := components.CreateBatchLinkedUserDto{
+
+    ctx := context.Background()
+    res, err := s.LinkedUsers.ImportBatch(ctx, components.CreateBatchLinkedUserDto{
         LinkedUserOriginIds: []string{
             "id_1",
         },
         Alias: gosdk.String("acme"),
-    }
-    ctx := context.Background()
-    res, err := s.LinkedUsers.ImportBatch(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -151,13 +159,16 @@ func main() {
 | `request`                                                                                  | [components.CreateBatchLinkedUserDto](../../models/components/createbatchlinkeduserdto.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.ImportBatchResponse](../../models/operations/importbatchresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -178,9 +189,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
+
     ctx := context.Background()
-    res, err := s.LinkedUsers.Retrieve(ctx, id)
+    res, err := s.LinkedUsers.Retrieve(ctx, "801f9ede-c698-4e66-a7fc-48d19eebaa4f")
     if err != nil {
         log.Fatal(err)
     }
@@ -198,13 +209,16 @@ func main() {
 | `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.RetrieveLinkedUserResponse](../../models/operations/retrievelinkeduserresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## RemoteID
 
@@ -225,9 +239,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var remoteID string = "id_1"
+
     ctx := context.Background()
-    res, err := s.LinkedUsers.RemoteID(ctx, remoteID)
+    res, err := s.LinkedUsers.RemoteID(ctx, "id_1")
     if err != nil {
         log.Fatal(err)
     }
@@ -245,10 +259,12 @@ func main() {
 | `remoteID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | id_1                                                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.RemoteIDResponse](../../models/operations/remoteidresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

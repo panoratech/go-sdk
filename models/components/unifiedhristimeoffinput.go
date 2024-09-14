@@ -2,5 +2,115 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedHrisTimeoffInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedHrisTimeoffInputFieldMappings struct {
+}
+
 type UnifiedHrisTimeoffInput struct {
+	// The UUID of the employee taking time off
+	Employee *string `json:"employee,omitempty"`
+	// The UUID of the approver for the time off request
+	Approver *string `json:"approver,omitempty"`
+	// The status of the time off request
+	Status *string `json:"status,omitempty"`
+	// A note from the employee about the time off request
+	EmployeeNote *string `json:"employee_note,omitempty"`
+	// The units used for the time off (e.g., Days, Hours)
+	Units *string `json:"units,omitempty"`
+	// The amount of time off requested
+	Amount *float64 `json:"amount,omitempty"`
+	// The type of time off request
+	RequestType *string `json:"request_type,omitempty"`
+	// The start time of the time off
+	StartTime *time.Time `json:"start_time,omitempty"`
+	// The end time of the time off
+	EndTime *time.Time `json:"end_time,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedHrisTimeoffInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (u UnifiedHrisTimeoffInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedHrisTimeoffInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedHrisTimeoffInput) GetEmployee() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Employee
+}
+
+func (o *UnifiedHrisTimeoffInput) GetApprover() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Approver
+}
+
+func (o *UnifiedHrisTimeoffInput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedHrisTimeoffInput) GetEmployeeNote() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EmployeeNote
+}
+
+func (o *UnifiedHrisTimeoffInput) GetUnits() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Units
+}
+
+func (o *UnifiedHrisTimeoffInput) GetAmount() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *UnifiedHrisTimeoffInput) GetRequestType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RequestType
+}
+
+func (o *UnifiedHrisTimeoffInput) GetStartTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.StartTime
+}
+
+func (o *UnifiedHrisTimeoffInput) GetEndTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.EndTime
+}
+
+func (o *UnifiedHrisTimeoffInput) GetFieldMappings() *UnifiedHrisTimeoffInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

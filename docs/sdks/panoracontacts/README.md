@@ -1,6 +1,8 @@
 # PanoraContacts
 (*Crm.Contacts*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List CRM Contacts
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Crm.Contacts.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Contacts.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListCrmContactsResponse](../../models/operations/listcrmcontactsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,32 +95,32 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedCrmContactInput := components.UnifiedCrmContactInput{
+    ctx := context.Background()
+    res, err := s.Crm.Contacts.Create(ctx, "<value>", components.UnifiedCrmContactInput{
         FirstName: gosdk.String("John"),
         LastName: gosdk.String("Doe"),
         EmailAddresses: []components.Email{
             components.Email{
                 EmailAddress: gosdk.String("Jena.Nienow28@yahoo.com"),
-                EmailAddressType: components.EmailAddressTypePersonal.ToPointer(),
+                EmailAddressType: gosdk.String("<value>"),
             },
         },
         PhoneNumbers: []components.Phone{
             components.Phone{
-                PhoneNumber: gosdk.String("<value>"),
-                PhoneType: components.PhoneTypeWork.ToPointer(),
+                PhoneNumber: gosdk.String("1-809-839-8041"),
+                PhoneType: gosdk.String("<value>"),
             },
         },
         Addresses: []components.Address{
             components.Address{
-                Street1: gosdk.String("<value>"),
-                Street2: gosdk.String("<value>"),
+                Street1: gosdk.String("5th Avenue"),
+                Street2: gosdk.String("Street 2"),
                 City: gosdk.String("Anytown"),
                 State: gosdk.String("CA"),
-                PostalCode: gosdk.String("97398"),
+                PostalCode: gosdk.String("10001"),
                 Country: gosdk.String("USA"),
-                AddressType: components.AddressTypePersonal.ToPointer(),
+                AddressType: gosdk.String("PERSONAL"),
                 OwnerType: gosdk.String("<value>"),
             },
         },
@@ -130,11 +129,7 @@ func main() {
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-
-    var remoteData *bool = gosdk.Bool(false)
-    ctx := context.Background()
-    res, err := s.Crm.Contacts.Create(ctx, xConnectionToken, unifiedCrmContactInput, remoteData)
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -154,13 +149,16 @@ func main() {
 | `remoteData`                                                                           | **bool*                                                                                | :heavy_minus_sign:                                                                     | Set to true to include data from the original CRM software.                            | false                                                                                  |
 | `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |                                                                                        |
 
-
 ### Response
 
 **[*operations.CreateCrmContactResponse](../../models/operations/createcrmcontactresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -181,13 +179,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Contacts.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Contacts.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -207,10 +201,12 @@ func main() {
 | `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original CRM software. | false                                                       |
 | `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
-
 ### Response
 
 **[*operations.RetrieveCrmContactResponse](../../models/operations/retrievecrmcontactresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

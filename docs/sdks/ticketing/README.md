@@ -1,5 +1,2 @@
 # Ticketing
 (*Ticketing*)
-
-### Available Operations
-

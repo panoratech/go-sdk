@@ -3,77 +3,9 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// UnifiedAtsJobOutputStatus - The status of the job
-type UnifiedAtsJobOutputStatus string
-
-const (
-	UnifiedAtsJobOutputStatusOpen     UnifiedAtsJobOutputStatus = "OPEN"
-	UnifiedAtsJobOutputStatusClosed   UnifiedAtsJobOutputStatus = "CLOSED"
-	UnifiedAtsJobOutputStatusDraft    UnifiedAtsJobOutputStatus = "DRAFT"
-	UnifiedAtsJobOutputStatusArchived UnifiedAtsJobOutputStatus = "ARCHIVED"
-	UnifiedAtsJobOutputStatusPending  UnifiedAtsJobOutputStatus = "PENDING"
-)
-
-func (e UnifiedAtsJobOutputStatus) ToPointer() *UnifiedAtsJobOutputStatus {
-	return &e
-}
-func (e *UnifiedAtsJobOutputStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "OPEN":
-		fallthrough
-	case "CLOSED":
-		fallthrough
-	case "DRAFT":
-		fallthrough
-	case "ARCHIVED":
-		fallthrough
-	case "PENDING":
-		*e = UnifiedAtsJobOutputStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedAtsJobOutputStatus: %v", v)
-	}
-}
-
-// UnifiedAtsJobOutputType - The type of the job
-type UnifiedAtsJobOutputType string
-
-const (
-	UnifiedAtsJobOutputTypePosting     UnifiedAtsJobOutputType = "POSTING"
-	UnifiedAtsJobOutputTypeRequisition UnifiedAtsJobOutputType = "REQUISITION"
-	UnifiedAtsJobOutputTypeProfile     UnifiedAtsJobOutputType = "PROFILE"
-)
-
-func (e UnifiedAtsJobOutputType) ToPointer() *UnifiedAtsJobOutputType {
-	return &e
-}
-func (e *UnifiedAtsJobOutputType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "POSTING":
-		fallthrough
-	case "REQUISITION":
-		fallthrough
-	case "PROFILE":
-		*e = UnifiedAtsJobOutputType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedAtsJobOutputType: %v", v)
-	}
-}
 
 type UnifiedAtsJobOutput struct {
 	// The name of the job
@@ -83,9 +15,9 @@ type UnifiedAtsJobOutput struct {
 	// The code of the job
 	Code *string `json:"code,omitempty"`
 	// The status of the job
-	Status *UnifiedAtsJobOutputStatus `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	// The type of the job
-	Type *UnifiedAtsJobOutputType `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 	// Whether the job is confidential
 	Confidential *bool `json:"confidential,omitempty"`
 	// The departments UUIDs associated with the job
@@ -146,14 +78,14 @@ func (o *UnifiedAtsJobOutput) GetCode() *string {
 	return o.Code
 }
 
-func (o *UnifiedAtsJobOutput) GetStatus() *UnifiedAtsJobOutputStatus {
+func (o *UnifiedAtsJobOutput) GetStatus() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *UnifiedAtsJobOutput) GetType() *UnifiedAtsJobOutputType {
+func (o *UnifiedAtsJobOutput) GetType() *string {
 	if o == nil {
 		return nil
 	}

@@ -2,43 +2,11 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-// PhoneType - The phone type. Authorized values are either MOBILE or WORK
-type PhoneType string
-
-const (
-	PhoneTypeMobile PhoneType = "MOBILE"
-	PhoneTypeWork   PhoneType = "WORK"
-)
-
-func (e PhoneType) ToPointer() *PhoneType {
-	return &e
-}
-func (e *PhoneType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MOBILE":
-		fallthrough
-	case "WORK":
-		*e = PhoneType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PhoneType: %v", v)
-	}
-}
-
 type Phone struct {
 	// The phone number starting with a plus (+) followed by the country code (e.g +336676778890 for France)
 	PhoneNumber *string `json:"phone_number"`
 	// The phone type. Authorized values are either MOBILE or WORK
-	PhoneType *PhoneType `json:"phone_type"`
+	PhoneType *string `json:"phone_type"`
 	// The owner type of a phone number
 	OwnerType *string `json:"owner_type,omitempty"`
 }
@@ -50,7 +18,7 @@ func (o *Phone) GetPhoneNumber() *string {
 	return o.PhoneNumber
 }
 
-func (o *Phone) GetPhoneType() *PhoneType {
+func (o *Phone) GetPhoneType() *string {
 	if o == nil {
 		return nil
 	}

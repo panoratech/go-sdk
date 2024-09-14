@@ -2,5 +2,142 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingJournalentryInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingJournalentryInputFieldMappings struct {
+}
+
 type UnifiedAccountingJournalentryInput struct {
+	// The date of the transaction
+	TransactionDate *time.Time `json:"transaction_date,omitempty"`
+	// The payments associated with the journal entry
+	Payments []string `json:"payments,omitempty"`
+	// The applied payments for the journal entry
+	AppliedPayments []string `json:"applied_payments,omitempty"`
+	// A memo or note for the journal entry
+	Memo *string `json:"memo,omitempty"`
+	// The currency of the journal entry
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the journal entry
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The UUID of the associated company info
+	IDAccCompanyInfo *string `json:"id_acc_company_info,omitempty"`
+	// The journal number
+	JournalNumber *string `json:"journal_number,omitempty"`
+	// The UUIDs of the tracking categories associated with the journal entry
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The UUID of the associated accounting period
+	IDAccAccountingPeriod *string `json:"id_acc_accounting_period,omitempty"`
+	// The posting status of the journal entry
+	PostingStatus *string `json:"posting_status,omitempty"`
+	// The line items associated with this journal entry
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingJournalentryInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (u UnifiedAccountingJournalentryInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingJournalentryInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetTransactionDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionDate
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetPayments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Payments
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetAppliedPayments() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AppliedPayments
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetMemo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Memo
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetIDAccCompanyInfo() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IDAccCompanyInfo
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetJournalNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.JournalNumber
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetIDAccAccountingPeriod() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IDAccAccountingPeriod
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetPostingStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PostingStatus
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingJournalentryInput) GetFieldMappings() *UnifiedAccountingJournalentryInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

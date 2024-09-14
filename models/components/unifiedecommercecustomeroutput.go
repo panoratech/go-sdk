@@ -2,9 +2,6 @@
 
 package components
 
-type Addresses struct {
-}
-
 // UnifiedEcommerceCustomerOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
 type UnifiedEcommerceCustomerOutputFieldMappings struct {
 }
@@ -23,7 +20,7 @@ type UnifiedEcommerceCustomerOutput struct {
 	// The phone number of the customer
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The addresses of the customer
-	Addresses []Addresses `json:"addresses,omitempty"`
+	Addresses []Address `json:"addresses,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
 	FieldMappings *UnifiedEcommerceCustomerOutputFieldMappings `json:"field_mappings,omitempty"`
 	// The UUID of the customer
@@ -66,7 +63,7 @@ func (o *UnifiedEcommerceCustomerOutput) GetPhoneNumber() *string {
 	return o.PhoneNumber
 }
 
-func (o *UnifiedEcommerceCustomerOutput) GetAddresses() []Addresses {
+func (o *UnifiedEcommerceCustomerOutput) GetAddresses() []Address {
 	if o == nil {
 		return nil
 	}

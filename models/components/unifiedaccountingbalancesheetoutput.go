@@ -2,5 +2,173 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingBalancesheetOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingBalancesheetOutputFieldMappings struct {
+}
+
+// UnifiedAccountingBalancesheetOutputRemoteData - The remote data of the balance sheet in the context of the 3rd Party
+type UnifiedAccountingBalancesheetOutputRemoteData struct {
+}
+
 type UnifiedAccountingBalancesheetOutput struct {
+	// The name of the balance sheet
+	Name *string `json:"name,omitempty"`
+	// The currency used in the balance sheet
+	Currency *string `json:"currency,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The date of the balance sheet
+	Date *time.Time `json:"date,omitempty"`
+	// The net assets value
+	NetAssets *float64 `json:"net_assets,omitempty"`
+	// The list of assets
+	Assets []string `json:"assets,omitempty"`
+	// The list of liabilities
+	Liabilities []string `json:"liabilities,omitempty"`
+	// The list of equity items
+	Equity []string `json:"equity,omitempty"`
+	// The date when the balance sheet was generated in the remote system
+	RemoteGeneratedAt *time.Time `json:"remote_generated_at,omitempty"`
+	// The report items associated with this balance sheet
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingBalancesheetOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the balance sheet record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the balance sheet in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the balance sheet in the context of the 3rd Party
+	RemoteData *UnifiedAccountingBalancesheetOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the balance sheet record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the balance sheet record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingBalancesheetOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingBalancesheetOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.Date
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetNetAssets() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.NetAssets
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetAssets() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Assets
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetLiabilities() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Liabilities
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetEquity() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Equity
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetRemoteGeneratedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteGeneratedAt
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetFieldMappings() *UnifiedAccountingBalancesheetOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetRemoteData() *UnifiedAccountingBalancesheetOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingBalancesheetOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

@@ -3,38 +3,9 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
-
-// UnifiedCrmTaskOutputStatus - The status of the task. Authorized values are PENDING, COMPLETED.
-type UnifiedCrmTaskOutputStatus string
-
-const (
-	UnifiedCrmTaskOutputStatusPending   UnifiedCrmTaskOutputStatus = "PENDING"
-	UnifiedCrmTaskOutputStatusCompleted UnifiedCrmTaskOutputStatus = "COMPLETED"
-)
-
-func (e UnifiedCrmTaskOutputStatus) ToPointer() *UnifiedCrmTaskOutputStatus {
-	return &e
-}
-func (e *UnifiedCrmTaskOutputStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PENDING":
-		fallthrough
-	case "COMPLETED":
-		*e = UnifiedCrmTaskOutputStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedCrmTaskOutputStatus: %v", v)
-	}
-}
 
 type UnifiedCrmTaskOutput struct {
 	// The subject of the task
@@ -42,7 +13,7 @@ type UnifiedCrmTaskOutput struct {
 	// The content of the task
 	Content *string `json:"content"`
 	// The status of the task. Authorized values are PENDING, COMPLETED.
-	Status *UnifiedCrmTaskOutputStatus `json:"status"`
+	Status *string `json:"status"`
 	// The due date of the task
 	DueDate *string `json:"due_date,omitempty"`
 	// The finished date of the task
@@ -92,7 +63,7 @@ func (o *UnifiedCrmTaskOutput) GetContent() *string {
 	return o.Content
 }
 
-func (o *UnifiedCrmTaskOutput) GetStatus() *UnifiedCrmTaskOutputStatus {
+func (o *UnifiedCrmTaskOutput) GetStatus() *string {
 	if o == nil {
 		return nil
 	}

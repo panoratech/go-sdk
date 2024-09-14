@@ -53,17 +53,17 @@ func (e *Vertical) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type ResyncStatusDtoStatus string
+type Status string
 
 const (
-	ResyncStatusDtoStatusSuccess ResyncStatusDtoStatus = "success"
-	ResyncStatusDtoStatusFail    ResyncStatusDtoStatus = "fail"
+	StatusSuccess Status = "success"
+	StatusFail    Status = "fail"
 )
 
-func (e ResyncStatusDtoStatus) ToPointer() *ResyncStatusDtoStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
-func (e *ResyncStatusDtoStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -72,18 +72,18 @@ func (e *ResyncStatusDtoStatus) UnmarshalJSON(data []byte) error {
 	case "success":
 		fallthrough
 	case "fail":
-		*e = ResyncStatusDtoStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ResyncStatusDtoStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
 type ResyncStatusDto struct {
-	Timestamp *time.Time             `json:"timestamp"`
-	Vertical  *Vertical              `json:"vertical"`
-	Provider  *string                `json:"provider"`
-	Status    *ResyncStatusDtoStatus `json:"status"`
+	Timestamp *time.Time `json:"timestamp"`
+	Vertical  *Vertical  `json:"vertical"`
+	Provider  *string    `json:"provider"`
+	Status    *Status    `json:"status"`
 }
 
 func (r ResyncStatusDto) MarshalJSON() ([]byte, error) {
@@ -118,7 +118,7 @@ func (o *ResyncStatusDto) GetProvider() *string {
 	return o.Provider
 }
 
-func (o *ResyncStatusDto) GetStatus() *ResyncStatusDtoStatus {
+func (o *ResyncStatusDto) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}

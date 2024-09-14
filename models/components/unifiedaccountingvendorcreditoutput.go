@@ -2,5 +2,182 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingVendorcreditOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingVendorcreditOutputFieldMappings struct {
+}
+
+// UnifiedAccountingVendorcreditOutputRemoteData - The remote data of the vendor credit in the context of the 3rd Party
+type UnifiedAccountingVendorcreditOutputRemoteData struct {
+}
+
 type UnifiedAccountingVendorcreditOutput struct {
+	// The number of the vendor credit
+	Number *string `json:"number,omitempty"`
+	// The date of the transaction
+	TransactionDate *time.Time `json:"transaction_date,omitempty"`
+	// The UUID of the vendor associated with the credit
+	Vendor *string `json:"vendor,omitempty"`
+	// The total amount of the vendor credit
+	TotalAmount *string `json:"total_amount,omitempty"`
+	// The currency of the vendor credit
+	Currency *string `json:"currency,omitempty"`
+	// The exchange rate applied to the vendor credit
+	ExchangeRate *string `json:"exchange_rate,omitempty"`
+	// The UUID of the associated company
+	CompanyID *string `json:"company_id,omitempty"`
+	// The UUID of the tracking categories associated with the vendor credit
+	TrackingCategories []string `json:"tracking_categories,omitempty"`
+	// The UUID of the associated accounting period
+	AccountingPeriodID *string `json:"accounting_period_id,omitempty"`
+	// The line items associated with this vendor credit
+	LineItems []LineItem `json:"line_items,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingVendorcreditOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the vendor credit record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the vendor credit
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The created date of the vendor credit
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the vendor credit
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+	// The date when the vendor credit was last updated in the remote system
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The remote data of the vendor credit in the context of the 3rd Party
+	RemoteData *UnifiedAccountingVendorcreditOutputRemoteData `json:"remote_data,omitempty"`
+}
+
+func (u UnifiedAccountingVendorcreditOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingVendorcreditOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Number
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetTransactionDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.TransactionDate
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetVendor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Vendor
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetTotalAmount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TotalAmount
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetExchangeRate() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExchangeRate
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetCompanyID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyID
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetTrackingCategories() []string {
+	if o == nil {
+		return nil
+	}
+	return o.TrackingCategories
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetAccountingPeriodID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountingPeriodID
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetLineItems() []LineItem {
+	if o == nil {
+		return nil
+	}
+	return o.LineItems
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetFieldMappings() *UnifiedAccountingVendorcreditOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetRemoteUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingVendorcreditOutput) GetRemoteData() *UnifiedAccountingVendorcreditOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
 }

@@ -1,6 +1,8 @@
 # Purchaseorders
 (*Accounting.Purchaseorders*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List  PurchaseOrders
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Accounting.Purchaseorders.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Accounting.Purchaseorders.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListAccountingPurchaseOrderResponse](../../models/operations/listaccountingpurchaseorderresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,9 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/types"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,13 +96,40 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedAccountingPurchaseorderInput := components.UnifiedAccountingPurchaseorderInput{}
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Accounting.Purchaseorders.Create(ctx, xConnectionToken, unifiedAccountingPurchaseorderInput, remoteData)
+    res, err := s.Accounting.Purchaseorders.Create(ctx, "<value>", components.UnifiedAccountingPurchaseorderInput{
+        Status: gosdk.String("Pending"),
+        IssueDate: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+        PurchaseOrderNumber: gosdk.String("PO-001"),
+        DeliveryDate: types.MustNewTimeFromString("2024-07-15T12:00:00Z"),
+        DeliveryAddress: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Customer: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Vendor: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        Memo: gosdk.String("Purchase order for Q3 inventory"),
+        CompanyID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        TotalAmount: gosdk.Float64(100000),
+        Currency: gosdk.String("USD"),
+        ExchangeRate: gosdk.String("1.2"),
+        TrackingCategories: []string{
+            "801f9ede-c698-4e66-a7fc-48d19eebaa4f",
+        },
+        AccountingPeriodID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        LineItems: []components.LineItem{
+            components.LineItem{
+                Name: gosdk.String("Net Income"),
+                Value: gosdk.Float64(100000),
+                Type: gosdk.String("Operating Activities"),
+                ParentItem: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+                RemoteID: gosdk.String("report_item_1234"),
+                RemoteGeneratedAt: types.MustNewTimeFromString("2024-07-01T12:00:00Z"),
+                CompanyInfoID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+                CreatedAt: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+                ModifiedAt: types.MustNewTimeFromString("2024-06-15T12:00:00Z"),
+            },
+        },
+        FieldMappings: &components.UnifiedAccountingPurchaseorderInputFieldMappings{},
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -122,13 +149,16 @@ func main() {
 | `remoteData`                                                                                                     | **bool*                                                                                                          | :heavy_minus_sign:                                                                                               | Set to true to include data from the original Accounting software.                                               | false                                                                                                            |
 | `opts`                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |                                                                                                                  |
 
-
 ### Response
 
 **[*operations.CreateAccountingPurchaseOrderResponse](../../models/operations/createaccountingpurchaseorderresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -149,13 +179,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Accounting.Purchaseorders.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Accounting.Purchaseorders.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -175,10 +201,12 @@ func main() {
 | `remoteData`                                                       | **bool*                                                            | :heavy_minus_sign:                                                 | Set to true to include data from the original Accounting software. | false                                                              |
 | `opts`                                                             | [][operations.Option](../../models/operations/option.md)           | :heavy_minus_sign:                                                 | The options for this request.                                      |                                                                    |
 
-
 ### Response
 
 **[*operations.RetrieveAccountingPurchaseOrderResponse](../../models/operations/retrieveaccountingpurchaseorderresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

@@ -1,6 +1,8 @@
 # Deals
 (*Crm.Deals*)
 
+## Overview
+
 ### Available Operations
 
 * [List](#list) - List Deals
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Crm.Deals.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Crm.Deals.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListCrmDealsResponse](../../models/operations/listcrmdealsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,9 +95,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedCrmDealInput := components.UnifiedCrmDealInput{
+    ctx := context.Background()
+    res, err := s.Crm.Deals.Create(ctx, "<value>", components.UnifiedCrmDealInput{
         Name: gosdk.String("Huge Contract with Acme"),
         Description: gosdk.String("Contract with Sales Operations Team"),
         Amount: gosdk.Float64(1000),
@@ -109,9 +108,7 @@ func main() {
             "fav_dish": "broccoli",
             "fav_color": "red",
         },
-    }
-    ctx := context.Background()
-    res, err := s.Crm.Deals.Create(ctx, xConnectionToken, unifiedCrmDealInput, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -131,13 +128,16 @@ func main() {
 | `remoteData`                                                                     | **bool*                                                                          | :heavy_minus_sign:                                                               | Set to true to include data from the original Crm software.                      |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.CreateCrmDealResponse](../../models/operations/createcrmdealresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Retrieve
 
@@ -158,13 +158,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "801f9ede-c698-4e66-a7fc-48d19eebaa4f"
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Crm.Deals.Retrieve(ctx, xConnectionToken, id, remoteData)
+    res, err := s.Crm.Deals.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -184,10 +180,12 @@ func main() {
 | `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Crm software. | false                                                       |
 | `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |                                                             |
 
-
 ### Response
 
 **[*operations.RetrieveCrmDealResponse](../../models/operations/retrievecrmdealresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

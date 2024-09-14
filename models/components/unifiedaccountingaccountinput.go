@@ -2,5 +2,108 @@
 
 package components
 
+// UnifiedAccountingAccountInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingAccountInputFieldMappings struct {
+}
+
 type UnifiedAccountingAccountInput struct {
+	// The name of the account
+	Name *string `json:"name,omitempty"`
+	// A description of the account
+	Description *string `json:"description,omitempty"`
+	// The classification of the account
+	Classification *string `json:"classification,omitempty"`
+	// The type of the account
+	Type *string `json:"type,omitempty"`
+	// The status of the account
+	Status *string `json:"status,omitempty"`
+	// The current balance of the account
+	CurrentBalance *float64 `json:"current_balance,omitempty"`
+	// The currency of the account
+	Currency *string `json:"currency,omitempty"`
+	// The account number
+	AccountNumber *string `json:"account_number,omitempty"`
+	// The UUID of the parent account
+	ParentAccount *string `json:"parent_account,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingAccountInputFieldMappings `json:"field_mappings,omitempty"`
+}
+
+func (o *UnifiedAccountingAccountInput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingAccountInput) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *UnifiedAccountingAccountInput) GetClassification() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Classification
+}
+
+func (o *UnifiedAccountingAccountInput) GetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Type
+}
+
+func (o *UnifiedAccountingAccountInput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingAccountInput) GetCurrentBalance() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.CurrentBalance
+}
+
+func (o *UnifiedAccountingAccountInput) GetCurrency() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Currency
+}
+
+func (o *UnifiedAccountingAccountInput) GetAccountNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountNumber
+}
+
+func (o *UnifiedAccountingAccountInput) GetParentAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ParentAccount
+}
+
+func (o *UnifiedAccountingAccountInput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingAccountInput) GetFieldMappings() *UnifiedAccountingAccountInputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
 }

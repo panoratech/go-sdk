@@ -2,5 +2,155 @@
 
 package components
 
+import (
+	"github.com/panoratech/go-sdk/internal/utils"
+	"time"
+)
+
+// UnifiedAccountingItemOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedAccountingItemOutputFieldMappings struct {
+}
+
+// UnifiedAccountingItemOutputRemoteData - The remote data of the item in the context of the 3rd Party
+type UnifiedAccountingItemOutputRemoteData struct {
+}
+
 type UnifiedAccountingItemOutput struct {
+	// The name of the accounting item
+	Name *string `json:"name,omitempty"`
+	// The status of the accounting item
+	Status *string `json:"status,omitempty"`
+	// The unit price of the item in cents
+	UnitPrice *float64 `json:"unit_price,omitempty"`
+	// The purchase price of the item in cents
+	PurchasePrice *float64 `json:"purchase_price,omitempty"`
+	// The UUID of the associated sales account
+	SalesAccount *string `json:"sales_account,omitempty"`
+	// The UUID of the associated purchase account
+	PurchaseAccount *string `json:"purchase_account,omitempty"`
+	// The UUID of the associated company info
+	CompanyInfoID *string `json:"company_info_id,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedAccountingItemOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the accounting item record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the item in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The date when the item was last updated in the remote system
+	RemoteUpdatedAt *time.Time `json:"remote_updated_at,omitempty"`
+	// The remote data of the item in the context of the 3rd Party
+	RemoteData *UnifiedAccountingItemOutputRemoteData `json:"remote_data,omitempty"`
+	// The created date of the accounting item record
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// The last modified date of the accounting item record
+	ModifiedAt *time.Time `json:"modified_at,omitempty"`
+}
+
+func (u UnifiedAccountingItemOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UnifiedAccountingItemOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *UnifiedAccountingItemOutput) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *UnifiedAccountingItemOutput) GetStatus() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Status
+}
+
+func (o *UnifiedAccountingItemOutput) GetUnitPrice() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.UnitPrice
+}
+
+func (o *UnifiedAccountingItemOutput) GetPurchasePrice() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.PurchasePrice
+}
+
+func (o *UnifiedAccountingItemOutput) GetSalesAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SalesAccount
+}
+
+func (o *UnifiedAccountingItemOutput) GetPurchaseAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PurchaseAccount
+}
+
+func (o *UnifiedAccountingItemOutput) GetCompanyInfoID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyInfoID
+}
+
+func (o *UnifiedAccountingItemOutput) GetFieldMappings() *UnifiedAccountingItemOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedAccountingItemOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedAccountingItemOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedAccountingItemOutput) GetRemoteUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteUpdatedAt
+}
+
+func (o *UnifiedAccountingItemOutput) GetRemoteData() *UnifiedAccountingItemOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedAccountingItemOutput) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedAccountingItemOutput) GetModifiedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
 }

@@ -3,7 +3,6 @@
 package gosdk
 
 type Filestorage struct {
-	Drives  *Drives
 	Files   *Files
 	Folders *Folders
 	Groups  *PanoraGroups
@@ -15,7 +14,6 @@ type Filestorage struct {
 func newFilestorage(sdkConfig sdkConfiguration) *Filestorage {
 	return &Filestorage{
 		sdkConfiguration: sdkConfig,
-		Drives:           newDrives(sdkConfig),
 		Files:            newFiles(sdkConfig),
 		Folders:          newFolders(sdkConfig),
 		Groups:           newPanoraGroups(sdkConfig),

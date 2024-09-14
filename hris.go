@@ -17,6 +17,7 @@ type Hris struct {
 	Payrollruns         *Payrollruns
 	Timeoffs            *Timeoffs
 	Timeoffbalances     *Timeoffbalances
+	Timesheetentries    *Timesheetentries
 
 	sdkConfiguration sdkConfiguration
 }
@@ -38,5 +39,6 @@ func newHris(sdkConfig sdkConfiguration) *Hris {
 		Payrollruns:         newPayrollruns(sdkConfig),
 		Timeoffs:            newTimeoffs(sdkConfig),
 		Timeoffbalances:     newTimeoffbalances(sdkConfig),
+		Timesheetentries:    newTimesheetentries(sdkConfig),
 	}
 }

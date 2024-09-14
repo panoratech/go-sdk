@@ -2,15 +2,12 @@
 
 package components
 
-type Variants struct {
+// UnifiedEcommerceProductOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedEcommerceProductOutputFieldMappings struct {
 }
 
-// FieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
-type FieldMappings struct {
-}
-
-// RemoteData - The remote data of the customer in the context of the 3rd Party
-type RemoteData struct {
+// UnifiedEcommerceProductOutputRemoteData - The remote data of the customer in the context of the 3rd Party
+type UnifiedEcommerceProductOutputRemoteData struct {
 }
 
 type UnifiedEcommerceProductOutput struct {
@@ -27,17 +24,17 @@ type UnifiedEcommerceProductOutput struct {
 	// The vendor of the product
 	Vendor *string `json:"vendor,omitempty"`
 	// The variants of the product
-	Variants []Variants `json:"variants,omitempty"`
+	Variants []Variant `json:"variants,omitempty"`
 	// The tags associated with the product
 	Tags []string `json:"tags,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
-	FieldMappings *FieldMappings `json:"field_mappings,omitempty"`
+	FieldMappings *UnifiedEcommerceProductOutputFieldMappings `json:"field_mappings,omitempty"`
 	// The UUID of the product
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the product in the context of the 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the customer in the context of the 3rd Party
-	RemoteData *RemoteData `json:"remote_data,omitempty"`
+	RemoteData *UnifiedEcommerceProductOutputRemoteData `json:"remote_data,omitempty"`
 	// The created date of the object
 	CreatedAt *string `json:"created_at,omitempty"`
 	// The modified date of the object
@@ -86,7 +83,7 @@ func (o *UnifiedEcommerceProductOutput) GetVendor() *string {
 	return o.Vendor
 }
 
-func (o *UnifiedEcommerceProductOutput) GetVariants() []Variants {
+func (o *UnifiedEcommerceProductOutput) GetVariants() []Variant {
 	if o == nil {
 		return nil
 	}
@@ -100,7 +97,7 @@ func (o *UnifiedEcommerceProductOutput) GetTags() []string {
 	return o.Tags
 }
 
-func (o *UnifiedEcommerceProductOutput) GetFieldMappings() *FieldMappings {
+func (o *UnifiedEcommerceProductOutput) GetFieldMappings() *UnifiedEcommerceProductOutputFieldMappings {
 	if o == nil {
 		return nil
 	}
@@ -121,7 +118,7 @@ func (o *UnifiedEcommerceProductOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedEcommerceProductOutput) GetRemoteData() *RemoteData {
+func (o *UnifiedEcommerceProductOutput) GetRemoteData() *UnifiedEcommerceProductOutputRemoteData {
 	if o == nil {
 		return nil
 	}

@@ -1,15 +1,17 @@
 # Products
 (*Ecommerce.Products*)
 
+## Overview
+
 ### Available Operations
 
-* [List](#list) - List a batch of Products
+* [List](#list) - List Products
 * [Create](#create) - Create Products
-* [Retrieve](#retrieve) - Retrieve a Product
+* [Retrieve](#retrieve) - Retrieve Products
 
 ## List
 
-List a batch of Products
+List Products
 
 ### Example Usage
 
@@ -26,15 +28,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var remoteData *bool = gosdk.Bool(true)
-
-    var limit *float64 = gosdk.Float64(10)
-
-    var cursor *string = gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874")
     ctx := context.Background()
-    res, err := s.Ecommerce.Products.List(ctx, xConnectionToken, remoteData, limit, cursor)
+    res, err := s.Ecommerce.Products.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,13 +64,16 @@ func main() {
 | `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | Set to get the number of records after this cursor.      | 1b8b05bb-5273-4012-b520-8657b0b90874                     |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
-
 ### Response
 
 **[*operations.ListEcommerceProductsResponse](../../models/operations/listecommerceproductsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Create
 
@@ -87,8 +86,8 @@ package main
 
 import(
 	gosdk "github.com/panoratech/go-sdk"
-	"github.com/panoratech/go-sdk/models/components"
 	"context"
+	"github.com/panoratech/go-sdk/models/components"
 	"log"
 )
 
@@ -96,13 +95,25 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    unifiedEcommerceProductInput := components.UnifiedEcommerceProductInput{}
-
-    var remoteData *bool = gosdk.Bool(false)
     ctx := context.Background()
-    res, err := s.Ecommerce.Products.Create(ctx, xConnectionToken, unifiedEcommerceProductInput, remoteData)
+    res, err := s.Ecommerce.Products.Create(ctx, "<value>", components.UnifiedEcommerceProductInput{
+        ProductURL: gosdk.String("https://product_url/tee"),
+        ProductType: gosdk.String("teeshirt"),
+        ProductStatus: gosdk.String("ACTIVE"),
+        ImagesUrls: []string{
+            "https://myproduct/image",
+        },
+        Description: gosdk.String("best tee ever"),
+        Vendor: gosdk.String("vendor_extern"),
+        Variants: []components.Variant{
+            components.Variant{},
+        },
+        Tags: []string{
+            "tag_1",
+        },
+        FieldMappings: &components.UnifiedEcommerceProductInputFieldMappings{},
+    }, gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
@@ -122,17 +133,20 @@ func main() {
 | `remoteData`                                                                                       | **bool*                                                                                            | :heavy_minus_sign:                                                                                 | Set to true to include data from the original Accounting software.                                 | false                                                                                              |
 | `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |                                                                                                    |
 
-
 ### Response
 
 **[*operations.CreateEcommerceProductResponse](../../models/operations/createecommerceproductresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
+
 ## Retrieve
 
-Retrieve a product from any connected Ats software
+Retrieve products from any connected Ats software
 
 ### Example Usage
 
@@ -149,11 +163,9 @@ func main() {
     s := gosdk.New(
         gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
-    var xConnectionToken string = "<value>"
 
-    var id string = "<value>"
     ctx := context.Background()
-    res, err := s.Ecommerce.Products.Retrieve(ctx, xConnectionToken, id, nil)
+    res, err := s.Ecommerce.Products.Retrieve(ctx, "<value>", "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -173,10 +185,12 @@ func main() {
 | `remoteData`                                                | **bool*                                                     | :heavy_minus_sign:                                          | Set to true to include data from the original Ats software. |
 | `opts`                                                      | [][operations.Option](../../models/operations/option.md)    | :heavy_minus_sign:                                          | The options for this request.                               |
 
-
 ### Response
 
 **[*operations.RetrieveEcommerceProductResponse](../../models/operations/retrieveecommerceproductresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

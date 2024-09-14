@@ -2,10 +2,6 @@
 
 package components
 
-// UnifiedEcommerceOrderInputItems - The items in the order
-type UnifiedEcommerceOrderInputItems struct {
-}
-
 // UnifiedEcommerceOrderInputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
 type UnifiedEcommerceOrderInputFieldMappings struct {
 }
@@ -32,7 +28,7 @@ type UnifiedEcommerceOrderInput struct {
 	// The UUID of the customer associated with the order
 	CustomerID *string `json:"customer_id,omitempty"`
 	// The items in the order
-	Items *UnifiedEcommerceOrderInputItems `json:"items,omitempty"`
+	Items []LineItem `json:"items,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
 	FieldMappings *UnifiedEcommerceOrderInputFieldMappings `json:"field_mappings,omitempty"`
 }
@@ -107,7 +103,7 @@ func (o *UnifiedEcommerceOrderInput) GetCustomerID() *string {
 	return o.CustomerID
 }
 
-func (o *UnifiedEcommerceOrderInput) GetItems() *UnifiedEcommerceOrderInputItems {
+func (o *UnifiedEcommerceOrderInput) GetItems() []LineItem {
 	if o == nil {
 		return nil
 	}

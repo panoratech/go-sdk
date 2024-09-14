@@ -2,5 +2,121 @@
 
 package components
 
+// UnifiedHrisTimeoffbalanceOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type UnifiedHrisTimeoffbalanceOutputFieldMappings struct {
+}
+
+// UnifiedHrisTimeoffbalanceOutputRemoteData - The remote data of the time off balance in the context of the 3rd Party
+type UnifiedHrisTimeoffbalanceOutputRemoteData struct {
+}
+
 type UnifiedHrisTimeoffbalanceOutput struct {
+	// The current balance of time off
+	Balance *float64 `json:"balance,omitempty"`
+	// The UUID of the associated employee
+	EmployeeID *string `json:"employee_id,omitempty"`
+	// The amount of time off used
+	Used *float64 `json:"used,omitempty"`
+	// The type of time off policy
+	PolicyType *string `json:"policy_type,omitempty"`
+	// The custom field mappings of the object between the remote 3rd party & Panora
+	FieldMappings *UnifiedHrisTimeoffbalanceOutputFieldMappings `json:"field_mappings,omitempty"`
+	// The UUID of the time off balance record
+	ID *string `json:"id,omitempty"`
+	// The remote ID of the time off balance in the context of the 3rd Party
+	RemoteID *string `json:"remote_id,omitempty"`
+	// The remote data of the time off balance in the context of the 3rd Party
+	RemoteData *UnifiedHrisTimeoffbalanceOutputRemoteData `json:"remote_data,omitempty"`
+	// The date when the time off balance was created in the 3rd party system
+	RemoteCreatedAt *string `json:"remote_created_at,omitempty"`
+	// The created date of the time off balance record
+	CreatedAt *string `json:"created_at,omitempty"`
+	// The last modified date of the time off balance record
+	ModifiedAt *string `json:"modified_at,omitempty"`
+	// Indicates if the time off balance was deleted in the remote system
+	RemoteWasDeleted *bool `json:"remote_was_deleted,omitempty"`
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetBalance() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Balance
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetEmployeeID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EmployeeID
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetUsed() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Used
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetPolicyType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PolicyType
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetFieldMappings() *UnifiedHrisTimeoffbalanceOutputFieldMappings {
+	if o == nil {
+		return nil
+	}
+	return o.FieldMappings
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetRemoteID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteID
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetRemoteData() *UnifiedHrisTimeoffbalanceOutputRemoteData {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteData
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetRemoteCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteCreatedAt
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetCreatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetModifiedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ModifiedAt
+}
+
+func (o *UnifiedHrisTimeoffbalanceOutput) GetRemoteWasDeleted() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RemoteWasDeleted
 }

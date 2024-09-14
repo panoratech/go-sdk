@@ -3,45 +3,13 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/panoratech/go-sdk/internal/utils"
 	"time"
 )
 
-// UnifiedAtsInterviewInputStatus - The status of the interview
-type UnifiedAtsInterviewInputStatus string
-
-const (
-	UnifiedAtsInterviewInputStatusScheduled        UnifiedAtsInterviewInputStatus = "SCHEDULED"
-	UnifiedAtsInterviewInputStatusAwaitingFeedback UnifiedAtsInterviewInputStatus = "AWAITING_FEEDBACK"
-	UnifiedAtsInterviewInputStatusCompleted        UnifiedAtsInterviewInputStatus = "COMPLETED"
-)
-
-func (e UnifiedAtsInterviewInputStatus) ToPointer() *UnifiedAtsInterviewInputStatus {
-	return &e
-}
-func (e *UnifiedAtsInterviewInputStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SCHEDULED":
-		fallthrough
-	case "AWAITING_FEEDBACK":
-		fallthrough
-	case "COMPLETED":
-		*e = UnifiedAtsInterviewInputStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UnifiedAtsInterviewInputStatus: %v", v)
-	}
-}
-
 type UnifiedAtsInterviewInput struct {
 	// The status of the interview
-	Status *UnifiedAtsInterviewInputStatus `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	// The UUID of the application
 	ApplicationID *string `json:"application_id,omitempty"`
 	// The UUID of the job interview stage
@@ -75,7 +43,7 @@ func (u *UnifiedAtsInterviewInput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *UnifiedAtsInterviewInput) GetStatus() *UnifiedAtsInterviewInputStatus {
+func (o *UnifiedAtsInterviewInput) GetStatus() *string {
 	if o == nil {
 		return nil
 	}
