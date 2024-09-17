@@ -27,11 +27,18 @@ func newQuery(sdkConfig sdkConfiguration) *Query {
 	}
 }
 
-func (s *Query) RagControllerQueryEmbeddings(ctx context.Context, opts ...operations.Option) (*operations.RagControllerQueryEmbeddingsResponse, error) {
+// Query using RAG Search
+// Query across your connected data sources using RAG Search
+func (s *Query) Query(ctx context.Context, xConnectionToken string, queryBody components.QueryBody, opts ...operations.Option) (*operations.QueryResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "RagController_queryEmbeddings",
+		OperationID:    "query",
 		SecuritySource: s.sdkConfiguration.Security,
+	}
+
+	request := operations.QueryRequest{
+		XConnectionToken: xConnectionToken,
+		QueryBody:        queryBody,
 	}
 
 	o := operations.Options{}
@@ -52,6 +59,11 @@ func (s *Query) RagControllerQueryEmbeddings(ctx context.Context, opts ...operat
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "QueryBody", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
@@ -63,12 +75,15 @@ func (s *Query) RagControllerQueryEmbeddings(ctx context.Context, opts ...operat
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -159,7 +174,7 @@ func (s *Query) RagControllerQueryEmbeddings(ctx context.Context, opts ...operat
 		}
 	}
 
-	res := &operations.RagControllerQueryEmbeddingsResponse{
+	res := &operations.QueryResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -185,7 +200,7 @@ func (s *Query) RagControllerQueryEmbeddings(ctx context.Context, opts ...operat
 				return nil, err
 			}
 
-			var out operations.RagControllerQueryEmbeddingsResponseBody
+			var out operations.QueryResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

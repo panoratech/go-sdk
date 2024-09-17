@@ -287,7 +287,7 @@ func main() {
 
 ### [Connections](docs/sdks/connections/README.md)
 
-* [Retrieve](docs/sdks/connections/README.md#retrieve) - List Connections
+* [List](docs/sdks/connections/README.md#list) - List Connections
 
 ### [Crm](docs/sdks/crm/README.md)
 
@@ -572,7 +572,7 @@ func main() {
 
 #### [Rag.Query](docs/sdks/query/README.md)
 
-* [RagControllerQueryEmbeddings](docs/sdks/query/README.md#ragcontrollerqueryembeddings)
+* [Query](docs/sdks/query/README.md#query) - Query using RAG Search
 
 ### [Sync](docs/sdks/sync/README.md)
 

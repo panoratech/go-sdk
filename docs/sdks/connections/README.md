@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [Retrieve](#retrieve) - List Connections
+* [List](#list) - List Connections
 
-## Retrieve
+## List
 
 List Connections
 
@@ -28,7 +28,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Connections.Retrieve(ctx)
+    res, err := s.Connections.List(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -47,7 +47,7 @@ func main() {
 
 ### Response
 
-**[*operations.RetrieveConnectionsResponse](../../models/operations/retrieveconnectionsresponse.md), error**
+**[*operations.ListConnectionsResponse](../../models/operations/listconnectionsresponse.md), error**
 
 ### Errors
 
