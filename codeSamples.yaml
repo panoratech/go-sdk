@@ -1935,7 +1935,7 @@ actions:
     update:
       x-codeSamples:
         - lang: go
-          label: retrieveConnections
+          label: listConnections
           source: |-
             package main
 
@@ -1951,7 +1951,7 @@ actions:
                 )
 
                 ctx := context.Background()
-                res, err := s.Connections.Retrieve(ctx)
+                res, err := s.Connections.List(ctx)
                 if err != nil {
                     log.Fatal(err)
                 }
@@ -4661,13 +4661,14 @@ actions:
     update:
       x-codeSamples:
         - lang: go
-          label: RagController_queryEmbeddings
+          label: query
           source: |-
             package main
 
             import(
             	gosdk "github.com/panoratech/go-sdk"
             	"context"
+            	"github.com/panoratech/go-sdk/models/components"
             	"log"
             )
 
@@ -4677,7 +4678,10 @@ actions:
                 )
 
                 ctx := context.Background()
-                res, err := s.Rag.Query.RagControllerQueryEmbeddings(ctx)
+                res, err := s.Rag.Query.Query(ctx, "<value>", components.QueryBody{
+                    Query: "When does Panora incorporated?",
+                    TopK: gosdk.Float64(3),
+                })
                 if err != nil {
                     log.Fatal(err)
                 }

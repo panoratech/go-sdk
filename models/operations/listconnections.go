@@ -6,19 +6,19 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type RetrieveConnectionsResponse struct {
+type ListConnectionsResponse struct {
 	HTTPMeta    components.HTTPMetadata `json:"-"`
 	Connections []components.Connection
 }
 
-func (o *RetrieveConnectionsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListConnectionsResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
 }
 
-func (o *RetrieveConnectionsResponse) GetConnections() []components.Connection {
+func (o *ListConnectionsResponse) GetConnections() []components.Connection {
 	if o == nil {
 		return nil
 	}

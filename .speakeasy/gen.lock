@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: 4451647c3fecd12e75576c88d6e46844
+  docChecksum: ef657b2aadcc7b6b8d116b9b11322b80
   docVersion: "1.0"
-  speakeasyVersion: 1.396.9
-  generationVersion: 2.415.7
-  releaseVersion: 0.6.0
-  configChecksum: 9b679a07ad1fb663d292fbbc4e2aaacc
+  speakeasyVersion: 1.398.1
+  generationVersion: 2.415.8
+  releaseVersion: 0.6.1
+  configChecksum: 83bd49dcf090270db2b5d604c9456403
   repoURL: https://github.com/panoratech/go-sdk.git
   installationURL: https://github.com/panoratech/go-sdk
 features:
@@ -56,6 +56,7 @@ generatedFiles:
   - /models/components/passthroughrequestdto.go
   - /models/components/phone.go
   - /models/components/projectresponse.go
+  - /models/components/querybody.go
   - /models/components/resyncstatusdto.go
   - /models/components/security.go
   - /models/components/signatureverificationdto.go
@@ -271,6 +272,7 @@ generatedFiles:
   - /models/operations/listatsscorecard.go
   - /models/operations/listatstags.go
   - /models/operations/listatsusers.go
+  - /models/operations/listconnections.go
   - /models/operations/listcrmcompany.go
   - /models/operations/listcrmcontacts.go
   - /models/operations/listcrmdeals.go
@@ -324,7 +326,7 @@ generatedFiles:
   - /models/operations/listticketingusers.go
   - /models/operations/listwebhooks.go
   - /models/operations/map.go
-  - /models/operations/ragcontrollerqueryembeddings.go
+  - /models/operations/query.go
   - /models/operations/remoteid.go
   - /models/operations/request.go
   - /models/operations/resync.go
@@ -364,7 +366,6 @@ generatedFiles:
   - /models/operations/retrieveatstag.go
   - /models/operations/retrieveatsuser.go
   - /models/operations/retrievecollection.go
-  - /models/operations/retrieveconnections.go
   - /models/operations/retrievecrmcompany.go
   - /models/operations/retrievecrmcontact.go
   - /models/operations/retrievecrmdeal.go
@@ -489,6 +490,7 @@ generatedFiles:
   - docs/models/components/passthroughrequestdtomethod.md
   - docs/models/components/phone.md
   - docs/models/components/projectresponse.md
+  - docs/models/components/querybody.md
   - docs/models/components/remotedata.md
   - docs/models/components/requestformat.md
   - docs/models/components/resyncstatusdto.md
@@ -926,6 +928,7 @@ generatedFiles:
   - docs/models/operations/listatsusersrequest.md
   - docs/models/operations/listatsusersresponse.md
   - docs/models/operations/listatsusersresponsebody.md
+  - docs/models/operations/listconnectionsresponse.md
   - docs/models/operations/listcrmcompanyrequest.md
   - docs/models/operations/listcrmcompanyresponse.md
   - docs/models/operations/listcrmcompanyresponsebody.md
@@ -1080,8 +1083,9 @@ generatedFiles:
   - docs/models/operations/listwebhooksresponse.md
   - docs/models/operations/mapresponse.md
   - docs/models/operations/option.md
-  - docs/models/operations/ragcontrollerqueryembeddingsresponse.md
-  - docs/models/operations/ragcontrollerqueryembeddingsresponsebody.md
+  - docs/models/operations/queryrequest.md
+  - docs/models/operations/queryresponse.md
+  - docs/models/operations/queryresponsebody.md
   - docs/models/operations/remoteidrequest.md
   - docs/models/operations/remoteidresponse.md
   - docs/models/operations/requestpassthroughresponsebody.md
@@ -1161,7 +1165,6 @@ generatedFiles:
   - docs/models/operations/retrieveatsuserresponse.md
   - docs/models/operations/retrievecollectionrequest.md
   - docs/models/operations/retrievecollectionresponse.md
-  - docs/models/operations/retrieveconnectionsresponse.md
   - docs/models/operations/retrievecrmcompanyrequest.md
   - docs/models/operations/retrievecrmcompanyresponse.md
   - docs/models/operations/retrievecrmcontactrequest.md
@@ -1801,6 +1804,7 @@ examples:
   createTicketingComment:
     speakeasy-default-create-ticketing-comment:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -1882,6 +1886,7 @@ examples:
   createTicketingAttachment:
     speakeasy-default-create-ticketing-attachment:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2007,6 +2012,7 @@ examples:
   createCrmDeal:
     speakeasy-default-create-crm-deal:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2137,6 +2143,7 @@ examples:
   createCrmTask:
     speakeasy-default-create-crm-task:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2406,6 +2413,7 @@ examples:
   createHrisEmployee:
     speakeasy-default-create-hris-employee:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2584,6 +2592,7 @@ examples:
   createHrisTimeoff:
     speakeasy-default-create-hris-timeoff:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2642,6 +2651,7 @@ examples:
   createHrisTimesheetentry:
     speakeasy-default-create-hris-timesheetentry:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
       requestBody:
@@ -2830,6 +2840,7 @@ examples:
   createMarketingautomationList:
     speakeasy-default-create-marketingautomation-list:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
   retrieveMarketingautomationList:
@@ -2877,6 +2888,7 @@ examples:
   createMarketingautomationTemplate:
     speakeasy-default-create-marketingautomation-template:
       parameters:
+        query: {}
         header:
           x-connection-token: "<value>"
   retrieveMarketingautomationTemplate:
@@ -4020,3 +4032,15 @@ examples:
       responses:
         "200":
           application/json: {"carrier": "DHL", "tracking_urls": ["https://tracing-url.sf.com"], "tracking_numbers": ["track_1029_191919"], "items": {}, "order_id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "remote_id": "id_1", "created_at": "2024-10-01T12:00:00Z", "modified_at": "2024-10-01T12:00:00Z"}
+  query:
+    speakeasy-default-query:
+      parameters:
+        header:
+          x-connection-token: "<value>"
+      requestBody:
+        application/json: {"query": "When does Panora incorporated?", "topK": "3"}
+  listConnections:
+    speakeasy-default-list-connections:
+      responses:
+        "200":
+          application/json: []

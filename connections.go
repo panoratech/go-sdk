@@ -27,11 +27,11 @@ func newConnections(sdkConfig sdkConfiguration) *Connections {
 	}
 }
 
-// Retrieve - List Connections
-func (s *Connections) Retrieve(ctx context.Context, opts ...operations.Option) (*operations.RetrieveConnectionsResponse, error) {
+// List Connections
+func (s *Connections) List(ctx context.Context, opts ...operations.Option) (*operations.ListConnectionsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "retrieveConnections",
+		OperationID:    "listConnections",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -160,7 +160,7 @@ func (s *Connections) Retrieve(ctx context.Context, opts ...operations.Option) (
 		}
 	}
 
-	res := &operations.RetrieveConnectionsResponse{
+	res := &operations.ListConnectionsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
