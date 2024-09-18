@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: ef657b2aadcc7b6b8d116b9b11322b80
+  docChecksum: a4760f0365a3f82bc52e78253bfc9346
   docVersion: "1.0"
-  speakeasyVersion: 1.398.1
+  speakeasyVersion: 1.399.0
   generationVersion: 2.415.8
-  releaseVersion: 0.6.1
-  configChecksum: 83bd49dcf090270db2b5d604c9456403
+  releaseVersion: 0.6.2
+  configChecksum: 650acdfa8e48a797ec1149ee5228c8a8
   repoURL: https://github.com/panoratech/go-sdk.git
   installationURL: https://github.com/panoratech/go-sdk
 features:
@@ -57,6 +57,7 @@ generatedFiles:
   - /models/components/phone.go
   - /models/components/projectresponse.go
   - /models/components/querybody.go
+  - /models/components/ragqueryoutput.go
   - /models/components/resyncstatusdto.go
   - /models/components/security.go
   - /models/components/signatureverificationdto.go
@@ -491,6 +492,7 @@ generatedFiles:
   - docs/models/components/phone.md
   - docs/models/components/projectresponse.md
   - docs/models/components/querybody.md
+  - docs/models/components/ragqueryoutput.md
   - docs/models/components/remotedata.md
   - docs/models/components/requestformat.md
   - docs/models/components/resyncstatusdto.md
@@ -1085,7 +1087,6 @@ generatedFiles:
   - docs/models/operations/option.md
   - docs/models/operations/queryrequest.md
   - docs/models/operations/queryresponse.md
-  - docs/models/operations/queryresponsebody.md
   - docs/models/operations/remoteidrequest.md
   - docs/models/operations/remoteidresponse.md
   - docs/models/operations/requestpassthroughresponsebody.md
@@ -1361,7 +1362,6 @@ generatedFiles:
   - docs/sdks/products/README.md
   - docs/sdks/projects/README.md
   - docs/sdks/purchaseorders/README.md
-  - docs/sdks/query/README.md
   - docs/sdks/rag/README.md
   - docs/sdks/rejectreasons/README.md
   - docs/sdks/retryid/README.md
@@ -1454,7 +1454,6 @@ generatedFiles:
   - products.go
   - projects.go
   - purchaseorders.go
-  - query.go
   - rag.go
   - rejectreasons.go
   - retry/config.go
@@ -4039,6 +4038,9 @@ examples:
           x-connection-token: "<value>"
       requestBody:
         application/json: {"query": "When does Panora incorporated?", "topK": "3"}
+      responses:
+        "201":
+          application/json: []
   listConnections:
     speakeasy-default-list-connections:
       responses:

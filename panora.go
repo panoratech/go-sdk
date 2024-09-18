@@ -176,9 +176,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.6.1",
+			SDKVersion:        "0.6.2",
 			GenVersion:        "2.415.8",
-			UserAgent:         "speakeasy-sdk/go 0.6.1 2.415.8 1.0 github.com/panoratech/go-sdk",
+			UserAgent:         "speakeasy-sdk/go 0.6.2 2.415.8 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}

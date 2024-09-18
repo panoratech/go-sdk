@@ -69,3 +69,13 @@ Based on:
 - [go v0.6.1] .
 ### Releases
 - [Go v0.6.1] https://github.com/panoratech/go-sdk/releases/tag/v0.6.1 - .
+
+## 2024-09-18 06:01:32
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.399.0 (2.415.8) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.6.2] .
+### Releases
+- [Go v0.6.2] https://github.com/panoratech/go-sdk/releases/tag/v0.6.2 - .

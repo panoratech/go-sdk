@@ -569,10 +569,7 @@ func main() {
 
 ### [Rag](docs/sdks/rag/README.md)
 
-
-#### [Rag.Query](docs/sdks/query/README.md)
-
-* [Query](docs/sdks/query/README.md#query) - Query using RAG Search
+* [Query](docs/sdks/rag/README.md#query) - Query using RAG Search
 
 ### [Sync](docs/sdks/sync/README.md)
 

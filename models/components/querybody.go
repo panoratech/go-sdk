@@ -3,7 +3,7 @@
 package components
 
 type QueryBody struct {
-	// The query you want to received embeddings adn chunks for
+	// The query you want to received embeddings and chunks for
 	Query string `json:"query"`
 	// The number of most appropriate documents for your query.
 	TopK *float64 `json:"topK,omitempty"`

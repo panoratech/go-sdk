@@ -4678,14 +4678,14 @@ actions:
                 )
 
                 ctx := context.Background()
-                res, err := s.Rag.Query.Query(ctx, "<value>", components.QueryBody{
+                res, err := s.Rag.Query(ctx, "<value>", components.QueryBody{
                     Query: "When does Panora incorporated?",
                     TopK: gosdk.Float64(3),
                 })
                 if err != nil {
                     log.Fatal(err)
                 }
-                if res.Object != nil {
+                if res.RagQueryOutputs != nil {
                     // handle response
                 }
             }
