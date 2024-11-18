@@ -1,9 +1,0 @@
-# RetrieveHrisTimesheetentryResponse
-
-
-## Fields
-
-| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                                | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                        | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `UnifiedHrisTimesheetEntryOutput`                                                                         | [*components.UnifiedHrisTimesheetEntryOutput](../../models/components/unifiedhristimesheetentryoutput.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |

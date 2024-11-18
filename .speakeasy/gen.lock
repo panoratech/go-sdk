@@ -1,22 +1,21 @@
 lockVersion: 2.0.0
 id: a91bd2c3-271c-43c1-8aa5-6b9067364c1b
 management:
-  docChecksum: ef657b2aadcc7b6b8d116b9b11322b80
+  docChecksum: b61e31f00ae44ce87e930935e8780921
   docVersion: "1.0"
-  speakeasyVersion: 1.398.1
-  generationVersion: 2.415.8
-  releaseVersion: 0.6.1
-  configChecksum: 83bd49dcf090270db2b5d604c9456403
+  speakeasyVersion: 1.440.2
+  generationVersion: 2.460.1
+  releaseVersion: 0.7.0
+  configChecksum: 7aac7a0edc76bd9c4cb7398085a32c05
   repoURL: https://github.com/panoratech/go-sdk.git
   installationURL: https://github.com/panoratech/go-sdk
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.6
-    core: 3.5.8
+    core: 3.5.16
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
-    envVarSecurityUsage: 0.3.1
+    envVarSecurityUsage: 0.3.2
     flattening: 2.81.1
     globalSecurity: 2.82.10
     globalSecurityCallbacks: 0.1.0
@@ -30,7 +29,7 @@ features:
     responseFormat: 0.1.2
     retries: 2.83.0
     sdkHooks: 0.1.0
-    unions: 2.85.9
+    unions: 2.85.10
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -43,9 +42,7 @@ generatedFiles:
   - /models/components/createprojectdto.go
   - /models/components/customfieldcreatedto.go
   - /models/components/customfieldresponse.go
-  - /models/components/deductionitem.go
   - /models/components/definetargetfielddto.go
-  - /models/components/earningitem.go
   - /models/components/email.go
   - /models/components/eventresponse.go
   - /models/components/httpmetadata.go
@@ -57,10 +54,10 @@ generatedFiles:
   - /models/components/phone.go
   - /models/components/projectresponse.go
   - /models/components/querybody.go
+  - /models/components/ragqueryoutput.go
   - /models/components/resyncstatusdto.go
   - /models/components/security.go
   - /models/components/signatureverificationdto.go
-  - /models/components/taxitem.go
   - /models/components/unifiedaccountingaccountinput.go
   - /models/components/unifiedaccountingaccountoutput.go
   - /models/components/unifiedaccountingaddressoutput.go
@@ -89,26 +86,6 @@ generatedFiles:
   - /models/components/unifiedaccountingtrackingcategoryoutput.go
   - /models/components/unifiedaccountingtransactionoutput.go
   - /models/components/unifiedaccountingvendorcreditoutput.go
-  - /models/components/unifiedatsactivityinput.go
-  - /models/components/unifiedatsactivityoutput.go
-  - /models/components/unifiedatsapplicationinput.go
-  - /models/components/unifiedatsapplicationoutput.go
-  - /models/components/unifiedatsattachmentinput.go
-  - /models/components/unifiedatsattachmentoutput.go
-  - /models/components/unifiedatscandidateinput.go
-  - /models/components/unifiedatscandidateoutput.go
-  - /models/components/unifiedatsdepartmentoutput.go
-  - /models/components/unifiedatseeocsoutput.go
-  - /models/components/unifiedatsinterviewinput.go
-  - /models/components/unifiedatsinterviewoutput.go
-  - /models/components/unifiedatsjobinterviewstageoutput.go
-  - /models/components/unifiedatsjoboutput.go
-  - /models/components/unifiedatsofferoutput.go
-  - /models/components/unifiedatsofficeoutput.go
-  - /models/components/unifiedatsrejectreasonoutput.go
-  - /models/components/unifiedatsscorecardoutput.go
-  - /models/components/unifiedatstagoutput.go
-  - /models/components/unifiedatsuseroutput.go
   - /models/components/unifiedcrmcompanyinput.go
   - /models/components/unifiedcrmcompanyoutput.go
   - /models/components/unifiedcrmcontactinput.go
@@ -135,24 +112,6 @@ generatedFiles:
   - /models/components/unifiedfilestoragefolderoutput.go
   - /models/components/unifiedfilestoragegroupoutput.go
   - /models/components/unifiedfilestorageuseroutput.go
-  - /models/components/unifiedhrisbankinfooutput.go
-  - /models/components/unifiedhrisbenefitoutput.go
-  - /models/components/unifiedhriscompanyoutput.go
-  - /models/components/unifiedhrisdependentoutput.go
-  - /models/components/unifiedhrisemployeeinput.go
-  - /models/components/unifiedhrisemployeeoutput.go
-  - /models/components/unifiedhrisemployeepayrollrunoutput.go
-  - /models/components/unifiedhrisemployerbenefitoutput.go
-  - /models/components/unifiedhrisemploymentoutput.go
-  - /models/components/unifiedhrisgroupoutput.go
-  - /models/components/unifiedhrislocationoutput.go
-  - /models/components/unifiedhrispaygroupoutput.go
-  - /models/components/unifiedhrispayrollrunoutput.go
-  - /models/components/unifiedhristimeoffbalanceoutput.go
-  - /models/components/unifiedhristimeoffinput.go
-  - /models/components/unifiedhristimeoffoutput.go
-  - /models/components/unifiedhristimesheetentryinput.go
-  - /models/components/unifiedhristimesheetentryoutput.go
   - /models/components/unifiedmarketingautomationactioninput.go
   - /models/components/unifiedmarketingautomationactionoutput.go
   - /models/components/unifiedmarketingautomationautomationinput.go
@@ -182,7 +141,6 @@ generatedFiles:
   - /models/components/unifiedticketingticketoutput.go
   - /models/components/unifiedticketinguseroutput.go
   - /models/components/updatepullfrequencydto.go
-  - /models/components/url.go
   - /models/components/variant.go
   - /models/components/webhookdto.go
   - /models/components/webhookresponse.go
@@ -194,11 +152,6 @@ generatedFiles:
   - /models/operations/createaccountingjournalentry.go
   - /models/operations/createaccountingpayment.go
   - /models/operations/createaccountingpurchaseorder.go
-  - /models/operations/createatsactivity.go
-  - /models/operations/createatsapplication.go
-  - /models/operations/createatsattachment.go
-  - /models/operations/createatscandidate.go
-  - /models/operations/createatsinterview.go
   - /models/operations/createcrmcompany.go
   - /models/operations/createcrmcontact.go
   - /models/operations/createcrmdeal.go
@@ -209,9 +162,6 @@ generatedFiles:
   - /models/operations/createecommerceproduct.go
   - /models/operations/createfilestoragefile.go
   - /models/operations/createfilestoragefolder.go
-  - /models/operations/createhrisemployee.go
-  - /models/operations/createhristimeoff.go
-  - /models/operations/createhristimesheetentry.go
   - /models/operations/createlinkeduser.go
   - /models/operations/createmarketingautomationaction.go
   - /models/operations/createmarketingautomationautomation.go
@@ -257,21 +207,6 @@ generatedFiles:
   - /models/operations/listaccountingtrackingcategorys.go
   - /models/operations/listaccountingtransaction.go
   - /models/operations/listaccountingvendorcredit.go
-  - /models/operations/listatsactivity.go
-  - /models/operations/listatsapplication.go
-  - /models/operations/listatsattachment.go
-  - /models/operations/listatscandidate.go
-  - /models/operations/listatsdepartments.go
-  - /models/operations/listatseeocs.go
-  - /models/operations/listatsinterview.go
-  - /models/operations/listatsjob.go
-  - /models/operations/listatsjobinterviewstage.go
-  - /models/operations/listatsoffer.go
-  - /models/operations/listatsoffice.go
-  - /models/operations/listatsrejectreasons.go
-  - /models/operations/listatsscorecard.go
-  - /models/operations/listatstags.go
-  - /models/operations/listatsusers.go
   - /models/operations/listconnections.go
   - /models/operations/listcrmcompany.go
   - /models/operations/listcrmcontacts.go
@@ -289,21 +224,6 @@ generatedFiles:
   - /models/operations/listfilestoragefolder.go
   - /models/operations/listfilestoragegroup.go
   - /models/operations/listfilestorageusers.go
-  - /models/operations/listhrisbankinfo.go
-  - /models/operations/listhrisbenefits.go
-  - /models/operations/listhriscompanies.go
-  - /models/operations/listhrisdependents.go
-  - /models/operations/listhrisemployeepayrollrun.go
-  - /models/operations/listhrisemployees.go
-  - /models/operations/listhrisemployerbenefits.go
-  - /models/operations/listhrisemployments.go
-  - /models/operations/listhrisgroups.go
-  - /models/operations/listhrislocations.go
-  - /models/operations/listhrispaygroups.go
-  - /models/operations/listhrispayrollruns.go
-  - /models/operations/listhristimeoffbalances.go
-  - /models/operations/listhristimeoffs.go
-  - /models/operations/listhristimesheetentries.go
   - /models/operations/listlinkedusers.go
   - /models/operations/listmarketingautomationaction.go
   - /models/operations/listmarketingautomationautomations.go
@@ -350,21 +270,6 @@ generatedFiles:
   - /models/operations/retrieveaccountingtrackingcategory.go
   - /models/operations/retrieveaccountingtransaction.go
   - /models/operations/retrieveaccountingvendorcredit.go
-  - /models/operations/retrieveatsactivity.go
-  - /models/operations/retrieveatsapplication.go
-  - /models/operations/retrieveatsattachment.go
-  - /models/operations/retrieveatscandidate.go
-  - /models/operations/retrieveatsdepartment.go
-  - /models/operations/retrieveatseeocs.go
-  - /models/operations/retrieveatsinterview.go
-  - /models/operations/retrieveatsjob.go
-  - /models/operations/retrieveatsjobinterviewstage.go
-  - /models/operations/retrieveatsoffer.go
-  - /models/operations/retrieveatsoffice.go
-  - /models/operations/retrieveatsrejectreason.go
-  - /models/operations/retrieveatsscorecard.go
-  - /models/operations/retrieveatstag.go
-  - /models/operations/retrieveatsuser.go
   - /models/operations/retrievecollection.go
   - /models/operations/retrievecrmcompany.go
   - /models/operations/retrievecrmcontact.go
@@ -382,21 +287,6 @@ generatedFiles:
   - /models/operations/retrievefilestoragefolder.go
   - /models/operations/retrievefilestoragegroup.go
   - /models/operations/retrievefilestorageuser.go
-  - /models/operations/retrievehrisbankinfo.go
-  - /models/operations/retrievehrisbenefit.go
-  - /models/operations/retrievehriscompany.go
-  - /models/operations/retrievehrisdependent.go
-  - /models/operations/retrievehrisemployee.go
-  - /models/operations/retrievehrisemployeepayrollrun.go
-  - /models/operations/retrievehrisemployerbenefit.go
-  - /models/operations/retrievehrisemployment.go
-  - /models/operations/retrievehrisgroup.go
-  - /models/operations/retrievehrislocation.go
-  - /models/operations/retrievehrispaygroup.go
-  - /models/operations/retrievehrispayrollrun.go
-  - /models/operations/retrievehristimeoff.go
-  - /models/operations/retrievehristimeoffbalance.go
-  - /models/operations/retrievehristimesheetentry.go
   - /models/operations/retrievelinkeduser.go
   - /models/operations/retrievemarketingautomationaction.go
   - /models/operations/retrievemarketingautomationautomation.go
@@ -426,18 +316,12 @@ generatedFiles:
   - accounting.go
   - accounts.go
   - actions.go
-  - activities.go
   - addresses.go
-  - applications.go
-  - ats.go
   - attachments.go
   - auth.go
   - automations.go
   - balancesheets.go
-  - bankinfos.go
-  - benefits.go
   - campaigns.go
-  - candidates.go
   - cashflowstatements.go
   - collections.go
   - comments.go
@@ -449,10 +333,7 @@ generatedFiles:
   - crm.go
   - customers.go
   - deals.go
-  - departments.go
-  - dependents.go
   - docs/models/components/address.md
-  - docs/models/components/applications.md
   - docs/models/components/attachments.md
   - docs/models/components/collections.md
   - docs/models/components/comment.md
@@ -468,14 +349,11 @@ generatedFiles:
   - docs/models/components/customfieldresponsedatatype.md
   - docs/models/components/data.md
   - docs/models/components/datatype.md
-  - docs/models/components/deductionitem.md
   - docs/models/components/definetargetfielddto.md
-  - docs/models/components/earningitem.md
   - docs/models/components/email.md
   - docs/models/components/eventresponse.md
   - docs/models/components/eventresponsestatus.md
   - docs/models/components/fieldmappings.md
-  - docs/models/components/headers.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/items.md
   - docs/models/components/lineitem.md
@@ -491,6 +369,7 @@ generatedFiles:
   - docs/models/components/phone.md
   - docs/models/components/projectresponse.md
   - docs/models/components/querybody.md
+  - docs/models/components/ragqueryoutput.md
   - docs/models/components/remotedata.md
   - docs/models/components/requestformat.md
   - docs/models/components/resyncstatusdto.md
@@ -498,14 +377,11 @@ generatedFiles:
   - docs/models/components/signatureverificationdto.md
   - docs/models/components/status.md
   - docs/models/components/tags.md
-  - docs/models/components/taxitem.md
   - docs/models/components/tokentype.md
   - docs/models/components/type.md
   - docs/models/components/unifiedaccountingaccountinput.md
   - docs/models/components/unifiedaccountingaccountinputfieldmappings.md
   - docs/models/components/unifiedaccountingaccountoutput.md
-  - docs/models/components/unifiedaccountingaccountoutputfieldmappings.md
-  - docs/models/components/unifiedaccountingaccountoutputremotedata.md
   - docs/models/components/unifiedaccountingaddressoutput.md
   - docs/models/components/unifiedaccountingaddressoutputfieldmappings.md
   - docs/models/components/unifiedaccountingaddressoutputremotedata.md
@@ -577,33 +453,6 @@ generatedFiles:
   - docs/models/components/unifiedaccountingvendorcreditoutput.md
   - docs/models/components/unifiedaccountingvendorcreditoutputfieldmappings.md
   - docs/models/components/unifiedaccountingvendorcreditoutputremotedata.md
-  - docs/models/components/unifiedatsactivityinput.md
-  - docs/models/components/unifiedatsactivityoutput.md
-  - docs/models/components/unifiedatsapplicationinput.md
-  - docs/models/components/unifiedatsapplicationoutput.md
-  - docs/models/components/unifiedatsattachmentinput.md
-  - docs/models/components/unifiedatsattachmentoutput.md
-  - docs/models/components/unifiedatscandidateinput.md
-  - docs/models/components/unifiedatscandidateinputapplications.md
-  - docs/models/components/unifiedatscandidateinputattachments.md
-  - docs/models/components/unifiedatscandidateinputtags.md
-  - docs/models/components/unifiedatscandidateoutput.md
-  - docs/models/components/unifiedatscandidateoutputattachments.md
-  - docs/models/components/unifiedatscandidateoutputtags.md
-  - docs/models/components/unifiedatsdepartmentoutput.md
-  - docs/models/components/unifiedatseeocsoutput.md
-  - docs/models/components/unifiedatsinterviewinput.md
-  - docs/models/components/unifiedatsinterviewoutput.md
-  - docs/models/components/unifiedatsjobinterviewstageoutput.md
-  - docs/models/components/unifiedatsjoboutput.md
-  - docs/models/components/unifiedatsofferoutput.md
-  - docs/models/components/unifiedatsofferoutputcreatedat.md
-  - docs/models/components/unifiedatsofferoutputmodifiedat.md
-  - docs/models/components/unifiedatsofficeoutput.md
-  - docs/models/components/unifiedatsrejectreasonoutput.md
-  - docs/models/components/unifiedatsscorecardoutput.md
-  - docs/models/components/unifiedatstagoutput.md
-  - docs/models/components/unifiedatsuseroutput.md
   - docs/models/components/unifiedcrmcompanyinput.md
   - docs/models/components/unifiedcrmcompanyoutput.md
   - docs/models/components/unifiedcrmcontactinput.md
@@ -642,55 +491,6 @@ generatedFiles:
   - docs/models/components/unifiedfilestoragefolderoutput.md
   - docs/models/components/unifiedfilestoragegroupoutput.md
   - docs/models/components/unifiedfilestorageuseroutput.md
-  - docs/models/components/unifiedhrisbankinfooutput.md
-  - docs/models/components/unifiedhrisbenefitoutput.md
-  - docs/models/components/unifiedhrisbenefitoutputfieldmappings.md
-  - docs/models/components/unifiedhrisbenefitoutputremotedata.md
-  - docs/models/components/unifiedhriscompanyoutput.md
-  - docs/models/components/unifiedhriscompanyoutputfieldmappings.md
-  - docs/models/components/unifiedhriscompanyoutputremotedata.md
-  - docs/models/components/unifiedhrisdependentoutput.md
-  - docs/models/components/unifiedhrisdependentoutputfieldmappings.md
-  - docs/models/components/unifiedhrisdependentoutputremotedata.md
-  - docs/models/components/unifiedhrisemployeeinput.md
-  - docs/models/components/unifiedhrisemployeeinputfieldmappings.md
-  - docs/models/components/unifiedhrisemployeeoutput.md
-  - docs/models/components/unifiedhrisemployeeoutputfieldmappings.md
-  - docs/models/components/unifiedhrisemployeeoutputremotedata.md
-  - docs/models/components/unifiedhrisemployeepayrollrunoutput.md
-  - docs/models/components/unifiedhrisemployeepayrollrunoutputfieldmappings.md
-  - docs/models/components/unifiedhrisemployeepayrollrunoutputremotedata.md
-  - docs/models/components/unifiedhrisemployerbenefitoutput.md
-  - docs/models/components/unifiedhrisemployerbenefitoutputfieldmappings.md
-  - docs/models/components/unifiedhrisemployerbenefitoutputremotedata.md
-  - docs/models/components/unifiedhrisemploymentoutput.md
-  - docs/models/components/unifiedhrisemploymentoutputfieldmappings.md
-  - docs/models/components/unifiedhrisemploymentoutputremotedata.md
-  - docs/models/components/unifiedhrisgroupoutput.md
-  - docs/models/components/unifiedhrisgroupoutputfieldmappings.md
-  - docs/models/components/unifiedhrisgroupoutputremotedata.md
-  - docs/models/components/unifiedhrislocationoutput.md
-  - docs/models/components/unifiedhrislocationoutputfieldmappings.md
-  - docs/models/components/unifiedhrislocationoutputremotedata.md
-  - docs/models/components/unifiedhrispaygroupoutput.md
-  - docs/models/components/unifiedhrispaygroupoutputfieldmappings.md
-  - docs/models/components/unifiedhrispaygroupoutputremotedata.md
-  - docs/models/components/unifiedhrispayrollrunoutput.md
-  - docs/models/components/unifiedhrispayrollrunoutputfieldmappings.md
-  - docs/models/components/unifiedhrispayrollrunoutputremotedata.md
-  - docs/models/components/unifiedhristimeoffbalanceoutput.md
-  - docs/models/components/unifiedhristimeoffbalanceoutputfieldmappings.md
-  - docs/models/components/unifiedhristimeoffbalanceoutputremotedata.md
-  - docs/models/components/unifiedhristimeoffinput.md
-  - docs/models/components/unifiedhristimeoffinputfieldmappings.md
-  - docs/models/components/unifiedhristimeoffoutput.md
-  - docs/models/components/unifiedhristimeoffoutputfieldmappings.md
-  - docs/models/components/unifiedhristimeoffoutputremotedata.md
-  - docs/models/components/unifiedhristimesheetentryinput.md
-  - docs/models/components/unifiedhristimesheetentryinputfieldmappings.md
-  - docs/models/components/unifiedhristimesheetentryoutput.md
-  - docs/models/components/unifiedhristimesheetentryoutputfieldmappings.md
-  - docs/models/components/unifiedhristimesheetentryoutputremotedata.md
   - docs/models/components/unifiedmarketingautomationactioninput.md
   - docs/models/components/unifiedmarketingautomationactionoutput.md
   - docs/models/components/unifiedmarketingautomationautomationinput.md
@@ -728,7 +528,6 @@ generatedFiles:
   - docs/models/components/unifiedticketingticketoutputattachments.md
   - docs/models/components/unifiedticketinguseroutput.md
   - docs/models/components/updatepullfrequencydto.md
-  - docs/models/components/url.md
   - docs/models/components/users.md
   - docs/models/components/variant.md
   - docs/models/components/vertical.md
@@ -750,16 +549,6 @@ generatedFiles:
   - docs/models/operations/createaccountingpaymentresponse.md
   - docs/models/operations/createaccountingpurchaseorderrequest.md
   - docs/models/operations/createaccountingpurchaseorderresponse.md
-  - docs/models/operations/createatsactivityrequest.md
-  - docs/models/operations/createatsactivityresponse.md
-  - docs/models/operations/createatsapplicationrequest.md
-  - docs/models/operations/createatsapplicationresponse.md
-  - docs/models/operations/createatsattachmentrequest.md
-  - docs/models/operations/createatsattachmentresponse.md
-  - docs/models/operations/createatscandidaterequest.md
-  - docs/models/operations/createatscandidateresponse.md
-  - docs/models/operations/createatsinterviewrequest.md
-  - docs/models/operations/createatsinterviewresponse.md
   - docs/models/operations/createcrmcompanyrequest.md
   - docs/models/operations/createcrmcompanyresponse.md
   - docs/models/operations/createcrmcontactrequest.md
@@ -780,12 +569,6 @@ generatedFiles:
   - docs/models/operations/createfilestoragefileresponse.md
   - docs/models/operations/createfilestoragefolderrequest.md
   - docs/models/operations/createfilestoragefolderresponse.md
-  - docs/models/operations/createhrisemployeerequest.md
-  - docs/models/operations/createhrisemployeeresponse.md
-  - docs/models/operations/createhristimeoffrequest.md
-  - docs/models/operations/createhristimeoffresponse.md
-  - docs/models/operations/createhristimesheetentryrequest.md
-  - docs/models/operations/createhristimesheetentryresponse.md
   - docs/models/operations/createlinkeduserresponse.md
   - docs/models/operations/createmarketingautomationactionrequest.md
   - docs/models/operations/createmarketingautomationactionresponse.md
@@ -883,51 +666,6 @@ generatedFiles:
   - docs/models/operations/listaccountingvendorcreditrequest.md
   - docs/models/operations/listaccountingvendorcreditresponse.md
   - docs/models/operations/listaccountingvendorcreditresponsebody.md
-  - docs/models/operations/listatsactivityrequest.md
-  - docs/models/operations/listatsactivityresponse.md
-  - docs/models/operations/listatsactivityresponsebody.md
-  - docs/models/operations/listatsapplicationrequest.md
-  - docs/models/operations/listatsapplicationresponse.md
-  - docs/models/operations/listatsapplicationresponsebody.md
-  - docs/models/operations/listatsattachmentrequest.md
-  - docs/models/operations/listatsattachmentresponse.md
-  - docs/models/operations/listatsattachmentresponsebody.md
-  - docs/models/operations/listatscandidaterequest.md
-  - docs/models/operations/listatscandidateresponse.md
-  - docs/models/operations/listatscandidateresponsebody.md
-  - docs/models/operations/listatsdepartmentsrequest.md
-  - docs/models/operations/listatsdepartmentsresponse.md
-  - docs/models/operations/listatsdepartmentsresponsebody.md
-  - docs/models/operations/listatseeocsrequest.md
-  - docs/models/operations/listatseeocsresponse.md
-  - docs/models/operations/listatseeocsresponsebody.md
-  - docs/models/operations/listatsinterviewrequest.md
-  - docs/models/operations/listatsinterviewresponse.md
-  - docs/models/operations/listatsinterviewresponsebody.md
-  - docs/models/operations/listatsjobinterviewstagerequest.md
-  - docs/models/operations/listatsjobinterviewstageresponse.md
-  - docs/models/operations/listatsjobinterviewstageresponsebody.md
-  - docs/models/operations/listatsjobrequest.md
-  - docs/models/operations/listatsjobresponse.md
-  - docs/models/operations/listatsjobresponsebody.md
-  - docs/models/operations/listatsofferrequest.md
-  - docs/models/operations/listatsofferresponse.md
-  - docs/models/operations/listatsofferresponsebody.md
-  - docs/models/operations/listatsofficerequest.md
-  - docs/models/operations/listatsofficeresponse.md
-  - docs/models/operations/listatsofficeresponsebody.md
-  - docs/models/operations/listatsrejectreasonsrequest.md
-  - docs/models/operations/listatsrejectreasonsresponse.md
-  - docs/models/operations/listatsrejectreasonsresponsebody.md
-  - docs/models/operations/listatsscorecardrequest.md
-  - docs/models/operations/listatsscorecardresponse.md
-  - docs/models/operations/listatsscorecardresponsebody.md
-  - docs/models/operations/listatstagsrequest.md
-  - docs/models/operations/listatstagsresponse.md
-  - docs/models/operations/listatstagsresponsebody.md
-  - docs/models/operations/listatsusersrequest.md
-  - docs/models/operations/listatsusersresponse.md
-  - docs/models/operations/listatsusersresponsebody.md
   - docs/models/operations/listconnectionsresponse.md
   - docs/models/operations/listcrmcompanyrequest.md
   - docs/models/operations/listcrmcompanyresponse.md
@@ -977,51 +715,6 @@ generatedFiles:
   - docs/models/operations/listfilestorageusersrequest.md
   - docs/models/operations/listfilestorageusersresponse.md
   - docs/models/operations/listfilestorageusersresponsebody.md
-  - docs/models/operations/listhrisbankinforequest.md
-  - docs/models/operations/listhrisbankinforesponse.md
-  - docs/models/operations/listhrisbankinforesponsebody.md
-  - docs/models/operations/listhrisbenefitsrequest.md
-  - docs/models/operations/listhrisbenefitsresponse.md
-  - docs/models/operations/listhrisbenefitsresponsebody.md
-  - docs/models/operations/listhriscompaniesrequest.md
-  - docs/models/operations/listhriscompaniesresponse.md
-  - docs/models/operations/listhriscompaniesresponsebody.md
-  - docs/models/operations/listhrisdependentsrequest.md
-  - docs/models/operations/listhrisdependentsresponse.md
-  - docs/models/operations/listhrisdependentsresponsebody.md
-  - docs/models/operations/listhrisemployeepayrollrunrequest.md
-  - docs/models/operations/listhrisemployeepayrollrunresponse.md
-  - docs/models/operations/listhrisemployeepayrollrunresponsebody.md
-  - docs/models/operations/listhrisemployeesrequest.md
-  - docs/models/operations/listhrisemployeesresponse.md
-  - docs/models/operations/listhrisemployeesresponsebody.md
-  - docs/models/operations/listhrisemployerbenefitsrequest.md
-  - docs/models/operations/listhrisemployerbenefitsresponse.md
-  - docs/models/operations/listhrisemployerbenefitsresponsebody.md
-  - docs/models/operations/listhrisemploymentsrequest.md
-  - docs/models/operations/listhrisemploymentsresponse.md
-  - docs/models/operations/listhrisemploymentsresponsebody.md
-  - docs/models/operations/listhrisgroupsrequest.md
-  - docs/models/operations/listhrisgroupsresponse.md
-  - docs/models/operations/listhrisgroupsresponsebody.md
-  - docs/models/operations/listhrislocationsrequest.md
-  - docs/models/operations/listhrislocationsresponse.md
-  - docs/models/operations/listhrislocationsresponsebody.md
-  - docs/models/operations/listhrispaygroupsrequest.md
-  - docs/models/operations/listhrispaygroupsresponse.md
-  - docs/models/operations/listhrispaygroupsresponsebody.md
-  - docs/models/operations/listhrispayrollrunsrequest.md
-  - docs/models/operations/listhrispayrollrunsresponse.md
-  - docs/models/operations/listhrispayrollrunsresponsebody.md
-  - docs/models/operations/listhristimeoffbalancesrequest.md
-  - docs/models/operations/listhristimeoffbalancesresponse.md
-  - docs/models/operations/listhristimeoffbalancesresponsebody.md
-  - docs/models/operations/listhristimeoffsrequest.md
-  - docs/models/operations/listhristimeoffsresponse.md
-  - docs/models/operations/listhristimeoffsresponsebody.md
-  - docs/models/operations/listhristimesheetentriesrequest.md
-  - docs/models/operations/listhristimesheetentriesresponse.md
-  - docs/models/operations/listhristimesheetentriesresponsebody.md
   - docs/models/operations/listlinkedusersresponse.md
   - docs/models/operations/listmarketingautomationactionrequest.md
   - docs/models/operations/listmarketingautomationactionresponse.md
@@ -1085,10 +778,8 @@ generatedFiles:
   - docs/models/operations/option.md
   - docs/models/operations/queryrequest.md
   - docs/models/operations/queryresponse.md
-  - docs/models/operations/queryresponsebody.md
   - docs/models/operations/remoteidrequest.md
   - docs/models/operations/remoteidresponse.md
-  - docs/models/operations/requestpassthroughresponsebody.md
   - docs/models/operations/requestrequest.md
   - docs/models/operations/requestresponse.md
   - docs/models/operations/requestresponsebody.md
@@ -1133,36 +824,6 @@ generatedFiles:
   - docs/models/operations/retrieveaccountingtransactionresponse.md
   - docs/models/operations/retrieveaccountingvendorcreditrequest.md
   - docs/models/operations/retrieveaccountingvendorcreditresponse.md
-  - docs/models/operations/retrieveatsactivityrequest.md
-  - docs/models/operations/retrieveatsactivityresponse.md
-  - docs/models/operations/retrieveatsapplicationrequest.md
-  - docs/models/operations/retrieveatsapplicationresponse.md
-  - docs/models/operations/retrieveatsattachmentrequest.md
-  - docs/models/operations/retrieveatsattachmentresponse.md
-  - docs/models/operations/retrieveatscandidaterequest.md
-  - docs/models/operations/retrieveatscandidateresponse.md
-  - docs/models/operations/retrieveatsdepartmentrequest.md
-  - docs/models/operations/retrieveatsdepartmentresponse.md
-  - docs/models/operations/retrieveatseeocsrequest.md
-  - docs/models/operations/retrieveatseeocsresponse.md
-  - docs/models/operations/retrieveatsinterviewrequest.md
-  - docs/models/operations/retrieveatsinterviewresponse.md
-  - docs/models/operations/retrieveatsjobinterviewstagerequest.md
-  - docs/models/operations/retrieveatsjobinterviewstageresponse.md
-  - docs/models/operations/retrieveatsjobrequest.md
-  - docs/models/operations/retrieveatsjobresponse.md
-  - docs/models/operations/retrieveatsofferrequest.md
-  - docs/models/operations/retrieveatsofferresponse.md
-  - docs/models/operations/retrieveatsofficerequest.md
-  - docs/models/operations/retrieveatsofficeresponse.md
-  - docs/models/operations/retrieveatsrejectreasonrequest.md
-  - docs/models/operations/retrieveatsrejectreasonresponse.md
-  - docs/models/operations/retrieveatsscorecardrequest.md
-  - docs/models/operations/retrieveatsscorecardresponse.md
-  - docs/models/operations/retrieveatstagrequest.md
-  - docs/models/operations/retrieveatstagresponse.md
-  - docs/models/operations/retrieveatsuserrequest.md
-  - docs/models/operations/retrieveatsuserresponse.md
   - docs/models/operations/retrievecollectionrequest.md
   - docs/models/operations/retrievecollectionresponse.md
   - docs/models/operations/retrievecrmcompanyrequest.md
@@ -1197,36 +858,6 @@ generatedFiles:
   - docs/models/operations/retrievefilestoragegroupresponse.md
   - docs/models/operations/retrievefilestorageuserrequest.md
   - docs/models/operations/retrievefilestorageuserresponse.md
-  - docs/models/operations/retrievehrisbankinforequest.md
-  - docs/models/operations/retrievehrisbankinforesponse.md
-  - docs/models/operations/retrievehrisbenefitrequest.md
-  - docs/models/operations/retrievehrisbenefitresponse.md
-  - docs/models/operations/retrievehriscompanyrequest.md
-  - docs/models/operations/retrievehriscompanyresponse.md
-  - docs/models/operations/retrievehrisdependentrequest.md
-  - docs/models/operations/retrievehrisdependentresponse.md
-  - docs/models/operations/retrievehrisemployeepayrollrunrequest.md
-  - docs/models/operations/retrievehrisemployeepayrollrunresponse.md
-  - docs/models/operations/retrievehrisemployeerequest.md
-  - docs/models/operations/retrievehrisemployeeresponse.md
-  - docs/models/operations/retrievehrisemployerbenefitrequest.md
-  - docs/models/operations/retrievehrisemployerbenefitresponse.md
-  - docs/models/operations/retrievehrisemploymentrequest.md
-  - docs/models/operations/retrievehrisemploymentresponse.md
-  - docs/models/operations/retrievehrisgrouprequest.md
-  - docs/models/operations/retrievehrisgroupresponse.md
-  - docs/models/operations/retrievehrislocationrequest.md
-  - docs/models/operations/retrievehrislocationresponse.md
-  - docs/models/operations/retrievehrispaygrouprequest.md
-  - docs/models/operations/retrievehrispaygroupresponse.md
-  - docs/models/operations/retrievehrispayrollrunrequest.md
-  - docs/models/operations/retrievehrispayrollrunresponse.md
-  - docs/models/operations/retrievehristimeoffbalancerequest.md
-  - docs/models/operations/retrievehristimeoffbalanceresponse.md
-  - docs/models/operations/retrievehristimeoffrequest.md
-  - docs/models/operations/retrievehristimeoffresponse.md
-  - docs/models/operations/retrievehristimesheetentryrequest.md
-  - docs/models/operations/retrievehristimesheetentryresponse.md
   - docs/models/operations/retrievelinkeduserrequest.md
   - docs/models/operations/retrievelinkeduserresponse.md
   - docs/models/operations/retrievemarketingautomationactionrequest.md
@@ -1271,7 +902,6 @@ generatedFiles:
   - docs/models/operations/statusrequest.md
   - docs/models/operations/statusresponse.md
   - docs/models/operations/updatepullfrequencyresponse.md
-  - docs/models/operations/updatepullfrequencyresponsebody.md
   - docs/models/operations/updatestatusrequest.md
   - docs/models/operations/updatestatusresponse.md
   - docs/models/operations/verifyeventresponse.md
@@ -1279,18 +909,12 @@ generatedFiles:
   - docs/sdks/accounting/README.md
   - docs/sdks/accounts/README.md
   - docs/sdks/actions/README.md
-  - docs/sdks/activities/README.md
   - docs/sdks/addresses/README.md
-  - docs/sdks/applications/README.md
-  - docs/sdks/ats/README.md
   - docs/sdks/attachments/README.md
   - docs/sdks/auth/README.md
   - docs/sdks/automations/README.md
   - docs/sdks/balancesheets/README.md
-  - docs/sdks/bankinfos/README.md
-  - docs/sdks/benefits/README.md
   - docs/sdks/campaigns/README.md
-  - docs/sdks/candidates/README.md
   - docs/sdks/cashflowstatements/README.md
   - docs/sdks/collections/README.md
   - docs/sdks/comments/README.md
@@ -1302,15 +926,8 @@ generatedFiles:
   - docs/sdks/crm/README.md
   - docs/sdks/customers/README.md
   - docs/sdks/deals/README.md
-  - docs/sdks/departments/README.md
-  - docs/sdks/dependents/README.md
   - docs/sdks/ecommerce/README.md
-  - docs/sdks/eeocs/README.md
   - docs/sdks/emails/README.md
-  - docs/sdks/employeepayrollruns/README.md
-  - docs/sdks/employees/README.md
-  - docs/sdks/employerbenefits/README.md
-  - docs/sdks/employments/README.md
   - docs/sdks/engagements/README.md
   - docs/sdks/events/README.md
   - docs/sdks/expenses/README.md
@@ -1320,52 +937,35 @@ generatedFiles:
   - docs/sdks/folders/README.md
   - docs/sdks/fulfillments/README.md
   - docs/sdks/groups/README.md
-  - docs/sdks/hris/README.md
   - docs/sdks/incomestatements/README.md
-  - docs/sdks/interviews/README.md
   - docs/sdks/invoices/README.md
   - docs/sdks/items/README.md
-  - docs/sdks/jobinterviewstages/README.md
-  - docs/sdks/jobs/README.md
   - docs/sdks/journalentries/README.md
   - docs/sdks/linkedusers/README.md
   - docs/sdks/lists/README.md
-  - docs/sdks/locations/README.md
   - docs/sdks/login/README.md
   - docs/sdks/marketingautomation/README.md
   - docs/sdks/messages/README.md
   - docs/sdks/notes/README.md
-  - docs/sdks/offers/README.md
-  - docs/sdks/offices/README.md
   - docs/sdks/orders/README.md
   - docs/sdks/panora/README.md
   - docs/sdks/panoraaccountingcontacts/README.md
   - docs/sdks/panoraaccounts/README.md
-  - docs/sdks/panoraatsusers/README.md
   - docs/sdks/panoraattachments/README.md
-  - docs/sdks/panoracompanies/README.md
   - docs/sdks/panoracontacts/README.md
   - docs/sdks/panoraevents/README.md
   - docs/sdks/panorafilestorageusers/README.md
-  - docs/sdks/panoragroups/README.md
   - docs/sdks/panoramarketingautomationcontacts/README.md
   - docs/sdks/panoramarketingautomationusers/README.md
-  - docs/sdks/panoratags/README.md
-  - docs/sdks/panoraticketingattachments/README.md
   - docs/sdks/panorausers/README.md
   - docs/sdks/passthrough/README.md
-  - docs/sdks/paygroups/README.md
   - docs/sdks/payments/README.md
-  - docs/sdks/payrollruns/README.md
   - docs/sdks/phonenumbers/README.md
   - docs/sdks/products/README.md
   - docs/sdks/projects/README.md
   - docs/sdks/purchaseorders/README.md
-  - docs/sdks/query/README.md
   - docs/sdks/rag/README.md
-  - docs/sdks/rejectreasons/README.md
   - docs/sdks/retryid/README.md
-  - docs/sdks/scorecards/README.md
   - docs/sdks/stages/README.md
   - docs/sdks/sync/README.md
   - docs/sdks/tags/README.md
@@ -1375,21 +975,13 @@ generatedFiles:
   - docs/sdks/templates/README.md
   - docs/sdks/ticketing/README.md
   - docs/sdks/tickets/README.md
-  - docs/sdks/timeoffbalances/README.md
-  - docs/sdks/timeoffs/README.md
-  - docs/sdks/timesheetentries/README.md
   - docs/sdks/trackingcategories/README.md
   - docs/sdks/transactions/README.md
   - docs/sdks/users/README.md
   - docs/sdks/vendorcredits/README.md
   - docs/sdks/webhooks/README.md
   - ecommerce.go
-  - eeocs.go
   - emails.go
-  - employeepayrollruns.go
-  - employees.go
-  - employerbenefits.go
-  - employments.go
   - engagements.go
   - events.go
   - expenses.go
@@ -1400,7 +992,6 @@ generatedFiles:
   - fulfillments.go
   - go.mod
   - groups.go
-  - hris.go
   - incomestatements.go
   - internal/hooks/hooks.go
   - internal/utils/contenttype.go
@@ -1413,53 +1004,37 @@ generatedFiles:
   - internal/utils/retries.go
   - internal/utils/security.go
   - internal/utils/utils.go
-  - interviews.go
   - invoices.go
   - items.go
-  - jobinterviewstages.go
-  - jobs.go
   - journalentries.go
   - linkedusers.go
   - lists.go
-  - locations.go
   - login.go
   - marketingautomation.go
   - messages.go
   - models/operations/options.go
   - models/sdkerrors/sdkerror.go
   - notes.go
-  - offers.go
-  - offices.go
   - orders.go
   - panora.go
   - panoraaccountingcontacts.go
   - panoraaccounts.go
-  - panoraatsusers.go
   - panoraattachments.go
-  - panoracompanies.go
   - panoracontacts.go
   - panoraevents.go
   - panorafilestorageusers.go
-  - panoragroups.go
   - panoramarketingautomationcontacts.go
   - panoramarketingautomationusers.go
-  - panoratags.go
-  - panoraticketingattachments.go
   - panorausers.go
   - passthrough.go
-  - paygroups.go
   - payments.go
-  - payrollruns.go
   - phonenumbers.go
   - products.go
   - projects.go
   - purchaseorders.go
-  - query.go
   - rag.go
-  - rejectreasons.go
   - retry/config.go
   - retryid.go
-  - scorecards.go
   - stages.go
   - sync.go
   - tags.go
@@ -1469,9 +1044,6 @@ generatedFiles:
   - templates.go
   - ticketing.go
   - tickets.go
-  - timeoffbalances.go
-  - timeoffs.go
-  - timesheetentries.go
   - trackingcategories.go
   - transactions.go
   - types/bigint.go
@@ -1618,7 +1190,7 @@ examples:
   signIn:
     speakeasy-default-sign-in:
       requestBody:
-        application/json: {"email": "Oda.Treutel97@hotmail.com", "password_hash": "<value>"}
+        application/json: {"id_user": "<value>", "email": "Oda.Treutel97@hotmail.com", "password_hash": "<value>"}
   retrieveConnections:
     speakeasy-default-retrieve-connections:
       responses:
@@ -1919,12 +1491,12 @@ examples:
   updatePullFrequency:
     speakeasy-default-update-pull-frequency:
       requestBody:
-        application/json: {"crm": 1800, "ats": 3600, "hris": 7200, "accounting": 14400, "filestorage": 28800, "ecommerce": 43200, "ticketing": 86400}
+        application/json: {"crm": 1800, "accounting": 14400, "filestorage": 28800, "ecommerce": 43200, "ticketing": 86400}
   getPullFrequency:
     speakeasy-default-get-pull-frequency:
       responses:
         "200":
-          application/json: {"crm": 1800, "ats": 3600, "hris": 7200, "accounting": 14400, "filestorage": 28800, "ecommerce": 43200, "ticketing": 86400}
+          application/json: {"crm": 1800, "accounting": 14400, "filestorage": 28800, "ecommerce": 43200, "ticketing": 86400}
   listCrmCompany:
     "":
       parameters:
@@ -2272,7 +1844,7 @@ examples:
         header:
           x-connection-token: "<value>"
       requestBody:
-        application/json: {"method": "GET", "path": "/dev"}
+        application/json: {"method": "GET", "path": "/dev", "request_format": {}, "overrideBaseUrl": {"key": "https://equatorial-government.com/"}}
   getRetriedRequestResponse:
     speakeasy-default-get-retried-request-response:
       parameters:
@@ -3985,7 +3557,7 @@ examples:
           x-connection-token: "<value>"
       responses:
         "200":
-          application/json: {"order_status": "UNSHIPPED", "order_number": "19823838833", "payment_status": "SUCCESS", "currency": "AUD", "total_price": 300, "total_discount": 10, "total_shipping": 120, "total_tax": 120, "fulfillment_status": "PENDING", "customer_id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "items": [{"name": "Net Income", "value": 100000, "type": "Operating Activities", "parent_item": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "remote_id": "12345", "remote_generated_at": "2024-07-01T12:00:00Z", "company_info_id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "created_at": "2024-06-15T12:00:00Z", "modified_at": "2024-06-15T12:00:00Z"}], "id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "remote_id": "id_1", "created_at": "2024-10-01T12:00:00Z", "modified_at": "2024-10-01T12:00:00Z"}
+          application/json: {"order_status": "UNSHIPPED", "order_number": "19823838833", "payment_status": "SUCCESS", "currency": "AUD", "total_price": 300, "total_discount": 10, "total_shipping": 120, "total_tax": 120, "fulfillment_status": "PENDING", "customer_id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "items": [{"name": "Net Income", "value": 100000, "type": "Operating Activities", "parent_item": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "remote_id": "report_item_1234", "remote_generated_at": "2024-07-01T12:00:00Z", "company_info_id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "created_at": "2024-06-15T12:00:00Z", "modified_at": "2024-06-15T12:00:00Z"}], "id": "801f9ede-c698-4e66-a7fc-48d19eebaa4f", "remote_id": "id_1", "created_at": "2024-10-01T12:00:00Z", "modified_at": "2024-10-01T12:00:00Z"}
   listEcommerceCustomers:
     "":
       parameters:
@@ -4039,6 +3611,9 @@ examples:
           x-connection-token: "<value>"
       requestBody:
         application/json: {"query": "When does Panora incorporated?", "topK": "3"}
+      responses:
+        "201":
+          application/json: [{"chunk": "Date : 06/07/2023", "metadata": {"blobType": "", "text": "ATTESTATION"}, "score": 0.87, "embedding": [-0.00442447886, -0.00116857514, 0.00869117491, -0.0361584462, -0.00220073434, 0.00946036354, -0.0101112155]}, {"chunk": "Date : 06/07/2023", "metadata": {"blobType": "", "text": "ATTESTATION"}, "score": 0.87, "embedding": [-0.00442447886, -0.00116857514, 0.00869117491, -0.0361584462, -0.00220073434, 0.00946036354, -0.0101112155]}, {"chunk": "Date : 06/07/2023", "metadata": {"blobType": "", "text": "ATTESTATION"}, "score": 0.87, "embedding": [-0.00442447886, -0.00116857514, 0.00869117491, -0.0361584462, -0.00220073434, 0.00946036354, -0.0101112155]}]
   listConnections:
     speakeasy-default-list-connections:
       responses:

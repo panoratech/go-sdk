@@ -13,7 +13,6 @@ import (
 	"github.com/panoratech/go-sdk/models/operations"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
 	"github.com/spyzhov/ajson"
-	"io"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -29,15 +28,15 @@ func newGroups(sdkConfig sdkConfiguration) *Groups {
 	}
 }
 
-// List Groups
-func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListHrisGroupsResponse, error) {
+// List  Groups
+func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListFilestorageGroupResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listHrisGroups",
+		OperationID:    "listFilestorageGroup",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListHrisGroupsRequest{
+	request := operations.ListFilestorageGroupRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -57,7 +56,7 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := url.JoinPath(baseURL, "/hris/groups")
+	opURL, err := url.JoinPath(baseURL, "/filestorage/groups")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -175,25 +174,14 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 		}
 	}
 
-	res := &operations.ListHrisGroupsResponse{
+	res := &operations.ListFilestorageGroupResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
 		},
 	}
-
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
-	res.Next = func() (*operations.ListHrisGroupsResponse, error) {
-		rawBody, err := getRawBody()
+	res.Next = func() (*operations.ListFilestorageGroupResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -240,40 +228,37 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
 
-			var out operations.ListHrisGroupsResponseBody
+			var out operations.ListFilestorageGroupResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
 			res.Object = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
@@ -281,16 +266,16 @@ func (s *Groups) List(ctx context.Context, xConnectionToken string, remoteData *
 
 }
 
-// Retrieve Group
-// Retrieve a Group from any connected Hris software
-func (s *Groups) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveHrisGroupResponse, error) {
+// Retrieve Groups
+// Retrieve Groups from any connected Filestorage software
+func (s *Groups) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveFilestorageGroupResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "retrieveHrisGroup",
+		OperationID:    "retrieveFilestorageGroup",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.RetrieveHrisGroupRequest{
+	request := operations.RetrieveFilestorageGroupRequest{
 		XConnectionToken: xConnectionToken,
 		ID:               id,
 		RemoteData:       remoteData,
@@ -309,7 +294,7 @@ func (s *Groups) Retrieve(ctx context.Context, xConnectionToken string, id strin
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/hris/groups/{id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/filestorage/groups/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -427,61 +412,48 @@ func (s *Groups) Retrieve(ctx context.Context, xConnectionToken string, id strin
 		}
 	}
 
-	res := &operations.RetrieveHrisGroupResponse{
+	res := &operations.RetrieveFilestorageGroupResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
 		},
 	}
 
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
 
-			var out components.UnifiedHrisGroupOutput
+			var out components.UnifiedFilestorageGroupOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedHrisGroupOutput = &out
+			res.UnifiedFilestorageGroupOutput = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 

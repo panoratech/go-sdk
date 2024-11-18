@@ -13,7 +13,6 @@ import (
 	"github.com/panoratech/go-sdk/models/operations"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
 	"github.com/spyzhov/ajson"
-	"io"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -30,14 +29,14 @@ func newAttachments(sdkConfig sdkConfiguration) *Attachments {
 }
 
 // List  Attachments
-func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListAtsAttachmentResponse, error) {
+func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteData *bool, limit *float64, cursor *string, opts ...operations.Option) (*operations.ListAccountingAttachmentsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "listAtsAttachment",
+		OperationID:    "listAccountingAttachments",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.ListAtsAttachmentRequest{
+	request := operations.ListAccountingAttachmentsRequest{
 		XConnectionToken: xConnectionToken,
 		RemoteData:       remoteData,
 		Limit:            limit,
@@ -57,7 +56,7 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := url.JoinPath(baseURL, "/ats/attachments")
+	opURL, err := url.JoinPath(baseURL, "/accounting/attachments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -175,25 +174,14 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 		}
 	}
 
-	res := &operations.ListAtsAttachmentResponse{
+	res := &operations.ListAccountingAttachmentsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
 		},
 	}
-
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
-	res.Next = func() (*operations.ListAtsAttachmentResponse, error) {
-		rawBody, err := getRawBody()
+	res.Next = func() (*operations.ListAccountingAttachmentsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -240,40 +228,37 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
 
-			var out operations.ListAtsAttachmentResponseBody
+			var out operations.ListAccountingAttachmentsResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
 			res.Object = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
@@ -282,18 +267,18 @@ func (s *Attachments) List(ctx context.Context, xConnectionToken string, remoteD
 }
 
 // Create Attachments
-// Create Attachments in any supported ATS software
-func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifiedAtsAttachmentInput components.UnifiedAtsAttachmentInput, remoteData *bool, opts ...operations.Option) (*operations.CreateAtsAttachmentResponse, error) {
+// Create attachments in any supported Accounting software
+func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifiedAccountingAttachmentInput components.UnifiedAccountingAttachmentInput, remoteData *bool, opts ...operations.Option) (*operations.CreateAccountingAttachmentResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "createAtsAttachment",
+		OperationID:    "createAccountingAttachment",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.CreateAtsAttachmentRequest{
-		XConnectionToken:          xConnectionToken,
-		RemoteData:                remoteData,
-		UnifiedAtsAttachmentInput: unifiedAtsAttachmentInput,
+	request := operations.CreateAccountingAttachmentRequest{
+		XConnectionToken:                 xConnectionToken,
+		RemoteData:                       remoteData,
+		UnifiedAccountingAttachmentInput: unifiedAccountingAttachmentInput,
 	}
 
 	o := operations.Options{}
@@ -309,12 +294,12 @@ func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifi
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := url.JoinPath(baseURL, "/ats/attachments")
+	opURL, err := url.JoinPath(baseURL, "/accounting/attachments")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UnifiedAtsAttachmentInput", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UnifiedAccountingAttachmentInput", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -433,61 +418,48 @@ func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifi
 		}
 	}
 
-	res := &operations.CreateAtsAttachmentResponse{
+	res := &operations.CreateAccountingAttachmentResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
 		},
 	}
 
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
 
-			var out components.UnifiedAtsAttachmentOutput
+			var out components.UnifiedAccountingAttachmentOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedAtsAttachmentOutput = &out
+			res.UnifiedAccountingAttachmentOutput = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
@@ -496,15 +468,15 @@ func (s *Attachments) Create(ctx context.Context, xConnectionToken string, unifi
 }
 
 // Retrieve Attachments
-// Retrieve Attachments from any connected Ats software
-func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveAtsAttachmentResponse, error) {
+// Retrieve attachments from any connected Accounting software
+func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id string, remoteData *bool, opts ...operations.Option) (*operations.RetrieveAccountingAttachmentResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "retrieveAtsAttachment",
+		OperationID:    "retrieveAccountingAttachment",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.RetrieveAtsAttachmentRequest{
+	request := operations.RetrieveAccountingAttachmentRequest{
 		XConnectionToken: xConnectionToken,
 		ID:               id,
 		RemoteData:       remoteData,
@@ -523,7 +495,7 @@ func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id 
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/ats/attachments/{id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/accounting/attachments/{id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -641,61 +613,48 @@ func (s *Attachments) Retrieve(ctx context.Context, xConnectionToken string, id 
 		}
 	}
 
-	res := &operations.RetrieveAtsAttachmentResponse{
+	res := &operations.RetrieveAccountingAttachmentResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
 		},
 	}
 
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
 
-			var out components.UnifiedAtsAttachmentOutput
+			var out components.UnifiedAccountingAttachmentOutput
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.UnifiedAtsAttachmentOutput = &out
+			res.UnifiedAccountingAttachmentOutput = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 

@@ -7,12 +7,12 @@ import (
 	"time"
 )
 
-// UnifiedAccountingAccountOutputFieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
-type UnifiedAccountingAccountOutputFieldMappings struct {
+// FieldMappings - The custom field mappings of the object between the remote 3rd party & Panora
+type FieldMappings struct {
 }
 
-// UnifiedAccountingAccountOutputRemoteData - The remote data of the account in the context of the 3rd Party
-type UnifiedAccountingAccountOutputRemoteData struct {
+// RemoteData - The remote data of the account in the context of the 3rd Party
+type RemoteData struct {
 }
 
 type UnifiedAccountingAccountOutput struct {
@@ -37,13 +37,13 @@ type UnifiedAccountingAccountOutput struct {
 	// The UUID of the associated company info
 	CompanyInfoID *string `json:"company_info_id,omitempty"`
 	// The custom field mappings of the object between the remote 3rd party & Panora
-	FieldMappings *UnifiedAccountingAccountOutputFieldMappings `json:"field_mappings,omitempty"`
+	FieldMappings *FieldMappings `json:"field_mappings,omitempty"`
 	// The UUID of the account record
 	ID *string `json:"id,omitempty"`
 	// The remote ID of the account in the context of the 3rd Party
 	RemoteID *string `json:"remote_id,omitempty"`
 	// The remote data of the account in the context of the 3rd Party
-	RemoteData *UnifiedAccountingAccountOutputRemoteData `json:"remote_data,omitempty"`
+	RemoteData *RemoteData `json:"remote_data,omitempty"`
 	// The created date of the account record
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The last modified date of the account record
@@ -131,7 +131,7 @@ func (o *UnifiedAccountingAccountOutput) GetCompanyInfoID() *string {
 	return o.CompanyInfoID
 }
 
-func (o *UnifiedAccountingAccountOutput) GetFieldMappings() *UnifiedAccountingAccountOutputFieldMappings {
+func (o *UnifiedAccountingAccountOutput) GetFieldMappings() *FieldMappings {
 	if o == nil {
 		return nil
 	}
@@ -152,7 +152,7 @@ func (o *UnifiedAccountingAccountOutput) GetRemoteID() *string {
 	return o.RemoteID
 }
 
-func (o *UnifiedAccountingAccountOutput) GetRemoteData() *UnifiedAccountingAccountOutputRemoteData {
+func (o *UnifiedAccountingAccountOutput) GetRemoteData() *RemoteData {
 	if o == nil {
 		return nil
 	}

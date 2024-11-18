@@ -26,12 +26,9 @@ func (o *QueryRequest) GetQueryBody() components.QueryBody {
 	return o.QueryBody
 }
 
-type QueryResponseBody struct {
-}
-
 type QueryResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	Object   *QueryResponseBody
+	HTTPMeta        components.HTTPMetadata `json:"-"`
+	RagQueryOutputs []components.RagQueryOutput
 }
 
 func (o *QueryResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -41,9 +38,9 @@ func (o *QueryResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *QueryResponse) GetObject() *QueryResponseBody {
+func (o *QueryResponse) GetRagQueryOutputs() []components.RagQueryOutput {
 	if o == nil {
 		return nil
 	}
-	return o.Object
+	return o.RagQueryOutputs
 }

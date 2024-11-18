@@ -6,12 +6,8 @@ import (
 	"github.com/panoratech/go-sdk/models/components"
 )
 
-type UpdatePullFrequencyResponseBody struct {
-}
-
 type UpdatePullFrequencyResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	Object   *UpdatePullFrequencyResponseBody
 }
 
 func (o *UpdatePullFrequencyResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -19,11 +15,4 @@ func (o *UpdatePullFrequencyResponse) GetHTTPMeta() components.HTTPMetadata {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
-}
-
-func (o *UpdatePullFrequencyResponse) GetObject() *UpdatePullFrequencyResponseBody {
-	if o == nil {
-		return nil
-	}
-	return o.Object
 }

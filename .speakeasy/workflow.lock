@@ -1,20 +1,20 @@
-speakeasyVersion: 1.398.1
+speakeasyVersion: 1.440.2
 sources:
     Panora-OAS:
         sourceNamespace: go-sdk
-        sourceRevisionDigest: sha256:ddbd53ecf79fd9f718003083380ffe83e9f4f2541acc0694f946e3c8d259e67c
-        sourceBlobDigest: sha256:11ed4be0d33ec3cc2c4c95a2b21ab2e1732bcb9e9760872be99cfaa3ca2b1279
+        sourceRevisionDigest: sha256:d66ba756c5edf812c00123345023de520a6662c85a00a047d79d03c4d13e4494
+        sourceBlobDigest: sha256:c3baeb1c04282c36b71950e2794c677901e518bc81a6fbe3b27510ce6d74e56a
         tags:
             - latest
-            - main
+            - speakeasy-sdk-regen-1726639298
 targets:
     panora:
         source: Panora-OAS
         sourceNamespace: go-sdk
-        sourceRevisionDigest: sha256:ddbd53ecf79fd9f718003083380ffe83e9f4f2541acc0694f946e3c8d259e67c
-        sourceBlobDigest: sha256:11ed4be0d33ec3cc2c4c95a2b21ab2e1732bcb9e9760872be99cfaa3ca2b1279
-        codeSamplesNamespace: go-sdk
-        codeSamplesRevisionDigest: sha256:63cb71f9b4db2f098b24dc95a3dd4e4e85846f811e4fd223c7394e805bee4e15
+        sourceRevisionDigest: sha256:d66ba756c5edf812c00123345023de520a6662c85a00a047d79d03c4d13e4494
+        sourceBlobDigest: sha256:c3baeb1c04282c36b71950e2794c677901e518bc81a6fbe3b27510ce6d74e56a
+        codeSamplesNamespace: go-sdk-code-samples
+        codeSamplesRevisionDigest: sha256:5ee9db06e7ed02c93044841c41378f668d02d24262ba746efa81f5f819400a49
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,4 +31,4 @@ workflow:
             codeSamples:
                 output: codeSamples.yaml
                 registry:
-                    location: registry.speakeasyapi.dev/panora/panora/go-sdk
+                    location: registry.speakeasyapi.dev/panora/panora/go-sdk-code-samples

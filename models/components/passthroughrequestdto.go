@@ -101,16 +101,12 @@ func (u RequestFormat) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type RequestFormat: all fields are null")
 }
 
-type Headers struct {
-}
-
 type PassThroughRequestDto struct {
 	Method          PassThroughRequestDtoMethod `json:"method"`
 	Path            *string                     `json:"path"`
-	Data            *Data                       `json:"data,omitempty"`
-	RequestFormat   *RequestFormat              `json:"request_format,omitempty"`
-	OverrideBaseURL map[string]any              `json:"overrideBaseUrl,omitempty"`
-	Headers         *Headers                    `json:"headers,omitempty"`
+	Data            Data                        `json:"data"`
+	RequestFormat   *RequestFormat              `json:"request_format"`
+	OverrideBaseURL map[string]any              `json:"overrideBaseUrl"`
 }
 
 func (o *PassThroughRequestDto) GetMethod() PassThroughRequestDtoMethod {
@@ -127,9 +123,9 @@ func (o *PassThroughRequestDto) GetPath() *string {
 	return o.Path
 }
 
-func (o *PassThroughRequestDto) GetData() *Data {
+func (o *PassThroughRequestDto) GetData() Data {
 	if o == nil {
-		return nil
+		return Data{}
 	}
 	return o.Data
 }
@@ -146,11 +142,4 @@ func (o *PassThroughRequestDto) GetOverrideBaseURL() map[string]any {
 		return nil
 	}
 	return o.OverrideBaseURL
-}
-
-func (o *PassThroughRequestDto) GetHeaders() *Headers {
-	if o == nil {
-		return nil
-	}
-	return o.Headers
 }

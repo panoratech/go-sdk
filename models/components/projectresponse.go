@@ -10,9 +10,9 @@ type ProjectResponse struct {
 	// Synchronization mode of the project
 	SyncMode string `json:"sync_mode"`
 	// Frequency of pulling data in seconds
-	PullFrequency *float64 `json:"pull_frequency,omitempty"`
+	PullFrequency float64 `json:"pull_frequency"`
 	// Redirect URL for the project
-	RedirectURL *string `json:"redirect_url,omitempty"`
+	RedirectURL string `json:"redirect_url"`
 	// User ID associated with the project
 	IDUser string `json:"id_user"`
 	// Connector set ID associated with the project
@@ -40,16 +40,16 @@ func (o *ProjectResponse) GetSyncMode() string {
 	return o.SyncMode
 }
 
-func (o *ProjectResponse) GetPullFrequency() *float64 {
+func (o *ProjectResponse) GetPullFrequency() float64 {
 	if o == nil {
-		return nil
+		return 0.0
 	}
 	return o.PullFrequency
 }
 
-func (o *ProjectResponse) GetRedirectURL() *string {
+func (o *ProjectResponse) GetRedirectURL() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.RedirectURL
 }

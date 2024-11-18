@@ -6,10 +6,6 @@ type UpdatePullFrequencyDto struct {
 	// Frequency in seconds
 	Crm float64 `json:"crm"`
 	// Frequency in seconds
-	Ats float64 `json:"ats"`
-	// Frequency in seconds
-	Hris float64 `json:"hris"`
-	// Frequency in seconds
 	Accounting float64 `json:"accounting"`
 	// Frequency in seconds
 	Filestorage float64 `json:"filestorage"`
@@ -24,20 +20,6 @@ func (o *UpdatePullFrequencyDto) GetCrm() float64 {
 		return 0.0
 	}
 	return o.Crm
-}
-
-func (o *UpdatePullFrequencyDto) GetAts() float64 {
-	if o == nil {
-		return 0.0
-	}
-	return o.Ats
-}
-
-func (o *UpdatePullFrequencyDto) GetHris() float64 {
-	if o == nil {
-		return 0.0
-	}
-	return o.Hris
 }
 
 func (o *UpdatePullFrequencyDto) GetAccounting() float64 {

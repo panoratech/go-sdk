@@ -30,6 +30,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Auth.Login.SignIn(ctx, components.LoginDto{
+        IDUser: "<value>",
         Email: "Oda.Treutel97@hotmail.com",
         PasswordHash: "<value>",
     })
@@ -56,6 +57,6 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
