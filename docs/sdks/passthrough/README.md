@@ -32,11 +32,20 @@ func main() {
     res, err := s.Passthrough.Request(ctx, "<value>", components.PassThroughRequestDto{
         Method: components.PassThroughRequestDtoMethodGet,
         Path: gosdk.String("/dev"),
+        Data: components.Data{},
+        RequestFormat: components.CreateRequestFormatMapOfAny(
+            map[string]any{
+
+            },
+        ),
+        OverrideBaseURL: map[string]any{
+            "key": "https://equatorial-government.com/",
+        },
     })
     if err != nil {
         log.Fatal(err)
     }
-    if res.TwoHundredApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }
@@ -57,6 +66,6 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

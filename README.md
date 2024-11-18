@@ -34,7 +34,6 @@ Panora API: A unified API to ship integrations
 * [Server Selection](#server-selection)
 * [Custom HTTP Client](#custom-http-client)
 * [Authentication](#authentication)
-* [Special Types](#special-types)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -98,11 +97,11 @@ func main() {
 * [List](docs/sdks/addresses/README.md#list) - List  Addresss
 * [Retrieve](docs/sdks/addresses/README.md#retrieve) - Retrieve Addresses
 
-#### [Accounting.Attachments](docs/sdks/panoraattachments/README.md)
+#### [Accounting.Attachments](docs/sdks/attachments/README.md)
 
-* [List](docs/sdks/panoraattachments/README.md#list) - List  Attachments
-* [Create](docs/sdks/panoraattachments/README.md#create) - Create Attachments
-* [Retrieve](docs/sdks/panoraattachments/README.md#retrieve) - Retrieve Attachments
+* [List](docs/sdks/attachments/README.md#list) - List  Attachments
+* [Create](docs/sdks/attachments/README.md#create) - Create Attachments
+* [Retrieve](docs/sdks/attachments/README.md#retrieve) - Retrieve Attachments
 
 #### [Accounting.Balancesheets](docs/sdks/balancesheets/README.md)
 
@@ -194,89 +193,6 @@ func main() {
 
 * [List](docs/sdks/vendorcredits/README.md#list) - List  VendorCredits
 * [Retrieve](docs/sdks/vendorcredits/README.md#retrieve) - Retrieve Vendor Credits
-
-### [Ats](docs/sdks/ats/README.md)
-
-
-#### [Ats.Activities](docs/sdks/activities/README.md)
-
-* [List](docs/sdks/activities/README.md#list) - List  Activities
-* [Create](docs/sdks/activities/README.md#create) - Create Activities
-* [Retrieve](docs/sdks/activities/README.md#retrieve) - Retrieve Activities
-
-#### [Ats.Applications](docs/sdks/applications/README.md)
-
-* [List](docs/sdks/applications/README.md#list) - List  Applications
-* [Create](docs/sdks/applications/README.md#create) - Create Applications
-* [Retrieve](docs/sdks/applications/README.md#retrieve) - Retrieve Applications
-
-#### [Ats.Attachments](docs/sdks/attachments/README.md)
-
-* [List](docs/sdks/attachments/README.md#list) - List  Attachments
-* [Create](docs/sdks/attachments/README.md#create) - Create Attachments
-* [Retrieve](docs/sdks/attachments/README.md#retrieve) - Retrieve Attachments
-
-#### [Ats.Candidates](docs/sdks/candidates/README.md)
-
-* [List](docs/sdks/candidates/README.md#list) - List  Candidates
-* [Create](docs/sdks/candidates/README.md#create) - Create Candidates
-* [Retrieve](docs/sdks/candidates/README.md#retrieve) - Retrieve Candidates
-
-#### [Ats.Departments](docs/sdks/departments/README.md)
-
-* [List](docs/sdks/departments/README.md#list) - List  Departments
-* [Retrieve](docs/sdks/departments/README.md#retrieve) - Retrieve Departments
-
-#### [Ats.Eeocs](docs/sdks/eeocs/README.md)
-
-* [List](docs/sdks/eeocs/README.md#list) - List  Eeocss
-* [Retrieve](docs/sdks/eeocs/README.md#retrieve) - Retrieve Eeocs
-
-#### [Ats.Interviews](docs/sdks/interviews/README.md)
-
-* [List](docs/sdks/interviews/README.md#list) - List  Interviews
-* [Create](docs/sdks/interviews/README.md#create) - Create Interviews
-* [Retrieve](docs/sdks/interviews/README.md#retrieve) - Retrieve Interviews
-
-#### [Ats.Jobinterviewstages](docs/sdks/jobinterviewstages/README.md)
-
-* [List](docs/sdks/jobinterviewstages/README.md#list) - List  JobInterviewStages
-* [Retrieve](docs/sdks/jobinterviewstages/README.md#retrieve) - Retrieve Job Interview Stages
-
-#### [Ats.Jobs](docs/sdks/jobs/README.md)
-
-* [List](docs/sdks/jobs/README.md#list) - List  Jobs
-* [Retrieve](docs/sdks/jobs/README.md#retrieve) - Retrieve Jobs
-
-#### [Ats.Offers](docs/sdks/offers/README.md)
-
-* [List](docs/sdks/offers/README.md#list) - List  Offers
-* [Retrieve](docs/sdks/offers/README.md#retrieve) - Retrieve Offers
-
-#### [Ats.Offices](docs/sdks/offices/README.md)
-
-* [List](docs/sdks/offices/README.md#list) - List Offices
-* [Retrieve](docs/sdks/offices/README.md#retrieve) - Retrieve Offices
-
-#### [Ats.Rejectreasons](docs/sdks/rejectreasons/README.md)
-
-* [List](docs/sdks/rejectreasons/README.md#list) - List  RejectReasons
-* [Retrieve](docs/sdks/rejectreasons/README.md#retrieve) - Retrieve Reject Reasons
-
-#### [Ats.Scorecards](docs/sdks/scorecards/README.md)
-
-* [List](docs/sdks/scorecards/README.md#list) - List  ScoreCards
-* [Retrieve](docs/sdks/scorecards/README.md#retrieve) - Retrieve Score Cards
-
-#### [Ats.Tags](docs/sdks/panoratags/README.md)
-
-* [List](docs/sdks/panoratags/README.md#list) - List  Tags
-* [Retrieve](docs/sdks/panoratags/README.md#retrieve) - Retrieve Tags
-
-#### [Ats.Users](docs/sdks/panoraatsusers/README.md)
-
-* [List](docs/sdks/panoraatsusers/README.md#list) - List  Users
-* [Retrieve](docs/sdks/panoraatsusers/README.md#retrieve) - Retrieve Users
 
 ### [Auth](docs/sdks/auth/README.md)
 
@@ -391,104 +307,23 @@ func main() {
 * [Create](docs/sdks/folders/README.md#create) - Create Folders
 * [Retrieve](docs/sdks/folders/README.md#retrieve) - Retrieve Folders
 
-#### [Filestorage.Groups](docs/sdks/panoragroups/README.md)
+#### [Filestorage.Groups](docs/sdks/groups/README.md)
 
-* [List](docs/sdks/panoragroups/README.md#list) - List  Groups
-* [Retrieve](docs/sdks/panoragroups/README.md#retrieve) - Retrieve Groups
+* [List](docs/sdks/groups/README.md#list) - List  Groups
+* [Retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve Groups
 
 #### [Filestorage.Users](docs/sdks/panorafilestorageusers/README.md)
 
 * [List](docs/sdks/panorafilestorageusers/README.md#list) - List Users
 * [Retrieve](docs/sdks/panorafilestorageusers/README.md#retrieve) - Retrieve Users
 
-### [Hris](docs/sdks/hris/README.md)
-
-
-#### [Hris.Bankinfos](docs/sdks/bankinfos/README.md)
-
-* [List](docs/sdks/bankinfos/README.md#list) - List Bank Info
-* [Retrieve](docs/sdks/bankinfos/README.md#retrieve) - Retrieve Bank Info
-
-#### [Hris.Benefits](docs/sdks/benefits/README.md)
-
-* [List](docs/sdks/benefits/README.md#list) - List Benefits
-* [Retrieve](docs/sdks/benefits/README.md#retrieve) - Retrieve Benefit
-
-#### [Hris.Companies](docs/sdks/panoracompanies/README.md)
-
-* [List](docs/sdks/panoracompanies/README.md#list) - List Companies
-* [Retrieve](docs/sdks/panoracompanies/README.md#retrieve) - Retrieve Company
-
-#### [Hris.Dependents](docs/sdks/dependents/README.md)
-
-* [List](docs/sdks/dependents/README.md#list) - List Dependents
-* [Retrieve](docs/sdks/dependents/README.md#retrieve) - Retrieve Dependent
-
-#### [Hris.Employeepayrollruns](docs/sdks/employeepayrollruns/README.md)
-
-* [List](docs/sdks/employeepayrollruns/README.md#list) - List Employee Payroll Runs
-* [Retrieve](docs/sdks/employeepayrollruns/README.md#retrieve) - Retrieve Employee Payroll Run
-
-#### [Hris.Employees](docs/sdks/employees/README.md)
-
-* [List](docs/sdks/employees/README.md#list) - List Employees
-* [Create](docs/sdks/employees/README.md#create) - Create Employees
-* [Retrieve](docs/sdks/employees/README.md#retrieve) - Retrieve Employee
-
-#### [Hris.Employerbenefits](docs/sdks/employerbenefits/README.md)
-
-* [List](docs/sdks/employerbenefits/README.md#list) - List Employer Benefits
-* [Retrieve](docs/sdks/employerbenefits/README.md#retrieve) - Retrieve Employer Benefit
-
-#### [Hris.Employments](docs/sdks/employments/README.md)
-
-* [List](docs/sdks/employments/README.md#list) - List Employments
-* [Retrieve](docs/sdks/employments/README.md#retrieve) - Retrieve Employment
-
-#### [Hris.Groups](docs/sdks/groups/README.md)
-
-* [List](docs/sdks/groups/README.md#list) - List Groups
-* [Retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve Group
-
-#### [Hris.Locations](docs/sdks/locations/README.md)
-
-* [List](docs/sdks/locations/README.md#list) - List Locations
-* [Retrieve](docs/sdks/locations/README.md#retrieve) - Retrieve Location
-
-#### [Hris.Paygroups](docs/sdks/paygroups/README.md)
-
-* [List](docs/sdks/paygroups/README.md#list) - List Pay Groups
-* [Retrieve](docs/sdks/paygroups/README.md#retrieve) - Retrieve Pay Group
-
-#### [Hris.Payrollruns](docs/sdks/payrollruns/README.md)
-
-* [List](docs/sdks/payrollruns/README.md#list) - List Payroll Runs
-* [Retrieve](docs/sdks/payrollruns/README.md#retrieve) - Retrieve Payroll Run
-
-#### [Hris.Timeoffbalances](docs/sdks/timeoffbalances/README.md)
-
-* [List](docs/sdks/timeoffbalances/README.md#list) - List  TimeoffBalances
-* [Retrieve](docs/sdks/timeoffbalances/README.md#retrieve) - Retrieve Time off Balances
-
-#### [Hris.Timeoffs](docs/sdks/timeoffs/README.md)
-
-* [List](docs/sdks/timeoffs/README.md#list) - List Time Offs
-* [Create](docs/sdks/timeoffs/README.md#create) - Create Timeoffs
-* [Retrieve](docs/sdks/timeoffs/README.md#retrieve) - Retrieve Time Off
-
-#### [Hris.Timesheetentries](docs/sdks/timesheetentries/README.md)
-
-* [List](docs/sdks/timesheetentries/README.md#list) - List Timesheetentries
-* [Create](docs/sdks/timesheetentries/README.md#create) - Create Timesheetentrys
-* [Retrieve](docs/sdks/timesheetentries/README.md#retrieve) - Retrieve Timesheetentry
-
 ### [LinkedUsers](docs/sdks/linkedusers/README.md)
 
+* [RemoteID](docs/sdks/linkedusers/README.md#remoteid) - Retrieve a Linked User From A Remote Id
 * [Create](docs/sdks/linkedusers/README.md#create) - Create Linked Users
 * [List](docs/sdks/linkedusers/README.md#list) - List Linked Users
 * [ImportBatch](docs/sdks/linkedusers/README.md#importbatch) - Add Batch Linked Users
 * [Retrieve](docs/sdks/linkedusers/README.md#retrieve) - Retrieve Linked Users
-* [RemoteID](docs/sdks/linkedusers/README.md#remoteid) - Retrieve a Linked User From A Remote Id
 
 ### [Marketingautomation](docs/sdks/marketingautomation/README.md)
 
@@ -569,10 +404,7 @@ func main() {
 
 ### [Rag](docs/sdks/rag/README.md)
 
-
-#### [Rag.Query](docs/sdks/query/README.md)
-
-* [Query](docs/sdks/query/README.md#query) - Query using RAG Search
+* [Query](docs/sdks/rag/README.md#query) - Query using RAG Search
 
 ### [Sync](docs/sdks/sync/README.md)
 
@@ -589,11 +421,11 @@ func main() {
 * [List](docs/sdks/accounts/README.md#list) - List  Accounts
 * [Retrieve](docs/sdks/accounts/README.md#retrieve) - Retrieve Accounts
 
-#### [Ticketing.Attachments](docs/sdks/panoraticketingattachments/README.md)
+#### [Ticketing.Attachments](docs/sdks/panoraattachments/README.md)
 
-* [List](docs/sdks/panoraticketingattachments/README.md#list) - List  Attachments
-* [Create](docs/sdks/panoraticketingattachments/README.md#create) - Create Attachments
-* [Retrieve](docs/sdks/panoraticketingattachments/README.md#retrieve) - Retrieve Attachments
+* [List](docs/sdks/panoraattachments/README.md#list) - List  Attachments
+* [Create](docs/sdks/panoraattachments/README.md#create) - Create Attachments
+* [Retrieve](docs/sdks/panoraattachments/README.md#retrieve) - Retrieve Attachments
 
 #### [Ticketing.Collections](docs/sdks/collections/README.md)
 
@@ -730,11 +562,15 @@ func main() {
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or an error, they will never return both.
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+By Default, an API error will return `sdkerrors.SDKError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
+
+For example, the `Hello` function may return the following errors:
+
+| Error Type         | Status Code | Content Type |
+| ------------------ | ----------- | ------------ |
+| sdkerrors.SDKError | 4XX, 5XX    | \*/\*        |
 
 ### Example
 
@@ -774,13 +610,13 @@ func main() {
 
 ### Select Server by Index
 
-You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.panora.dev` | None |
-| 1 | `https://api-sandbox.panora.dev` | None |
-| 2 | `https://api-dev.panora.dev` | None |
+| #   | Server                           |
+| --- | -------------------------------- |
+| 0   | `https://api.panora.dev`         |
+| 1   | `https://api-sandbox.panora.dev` |
+| 2   | `https://api-dev.panora.dev`     |
 
 #### Example
 
@@ -811,10 +647,9 @@ func main() {
 
 ```
 
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
 ```go
 package main
 
@@ -872,12 +707,6 @@ var (
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
 <!-- End Custom HTTP Client [http-client] -->
 
-<!-- Start Special Types [types] -->
-## Special Types
-
-
-<!-- End Special Types [types] -->
-
 <!-- Start Authentication [security] -->
 ## Authentication
 
@@ -885,9 +714,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name     | Type     | Scheme   |
-| -------- | -------- | -------- |
-| `APIKey` | apiKey   | API key  |
+| Name     | Type   | Scheme  |
+| -------- | ------ | ------- |
+| `APIKey` | apiKey | API key |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go

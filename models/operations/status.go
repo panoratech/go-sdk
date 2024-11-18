@@ -15,8 +15,6 @@ const (
 	VerticalMarketingautomation Vertical = "marketingautomation"
 	VerticalCrm                 Vertical = "crm"
 	VerticalFilestorage         Vertical = "filestorage"
-	VerticalAts                 Vertical = "ats"
-	VerticalHris                Vertical = "hris"
 	VerticalAccounting          Vertical = "accounting"
 	VerticalEcommerce           Vertical = "ecommerce"
 )
@@ -37,10 +35,6 @@ func (e *Vertical) UnmarshalJSON(data []byte) error {
 	case "crm":
 		fallthrough
 	case "filestorage":
-		fallthrough
-	case "ats":
-		fallthrough
-	case "hris":
 		fallthrough
 	case "accounting":
 		fallthrough

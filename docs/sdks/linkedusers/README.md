@@ -5,11 +5,60 @@
 
 ### Available Operations
 
+* [RemoteID](#remoteid) - Retrieve a Linked User From A Remote Id
 * [Create](#create) - Create Linked Users
 * [List](#list) - List Linked Users
 * [ImportBatch](#importbatch) - Add Batch Linked Users
 * [Retrieve](#retrieve) - Retrieve Linked Users
-* [RemoteID](#remoteid) - Retrieve a Linked User From A Remote Id
+
+## RemoteID
+
+Retrieve a Linked User From A Remote Id
+
+### Example Usage
+
+```go
+package main
+
+import(
+	gosdk "github.com/panoratech/go-sdk"
+	"context"
+	"log"
+)
+
+func main() {
+    s := gosdk.New(
+        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
+    )
+
+    ctx := context.Background()
+    res, err := s.LinkedUsers.RemoteID(ctx, "id_1")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.LinkedUserResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `remoteID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | id_1                                                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.RemoteIDResponse](../../models/operations/remoteidresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## Create
 
@@ -60,10 +109,9 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## List
 
@@ -109,10 +157,9 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ImportBatch
 
@@ -165,10 +212,9 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## Retrieve
 
@@ -215,56 +261,6 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
-
-## RemoteID
-
-Retrieve a Linked User From A Remote Id
-
-### Example Usage
-
-```go
-package main
-
-import(
-	gosdk "github.com/panoratech/go-sdk"
-	"context"
-	"log"
-)
-
-func main() {
-    s := gosdk.New(
-        gosdk.WithSecurity("<YOUR_API_KEY_HERE>"),
-    )
-
-    ctx := context.Background()
-    res, err := s.LinkedUsers.RemoteID(ctx, "id_1")
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.LinkedUserResponse != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `remoteID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | id_1                                                     |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
-
-### Response
-
-**[*operations.RemoteIDResponse](../../models/operations/remoteidresponse.md), error**
-
-### Errors
-
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

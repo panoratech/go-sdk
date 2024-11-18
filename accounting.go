@@ -5,7 +5,7 @@ package gosdk
 type Accounting struct {
 	Accounts           *PanoraAccounts
 	Addresses          *Addresses
-	Attachments        *PanoraAttachments
+	Attachments        *Attachments
 	Balancesheets      *Balancesheets
 	Cashflowstatements *Cashflowstatements
 	Companyinfos       *Companyinfos
@@ -32,7 +32,7 @@ func newAccounting(sdkConfig sdkConfiguration) *Accounting {
 		sdkConfiguration:   sdkConfig,
 		Accounts:           newPanoraAccounts(sdkConfig),
 		Addresses:          newAddresses(sdkConfig),
-		Attachments:        newPanoraAttachments(sdkConfig),
+		Attachments:        newAttachments(sdkConfig),
 		Balancesheets:      newBalancesheets(sdkConfig),
 		Cashflowstatements: newCashflowstatements(sdkConfig),
 		Companyinfos:       newCompanyinfos(sdkConfig),

@@ -13,7 +13,6 @@ import (
 	"github.com/panoratech/go-sdk/models/operations"
 	"github.com/panoratech/go-sdk/models/sdkerrors"
 	"github.com/panoratech/go-sdk/retry"
-	"io"
 	"net/http"
 	"net/url"
 	"time"
@@ -93,9 +92,7 @@ type Panora struct {
 	FieldMappings       *FieldMappings
 	Events              *Events
 	Passthrough         *Passthrough
-	Hris                *Hris
 	Marketingautomation *Marketingautomation
-	Ats                 *Ats
 	Accounting          *Accounting
 	Ecommerce           *Ecommerce
 
@@ -176,9 +173,9 @@ func New(opts ...SDKOption) *Panora {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.6.1",
-			GenVersion:        "2.415.8",
-			UserAgent:         "speakeasy-sdk/go 0.6.1 2.415.8 1.0 github.com/panoratech/go-sdk",
+			SDKVersion:        "0.7.0",
+			GenVersion:        "2.460.1",
+			UserAgent:         "speakeasy-sdk/go 0.7.0 2.460.1 1.0 github.com/panoratech/go-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -224,11 +221,7 @@ func New(opts ...SDKOption) *Panora {
 
 	sdk.Passthrough = newPassthrough(sdk.sdkConfiguration)
 
-	sdk.Hris = newHris(sdk.sdkConfiguration)
-
 	sdk.Marketingautomation = newMarketingautomation(sdk.sdkConfiguration)
-
-	sdk.Ats = newAts(sdk.sdkConfiguration)
 
 	sdk.Accounting = newAccounting(sdk.sdkConfiguration)
 
@@ -376,21 +369,11 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 		},
 	}
 
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `text/plain`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
@@ -398,28 +381,25 @@ func (s *Panora) Hello(ctx context.Context, opts ...operations.Option) (*operati
 			out := string(rawBody)
 			res.Res = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
@@ -566,21 +546,11 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 		},
 	}
 
-	getRawBody := func() ([]byte, error) {
-		rawBody, err := io.ReadAll(httpRes.Body)
-		if err != nil {
-			return nil, fmt.Errorf("error reading response body: %w", err)
-		}
-		httpRes.Body.Close()
-		httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-		return rawBody, nil
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
@@ -592,28 +562,25 @@ func (s *Panora) Health(ctx context.Context, opts ...operations.Option) (*operat
 
 			res.Number = &out
 		default:
-			rawBody, err := getRawBody()
+			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
 				return nil, err
 			}
-
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		rawBody, err := getRawBody()
+		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
 			return nil, err
 		}
-
 		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 

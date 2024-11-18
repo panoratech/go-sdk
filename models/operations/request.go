@@ -25,16 +25,12 @@ func (o *RequestRequest) GetPassThroughRequestDto() components.PassThroughReques
 	return o.PassThroughRequestDto
 }
 
-type RequestPassthroughResponseBody struct {
-}
-
 type RequestResponseBody struct {
 }
 
 type RequestResponse struct {
-	HTTPMeta                              components.HTTPMetadata `json:"-"`
-	TwoHundredApplicationJSONObject       *RequestResponseBody
-	TwoHundredAndOneApplicationJSONObject *RequestPassthroughResponseBody
+	HTTPMeta components.HTTPMetadata `json:"-"`
+	Object   *RequestResponseBody
 }
 
 func (o *RequestResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -44,16 +40,9 @@ func (o *RequestResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *RequestResponse) GetTwoHundredApplicationJSONObject() *RequestResponseBody {
+func (o *RequestResponse) GetObject() *RequestResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.TwoHundredApplicationJSONObject
-}
-
-func (o *RequestResponse) GetTwoHundredAndOneApplicationJSONObject() *RequestPassthroughResponseBody {
-	if o == nil {
-		return nil
-	}
-	return o.TwoHundredAndOneApplicationJSONObject
+	return o.Object
 }

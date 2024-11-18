@@ -1,9 +1,0 @@
-# RetrieveHrisEmploymentResponse
-
-
-## Fields
-
-| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `UnifiedHrisEmploymentOutput`                                                                     | [*components.UnifiedHrisEmploymentOutput](../../models/components/unifiedhrisemploymentoutput.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |

@@ -1,5 +1,5 @@
 # PanoraAttachments
-(*Accounting.Attachments*)
+(*Ticketing.Attachments*)
 
 ## Overview
 
@@ -30,7 +30,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Accounting.Attachments.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
+    res, err := s.Ticketing.Attachments.List(ctx, "<value>", gosdk.Bool(true), gosdk.Float64(10), gosdk.String("1b8b05bb-5273-4012-b520-8657b0b90874"))
     if err != nil {
         log.Fatal(err)
     }
@@ -66,18 +66,17 @@ func main() {
 
 ### Response
 
-**[*operations.ListAccountingAttachmentsResponse](../../models/operations/listaccountingattachmentsresponse.md), error**
+**[*operations.ListTicketingAttachmentsResponse](../../models/operations/listticketingattachmentsresponse.md), error**
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## Create
 
-Create attachments in any supported Accounting software
+Create Attachments in any supported Ticketing software
 
 ### Example Usage
 
@@ -97,16 +96,21 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Accounting.Attachments.Create(ctx, "<value>", components.UnifiedAccountingAttachmentInput{
-        FileName: gosdk.String("invoice.pdf"),
-        FileURL: gosdk.String("https://example.com/files/invoice.pdf"),
-        AccountID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
-        FieldMappings: &components.UnifiedAccountingAttachmentInputFieldMappings{},
-    }, gosdk.Bool(false))
+    res, err := s.Ticketing.Attachments.Create(ctx, "<value>", components.UnifiedTicketingAttachmentInput{
+        FileName: gosdk.String("features_planning.pdf"),
+        FileURL: gosdk.String("https://example.com/features_planning.pdf"),
+        Uploader: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        TicketID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        CommentID: gosdk.String("801f9ede-c698-4e66-a7fc-48d19eebaa4f"),
+        FieldMappings: map[string]any{
+            "fav_dish": "broccoli",
+            "fav_color": "red",
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.UnifiedAccountingAttachmentOutput != nil {
+    if res.UnifiedTicketingAttachmentOutput != nil {
         // handle response
     }
 }
@@ -114,28 +118,27 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |                                                                                                            |
-| `xConnectionToken`                                                                                         | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The connection token                                                                                       |                                                                                                            |
-| `unifiedAccountingAttachmentInput`                                                                         | [components.UnifiedAccountingAttachmentInput](../../models/components/unifiedaccountingattachmentinput.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
-| `remoteData`                                                                                               | **bool*                                                                                                    | :heavy_minus_sign:                                                                                         | Set to true to include data from the original Accounting software.                                         | false                                                                                                      |
-| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |                                                                                                            |
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
+| `xConnectionToken`                                                                                       | *string*                                                                                                 | :heavy_check_mark:                                                                                       | The connection token                                                                                     |
+| `unifiedTicketingAttachmentInput`                                                                        | [components.UnifiedTicketingAttachmentInput](../../models/components/unifiedticketingattachmentinput.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `remoteData`                                                                                             | **bool*                                                                                                  | :heavy_minus_sign:                                                                                       | Set to true to include data from the original Ticketing software.                                        |
+| `opts`                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
 ### Response
 
-**[*operations.CreateAccountingAttachmentResponse](../../models/operations/createaccountingattachmentresponse.md), error**
+**[*operations.CreateTicketingAttachmentResponse](../../models/operations/createticketingattachmentresponse.md), error**
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## Retrieve
 
-Retrieve attachments from any connected Accounting software
+Retrieve Attachments from any connected Ticketing software
 
 ### Example Usage
 
@@ -154,11 +157,11 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Accounting.Attachments.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
+    res, err := s.Ticketing.Attachments.Retrieve(ctx, "<value>", "801f9ede-c698-4e66-a7fc-48d19eebaa4f", gosdk.Bool(false))
     if err != nil {
         log.Fatal(err)
     }
-    if res.UnifiedAccountingAttachmentOutput != nil {
+    if res.UnifiedTicketingAttachmentOutput != nil {
         // handle response
     }
 }
@@ -166,20 +169,20 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |                                                                    |
-| `xConnectionToken`                                                 | *string*                                                           | :heavy_check_mark:                                                 | The connection token                                               |                                                                    |
-| `id`                                                               | *string*                                                           | :heavy_check_mark:                                                 | id of the attachment you want to retrieve.                         | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                               |
-| `remoteData`                                                       | **bool*                                                            | :heavy_minus_sign:                                                 | Set to true to include data from the original Accounting software. | false                                                              |
-| `opts`                                                             | [][operations.Option](../../models/operations/option.md)           | :heavy_minus_sign:                                                 | The options for this request.                                      |                                                                    |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |                                                                   |
+| `xConnectionToken`                                                | *string*                                                          | :heavy_check_mark:                                                | The connection token                                              |                                                                   |
+| `id`                                                              | *string*                                                          | :heavy_check_mark:                                                | id of the attachment you want to retrive.                         | 801f9ede-c698-4e66-a7fc-48d19eebaa4f                              |
+| `remoteData`                                                      | **bool*                                                           | :heavy_minus_sign:                                                | Set to true to include data from the original Ticketing software. | false                                                             |
+| `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |                                                                   |
 
 ### Response
 
-**[*operations.RetrieveAccountingAttachmentResponse](../../models/operations/retrieveaccountingattachmentresponse.md), error**
+**[*operations.RetrieveTicketingAttachmentResponse](../../models/operations/retrieveticketingattachmentresponse.md), error**
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
+| Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

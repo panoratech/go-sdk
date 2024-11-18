@@ -13,9 +13,7 @@ type Vertical string
 
 const (
 	VerticalTicketing           Vertical = "ticketing"
-	VerticalAts                 Vertical = "ats"
 	VerticalAccounting          Vertical = "accounting"
-	VerticalHris                Vertical = "hris"
 	VerticalCrm                 Vertical = "crm"
 	VerticalFilestorage         Vertical = "filestorage"
 	VerticalEcommerce           Vertical = "ecommerce"
@@ -33,11 +31,7 @@ func (e *Vertical) UnmarshalJSON(data []byte) error {
 	switch v {
 	case "ticketing":
 		fallthrough
-	case "ats":
-		fallthrough
 	case "accounting":
-		fallthrough
-	case "hris":
 		fallthrough
 	case "crm":
 		fallthrough

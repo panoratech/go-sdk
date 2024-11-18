@@ -11,7 +11,7 @@ type Ticketing struct {
 	Comments    *Comments
 	Tags        *Tags
 	Teams       *Teams
-	Attachments *PanoraTicketingAttachments
+	Attachments *PanoraAttachments
 
 	sdkConfiguration sdkConfiguration
 }
@@ -27,6 +27,6 @@ func newTicketing(sdkConfig sdkConfiguration) *Ticketing {
 		Comments:         newComments(sdkConfig),
 		Tags:             newTags(sdkConfig),
 		Teams:            newTeams(sdkConfig),
-		Attachments:      newPanoraTicketingAttachments(sdkConfig),
+		Attachments:      newPanoraAttachments(sdkConfig),
 	}
 }

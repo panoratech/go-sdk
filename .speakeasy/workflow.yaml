@@ -13,4 +13,4 @@ targets:
         codeSamples:
             output: codeSamples.yaml
             registry:
-                location: registry.speakeasyapi.dev/panora/panora/go-sdk
+                location: registry.speakeasyapi.dev/panora/panora/go-sdk-code-samples

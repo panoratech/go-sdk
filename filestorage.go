@@ -5,7 +5,7 @@ package gosdk
 type Filestorage struct {
 	Files   *Files
 	Folders *Folders
-	Groups  *PanoraGroups
+	Groups  *Groups
 	Users   *PanoraFilestorageUsers
 
 	sdkConfiguration sdkConfiguration
@@ -16,7 +16,7 @@ func newFilestorage(sdkConfig sdkConfiguration) *Filestorage {
 		sdkConfiguration: sdkConfig,
 		Files:            newFiles(sdkConfig),
 		Folders:          newFolders(sdkConfig),
-		Groups:           newPanoraGroups(sdkConfig),
+		Groups:           newGroups(sdkConfig),
 		Users:            newPanoraFilestorageUsers(sdkConfig),
 	}
 }
